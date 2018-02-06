@@ -383,7 +383,7 @@ p {
     border-bottom: 1px solid #ccc;
     background: #fcfcfc;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
     color: #333;
 }
 .ui-table td {
