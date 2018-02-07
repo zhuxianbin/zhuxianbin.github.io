@@ -18,6 +18,9 @@ hr{
 p {
     margin: 0 0 10px;
 }
+.ant-radio{
+    vertical-align: top !important;
+}
 .ant-btn-background-ghost:hover{
     border-color: #fff;
     background: #fff !important;
@@ -28,6 +31,9 @@ p {
 .has-warning.has-feedback:after,
 .has-error.has-feedback:after,
 .is-validating.has-feedback:after{
+    line-height: 44px;
+}
+.ant-form-item-control{
     line-height: 44px;
 }
 

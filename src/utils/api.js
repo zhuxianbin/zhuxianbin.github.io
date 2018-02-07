@@ -133,4 +133,35 @@ export default {
         return conmonAjax("/api/product/list", param);
     },
 
+    /**
+     * 获取订单状态
+     * URL (/api/get-pay-info) METHOD POST
+     * 接收参数
+     * product_id 产品列表的ID字段
+     * */
+    getPayInfo: function (param) {
+        return conmonAjax("/api/get-pay-info", param);
+    },
+
+    /**
+     * 刷新订单金额
+     * URL (/api/pay/refresh-price/{TOKEN} ) METHOD GET
+     * 接收参数
+     * token 直接拼在url后
+     * 示例: /api/pay/refresh-price/1802055004745729
+     * */
+    refreshPrice: function (param) {
+        return conmonAjax("/api/pay/refresh-price/" + param.token, param, "get");
+    },
+
+    /**
+     * 订单下单
+     * URL (/api/pay) METHOD POST
+     * 接收参数
+     * product_id 产品列表的ID字段 channel 支付渠道 wechat,alipay
+     * */
+    pay: function (param) {
+        return conmonAjax("/api/pay", param);
+    },
+
 }

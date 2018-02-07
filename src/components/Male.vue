@@ -31,8 +31,13 @@
                             <div class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
                                 <v-row :gutter="layout.gutter">
                                     <v-col :span="layout.span">
-                                        <div style="width: 100%;height: 330px;background: #f2f2f2;">
-                                            <img :src="it.img" alt="" style="height: 330px;">
+                                        <div style="width: 100%;height: 330px;line-height: 330px;text-align: center; background: #f2f2f2;">
+                                            <template v-if="it.img == ''">
+                                                <i class="iconfont icon-zanwutupian" style="font-size: 210px;color:#ccc;"></i>
+                                            </template>
+                                            <template v-else>
+                                                <img :src="it.img" alt="" style="height: 330px;">
+                                            </template>
                                         </div>
                                     </v-col>
                                     <v-col :span="layout.span">
@@ -52,6 +57,7 @@
 
                                         <div class="margin-top-20 text-center">
                                             <a href="javascript:;" class="ant-btn ant-btn-warning"
+                                               @click="goPay(it)"
                                                style="font-size: 16px;width: 160px;">
                                                 立即购买
                                             </a>
@@ -136,7 +142,7 @@
                                 "name": "AC心理咨询师课程",
                                 "price": "0.10",
                                 "original_price": "0.01",
-                                "img": "http:\/\/aci.zhj\/api\/file\/1",
+                                "img": "",
                                 "description": "是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、经济学硕士研究生入学考试的门必考科目"
                             }
                         ]
@@ -144,6 +150,11 @@
                 };
                 vm.page.total = data.data.total;
                 this.info = data.data.row;
+            },
+
+            goPay(it){
+                window.payData = it
+                this.$router.push({ name: 'Pay'})
             }
         },
         mounted(){

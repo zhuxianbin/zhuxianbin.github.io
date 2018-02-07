@@ -245,7 +245,7 @@
                             );
 
                             //登录成功跳转页面（三种用法）
-                            vm.$router.push({ name: 'home'})
+                            vm.$router.push({ name: 'Index'})
 
                             // 字符串
                             //vm.$router.push('/home/first')

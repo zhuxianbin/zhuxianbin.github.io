@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Index from '@/components/Index'
 import Courselist from '@/components/Courselist'
 import Male from '@/components/Male'
+import Pay from '@/components/Pay'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
             path: '/male',
             name: 'Male',
             component: Male
+        },
+        {
+            path: '/pay',
+            name: 'Pay',
+            component: Pay
         }
     ]
 })
