@@ -6,6 +6,8 @@ import router from './router'
 
 //jquery插件
 import cookie from './jPlugins/jquery.cookie.min'
+import ajaxfileupload from './jPlugins/ajaxfileupload.min'
+import $ from 'jquery'
 
 import api from './utils/api'
 

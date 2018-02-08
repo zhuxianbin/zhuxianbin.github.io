@@ -7,20 +7,31 @@
                 </div>
                 <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
                     <li class="ant-menu-item">
-                        <a>首页</a>
+                        <router-link to="/index">首页</router-link>
                     </li>
-                    <li class="ant-menu-item ant-menu-item-selected">
-                        <a>课程分类</a>
+                    <li class="ant-menu-item ant-menu-item-selected hasSubmenu">
+                        <a>课程分类 <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i></a>
+                        <div class="sub-menu-tip">
+                            <em class="arrow"></em>
+                            <div>
+                                <ul>
+                                    <li><a>ACI国际心理咨询师</a></li>
+                                    <li><a>经济师</a></li>
+                                    <li><a>人力资源管理师</a></li>
+                                    <li><a>营养师</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                     <li class="ant-menu-item">
-                        <a>超职商城</a>
+                        <router-link to="/male">超职商城</router-link>
                     </li>
                     <li class="ant-menu-item">
                         <a>关于超职</a>
                     </li>
                 </ul>
                 <div class="header-login">
-                    <v-button ghost style="font-size: 16px;">学员登录</v-button>
+                    <a href="#/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;">学员登录</a>
                 </div>
             </div>
             <div class="ant-layout ant-layout-has-sider">
@@ -29,26 +40,26 @@
                     <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="height: 100%;">
                         <li class="ant-menu-item">
                             <div class="ant-menu-submenu-title">
-                                <a>
+                                <router-link to="/index">
                                     <i class="iconfont icon-shouye"></i>
                                     <span class="margin-left-5">后台首页</span>
-                                </a>
+                                </router-link>
                             </div>
                         </li>
                         <li class="ant-menu-item">
                             <div class="ant-menu-submenu-title">
-                                <a>
+                                <router-link to="/info">
                                     <i class="iconfont icon-baoming"></i>
                                     <span class="margin-left-5">我的报考资料</span>
-                                </a>
+                                </router-link>
                             </div>
                         </li>
                         <li class="ant-menu-item ant-menu-item-selected">
                             <div class="ant-menu-submenu-title">
-                                <a>
+                                <router-link to="/courselist">
                                     <i class="iconfont icon-kecheng"></i>
                                     <span class="margin-left-5">我购买的课程</span>
-                                </a>
+                                </router-link>
                             </div>
                         </li>
                     </ul>
