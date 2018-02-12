@@ -15,10 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li><a>ACI国际心理咨询师</a></li>
-                                    <li><a>经济师</a></li>
-                                    <li><a>人力资源管理师</a></li>
-                                    <li><a>营养师</a></li>
+                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -82,7 +79,7 @@
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">直播课程：</span>
-                                        <span class="inline-block">{{it.products.name}}</span>
+                                        <span class="inline-block">{{it.live_name}}</span>
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">当前课时：</span>
@@ -94,20 +91,23 @@
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">直播开始时间：</span>
-                                        <span class="inline-block">{{it.endtime}}</span>
+                                        <span class="inline-block">{{it.live_time}}</span>
                                     </div>
                                     <div class="margin-top-20 text-center">
-                                        <a href="javascript:;" class="ant-btn ant-btn-warning"
-                                           style="font-size: 16px;">
-                                            <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
-                                            <span class="inline-block">进入直播课堂</span>
-                                        </a>
-                                        <a href="javascript:;" class="ant-btn ant-btn-warning margin-left-20" disabled
-                                           style="font-size: 16px;">
-                                            <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
-                                            <span class="inline-block">直播课堂还未开始</span>
-                                        </a>
-                                        <span>（这两个按钮没办法判断）</span>
+                                        <template v-if="it.live_status == 0">
+                                            <a href="javascript:;" class="ant-btn ant-btn-warning margin-left-20" disabled
+                                               style="font-size: 16px;">
+                                                <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
+                                                <span class="inline-block">直播课堂还未开始</span>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a :href="it.live_url" class="ant-btn ant-btn-warning"
+                                               style="font-size: 16px;">
+                                                <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
+                                                <span class="inline-block">进入直播课堂</span>
+                                            </a>
+                                        </template>
                                     </div>
                                     <!--<div class="margin-top-20">
                                         购买价：<span style="font-size: 28px;color: #FE6500;">{{product.price}}</span> 元
@@ -134,7 +134,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <!--<tr>
                                         <td>普通心理</td>
                                         <td>
                                             <v-popover placement="right" title="" trigger="hover" :controlled="false">
@@ -165,7 +165,7 @@
                                         <td></td>
                                         <td>60课时</td>
                                         <td></td>
-                                    </tr>
+                                    </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -212,7 +212,11 @@
 
                 product: [],
 
-                downList: []
+                planLine: [],
+
+                downList: [],
+
+                cateList: []
             }
         },
         methods: {
@@ -221,15 +225,17 @@
             },*/
 
             showCoursePlan(){
-                /*this.$czapi.getCoursePlan({
+                var vm = this;
+                vm.$czapi.getCoursePlan({
                     pid: 1,
                     p: 1,
                     offset: 10
                 }).then(function (data) {
                     console.log(data);
-                });*/
+                    vm.planLine = data.data.row;
+                });
 
-                var data = {
+                /*var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -266,19 +272,21 @@
                             }
                         ]
                     }
-                }
+                }*/
             },
 
             showCourseDown(){
-                /*this.$czapi.getCourseInfo({
+                var vm = this;
+                this.$czapi.getCourseInfo({
                     pid: 0,
                     p: 1,
                     offset: 10
                 }).then(function (data) {
                     console.log(data);
-                });*/
+                    vm.downList = data.data.row;
+                });
 
-                var data = {
+               /* var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -292,17 +300,27 @@
                         ]
                     }
                 }
-                this.downList = data.data.row;
+                this.downList = data.data.row;*/
 
+            },
+
+            getCateList(){
+                var vm = this;
+                this.$czapi.getCateogry().then(function (data) {
+                    console.log(data);
+                    vm.cateList = data.data;
+                });
             }
         },
         mounted(){
+            var vm = this;
             //请求用不了，暂时直接模拟
-            /*this.$czapi.getCourseList().then(function (data) {
+            vm.$czapi.getCourseList().then(function (data) {
                 console.log(data);
-            });*/
+                vm.product = data.data;
+            });
 
-            var data = {
+            /*var data = {
                 "code":200,
                 "msg":"ok",
                 "data":[
@@ -326,10 +344,13 @@
                 ]
             }
 
-            this.product = data.data;
+            vm.product = data.data;*/
 
             //取课程安排计划
-            this.showCoursePlan();
+            vm.showCoursePlan();
+
+            //获取分类
+            this.getCateList();
         }
     }
 </script>

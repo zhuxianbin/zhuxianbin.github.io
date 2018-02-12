@@ -3,7 +3,7 @@ import Vue from 'vue'
 /**
  * 接口前缀
  * */
-var contentPath = "http://60.205.115.216/aci.api/public";
+var contentPath = "http://aci-api.chaozhiedu.com";
 
 var conmonAjax = function (url, param, type) {
     param = param || {};
@@ -162,6 +162,15 @@ export default {
      * */
     pay: function (param) {
         return conmonAjax("/api/pay", param);
+    },
+
+    /**
+     * 取得课程分类
+     * URL (/api/course/cateogry) METHOD GET
+     * 接收参数 无
+     * */
+    getCateogry: function (param) {
+        return conmonAjax("/api/course/cateogry", param, "get");
     },
 
 }

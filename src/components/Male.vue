@@ -15,10 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li><a>ACI国际心理咨询师</a></li>
-                                    <li><a>经济师</a></li>
-                                    <li><a>人力资源管理师</a></li>
-                                    <li><a>营养师</a></li>
+                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,7 +110,8 @@
                     p: 1,
                     total: 1,
                     offset: 10
-                }
+                },
+                cateList: []
             }
         },
         methods: {
@@ -135,14 +133,16 @@
                     p: vm.page.p,
                     offset: vm.page.offset
                 })
-                /*this.$czapi.getProductList({
+                vm.$czapi.getProductList({
                     p: vm.page.p,
                     offset: vm.page.offset
                 }).then(function (data) {
                     console.log(data)
-                });*/
+                    vm.page.total = data.data.total;
+                    vm.info = data.data.row;
+                });
 
-                var data = {
+                /*var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -160,16 +160,27 @@
                     }
                 };
                 vm.page.total = data.data.total;
-                this.info = data.data.row;
+                this.info = data.data.row;*/
             },
 
             goPay(it){
                 window.payData = it
                 this.$router.push({ name: 'Pay'})
+            },
+
+            getCateList(){
+                var vm = this;
+                this.$czapi.getCateogry().then(function (data) {
+                    console.log(data);
+                    vm.cateList = data.data;
+                });
             }
         },
         mounted(){
             this.loadData();
+
+            //获取分类
+            this.getCateList();
         }
     }
 </script>

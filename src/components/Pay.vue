@@ -15,10 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li><a>ACI国际心理咨询师</a></li>
-                                    <li><a>经济师</a></li>
-                                    <li><a>人力资源管理师</a></li>
-                                    <li><a>营养师</a></li>
+                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -238,25 +235,27 @@
                 alipayPayDialog1: false,
                 alipayPayDialog2: false,
                 alipayPayDialog3: false,
+                cateList: []
             }
         },
         methods: {
             refreshPrice(){
                 var vm = this;
-                /*vm.$czapi.refreshPrice({
+                vm.$czapi.refreshPrice({
                     token: vm.payState.token
                 }).then(function (data) {
-
-                })*/
+                    vm.payData.price = data.data;
+                    vm.$message.success("刷新价格成功");
+                })
 
                 //假设已经获取了
-                var data = {
+                /*var data = {
                     "code": 200,
                     "msg": "获取成功",
                     "data": "100"
                 };
                 vm.payData.price = data.data;
-                vm.$message.success("刷新价格成功");
+                vm.$message.success("刷新价格成功");*/
             },
 
             pay(){
@@ -272,17 +271,17 @@
                     vm.alipayPayDialog3 = true
                 }
 
-                /*vm.$czapi.pay({
+                vm.$czapi.pay({
                     product_id: vm.payData.id,
                     channel: vm.payStyle
                 }).then(function () {
 
-                })*/
+                })
 
-                console.log({
+                /*console.log({
                     product_id: vm.payData.id,
                     channel: vm.payStyle
-                })
+                })*/
             },
 
             wechatPayDialogCancle(){
@@ -302,19 +301,27 @@
             alipayPayDialogCancle3(){
                 this.alipayPayDialog3 = false
             },
+
+            getCateList(){
+                var vm = this;
+                this.$czapi.getCateogry().then(function (data) {
+                    console.log(data);
+                    vm.cateList = data.data;
+                });
+            }
         },
         mounted(){
             var vm = this;
             if(window.payData){
                 vm.payData = window.payData;
-                /*vm.$czapi.getPayInfo({
+                vm.$czapi.getPayInfo({
                     product_id: vm.payData.id
                 }).then(function () {
-
-                })*/
+                    vm.payState = data;
+                })
 
                 //假设已经获取了
-                var data = {
+                /*var data = {
                     "code": 200,
                     "msg": "获取成功",
                     "token": "1802055118094866",
@@ -325,10 +332,16 @@
                     }
                 }
 
-                this.payState = data;
+                this.payState = data;*/
             }else{
                 vm.$router.push({ name: 'Male'})
             }
+
+            //获取分类
+            this.getCateList();
+
+            //获取分类
+            this.getCateList();
         }
     }
 </script>

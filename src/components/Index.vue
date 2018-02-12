@@ -15,10 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li><a>ACI国际心理咨询师</a></li>
-                                    <li><a>经济师</a></li>
-                                    <li><a>人力资源管理师</a></li>
-                                    <li><a>营养师</a></li>
+                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -73,7 +70,7 @@
                                         <use xlink:href="#icon-touxiang1"></use>
                                     </svg>
                                 </template>
-                                <template v-if="info.code !== 200">
+                                <template v-if="info.code === 200">
                                     <img :src="info.ext_info.avatar_file"
                                          alt="" style="width: 80px;height: 80px;border-radius: 100%;">
                                 </template>
@@ -117,18 +114,27 @@
                     user: {},
                     ext_info: {},
                     period: []
-                }
+                },
+                cateList: []
             }
         },
         methods: {
-
+            getCateList(){
+                var vm = this;
+                this.$czapi.getCateogry().then(function (data) {
+                    console.log(data);
+                    vm.cateList = data.data;
+                });
+            }
         },
         mounted(){
-            /*this.$czapi.getUserInfo().then(function (data) {
+            var vm = this;
+            vm.$czapi.getUserInfo().then(function (data) {
                 console.log(data)
-            });*/
+                vm.info = data;
+            });
 
-            var data = {
+            /*var data = {
                 "code": 201, //201 等待完善信息 202 审核未通过 203 审核中 200 审核通过
                 "msg": "等待完善信息",
                 "user": {
@@ -170,7 +176,10 @@
                 "entry_form_example_url": "http:\/\/aci.zhj\/api\/file\/1"
             }
 
-            this.info = data;
+            this.info = data;*/
+
+            //获取分类
+            this.getCateList();
         }
     }
 </script>

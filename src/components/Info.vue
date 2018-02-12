@@ -15,10 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li><a>ACI国际心理咨询师</a></li>
-                                    <li><a>经济师</a></li>
-                                    <li><a>人力资源管理师</a></li>
-                                    <li><a>营养师</a></li>
+                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -208,7 +205,7 @@
                                                 <div>
                                                     <a href="javascript:;" @click="triggerUpload('entry_form_file')" class="ant-btn" style="width: 110px;">选择文件</a>
                                                     <!--<span class="inline-block margin-left-10">报表名.DOC</span>-->
-                                                    <a class="inline-block margin-left-20" href="javascript:;">点击下载：报名表>></a>
+                                                    <a class="inline-block margin-left-20" download="" :href="info.entry_form_example_url">点击下载：报名表>></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -574,7 +571,8 @@
                     label: '2018年6月开课'
                 }],
                 fileName: "file",
-                uploadAction: "http://60.205.115.216/aci.api/public/api/file/upload"
+                uploadAction: "http://aci-api.chaozhiedu.com/api/file/upload",
+                cateList: []
             }
         },
         methods: {
@@ -625,14 +623,24 @@
                         console.log("返回修改资料")
                     }
                 })
+            },
+
+            getCateList(){
+                var vm = this;
+                this.$czapi.getCateogry().then(function (data) {
+                    console.log(data);
+                    vm.cateList = data.data;
+                });
             }
         },
         mounted(){
-            /*this.$czapi.getUserInfo().then(function (data) {
+            var vm = this;
+            vm.$czapi.getUserInfo().then(function (data) {
                 console.log(data)
-            });*/
+                vm.info = data;
+            });
 
-            var data = {
+            /*var data = {
                 "code": 201, //201 等待完善信息 202 审核未通过 203 审核中 200 审核通过
                 "msg": "等待完善信息",
                 "user": {
@@ -674,7 +682,10 @@
                 "entry_form_example_url": "http:\/\/aci.zhj\/api\/file\/1"
             };
 
-            this.info = data;
+            this.info = data;*/
+
+            //获取分类
+            this.getCateList();
         }
     }
 </script>
