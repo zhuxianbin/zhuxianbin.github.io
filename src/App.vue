@@ -35,5 +35,7 @@ export default {
 </script>
 
 <style>
-
+#app .sub-menu-tip {
+  width: auto;
+}
 </style>

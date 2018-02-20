@@ -104,7 +104,8 @@
             </div>
 
             <div class="text-center">
-                北京XXX科技有限公司 版权所有 京ICP备17033346号
+                北京超职教育科技有限公司 版权所有 
+                <!-- 京ICP备17033346号 -->
             </div>
         </div>
     </div>
@@ -251,7 +252,7 @@ export default {
 
               this.getUserInfo();
               this.getCateList();
-              
+
               //登录成功跳转页面（三种用法）
               this.$router.push({ name: "Index" });
 
