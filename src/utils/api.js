@@ -3,7 +3,7 @@ import Vue from 'vue'
 /**
  * 接口前缀
  * */
-var contentPath = "http://aci-api.chaozhiedu.com";
+var contentPath = "" || "http://aci-api.chaozhiedu.com";
 
 var conmonAjax = function (url, param, type) {
     param = param || {};
@@ -14,31 +14,38 @@ var conmonAjax = function (url, param, type) {
         data: param,
         dataType: "json",
         beforeSend: function (xhr) {
-            if(url != "/api/login" && url != "/api/phone-captcha"){
+            if (url != "/api/login" && url != "/api/phone-captcha") {
                 var userToken = $.cookie("userToken");
                 console.log(userToken);
                 console.log("!=====");
-                if(userToken){
+                if (userToken) {
                     xhr.setRequestHeader('Token', userToken);
                 }
             }
         },
         success: function (data) {
-            if(data.code === 200){
+            console.log(data);
+            if (data.code === 200) {
                 defer.resolve(data);
-            }else{
+            } else {
                 //alert(data.msg);
                 //Vue.$message.error(data.msg, 2);
                 Vue.$modal.error({
                     title: '接口错误提示',
                     content: '出错内容：' + data.msg
                 });
-                defer.reject();
+                defer.reject(data);
             }
         }
     });
     return defer.promise();
 };
+
+// let conmonAjax = function (url, param, type) {
+//     let headers = {
+//       };
+//     return fetch();
+// }
 
 export default {
 
@@ -68,8 +75,8 @@ export default {
      * 无需参数，直接获取 ，注意要带上token
      * */
     getUserInfo: function (param) {
-        return conmonAjax("/api/user", param, "get");
-
+        
+        return conmonAjax("/api/user", param || {}, "get");
     },
 
     /**

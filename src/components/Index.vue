@@ -15,7 +15,7 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
+                                    <li v-for="it in cateList" :key='it.id'><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
                                 </ul>
                             </div>
                         </div>

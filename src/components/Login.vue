@@ -13,18 +13,18 @@
                     <v-form direction="horizontal" :model="ruleForm" :rules="rules" ref="ruleForm">
                         <v-form-item label="" :label-col="labelCol" :wrapper-col="wrapperCol" prop="phoneNumber">
                             <v-input placeholder="使用的手机号码" v-model="ruleForm.phoneNumber">
-                                <v-icon type="123" slot="before">
+                                <!-- <v-icon slot="before">
                                     <i class="iconfont icon-shoujihao" style="font-size: 22px;"></i>
-                                </v-icon>
+                                </v-icon> -->
                             </v-input>
                         </v-form-item>
 
                         <v-form-item label="" :label-col="labelCol" :wrapper-col="wrapperCol" prop="qcode">
                             <div class="inline-block text-center" style="width: 55%;">
                                 <v-input placeholder="短信验证码" v-model="ruleForm.qcode">
-                                    <v-icon type="123" slot="before">
+                                    <!-- <v-icon type="123" slot="before">
                                         <i class="iconfont icon-unie615" style="font-size: 22px;"></i>
-                                    </v-icon>
+                                    </v-icon> -->
                                 </v-input>
                             </div>
                             <div class="inline-block text-center" style="width: 43%;">
@@ -111,161 +111,164 @@
 </template>
 
 <script>
-    var isMobileNum = function(num) {
-        return /^(1[3-8]\d{9})$/.test(num);
+var isMobileNum = function(num) {
+  return /^(1[3-8]\d{9})$/.test(num);
+};
+
+var isLoginQcode = function(n) {
+  return /^\d{4}$/.test(n);
+};
+
+var validatePhoneNumber = function(rule, value, callback) {
+  if (isMobileNum(value)) {
+    callback();
+  } else {
+    callback(new Error("请确认您输入的手机号是否正确"));
+  }
+};
+
+var validateQcode = function(rule, value, callback) {
+  if (isLoginQcode(value)) {
+    callback();
+  } else {
+    callback(new Error("请确认您输入的验证码是否正确"));
+  }
+};
+
+export default {
+  name: "Login",
+  data() {
+    return {
+      labelCol: {
+        span: 6
+      },
+      wrapperCol: {
+        span: 24
+      },
+      ruleForm: {
+        phoneNumber: "",
+        qcode: "",
+        isTy: false
+      },
+      rules: {
+        phoneNumber: [
+          {
+            required: true,
+            message: "请确认您输入的手机号是否正确"
+          },
+          {
+            validator: validatePhoneNumber
+          }
+        ],
+        qcode: [
+          {
+            required: true,
+            message: "请确认您输入的验证码是否正确"
+          },
+          {
+            validator: validateQcode
+          }
+        ]
+      },
+      visible: false,
+
+      qcodeText: "获取验证码",
+      //是否在60秒内已经发送过获取验证码
+      isSend: false
+    };
+  },
+  methods: {
+    //点击确定同意协议
+    handleOk: function() {
+      this.visible = false;
+      this.ruleForm.isTy = true;
+    },
+
+    //点击关闭协议
+    handleCancel: function() {
+      this.visible = false;
+    },
+
+    //获取验证码
+    getQcode: function() {
+      var vm = this;
+      console.log(vm.isSend);
+      if (!vm.isSend) {
+        vm.isSend = true;
+
+        //获取验证码需要校验手机号码是否填写
+        this.$refs.ruleForm.validateField("phoneNumber", function(a) {
+          if (a === "") {
+            vm.$czapi
+              .getPhoneCaptcha({
+                phone: vm.ruleForm.phoneNumber
+              })
+              .then(function(data) {
+                vm.isSend = true;
+                var count = data.interval,
+                  timer = null;
+                vm.qcodeText = count + "秒后再次获取验证码";
+                timer = setInterval(function() {
+                  count--;
+                  if (count > 0) {
+                    vm.qcodeText = count + "秒后再次获取验证码";
+                  } else {
+                    vm.isSend = false;
+                    vm.qcodeText = "获取验证码";
+                    clearInterval(timer);
+                  }
+                }, 1000);
+              })
+              .fail(function() {
+                vm.isSend = false;
+              });
+          } else {
+            vm.isSend = false;
+          }
+        });
+      }
+    },
+
+    submitForm: function(formName) {
+      var vm = this;
+      vm.$refs[formName].validate(function(valid) {
+        if (valid) {
+          //alert('提交了!');
+          vm.$czapi
+            .doLogin({
+              phone: vm.ruleForm.phoneNumber,
+              captcha: vm.ruleForm.qcode
+            })
+            .then(function(data) {
+              var expiresDate = new Date(data.expired);
+              //在cookie中写用户token信息
+              $.cookie("userToken", data.token, {
+                path: "/", //cookie的作用域
+                expires: expiresDate
+              });
+
+              //登录成功跳转页面（三种用法）
+              vm.$router.push({ name: "Index" });
+
+              // 字符串
+              //vm.$router.push('/home/first')
+
+              // 对象
+              //vm.$router.push({ path: '/home/first' })
+
+              // 命名的路由
+              //vm.$router.push({ name: 'home', params: { userId: wise }})
+            });
+        } else {
+          return false;
+        }
+      });
     }
-
-    var isLoginQcode = function (n) {
-        return /^\d{4}$/.test(n);
-    };
-
-    var validatePhoneNumber = function(rule, value, callback) {
-        if(isMobileNum(value)){
-            callback();
-        }else{
-            callback(new Error('请确认您输入的手机号是否正确'));
-        }
-    };
-
-    var validateQcode = function(rule, value, callback) {
-        if(isLoginQcode(value)){
-            callback();
-        }else{
-            callback(new Error('请确认您输入的验证码是否正确'));
-        }
-    };
-
-    export default {
-        name: 'Login',
-        data () {
-            return {
-                labelCol: {
-                    span: 6
-                },
-                wrapperCol: {
-                    span: 24
-                },
-                ruleForm: {
-                    phoneNumber: '',
-                    qcode: '',
-                    isTy: false
-
-                },
-                rules: {
-                    phoneNumber: [
-                        {
-                            required: true,
-                            message: '请确认您输入的手机号是否正确'
-                        },
-                        {
-                            validator: validatePhoneNumber
-                        }
-                    ],
-                    qcode: [
-                        {
-                            required: true,
-                            message: '请确认您输入的验证码是否正确'
-                        },
-                        {
-                            validator: validateQcode
-                        }
-                    ]
-                },
-                visible: false,
-
-                qcodeText: "获取验证码",
-                //是否在60秒内已经发送过获取验证码
-                isSend: false
-            }
-        },
-        methods: {
-            //点击确定同意协议
-            handleOk: function () {
-                this.visible = false;
-                this.ruleForm.isTy = true;
-            },
-
-            //点击关闭协议
-            handleCancel: function () {
-                this.visible = false;
-            },
-
-            //获取验证码
-            getQcode: function () {
-                var vm = this;
-                console.log(vm.isSend)
-                if(!vm.isSend){
-                    vm.isSend = true;
-
-                    //获取验证码需要校验手机号码是否填写
-                    this.$refs.ruleForm.validateField("phoneNumber", function (a) {
-                        if(a === ""){
-                            vm.$czapi.getPhoneCaptcha({
-                                phone: vm.ruleForm.phoneNumber
-                            }).then(function (data) {
-                                vm.isSend = true;
-                                var count = data.interval, timer = null;
-                                vm.qcodeText = count + "秒后再次获取验证码";
-                                timer = setInterval(function () {
-                                    count--;
-                                    if(count > 0){
-                                        vm.qcodeText = count + "秒后再次获取验证码";
-                                    }else{
-                                        vm.isSend = false;
-                                        vm.qcodeText = "获取验证码";
-                                        clearInterval(timer);
-                                    }
-                                }, 1000);
-                            }).fail(function () {
-                                vm.isSend = false;
-                            });
-                        }else{
-                            vm.isSend = false;
-                        }
-
-                    });
-                }
-            },
-
-            submitForm: function(formName) {
-                var vm = this;
-                vm.$refs[formName].validate(function(valid) {
-                    if (valid) {
-                        //alert('提交了!');
-                        vm.$czapi.doLogin({
-                            phone: vm.ruleForm.phoneNumber,
-                            captcha: vm.ruleForm.qcode,
-                        }).then(function (data) {
-                            var expiresDate = new Date(data.expired);
-                            //在cookie中写用户token信息
-                            $.cookie("userToken", data.token, {
-                                    path : '/',//cookie的作用域
-                                    expires : expiresDate
-                                }
-                            );
-
-                            //登录成功跳转页面（三种用法）
-                            vm.$router.push({ name: 'Index'})
-
-                            // 字符串
-                            //vm.$router.push('/home/first')
-
-                            // 对象
-                            //vm.$router.push({ path: '/home/first' })
-
-                            // 命名的路由
-                            //vm.$router.push({ name: 'home', params: { userId: wise }})
-                        });
-                    } else {
-                        return false;
-                    }
-                });
-            }
-        },
-        mounted(){
-            //console.log(this.$czapi);
-        }
-    }
+  },
+  mounted() {
+    //console.log(this.$czapi);
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
