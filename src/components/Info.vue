@@ -115,18 +115,17 @@
                                                     <v-input placeholder="" v-model="param.en_name" style="width:320px;"></v-input>
                                                 </td>
                                                 <td rowspan="4" style="width: 130px;">
-                                                    <div>
-                                                        <img :src="param.avatar_file" alt="" style="width: 130px;height: 160px;">
-                                                    </div>
-                                                    <div class="margin-top-10">
-																											<v-upload name="avatar_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-                                                            <v-button type="ghost">
-                                                                选择图片
-                                                            </v-button>
-                                                        </v-upload>
-                                                        <!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('avatar_file')" style="display: block;">选择图片</a> -->
-                                                    </div>
-
+																									<div>
+																											<img :src="param.avatar_file" alt="" style="width: 130px;height: 160px;">
+																									</div>
+																									<div class="margin-top-10">
+																										<v-upload name="avatar_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+																											<v-button type="ghost">
+																													选择图片
+																											</v-button>
+																										</v-upload>
+																											<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('avatar_file')" style="display: block;">选择图片</a> -->
+																									</div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -183,7 +182,7 @@
                                                 <td>身份证复印件上传</td>
                                                 <td colspan="4" class="color-6">
                                                     <div>
-                                                        <v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_front_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+                                                        <v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_front_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
                                                             <v-button type="ghost">
                                                                 选择正面图片
                                                             </v-button>
@@ -195,7 +194,7 @@
                                                     <div class="margin-top-10">
                                                         <!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
                                                         <!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-																												<v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_reverse_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+																												<v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
                                                             <v-button type="ghost">
                                                                 选择反面图片
                                                             </v-button>
@@ -210,7 +209,7 @@
                                                     <div>
                                                         <!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
                                                         <!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-																												<v-upload accept="image/jpeg,image/jpg,image/png" name="edu_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+																												<v-upload accept="image/jpeg,image/jpg,image/png" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
                                                             <v-button type="ghost">
                                                                 选择图片
                                                             </v-button>
@@ -225,7 +224,7 @@
                                                     <div>
                                                         <!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
                                                         <!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-																												<v-upload accept="image/jpeg,image/jpg,image/png" name="degree_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+																												<v-upload accept="image/jpeg,image/jpg,image/png" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
                                                             <v-button type="ghost">
                                                                 选择图片
                                                             </v-button>
@@ -238,7 +237,7 @@
                                                 <td>报名表上传</td>
                                                 <td colspan="4" class="color-6">
                                                     <div>
-																											<v-upload name="entry_form_file" action="" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+																											<v-upload name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
                                                             <v-button type="ghost">
                                                                 选择文件
                                                             </v-button>

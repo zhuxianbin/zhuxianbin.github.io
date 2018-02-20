@@ -35,8 +35,8 @@
                 <div class="ant-layout" style="padding: 20px 0;background: #fff;">
                     <div style="width: 1200px;margin: 0 auto;background: #fff;">
                         <div style="margin-bottom: 10px;font-size: 16px;color: #56509F;">超职商城欢迎您</div>
-                        <template v-for="it in info">
-                            <div class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
+                       
+                            <div v-for="it in rows" :key="it.id" class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
                                 <v-row :gutter="layout.gutter">
                                     <v-col :span="layout.span">
                                         <div style="width: 100%;height: 330px;line-height: 330px;text-align: center; background: #f2f2f2;">
@@ -52,7 +52,7 @@
                                         <div style="font-size: 24px;color: #333333;">{{it.name}}</div>
                                         <div class="margin-top-20">
                                             <span class="inline-block text-right" style="width: 14%;vertical-align: top;">课程介绍：</span>
-                                            <span class="inline-block" style="width: 85%;">{{it.description}}</span>
+                                            <span class="inline-block" style="width: 85%;" v-html="it.description"></span>
                                         </div>
 
                                         <div class="margin-top-20">
@@ -77,7 +77,6 @@
                                     </v-col>
                                 </v-row>
                             </div>
-                        </template>
                         <div class="text-right">
                             <v-pagination
                                 show-size-changer
@@ -95,54 +94,55 @@
 </template>
 
 <script>
-    export default {
-        name: 'Index',
-        data () {
-            return {
-                layout: {
-                    gutter: 32,
-                    span: 12,
-                },
-                info: {
+import { mapState } from "vuex";
+export default {
+  name: "Index",
+  data() {
+    return {
+      layout: {
+        gutter: 32,
+        span: 12
+      },
+      rows: [],
+      page: {
+        p: 1,
+        total: 1,
+        offset: 10
+      }
+      //cateList: []
+    };
+  },
+  computed: {
+    ...mapState({
+      info: state => state.userInfo,
+      cateList: state => state.cateList
+    })
+  },
+  methods: {
+    showTotal(total) {
+      return `全部 ${total} 条`;
+    },
+    pageSizeChange(current, size) {
+      //console.log(current, size);
+      this.page.offset = size;
+      this.loadData();
+    },
+    changePage(a) {
+      this.page.p = a;
+      this.loadData();
+    },
+    loadData() {
+      this.$czapi
+        .getProductList({
+          p: this.page.p,
+          offset: this.page.offset
+        })
+        .then(({ data }) => {
+          this.page.total = data.total;
+          this.rows = data.rows;
+        });
 
-                },
-                page: {
-                    p: 1,
-                    total: 1,
-                    offset: 10
-                },
-                cateList: []
-            }
-        },
-        methods: {
-            showTotal(total) {
-                return `全部 ${total} 条`;
-            },
-            pageSizeChange(current, size) {
-                //console.log(current, size);
-                this.page.offset = size;
-                this.loadData();
-            },
-            changePage(a){
-                this.page.p = a;
-                this.loadData();
-            },
-            loadData(){
-                var vm = this;
-                console.log({
-                    p: vm.page.p,
-                    offset: vm.page.offset
-                })
-                vm.$czapi.getProductList({
-                    p: vm.page.p,
-                    offset: vm.page.offset
-                }).then(function (data) {
-                    console.log(data)
-                    vm.page.total = data.data.total;
-                    vm.info = data.data.row;
-                });
-
-                /*var data = {
+      /*var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -161,28 +161,17 @@
                 };
                 vm.page.total = data.data.total;
                 this.info = data.data.row;*/
-            },
+    },
 
-            goPay(it){
-                window.payData = it
-                this.$router.push({ name: 'Pay'})
-            },
-
-            getCateList(){
-                var vm = this;
-                this.$czapi.getCateogry().then(function (data) {
-                    console.log(data);
-                    vm.cateList = data.data;
-                });
-            }
-        },
-        mounted(){
-            this.loadData();
-
-            //获取分类
-            this.getCateList();
-        }
+    goPay(it) {
+      window.payData = it;
+      this.$router.push({ name: "Pay" });
     }
+  },
+  mounted() {
+    this.loadData();
+  }
+};
 </script>
 
 <style>
