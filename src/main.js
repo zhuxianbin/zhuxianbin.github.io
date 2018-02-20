@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store/index'
 
 //jquery插件
 import cookie from './jPlugins/jquery.cookie.min'
@@ -49,6 +50,7 @@ Vue.prototype.$czapi = api;
 new Vue({
     el: '#app',
     router,
+    store,
     components: {App},
     template: '<App/>'
 })

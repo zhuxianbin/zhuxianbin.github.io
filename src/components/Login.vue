@@ -134,7 +134,7 @@ var validateQcode = function(rule, value, callback) {
     callback(new Error("请确认您输入的验证码是否正确"));
   }
 };
-
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -178,6 +178,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      getUserInfo: "USER_INFO",
+      getCateList: "CATE_LIST"
+    }),
     //点击确定同意协议
     handleOk: function() {
       this.visible = false;
@@ -228,18 +232,16 @@ export default {
         });
       }
     },
-
-    submitForm: function(formName) {
-      var vm = this;
-      vm.$refs[formName].validate(function(valid) {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           //alert('提交了!');
-          vm.$czapi
+          this.$czapi
             .doLogin({
-              phone: vm.ruleForm.phoneNumber,
-              captcha: vm.ruleForm.qcode
+              phone: this.ruleForm.phoneNumber,
+              captcha: this.ruleForm.qcode
             })
-            .then(function(data) {
+            .then(data => {
               var expiresDate = new Date(data.expired);
               //在cookie中写用户token信息
               $.cookie("userToken", data.token, {
@@ -247,8 +249,11 @@ export default {
                 expires: expiresDate
               });
 
+              this.getUserInfo();
+              this.getCateList();
+              
               //登录成功跳转页面（三种用法）
-              vm.$router.push({ name: "Index" });
+              this.$router.push({ name: "Index" });
 
               // 字符串
               //vm.$router.push('/home/first')

@@ -28,7 +28,7 @@
                     </li>
                 </ul>
                 <div class="header-login">
-                    <a href="#/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;">学员登录</a>
+                    <router-link to="/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;">退出登录</router-link>
                 </div>
             </div>
             <div class="ant-layout ant-layout-has-sider">
@@ -86,7 +86,7 @@
                             <p style="margin-left: 28px;">您还未参考网校的ACI注册国际心理咨询师课程培训，请先缴费学习课程，再进行报名。</p>
                             <p style="margin-left: 28px;">职业培训教育网为您提供ACI注册国际心理咨询师培训考试一站式服务。</p>
                             <p class="margin-top-20" style="margin-left: 28px;">
-                                <v-button type="ghost" size="large" style="font-size: 18px;">点击购买课程>></v-button>
+                                <v-button @click='$router.push("/male")' type="ghost" size="large" style="font-size: 18px;">点击购买课程>></v-button>
                             </p>
                         </div>
                         <hr>
@@ -95,7 +95,7 @@
                             <p style="margin-left: 28px;">您已参考网校的ACI注册国际心理咨询师课程培训，可以进行报名。</p>
                             <p style="margin-left: 28px;">职业培训教育网为您提供ACI注册国际心理咨询师培训考试一站式服务。</p>
                             <p class="margin-top-20" style="margin-left: 28px;">
-                                <v-button type="ghost" size="large" style="font-size: 18px;">点击报考资料>></v-button>
+                                <v-button @click='$router.push("/info")' type="ghost" size="large" style="font-size: 18px;">点击报考资料>></v-button>
                             </p>
                         </div>
                     </div>
@@ -106,35 +106,42 @@
 </template>
 
 <script>
-    export default {
-        name: 'Index',
-        data () {
-            return {
-                info: {
-                    user: {},
-                    ext_info: {},
-                    period: []
-                },
-                cateList: []
-            }
-        },
-        methods: {
-            getCateList(){
-                var vm = this;
-                this.$czapi.getCateogry().then(function (data) {
-                    console.log(data);
-                    vm.cateList = data.data;
-                });
-            }
-        },
-        mounted(){
-            var vm = this;
-            vm.$czapi.getUserInfo().then(function (data) {
-                console.log(data)
-                vm.info = data;
-            });
+import { mapState } from "vuex";
+export default {
+  name: "Index",
+  data() {
+    return {
+    //   info: {
+    //     user: {},
+    //     ext_info: {},
+    //     period: []
+    //   },
+      //cateList: []
+    };
+  },
+  computed: {
+    ...mapState({
+      info: state => state.userInfo,
+      cateList: state => state.cateList
+    })
+  },
+//   methods: {
+//     getCateList() {
+//       var vm = this;
+//       this.$czapi.getCateogry().then(function(data) {
+//         console.log(data);
+//         vm.cateList = data.data;
+//       });
+//     }
+//   },
+  mounted() {
+    var vm = this;
+    // vm.$czapi.getUserInfo().then(function(data) {
+    //   console.log(data);
+    //   vm.info = data;
+    // });
 
-            /*var data = {
+    /*var data = {
                 "code": 201, //201 等待完善信息 202 审核未通过 203 审核中 200 审核通过
                 "msg": "等待完善信息",
                 "user": {
@@ -178,10 +185,10 @@
 
             this.info = data;*/
 
-            //获取分类
-            this.getCateList();
-        }
-    }
+    //获取分类
+    //this.getCateList();
+  }
+};
 </script>
 
 <style>
