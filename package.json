@@ -9,13 +9,12 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "build-test": "node build/build.js && git add -A && git commit -m 'test' && git push https://github.com/zhuxianbin/zhuxianbin.github.io.git"
-  
   },
   "dependencies": {
     "es5-shim": "^4.5.10",
     "es6-promise": "^4.2.4",
     "fetch-ie8": "^1.5.0",
-    "jquery": "^2.1.1",
+    "jquery": "^3.3.1",
     "vue": "^2.5.2",
     "vue-beauty": "^2.0.0-beta.10",
     "vue-router": "^3.0.1",
