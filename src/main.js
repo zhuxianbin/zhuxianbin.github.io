@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index'
+import mixins from './utils/mixins'
 
 //jquery插件
 import cookie from './jPlugins/jquery.cookie.min'
@@ -45,7 +46,7 @@ router.beforeEach((to, from, next) => {
  * 把API都混入到VUE实例中，方便直接调用
  * */
 Vue.prototype.$czapi = api;
-
+Vue.use(mixins)
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

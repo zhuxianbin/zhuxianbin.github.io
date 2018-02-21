@@ -33,7 +33,7 @@
                         </v-form-item>
 
                         <v-form-item :label-col="labelCol" :wrapper-col="wrapperCol">
-                            <v-button type="primary" html-type="submit"
+                            <v-button type="primary" :disabled='!ruleForm.isTy' html-type="submit"
                                       @click.prevent="submitForm('ruleForm')"
                                       style="display: block;width: 100%;font-size: 22px;">登录超职</v-button>
                         </v-form-item>

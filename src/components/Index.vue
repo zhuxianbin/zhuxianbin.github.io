@@ -28,7 +28,8 @@
                     </li>
                 </ul>
                 <div class="header-login">
-                    <router-link to="/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;">退出登录</router-link>
+                    <v-button @click="doLogout">退出登录</v-button>
+                    <!-- <router-link to="/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;"></router-link> -->
                 </div>
             </div>
             <div class="ant-layout ant-layout-has-sider">
