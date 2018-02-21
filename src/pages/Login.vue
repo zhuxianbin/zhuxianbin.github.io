@@ -149,7 +149,7 @@ export default {
       ruleForm: {
         phoneNumber: "",
         qcode: "",
-        isTy: false
+        isTy: true
       },
       rules: {
         phoneNumber: [
