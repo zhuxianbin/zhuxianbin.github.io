@@ -42,8 +42,8 @@ var conmonAjax = function (url, param, type) {
 };
 
 // let conmonAjax = function (url, param, type) {
-//     let headers = {
-//       };
+//     //let headers = {};
+//     //var userToken = $.cookie("userToken");
 //     return fetch();
 // }
 
