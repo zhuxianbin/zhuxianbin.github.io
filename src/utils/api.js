@@ -24,18 +24,19 @@ var conmonAjax = function (url, param, type) {
             }
         },
         success: function (data) {
-            console.log(data);
-            if (data.code === 200) {
-                defer.resolve(data);
-            } else {
-                //alert(data.msg);
-                //Vue.$message.error(data.msg, 2);
-                Vue.$modal.error({
-                    title: '接口错误提示',
-                    content: '出错内容：' + data.msg
-                });
-                defer.reject(data);
-            }
+            //console.log(data);
+            defer.resolve(data);
+            // if (data.code === 200) {
+            //     defer.resolve(data);
+            // } else {
+            //     //alert(data.msg);
+            //     //Vue.$message.error(data.msg, 2);
+            //     // Vue.$modal.error({
+            //     //     title: '接口错误提示',
+            //     //     content: '出错内容：' + data.msg
+            //     // });
+            //     defer.reject(data);
+            // }
         }
     });
     return defer.promise();

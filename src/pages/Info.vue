@@ -629,9 +629,14 @@ export default {
   },
   watch: {
     info(val, old) {
-      console.log(val, "112312312");
+      //console.log(val, "112312312");
 			this.param = { ...this.param, ...val.ext_info, ...val.user };
-			//this.ksType = val.period.map(()=>{});
+			this.ksType = val.period.map((item)=>{
+				return {
+					value: item.id,
+          label: item.name
+				}
+			});
     }
   },
   methods: {
@@ -690,7 +695,7 @@ export default {
       for (const key in this.param) {
         if (this.param.hasOwnProperty(key)) {
           const element = this.param[key];
-          if ("" + element) {
+          if (element) {
             params[key] = element;
           }
         }
@@ -723,7 +728,9 @@ export default {
           //console.log(data, file, reqOptions, 111);
           if (res.code == 200) {
             //console.log(reqOptions, this.$refs);
-            this.param[reqOptions.filename] = res.data.url;
+						this.param[reqOptions.filename] = res.data.url;
+						this.param[reqOptions.filename.replace('_file','')] = res.data.id;
+						console.log(this.param);
           }
         });
 
@@ -734,7 +741,13 @@ export default {
     }
   },
   mounted() {
-    var vm = this;
+		this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
+		this.ksType = this.info.period.map((item)=>{
+				return {
+					value: item.id,
+          label: item.name
+				}
+			});
     // vm.$czapi
     //   .getUserInfo()
     //   .then(function(data) {

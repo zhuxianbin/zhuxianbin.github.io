@@ -10,12 +10,12 @@ const CATE_LIST = "CATE_LIST";
 export default new Vuex.Store({
     state: {
         userInfo: {
-          user: {},
-          ext_info: {},
-          period: []
+            user: {},
+            ext_info: {},
+            period: []
         },
         cateList: [],
-        TOKEN: '',
+        Token: '',
         // LAB: api.baseUrl,
     },
     actions: {
@@ -35,6 +35,12 @@ export default new Vuex.Store({
     mutations: {
         [USER_INFO](state, data) {
             state.userInfo = data;
+            if (data.code !== 200) {
+                Vue.$modal.info({
+                    title: '温馨提示',
+                    content: '您的报考资料还未提交'
+                });
+            }
         },
         [CATE_LIST](state, {
             data
