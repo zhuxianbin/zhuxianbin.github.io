@@ -20,14 +20,16 @@ export default new Vuex.Store({
     },
     actions: {
         [USER_INFO](context, data) {
-            api.getUserInfo().then((data) => {
+            var userToken = $.cookie("userToken");
+            userToken && api.getUserInfo().then((data) => {
                 context.commit(USER_INFO, data);
             }).fail((data) => {
                 context.commit(USER_INFO, data);
             })
         },
         [CATE_LIST](context, data) {
-            api.getCateogry().then(function (data) {
+            var userToken = $.cookie("userToken");
+            userToken && api.getCateogry().then(function (data) {
                 context.commit(CATE_LIST, data);
             });
         },

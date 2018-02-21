@@ -8,10 +8,12 @@ var contentPath = "" || "http://aci-api.chaozhiedu.com";
 var conmonAjax = function (url, param, type) {
     param = param || {};
     var defer = $.Deferred();
+    let headers = {};
     $.ajax({
         url: contentPath + url,
         type: type || "post",
         data: param,
+        headers,
         dataType: "json",
         beforeSend: function (xhr) {
             if (url != "/api/login" && url != "/api/phone-captcha") {
