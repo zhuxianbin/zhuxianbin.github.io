@@ -1,37 +1,6 @@
 <template>
     <div class="course-list">
         <div class="ant-layout">
-            <div class="ant-layout-header">
-                <div class="logo">
-                    <img src="static/images/logo-1.png" alt="logo">
-                </div>
-                <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
-                    <li class="ant-menu-item">
-                        <router-link to="/index">首页</router-link>
-                    </li>
-                    <li class="ant-menu-item ant-menu-item-selected hasSubmenu">
-                        <a>课程分类 <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i></a>
-                        <div class="sub-menu-tip">
-                            <em class="arrow"></em>
-                            <div>
-                                <ul>
-                                    <li v-for="it in cateList"><a :href="'/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ant-menu-item">
-                        <router-link to="/male">超职商城</router-link>
-                    </li>
-                    <li class="ant-menu-item">
-                        <a>关于超职</a>
-                    </li>
-                </ul>
-                <div class="header-login">
-                    <v-button @click="doLogout" ghost>退出登录</v-button>
-                    <!-- <a href="#/login" class="ant-btn ant-btn-background-ghost" style="font-size: 16px;">退出登录</a> -->
-                </div>
-            </div>
             <div class="ant-layout ant-layout-has-sider">
                 <div class="ant-layout-sider" style="">
                     <div class="color-9 padding-15">我的超职管理后台</div>
@@ -64,8 +33,7 @@
                 </div>
                 <div class="ant-layout ant-layout-chaozhi">
                     <div class="ant-layout-content">
-                        <template v-for="it in product">
-                        <div class="padding-10" style="border: 1px solid #E8E8E8;border-radius: 6px;">
+                        <div v-for="it in product" :key='it.id' class="padding-10" style="border: 1px solid #E8E8E8;border-radius: 6px;">
                             <v-row :gutter="layout.gutter">
                                 <v-col :span="layout.span">
                                     <div style="width: 100%;height: 330px;background: #f2f2f2;">
@@ -116,7 +84,6 @@
                                 </v-col>
                             </v-row>
                         </div>
-                        </template>
                         <div class="admin-tab margin-top-20">
                             <ul class="clearfix">
                                 <li :class="{active: activeTabIndex == 0}" @click="activeTabIndex = 0, showCoursePlan()"><a href="jkavascript:;">课程安排计划</a></li>
@@ -179,7 +146,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="it in downList">
+                                    <tr v-for="it in downList" :key='it.id'>
                                         <td>{{it.file_name}}</td>
                                         <td>
                                             <!--<a :href="it.file" download class="ant-btn ant-btn-success"></a>-->
@@ -200,43 +167,45 @@
 </template>
 
 <script>
-    export default {
-        name: 'Courselist',
-        data () {
-            return {
-                layout: {
-                    gutter: 32,
-                    span: 12,
-                },
+export default {
+  name: "Courselist",
+  data() {
+    return {
+      layout: {
+        gutter: 32,
+        span: 12
+      },
 
-                activeTabIndex: 0,
+      activeTabIndex: 0,
 
-                product: [],
+      product: [],
 
-                planLine: [],
+      planLine: [],
 
-                downList: [],
+      downList: [],
 
-                cateList: []
-            }
-        },
-        methods: {
-            /*showTotal(total) {
+      cateList: []
+    };
+  },
+  methods: {
+    /*showTotal(total) {
                 return `全部 ${total} 条`;
             },*/
 
-            showCoursePlan(){
-                var vm = this;
-                vm.$czapi.getCoursePlan({
-                    pid: 1,
-                    p: 1,
-                    offset: 10
-                }).then(function (data) {
-                    console.log(data);
-                    vm.planLine = data.data.row;
-                });
+    showCoursePlan() {
+      var vm = this;
+      vm.$czapi
+        .getCoursePlan({
+          pid: 1,
+          p: 1,
+          offset: 10
+        })
+        .then(function(data) {
+          console.log(data);
+          vm.planLine = data.data.row;
+        });
 
-                /*var data = {
+      /*var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -274,20 +243,22 @@
                         ]
                     }
                 }*/
-            },
+    },
 
-            showCourseDown(){
-                var vm = this;
-                this.$czapi.getCourseInfo({
-                    pid: 0,
-                    p: 1,
-                    offset: 10
-                }).then(function (data) {
-                    console.log(data);
-                    vm.downList = data.data.row;
-                });
+    showCourseDown() {
+      var vm = this;
+      this.$czapi
+        .getCourseInfo({
+          pid: 0,
+          p: 1,
+          offset: 10
+        })
+        .then(function(data) {
+          console.log(data);
+          vm.downList = data.data.row;
+        });
 
-               /* var data = {
+      /* var data = {
                     "code": 200,
                     "msg": "ok",
                     "data": {
@@ -302,26 +273,17 @@
                     }
                 }
                 this.downList = data.data.row;*/
+    },
+  },
+  mounted() {
+    var vm = this;
+    //请求用不了，暂时直接模拟
+    vm.$czapi.getCourseList().then(function(data) {
+      console.log(data);
+      vm.product = data.data;
+    });
 
-            },
-
-            getCateList(){
-                var vm = this;
-                this.$czapi.getCateogry().then(function (data) {
-                    console.log(data);
-                    vm.cateList = data.data;
-                });
-            }
-        },
-        mounted(){
-            var vm = this;
-            //请求用不了，暂时直接模拟
-            vm.$czapi.getCourseList().then(function (data) {
-                console.log(data);
-                vm.product = data.data;
-            });
-
-            /*var data = {
+    /*var data = {
                 "code":200,
                 "msg":"ok",
                 "data":[
@@ -347,13 +309,13 @@
 
             vm.product = data.data;*/
 
-            //取课程安排计划
-            vm.showCoursePlan();
+    //取课程安排计划
+    vm.showCoursePlan();
 
-            //获取分类
-            this.getCateList();
-        }
-    }
+    //获取分类
+    //this.getCateList();
+  }
+};
 </script>
 
 <style>

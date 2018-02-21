@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Index from '@/components/Index'
-import Courselist from '@/components/Courselist'
-import Male from '@/components/Male'
-import Pay from '@/components/Pay'
-import Info from '@/components/Info'
+import Layout from '@/pages/Layout'
+import Login from '@/pages/Login'
+import Index from '@/pages/Index'
+import Courselist from '@/pages/Courselist'
+import Male from '@/pages/Male'
+import Pay from '@/pages/Pay'
+import Info from '@/pages/Info'
 
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        {
+    routes: [{
             path: '/',
             name: 'Login',
             component: Login
@@ -22,29 +22,36 @@ export default new Router({
             component: Login
         },
         {
-            path: '/index',
-            name: 'Index',
-            component: Index
+            path: '/page',
+            name: 'page',
+            component: Layout,
+            children: [{
+                    path: '/index',
+                    name: 'Index',
+                    component: Index
+                },
+                {
+                    path: '/courselist',
+                    name: 'Courselist',
+                    component: Courselist
+                },
+                {
+                    path: '/male',
+                    name: 'Male',
+                    component: Male
+                },
+                {
+                    path: '/pay',
+                    name: 'Pay',
+                    component: Pay
+                },
+                {
+                    path: '/info',
+                    name: 'Info',
+                    component: Info
+                }
+            ]
         },
-        {
-            path: '/courselist',
-            name: 'Courselist',
-            component: Courselist
-        },
-        {
-            path: '/male',
-            name: 'Male',
-            component: Male
-        },
-        {
-            path: '/pay',
-            name: 'Pay',
-            component: Pay
-        },
-        {
-            path: '/info',
-            name: 'Info',
-            component: Info
-        }
+
     ]
 })

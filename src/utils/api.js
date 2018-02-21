@@ -80,7 +80,7 @@ export default {
     },
 
     /**
-     * 增写用户基本资料
+     * 保存用户基本资料
      * URL (/api/user) METHOD POST
      * 接收参数如下：
      * cn_name en_name sex birthday college edu_num idcard
@@ -90,6 +90,19 @@ export default {
         return conmonAjax("/api/user", param);
 
     },
+
+    /**
+     * 提交用户基本资料
+     * URL (/api/user) METHOD POST
+     * 接收参数如下：
+     * cn_name en_name sex birthday college edu_num idcard
+     * email contacts_phone addr period idcard_front idcard_reverse edu degree entry_form avatar
+     * */
+    submitUserInfo: function (param) {
+        return conmonAjax("/api/user/submit", param);
+
+    },
+    
 
     /**
      * 取得已购课程
