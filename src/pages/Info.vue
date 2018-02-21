@@ -630,13 +630,13 @@ export default {
   watch: {
     info(val, old) {
       //console.log(val, "112312312");
-			this.param = { ...this.param, ...val.ext_info, ...val.user };
-			this.ksType = val.period.map((item)=>{
-				return {
-					value: item.id,
+      this.param = { ...this.param, ...val.ext_info, ...val.user };
+      this.ksType = val.period.map(item => {
+        return {
+          value: item.id,
           label: item.name
-				}
-			});
+        };
+      });
     }
   },
   methods: {
@@ -666,19 +666,27 @@ export default {
       document.getElementById("wtFile").click();
     },
     showConfirmForm() {
-      var vm = this;
-      vm.$modal.confirm({
+      this.$modal.confirm({
         iconType: "exclamation-circle-o",
         title: "注意",
         content: "请确认您填写的资料是否正确\n" + "一经提交不能再修改",
         okText: "确认提交",
         cancelText: "返回修改资料",
         width: 600,
-        onOk: function() {
+        onOk: () => {
           console.log("确认提交");
+          let params = {};
 
+          for (const key in this.param) {
+            if (this.param.hasOwnProperty(key)) {
+              const element = this.param[key];
+              if (element) {
+                params[key] = element;
+              }
+            }
+          }
           //确认提交资料
-          vm.$czapi.addUserInfo(vm.param).then(function(data) {
+          this.$czapi.submitUserInfo(params).then((data)=> {
             console.log(data);
           });
         },
@@ -728,9 +736,9 @@ export default {
           //console.log(data, file, reqOptions, 111);
           if (res.code == 200) {
             //console.log(reqOptions, this.$refs);
-						this.param[reqOptions.filename] = res.data.url;
-						this.param[reqOptions.filename.replace('_file','')] = res.data.id;
-						console.log(this.param);
+            this.param[reqOptions.filename] = res.data.url;
+            this.param[reqOptions.filename.replace("_file", "")] = res.data.id;
+            console.log(this.param);
           }
         });
 
@@ -741,13 +749,13 @@ export default {
     }
   },
   mounted() {
-		this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
-		this.ksType = this.info.period.map((item)=>{
-				return {
-					value: item.id,
-          label: item.name
-				}
-			});
+    this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
+    this.ksType = this.info.period.map(item => {
+      return {
+        value: item.id,
+        label: item.name
+      };
+    });
     // vm.$czapi
     //   .getUserInfo()
     //   .then(function(data) {
