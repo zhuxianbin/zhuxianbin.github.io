@@ -243,12 +243,14 @@ export default {
               captcha: this.ruleForm.qcode
             })
             .then(data => {
-              var expiresDate = new Date(data.expired);
+              //var expiresDate = new Date(data.expired);
               //在cookie中写用户token信息
-              $.cookie("userToken", data.token, {
-                path: "/", //cookie的作用域
-                expires: expiresDate
-              });
+              // $.cookie("userToken", data.token, {
+              //   path: "/", //cookie的作用域
+              //   expires: expiresDate
+              // });
+              //data里有token
+              this.$storage.set("userToken", data);
 
               this.getUserInfo();
               this.getCateList();

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import mixins from './utils/mixins'
+import storage from './utils/storage'
 
 //jquery插件
 import cookie from './jPlugins/jquery.cookie.min'
@@ -23,9 +24,8 @@ Vue.use(vueBeauty)
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-    var userToken = $.cookie("userToken");
+    var userToken = storage.get("userToken").token;
     console.log(userToken);
-    //console.log(to, from, next);
     if(userToken){
         if(to.fullPath === "/" || to.fullPath === "/login"){
             next("/index")

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import storage from "./storage";
 
 /**
  * 接口前缀
@@ -17,7 +18,7 @@ var conmonAjax = function (url, param, type) {
         dataType: "json",
         beforeSend: function (xhr) {
             if (url != "/api/login" && url != "/api/phone-captcha") {
-                var userToken = $.cookie("userToken");
+                var userToken = storage.get('userToken').token
                 console.log(userToken);
                 console.log("!=====");
                 if (userToken) {
@@ -78,7 +79,7 @@ export default {
      * 无需参数，直接获取 ，注意要带上token
      * */
     getUserInfo: function (param) {
-        
+
         return conmonAjax("/api/user", param || {}, "get");
     },
 
@@ -105,7 +106,7 @@ export default {
         return conmonAjax("/api/user/submit", param);
 
     },
-    
+
 
     /**
      * 取得已购课程

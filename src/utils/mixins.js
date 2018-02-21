@@ -1,5 +1,6 @@
 //import cookie from '../jPlugins/jquery.cookie.min'
 //import $ from 'jquery';
+import storage from "./storage";
 
 const $cookie = {
     //设置cookie  
@@ -34,7 +35,8 @@ export default {
             },
             methods: {
                 doLogout() {
-                    $cookie.clearCookie("userToken", "", -1);
+                    storage.remove("userToken");
+                    //$cookie.clearCookie("userToken", "", -1);
                     //$.cookie("userToken", "", -1);
                     //console.log(this.$router,1111);
                     this.$router.go();
@@ -45,15 +47,7 @@ export default {
         //Vue.prototype.$tools = prototypes;
         //Vue.prototype.$regex = regex;
         //Vue.prototype.$api = api;
-        Vue.prototype.$storage = {
-            get(key) {
-                return JSON.parse(window.localStorage[key]);
-            },
-            set(key, value) {
-                console.log("setStorage:", key, value);
-                return window.localStorage[key] = JSON.stringify(value);
-            }
-        }
+        Vue.prototype.$storage = storage
 
         Vue.prototype.$cookie = $cookie;
 
