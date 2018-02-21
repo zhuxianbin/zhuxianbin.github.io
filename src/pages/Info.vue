@@ -160,7 +160,7 @@
 												<td>身份证复印件上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_front_file" :action="uploadAction" @change="doChangeFile"
+														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction" @change="doChangeFile"
 														 :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择正面图片
@@ -173,7 +173,7 @@
 													<div class="margin-top-10">
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
 														<!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile"
+														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile"
 														 :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择反面图片
@@ -189,7 +189,7 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择图片
 															</v-button>
@@ -204,7 +204,7 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择图片
 															</v-button>
@@ -217,7 +217,7 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<v-upload name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择文件
 															</v-button>
@@ -686,7 +686,7 @@ export default {
             }
           }
           //确认提交资料
-          this.$czapi.submitUserInfo(params).then((data)=> {
+          this.$czapi.submitUserInfo(params).then(data => {
             console.log(data);
           });
         },
@@ -714,17 +714,18 @@ export default {
         console.log(data);
       });
     },
-    onBeforeUpload(file, reqOptions) {
-      //console.log(file, reqOptions);
-      var userToken = $.cookie("userToken");
+    onBeforeUpload(file, reqOptions,ccc) {
+      console.log(file, reqOptions,ccc);
+      let { token } = this.$storage.get("userToken");
+
       let headers = {
-          Token: userToken
+          Token: token
         },
         formData = new FormData();
 
       formData.append("file", file);
 
-      return fetch(this.uploadAction, {
+      fetch(this.uploadAction, {
         method: "POST",
         headers,
         body: formData
@@ -741,7 +742,7 @@ export default {
             console.log(this.param);
           }
         });
-
+			
       return false;
     },
     doChangeFile(data) {
