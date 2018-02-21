@@ -630,7 +630,8 @@ export default {
   watch: {
     info(val, old) {
       console.log(val, "112312312");
-      this.param = { ...val.ext_info };
+			this.param = { ...this.param, ...val.ext_info, ...val.user };
+			//this.ksType = val.period.map(()=>{});
     }
   },
   methods: {
@@ -684,18 +685,16 @@ export default {
 
     //临时保存
     doSave() {
+      let params = {};
 
-			let params = {};
-
-			for (const key in this.param) {
-				if (this.param.hasOwnProperty(key)) {
-					const element = this.param[key];
-					if(""+element)
-					{
-						params[key] = element;
-					}
-				}
-			}
+      for (const key in this.param) {
+        if (this.param.hasOwnProperty(key)) {
+          const element = this.param[key];
+          if ("" + element) {
+            params[key] = element;
+          }
+        }
+      }
 
       //确认提交资料
       this.$czapi.addUserInfo(params).then(data => {
