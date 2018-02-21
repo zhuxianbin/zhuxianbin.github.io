@@ -80,28 +80,22 @@
 							<template v-if="info.code === 201">
 								<div class="margin-top-10">
 									<table class="ui-table">
-										<colgroup>
-											<col style='width:170px' />
-											<col />
-											<col style='width:170px' />
-											<col />
-										</colgroup>
 										<tbody>
 											<tr>
-												<td>中文姓名</td>
-												<td>
-													<v-input placeholder="" v-model="param.cn_name" style="width:320px;"></v-input>
+												<td style='width:300px'>中文姓名</td>
+												<td >
+													<v-input placeholder="" v-model="param.cn_name" style="width:300px;"></v-input>
 												</td>
-												<td>英文姓名</td>
-												<td>
-													<v-input placeholder="" v-model="param.en_name" style="width:320px;"></v-input>
+												<td style='width:200px'>英文姓名</td>
+												<td >
+													<v-input placeholder="" v-model="param.en_name" style="width:300px;"></v-input>
 												</td>
-												<td rowspan="4" style="width: 130px;">
+												<td rowspan="4" style="width: 150px;">
 													<div>
-														<img :src="param.avatar_file" alt="" style="width: 130px;height: 160px;">
+														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;height: 160px;">
 													</div>
 													<div class="margin-top-10">
-														<v-upload name="avatar_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload name="avatar_file" :fileList="[]"  :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择图片
 															</v-button>
@@ -113,37 +107,37 @@
 											<tr>
 												<td>性别</td>
 												<td>
-													<v-select placeholder="请选择性别" style="width: 320px;" v-model='param.sex' :data="sexType"></v-select>
+													<v-select placeholder="请选择性别" style="width: 300px;" v-model='param.sex' :data="sexType"></v-select>
 												</td>
 												<td>出生日期</td>
 												<td>
-													<v-date-picker v-model="param.birthday" clearable :disabled-date="disabledDate" style="width:320px;"></v-date-picker>
+													<v-date-picker v-model="param.birthday" clearable :disabled-date="disabledDate" style="width:300px;"></v-date-picker>
 												</td>
 											</tr>
 											<tr>
 												<td>毕业院校</td>
 												<td>
-													<v-input placeholder="" v-model="param.college" style="width:320px;"></v-input>
+													<v-input placeholder="" v-model="param.college" style="width:300px;"></v-input>
 												</td>
 												<td>学历编号</td>
 												<td>
-													<v-input placeholder="" v-model="param.edu_num" style="width:320px;"></v-input>
+													<v-input placeholder="" v-model="param.edu_num" style="width:300px;"></v-input>
 												</td>
 											</tr>
 											<tr>
 												<td>身份证/护照</td>
 												<td>
-													<v-input placeholder="" v-model="param.idcard" style="width:320px;"></v-input>
+													<v-input placeholder="" v-model="param.idcard" style="width:300px;"></v-input>
 												</td>
 												<td>电子邮件</td>
 												<td>
-													<v-input placeholder="" v-model="param.email" style="width:320px;"></v-input>
+													<v-input placeholder="" v-model="param.email" style="width:300px;"></v-input>
 												</td>
 											</tr>
 											<tr>
 												<td>联系电话</td>
 												<td>
-													<v-input placeholder="" v-model="param.contacts_phone" style="width:320px;"></v-input>
+													<v-input placeholder="" v-model="param.contacts_phone" style="width:300px;"></v-input>
 												</td>
 												<td>居住地址</td>
 												<td colspan="2">
@@ -153,7 +147,7 @@
 											<tr>
 												<td>课时选择</td>
 												<td colspan="4" class="color-6">
-													<v-select placeholder="请课时选择" style="width: 320px;" v-model='param.period' :data="ksType"></v-select>
+													<v-select placeholder="请课时选择" style="width: 300px;" v-model='param.period' :data="ksType"></v-select>
 												</td>
 											</tr>
 											<tr>
@@ -166,7 +160,7 @@
 																选择正面图片
 															</v-button>
 														</v-upload>
-														<a v-if='param.idcard_front_file' :href='param.idcard_front_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
+														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_front_file')" style="width: 110px;">选择正面图片</a> -->
 
 													</div>
@@ -179,7 +173,7 @@
 																选择反面图片
 															</v-button>
 														</v-upload>
-														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
+														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
 													</div>
 												</td>
 											</tr>
@@ -194,7 +188,7 @@
 																选择图片
 															</v-button>
 														</v-upload>
-														<a v-if='param.edu_file' :href='param.edu_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
+														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
 													</div>
 												</td>
 											</tr>
@@ -209,7 +203,7 @@
 																选择图片
 															</v-button>
 														</v-upload>
-														<a v-if='param.degree_file' :href='param.degree_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
+														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
 													</div>
 												</td>
 											</tr>
@@ -252,11 +246,11 @@
 									<table class="ui-table">
 										<tr>
 											<td>中文姓名</td>
-											<td style="width: 320px;">
+											<td style="width: 300px;">
 												冯xx
 											</td>
 											<td>英文姓名</td>
-											<td style="width: 320px;">
+											<td style="width: 300px;">
 												Hel Yan
 											</td>
 											<td rowspan="4" style="width: 130px;">
@@ -367,11 +361,11 @@
 									<table class="ui-table">
 										<tr>
 											<td>中文姓名</td>
-											<td style="width: 320px;">
+											<td style="width: 300px;">
 												冯xx
 											</td>
 											<td>英文姓名</td>
-											<td style="width: 320px;">
+											<td style="width: 300px;">
 												Hel Yan
 											</td>
 											<td rowspan="4" style="width: 130px;">
@@ -714,12 +708,12 @@ export default {
         console.log(data);
       });
     },
-    onBeforeUpload(file, reqOptions,ccc) {
-      console.log(file, reqOptions,ccc);
-      let { token } = this.$storage.get("userToken");
+    onBeforeUpload(file, reqOptions, ccc) {
+      //console.log(file, reqOptions, ccc);
+      //let { token } = this.$storage.get("userToken");
 
       let headers = {
-          Token: token
+          Token: this.Token
         },
         formData = new FormData();
 
@@ -742,7 +736,7 @@ export default {
             console.log(this.param);
           }
         });
-			
+
       return false;
     },
     doChangeFile(data) {

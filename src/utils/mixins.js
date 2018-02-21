@@ -31,7 +31,12 @@ export default {
     install(Vue) {
         Vue.mixin({
             data() {
-                return {}
+                let {
+                    token
+                } = this.$storage.get("userToken");
+                return {
+                    Token: token
+                }
             },
             methods: {
                 doLogout() {

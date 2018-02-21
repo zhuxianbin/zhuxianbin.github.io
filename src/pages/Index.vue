@@ -53,9 +53,17 @@
                         <hr>
                         <div class="color-6" style="padding: 0 25px 25px 25px;">
                             <p>亲爱的学员：</p>
-                            <p style="margin-left: 28px;">您还未参考网校的ACI注册国际心理咨询师课程培训，请先缴费学习课程，再进行报名。</p>
-                            <p style="margin-left: 28px;">职业培训教育网为您提供ACI注册国际心理咨询师培训考试一站式服务。</p>
-                            <p class="margin-top-20" style="margin-left: 28px;">
+                            <p v-if='info.orders.product_id'>
+                                您已经购买了超职教育的在线课程，赶紧去学习吧。
+                            </p>
+                            <div v-else>
+                                <p style="margin-left: 28px;">您还未参考网校的ACI注册国际心理咨询师课程培训，请先缴费学习课程，再进行报名。</p>
+                                <p style="margin-left: 28px;">职业培训教育网为您提供ACI注册国际心理咨询师培训考试一站式服务。</p>
+                            </div>
+                            <p v-if='info.orders.product_id' class="margin-top-20" style="margin-left: 28px;">
+                                <v-button @click='$router.push("/courselist")' type="ghost" size="large" style="font-size: 18px;">赶紧去学习>></v-button>
+                            </p>
+                            <p v-else class="margin-top-20" style="margin-left: 28px;">
                                 <v-button @click='$router.push("/male")' type="ghost" size="large" style="font-size: 18px;">点击购买课程>></v-button>
                             </p>
                         </div>
@@ -81,29 +89,29 @@ export default {
   name: "Index",
   data() {
     return {
-    //   info: {
-    //     user: {},
-    //     ext_info: {},
-    //     period: []
-    //   },
+      //   info: {
+      //     user: {},
+      //     ext_info: {},
+      //     period: []
+      //   },
       //cateList: []
     };
   },
   computed: {
     ...mapState({
-      info: state => state.userInfo,
+      info: state => state.userInfo
       //cateList: state => state.cateList
     })
   },
-//   methods: {
-//     getCateList() {
-//       var vm = this;
-//       this.$czapi.getCateogry().then(function(data) {
-//         console.log(data);
-//         vm.cateList = data.data;
-//       });
-//     }
-//   },
+  //   methods: {
+  //     getCateList() {
+  //       var vm = this;
+  //       this.$czapi.getCateogry().then(function(data) {
+  //         console.log(data);
+  //         vm.cateList = data.data;
+  //       });
+  //     }
+  //   },
   mounted() {
     var vm = this;
     // vm.$czapi.getUserInfo().then(function(data) {
