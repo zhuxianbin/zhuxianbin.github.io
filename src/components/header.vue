@@ -13,7 +13,7 @@
                 <em class="arrow"></em>
                 <div>
                     <ul>
-                        <li v-for="it in cateList" :key='it.id'><a :href="'http://aci-api.chaozhiedu.com/api/product/list/' + it.id" target="_blank">{{it.name}}</a></li>
+                        <li v-for="it in cateList" :key='it.id'><a :href="'#m' + it.id">{{it.name}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <router-link to="/male">超职商城</router-link>
         </li>
         <li class="ant-menu-item">
-            <a>关于超职</a>
+            <a href="/#about">关于超职</a>
         </li>
     </ul>
     <div class="header-login">
