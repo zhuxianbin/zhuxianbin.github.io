@@ -211,14 +211,14 @@ export default {
   },
   methods: {
     refreshPrice() {
-      var vm = this;
-      vm.$czapi
+        console.log(this.payState);
+      this.$czapi
         .refreshPrice({
-          token: vm.payState.token
+          token: this.payState.token
         })
-        .then(function(data) {
-          vm.payData.price = data.data;
-          vm.$message.success("刷新价格成功");
+        .then(data => {
+          this.payData.price = data.data;
+          this.$message.success("刷新价格成功");
         });
 
       //假设已经获取了
@@ -244,10 +244,10 @@ export default {
         vm.alipayPayDialog3 = true;
       }
 
-      vm.$czapi
+      this.$czapi
         .pay({
-          product_id: vm.payData.id,
-          channel: vm.payStyle
+          product_id: this.payData.id,
+          channel: this.payStyle
         })
         .then(data => {
           this.payResult = data;
@@ -276,26 +276,25 @@ export default {
     },
     alipayPayDialogCancle3() {
       this.alipayPayDialog3 = false;
-    },
-
-    getCateList() {
-      var vm = this;
-      this.$czapi.getCateogry().then(function(data) {
-        console.log(data);
-        vm.cateList = data.data;
-      });
     }
+
+    // getCateList() {
+    //   var vm = this;
+    //   this.$czapi.getCateogry().then(function(data) {
+    //     console.log(data);
+    //     vm.cateList = data.data;
+    //   });
+    // }
   },
   mounted() {
-    var vm = this;
     if (window.payData) {
-      vm.payData = window.payData;
-      vm.$czapi
+      this.payData = window.payData;
+      this.$czapi
         .getPayInfo({
-          product_id: vm.payData.id
+          product_id: this.payData.id
         })
-        .then(function() {
-          vm.payState = data;
+        .then((data) => {
+          this.payState = data;
         });
 
       //假设已经获取了
@@ -312,14 +311,14 @@ export default {
 
                 this.payState = data;*/
     } else {
-      vm.$router.push({ name: "Male" });
+      this.$router.push({ name: "Male" });
     }
 
-    //获取分类
-    this.getCateList();
+    // //获取分类
+    // this.getCateList();
 
-    //获取分类
-    this.getCateList();
+    // //获取分类
+    // this.getCateList();
   }
 };
 </script>
