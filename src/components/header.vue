@@ -5,7 +5,7 @@
     </div>
     <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
         <li class="ant-menu-item ant-menu-item-selected">
-            <router-link to="/index">首页</router-link>
+            <a href="/">首页</a>
         </li>
         <li class="ant-menu-item hasSubmenu">
             <a>课程分类 <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i></a>
@@ -26,6 +26,7 @@
         </li>
     </ul>
     <div class="header-login">
+        <v-button @click="$router.push('/index')" ghost>个人中心</v-button>
         <v-button @click="doLogout" ghost>退出登录</v-button>
     </div>
   </div>
@@ -34,13 +35,13 @@
 <script>
 import { mapState } from "vuex";
 export default {
-    name: "Header",
-    computed: {
+  name: "Header",
+  computed: {
     ...mapState({
       info: state => state.userInfo,
       cateList: state => state.cateList
     })
-  },
+  }
 };
 </script>
 

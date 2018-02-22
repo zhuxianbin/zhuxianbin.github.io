@@ -704,8 +704,8 @@ export default {
       }
 
       //确认提交资料
-      this.$czapi.addUserInfo(params).then(data => {
-        console.log(data);
+      this.$czapi.addUserInfo(params).then(({code,msg}) => {
+				this.$message[code==200?"success":"error"](msg);
       });
     },
     onBeforeUpload(file, reqOptions, ccc) {
