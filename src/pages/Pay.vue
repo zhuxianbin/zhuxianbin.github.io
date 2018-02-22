@@ -259,6 +259,7 @@ export default {
                 let form = $(data.form)[0];
                 $("body").append(form);
                 form.submit();
+                $(form).remove();
               //document.forms["alipaysubmit"].submit();
             }
           //});
