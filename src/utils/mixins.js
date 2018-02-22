@@ -47,13 +47,13 @@ export default {
                     this.$router.go();
                 },
                 openNew(link) {
-                    var e = document.createElement("a");
-                    document.body.appendChild(e);
-                    e.href = link;
-                    e.target = "_new";
-                    e.click();
-                    document.body.removeChild(e);
-
+                    // var e = document.createElement("a");
+                    // document.body.appendChild(e);
+                    // e.href = link;
+                    // e.target = "_new";
+                    // e.click();
+                    // document.body.removeChild(e);
+                    window.open(link);
                 }
             }
         });

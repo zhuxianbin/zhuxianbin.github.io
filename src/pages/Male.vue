@@ -39,7 +39,7 @@
                                                style="font-size: 16px;width: 160px;">
                                                 立即购买
                                             </a>
-                                            <a href="javascript:;" class="ant-btn"
+                                            <a href="javascript:;" @click="doKF" class="ant-btn"
                                                style="font-size: 16px;width: 160px;margin-left: 20px;">
                                                 立即咨询
                                             </a>
@@ -65,6 +65,7 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "Index",
   data() {
@@ -84,7 +85,7 @@ export default {
   },
   computed: {
     ...mapState({
-      info: state => state.userInfo,
+      info: state => state.userInfo
       //cateList: state => state.cateList
     })
   },
@@ -136,10 +137,35 @@ export default {
     goPay(it) {
       window.payData = it;
       this.$router.push({ name: "Pay" });
+    },
+    doKF(){
+        let kfs = $('.doyoo_link.doyoo_online');
+        if(kfs.length)
+        {
+            $(kfs[0]).click();
+        }
+        else{
+            this.$message.info("当前没有在线的老师,请拨打客服热线： 010-51657777");
+        }
     }
   },
   mounted() {
     this.loadData();
+    document.write(
+      '<script id="kf" src="http://lead.soperson.com/20003131/10088703.js"><\/script>'
+    );
+  },
+  activated() {
+    let doyoo = document.getElementById("doyoo_panel");
+    if(doyoo){
+        doyoo.style.display = "block";
+    }
+  },
+  deactivated() {
+     let doyoo = document.getElementById("doyoo_panel");
+    if(doyoo){
+        doyoo.style.display = "none";
+    }
   }
 };
 </script>
