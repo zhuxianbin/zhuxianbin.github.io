@@ -112,7 +112,7 @@
                     </div>
                     <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
                 </div>
-                <div v-html="payResult.form"></div>
+                <!-- <div v-html="payResult.form"></div> -->
             </div>
             <div slot="footer">
                 <v-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle1">关闭</v-button>
@@ -251,14 +251,17 @@ export default {
           channel: this.payStyle
         })
         .then(data => {
-          console.log(data, 1111111111);
+          //console.log(data, 1111111111);
           this.payResult = data;
-          console.log(data, "pay");
-          this.$nextTick(() => {
+          //console.log(data, "pay");
+          //this.$nextTick(() => {
             if (this.payStyle === "alipay") {
-              document.forms["alipaysubmit"].submit();
+                let form = $(data.form)[0];
+                $("body").append(form);
+                form.submit();
+              //document.forms["alipaysubmit"].submit();
             }
-          });
+          //});
         });
 
       /*console.log({
