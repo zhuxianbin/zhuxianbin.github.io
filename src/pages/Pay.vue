@@ -235,35 +235,45 @@ export default {
     pay() {
       var vm = this;
 
-      if (vm.payStyle === "wechat") {
-        vm.wechatPayDialog = true;
-      } else if (vm.payStyle === "yhk") {
-        vm.yhkPayDialog = true;
-      } else if (vm.payStyle === "alipay") {
-        vm.alipayPayDialog1 = true;
-        // vm.alipayPayDialog2 = true;
-        // vm.alipayPayDialog3 = true;
-      }
-
       this.$czapi
         .pay({
           product_id: this.payData.id,
           channel: this.payStyle
         })
         .then(data => {
-          //console.log(data, 1111111111);
+          if (data.code !== 200) {
+            this.$modal.error({
+              title: "温馨提示",
+              content: data.msg
+            });
+            return false;
+          }
+
+          if (vm.payStyle === "wechat") {
+            vm.wechatPayDialog = true;
+          }
+          if (vm.payStyle === "yhk") {
+            vm.yhkPayDialog = true;
+          }
+
           this.payResult = data;
           //console.log(data, "pay");
           //this.$nextTick(() => {
-            if (this.payStyle === "alipay") {
-
-                this.openNew(`http://aci-api.chaozhiedu.com/api/pay/alipay/${this.payState.token}`);
-                // let form = $(data.form)[0];
-                // $("body").append(form);
-                // form.submit();
-                // $(form).remove();
-              //document.forms["alipaysubmit"].submit();
-            }
+          if (this.payStyle === "alipay") {
+            this.alipayPayDialog1 = true;
+            // vm.alipayPayDialog2 = true;
+            // vm.alipayPayDialog3 = true;
+            this.openNew(
+              `http://aci-api.chaozhiedu.com/api/pay/alipay/${
+                this.payState.token
+              }`
+            );
+            // let form = $(data.form)[0];
+            // $("body").append(form);
+            // form.submit();
+            // $(form).remove();
+            //document.forms["alipaysubmit"].submit();
+          }
           //});
         });
 
