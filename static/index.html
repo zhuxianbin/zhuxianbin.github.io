@@ -26,6 +26,11 @@
             width: auto;
         }
 
+        .tc-list-item {
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 
@@ -66,7 +71,7 @@
                     </li>
                 </ul>
                 <div class="header-login">
-                    <v-button ghost style="font-size: 16px;">学员登录</v-button>
+                    <a class='ant-btn ant-btn-background-ghost' style="font-size: 16px;" href="/#/login">学员登录</a>
                 </div>
             </div>
 
@@ -148,15 +153,15 @@
                 </div>
             </div>
 
-            <div class="text-center" style="height: 176px; background: url('./images/hh-bg.png') no-repeat center top;background-position: center;background-size: cover;">
+            <!-- <div class="text-center" style="height: 176px; background: url('./images/hh-bg.png') no-repeat center top;background-position: center;background-size: cover;">
                 <div class="index-gg-menu wow fadeIn">
                     <ul>
-                        <!-- <li :class="{active: ggMenuActiveIndex == 0}" @click="ggMenuActiveIndex = 0">改革方向</li>
-                    <li :class="{active: ggMenuActiveIndex == 1}" @click="ggMenuActiveIndex = 1">市场缺口</li> -->
+                        <li :class="{active: ggMenuActiveIndex == 0}" @click="ggMenuActiveIndex = 0">改革方向</li>
+                        <li :class="{active: ggMenuActiveIndex == 1}" @click="ggMenuActiveIndex = 1">市场缺口</li>
                         <li :class="{active: ggMenuActiveIndex == 2}" @click="ggMenuActiveIndex = 2">课程优势</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
             <!-- <div class="wow bounceIn" v-show="ggMenuActiveIndex == 0">
             <div style="width: 1200px;margin: 0 auto;">
@@ -216,7 +221,7 @@
             </div>
         </div> -->
 
-            <div class="wow bounceIn" v-show="ggMenuActiveIndex == 2">
+            <div class="wow bounceIn">
                 <div class="text-center" style="width: 1200px;margin: 0 auto;padding-top: 20px;padding-bottom: 34px;">
                     <div style="margin-bottom: 50px;">
                         <div class="inline-block color-3" style="font-size: 42px;padding-left: 5px;padding-right: 35px;border-bottom: 10px solid #FF4000;">注册国际心理咨询师证书</div>
@@ -508,10 +513,10 @@
                     <div class="wow fadeInLeft" style="font-size: 42px;font-weight: bold;color: #fff;text-align: center;">超职网校加盟名师</div>
 
                     <div class="clearfix text-center wow fadeInUp" style="margin-top: 60px;">
-                        <div class="pull-left" style="margin-right: 80px;">
-                            <div style="width: 240px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: cover;">
+                        <div class="pull-left tc-list-item">
+                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/fur2.png" alt="" style="width: 130px;">
+                                    <img src="./images/郭聪荣.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">郭聪荣老师</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -521,10 +526,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pull-left" style="margin-right: 80px;">
-                            <div style="width: 240px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: cover;">
+                        <div class="pull-left tc-list-item">
+                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/fur2.png" alt="" style="width: 130px;">
+                                    <img src="./images/王海燕.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">王海燕老师</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -533,29 +538,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pull-left" style="margin-right: 80px;">
-                            <div style="width: 240px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: cover;">
+                        <div class="pull-left tc-list-item">
+                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/fur2.png" alt="" style="width: 130px;">
+                                    <img src="./images/郑海英.png" alt="" style="width: 130px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">牟海老师</div>
+                                <div style="font-size: 24px;color: #029EFF;">郑海英</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
-                                    北大心理学硕士，二级心理咨
-                                    <br/>询师 共青团心理辅导员培训与
-                                    <br/>督导师
+                                    硕士研究生，国家二级心理咨询师，华北理工大学心理学院教师，华北理工大学附属医院心理科心理咨询师
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-left tc-list-item">
+                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                                <div style="padding-top: 35px;">
+                                    <img src="./images/树心.png" alt="" style="width: 130px;">
+                                </div>
+                                <div style="font-size: 24px;color: #029EFF;">树心</div>
+                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
+                                    心理学硕士，国内实力派咨询专家，二级心理咨询师
                                 </div>
                             </div>
                         </div>
                         <div class="pull-left">
-                            <div style="width: 240px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: cover;">
+                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/fur2.png" alt="" style="width: 130px;">
+                                    <img src="./images/果果.png" alt="" style="width: 130px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">李艳老师</div>
+                                <div style="font-size: 24px;color: #029EFF;">果果</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
-                                    心理学硕士，国内实力派咨询
-                                    <br/>专家，二级心理咨询师 OH卡与
-                                    <br/>回归疗法整合式咨询第一人。
+                                    心理学硕士，心理治疗师
                                 </div>
                             </div>
                         </div>
@@ -617,9 +629,9 @@
                     <div class="color-3 text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">选择超职，选择未来</div>
                     <div class="text-center" style="margin-top: 30px;">
                         <div class="inline-block clearfix">
-                            <div class="pull-left clearfix" style="width: 700px;">
+                            <div class="pull-left clearfix" style="width: 500px;line-height: 38px;">
                                 <div class="index-select-items pull-left wow fadeInLeft">
-                                    <img src="./images/fur1.png" alt="" style="width: 700px;display: block;">
+                                    <!-- <img src="./images/fur1.png" alt="" style="width: 700px;display: block;">
                                     <div class="bg">
                                         <div style="display: inline-block;margin-top: 60px;width: 470px;height:38px;
                                     line-height:38px;background: #fff;font-size: 20px;color: #56509F;">
@@ -628,20 +640,19 @@
                                         <div style="margin-top: 5px;">你还愿意再接受照本宣科的老师吗？你还愿意接收学术平庸责任心差的老师吗？</div>
                                         <div>在超职网，对老师层层把关，保留5A教学质量且</div>
                                         <div>具有能力、经验、责任心的教师！</div>
+                                    </div> -->
+                                    <div style='width:500px;background-color:#FE741A;color:#fff;font-size:20px;'>5A级专业老师，在超职网，老师就是核心关键！</div>
+                                    <div >
+                                        <div style="margin-top: 30px;">你还愿意再接受照本宣科的老师吗？你还愿意接收学术平庸责任心差的老师吗？</div>
+                                        <div>在超职网，对老师层层把关，保留5A教学质量且</div>
+                                        <div>具有能力、经验、责任心的教师！</div>
                                     </div>
                                 </div>
-                                <div class="index-select-items pull-left wow fadeInLeft" style="margin-top: 16px;">
-                                    <img src="./images/fur3.png" alt="" style="width: 373px;display: block;">
-                                    <div class="bg"></div>
-                                </div>
-                                <div class="index-select-items pull-left wow fadeInLeft" style="margin-top: 16px;margin-left: 16px;">
-                                    <img src="./images/fur4.png" alt="" style="width: 310px;display: block;">
-                                    <div class="bg"></div>
-                                </div>
+
                             </div>
                             <div class="index-select-items pull-left wow fadeInRight" style="margin-left: 16px;">
                                 <div>
-                                    <img src="./images/fur2.png" alt="" style="width: 314px;display: block;">
+                                    <img src="./images/honnr.jpg" alt="" style="width: 314px;display: block;">
                                     <div class="bg"></div>
                                 </div>
                             </div>

@@ -45,6 +45,15 @@ export default {
                     //$.cookie("userToken", "", -1);
                     //console.log(this.$router,1111);
                     this.$router.go();
+                },
+                openNew(link) {
+                    var e = document.createElement("a");
+                    document.body.appendChild(e);
+                    e.href = link;
+                    e.target = "_new";
+                    e.click();
+                    document.body.removeChild(e);
+
                 }
             }
         });

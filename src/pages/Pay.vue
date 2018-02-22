@@ -256,10 +256,12 @@ export default {
           //console.log(data, "pay");
           //this.$nextTick(() => {
             if (this.payStyle === "alipay") {
-                let form = $(data.form)[0];
-                $("body").append(form);
-                form.submit();
-                $(form).remove();
+
+                this.openNew(`http://aci-api.chaozhiedu.com/api/pay/alipay/${this.payState.token}`);
+                // let form = $(data.form)[0];
+                // $("body").append(form);
+                // form.submit();
+                // $(form).remove();
               //document.forms["alipaysubmit"].submit();
             }
           //});
