@@ -88,7 +88,7 @@
         </div>
     </v-modal>
 
-        <v-modal
+        <!-- <v-modal
             title="支付提醒"
             :width="800"
             :visible="alipayPayDialog1"
@@ -112,6 +112,37 @@
                     </div>
                     <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
                 </div>
+            </div>
+            <div slot="footer">
+                <v-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle1">关闭</v-button>
+            </div>
+        </v-modal> -->
+
+        <v-modal
+            title="支付提醒"
+            :width="800"
+            :visible="alipayPayDialog1"
+            @cancel="alipayPayDialogCancle1"
+            wrap-class-name="vertical-center-modal">
+            <div class="clearfix" style="font-size: 16px;" v-html="payResult">
+                <!-- <div class="pull-left margin-left-20">
+                    <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
+                </div>
+                <div class="pull-left margin-left-20" style="width: 450px;">
+                    <div style="font-size: 24px;">
+                        请您在新打开的平台支付页面进行支付，<br/>
+                        支付完成前请不要关闭该窗口
+                    </div>
+                    <div class="margin-top-20" style="font-size: 14px;color: #FF4000;">
+                        在订单支付完成前请不要关闭此窗口，否则会影响购买。
+                    </div>
+                    <div class="margin-top-20">
+                        <v-button type="primary">已完成支付</v-button>
+                        <v-button type="default" style="margin-left: 10px;">未完成支付</v-button>
+                    </div>
+                    <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
+                </div> -->
+                
             </div>
             <div slot="footer">
                 <v-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle1">关闭</v-button>
@@ -250,6 +281,7 @@ export default {
           channel: this.payStyle
         })
         .then(data => {
+            console.log(data,1111111111);
           this.payResult = data;
           console.log(data, "pay");
         });

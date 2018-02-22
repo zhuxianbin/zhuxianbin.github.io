@@ -19,8 +19,8 @@ var conmonAjax = function (url, param, type) {
         beforeSend: function (xhr) {
             if (url != "/api/login" && url != "/api/phone-captcha") {
                 var userToken = storage.get('userToken').token
-                console.log(userToken);
-                console.log("!=====");
+                // console.log(userToken);
+                // console.log("!=====");
                 if (userToken) {
                     xhr.setRequestHeader('Token', userToken);
                 }
