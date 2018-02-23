@@ -212,7 +212,7 @@ export default {
   },
   methods: {
     refreshPrice() {
-      console.log(this.payState);
+      //console.log(this.payState);
       this.$czapi
         .refreshPrice({
           token: this.payState.token
@@ -309,7 +309,8 @@ export default {
     //   });
     // }
   },
-  mounted() {
+  mounted() {},
+  activated() {
     if (window.payData) {
       this.payData = window.payData;
       this.$czapi
@@ -319,29 +320,9 @@ export default {
         .then(data => {
           this.payState = data;
         });
-
-      //假设已经获取了
-      /*var data = {
-                    "code": 200,
-                    "msg": "获取成功",
-                    "token": "1802055118094866",
-                    "data": {
-                        "title": "银行卡对公转账使用银行卡对公转账",
-                        "content": "收款人:北京超职教育机构收款银行招商银行收款账号:899912828111288注",
-                        "tip": "注:转账填写相关备注,如购买多套,原价X数量,并请填写相关的报考人手机号及名字转账成功后,请联系客服010-51657777"
-                    }
-                }
-
-                this.payState = data;*/
     } else {
       this.$router.push({ name: "Male" });
     }
-
-    // //获取分类
-    // this.getCateList();
-
-    // //获取分类
-    // this.getCateList();
   }
 };
 </script>
