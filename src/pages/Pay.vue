@@ -260,21 +260,21 @@ export default {
           this.payResult = data;
           //console.log(data, "pay");
           //this.$nextTick(() => {
-          if (this.payStyle === "alipay") {
-            this.alipayPayDialog1 = true;
-            // vm.alipayPayDialog2 = true;
-            // vm.alipayPayDialog3 = true;
-            this.openNew(
-              `http://aci-api.chaozhiedu.com/api/pay/alipay/${
-                this.payState.token
-              }`
-            );
-            // let form = $(data.form)[0];
-            // $("body").append(form);
-            // form.submit();
-            // $(form).remove();
-            //document.forms["alipaysubmit"].submit();
-          }
+        //   if (this.payStyle === "alipay") {
+        //     this.alipayPayDialog1 = true;
+        //     // vm.alipayPayDialog2 = true;
+        //     // vm.alipayPayDialog3 = true;
+        //     this.openNew(
+        //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
+        //         this.payState.token
+        //       }`
+        //     );
+        //     // let form = $(data.form)[0];
+        //     // $("body").append(form);
+        //     // form.submit();
+        //     // $(form).remove();
+        //     //document.forms["alipaysubmit"].submit();
+        //   }
           //});
         });
 
