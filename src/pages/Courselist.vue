@@ -203,7 +203,7 @@ export default {
   },
   filters: {
     totalUnit(arr) {
-      if (!arr) return "";
+      if (!arr) return 0;
       let ret = 0;
       arr.forEach(item => {
         ret += item.total_unit;
@@ -212,12 +212,7 @@ export default {
     }
   },
   methods: {
-    /*showTotal(total) {
-                        return `全部 ${total} 条`;
-                    },*/
-
-    showCoursePlan(item,index) {
-			//console.log(item,321312);
+    showCoursePlan(item, index) {
       this.$czapi
         .getCoursePlan({
           pid: item.product_id,
@@ -225,55 +220,11 @@ export default {
           offset: 10
         })
         .then(({ code, data, msg }) => {
-
-					console.log(this.product[index], 22222);
           this.product[index].planLine = data.rows;
-					//console.log(this.product, 1123);
-					
         });
-
-      /*var data = {
-                              "code": 200,
-                              "msg": "ok",
-                              "data": {
-                                  "total": 1,
-                                  "row": [
-                                      {
-                                          "id": 1,
-                                          "name": "aaa",
-                                          "teacher": "aaaa",
-                                          "teacher_description": "aaa",
-                                          "teacher_img": 1,
-                                          "total_unit": 3,
-                                          "update_at": "2018-02-03 20:02:17",
-                                          "teach_plan": [
-                                              {
-                                                  "time": "2018-02-03 20:03:08",
-                                                  "view_url": "baidu.com",
-                                                  "tid": 1,
-                                                  "name": "第1节课"
-                                              },
-                                              {
-                                                  "time": "2018-02-03 20:03:22",
-                                                  "view_url": "sohu.com",
-                                                  "tid": 2,
-                                                  "name": "第2节课"
-                                              },
-                                              {
-                                                  "time": "2018-02-03 20:03:31",
-                                                  "view_url": "sina.com",
-                                                  "tid": 3,
-                                                  "name": "第3节课"
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          }*/
     },
 
     showCourseDown(item, index) {
-      
       this.$czapi
         .getCourseInfo({
           pid: item.product_id,
@@ -282,85 +233,23 @@ export default {
         })
         .then(({ data, code }) => {
           this.product[index].downList = data.rows;
-          console.log(this.product[index], 111111);
         });
-
-      /* var data = {
-                              "code": 200,
-                              "msg": "ok",
-                              "data": {
-                                  "total": 1,
-                                  "row": [
-                                      {
-                                          "file_id": 1,
-                                          "file_name": "习近平谈治国理政",
-                                          "file": "http:\/\/aci.zhj\/api\/file\/1" //文件地址
-                                      }
-                                  ]
-                              }
-                          }
-                          this.downList = data.data.row;*/
     }
   },
   mounted() {
     //var vm = this;
     //请求用不了，暂时直接模拟
     this.$czapi.getCourseList().then(({ data }) => {
-      this.product = data;
+      this.product = data.map(item => {
+        item.planLine = [];
+        item.downList = [];
+        return item;
+      });
       this.product.forEach((item, index) => {
         this.showCourseDown(item, index);
         this.showCoursePlan(item, index);
       });
-      // this.$czapi
-      // .getCoursePlan({
-      //   pid: 3,
-      //   p: 1,
-      //   offset: 10
-      // })
-      // .then(({ code, data, msg }) => {
-      //   if (code !== 200) {
-      //     //this.$message.error(msg);
-      //     this.$modal.error({
-      //       title: "温馨提示",
-      //       content: msg
-      //     });
-      //     return false;
-      //   }
-      //   this.planLine = data.row;
-      // });
     });
-
-    /*var data = {
-                        "code":200,
-                        "msg":"ok",
-                        "data":[
-                            {
-                                "product_id":1,
-                                "product_name":"产品名称",
-                                "category_id":1,
-                                "category_name":"分类名称",
-                                "price":"100000",
-                                "endtime":"2018-02-03 20:04:48",
-                                "products":{
-                                    "id":1,
-                                    "num":"10000",
-                                    "name":"产品名称",
-                                    "img":"http://aci.zhj/api/file/1",
-                                    "description":"产品描述 ",
-                                    "total_course":0,
-                                    "current_course":0
-                                }
-                            }
-                        ]
-                    }
-
-                    vm.product = data.data;*/
-
-    //取课程安排计划
-    //vm.showCoursePlan();
-
-    //获取分类
-    //this.getCateList();
   }
 };
 </script>
