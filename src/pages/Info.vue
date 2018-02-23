@@ -660,34 +660,34 @@ export default {
       document.getElementById("wtFile").click();
     },
     showConfirmForm() {
-      this.$modal.confirm({
-        iconType: "exclamation-circle-o",
-        title: "注意",
-        content: "请确认您填写的资料是否正确\n" + "一经提交不能再修改",
-        okText: "确认提交",
-        cancelText: "返回修改资料",
-        width: 600,
-        onOk: () => {
-          console.log("确认提交");
-          let params = {};
+      // this.$modal.confirm({
+      //   iconType: "exclamation-circle-o",
+      //   title: "注意",
+      //   content: "请确认您填写的资料是否正确\n" + "一经提交不能再修改",
+      //   okText: "确认提交",
+      //   cancelText: "返回修改资料",
+      //   width: 600,
+      //   onOk: () => {
+      //     console.log("确认提交");
+      let params = {};
 
-          for (const key in this.param) {
-            if (this.param.hasOwnProperty(key)) {
-              const element = this.param[key];
-              if (element) {
-                params[key] = element;
-              }
-            }
+      for (const key in this.param) {
+        if (this.param.hasOwnProperty(key)) {
+          const element = this.param[key];
+          if (element) {
+            params[key] = element;
           }
-          //确认提交资料
-          this.$czapi.submitUserInfo(params).then(data => {
-            console.log(data);
-          });
-        },
-        onCancle: function() {
-          console.log("返回修改资料");
         }
+      }
+      //确认提交资料
+      this.$czapi.submitUserInfo(params).then(({ code, msg }) => {
+        this.$message[code == 200 ? "success" : "error"](msg);
       });
+      //   },
+      //   onCancle: function() {
+      //     console.log("返回修改资料");
+      //   }
+      // });
     },
 
     //临时保存
@@ -704,8 +704,8 @@ export default {
       }
 
       //确认提交资料
-      this.$czapi.addUserInfo(params).then(({code,msg}) => {
-				this.$message[code==200?"success":"error"](msg);
+      this.$czapi.addUserInfo(params).then(({ code, msg }) => {
+        this.$message[code == 200 ? "success" : "error"](msg);
       });
     },
     onBeforeUpload(file, reqOptions, ccc) {
