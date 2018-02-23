@@ -131,7 +131,15 @@
                                                 </v-popover>
                                             </td>
                                             <td>{{item.total_unit}}</td>
-                                            <td>6</td>
+                                            <td>
+																							<div>
+																								<a :href="teach_plan.view_url" target="_blank" class='ant-btn ant-btn-primary ant-btn-sm' style='margin-right:5px;' v-for='teach_plan in item.teach_plan' :key="teach_plan.id">
+																										<i class="anticon anticon-play-circle-o"></i>
+																										<span v-text='teach_plan.name'></span>
+																								</a>		
+
+																							</div>
+																						</td>
                                         </tr>
                                         <tr>
                                             <td>合计</td>
