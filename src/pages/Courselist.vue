@@ -203,6 +203,7 @@ export default {
   },
   filters: {
     totalUnit(arr) {
+      if (!arr) return "";
       let ret = 0;
       arr.forEach(item => {
         ret += item.total_unit;
@@ -215,7 +216,8 @@ export default {
                         return `全部 ${total} 条`;
                     },*/
 
-    showCoursePlan(item) {
+    showCoursePlan(item,index) {
+			//console.log(item,321312);
       this.$czapi
         .getCoursePlan({
           pid: item.product_id,
@@ -223,13 +225,11 @@ export default {
           offset: 10
         })
         .then(({ code, data, msg }) => {
-          this.product.push({
-            ...item,
-            ...{
-              planLine: data.rows
-            }
-          });
-          console.log(this.product, 1123);
+
+					console.log(this.product[index], 22222);
+          this.product[index].planLine = data.rows;
+					//console.log(this.product, 1123);
+					
         });
 
       /*var data = {
@@ -272,17 +272,17 @@ export default {
                           }*/
     },
 
-    showCourseDown() {
-      var vm = this;
+    showCourseDown(item, index) {
+      
       this.$czapi
         .getCourseInfo({
-          pid: 0,
+          pid: item.product_id,
           p: 1,
           offset: 10
         })
-        .then(function(data) {
-          console.log(data);
-          vm.downList = data.data.row;
+        .then(({ data, code }) => {
+          this.product[index].downList = data.rows;
+          console.log(this.product[index], 111111);
         });
 
       /* var data = {
@@ -306,9 +306,11 @@ export default {
     //var vm = this;
     //请求用不了，暂时直接模拟
     this.$czapi.getCourseList().then(({ data }) => {
-      console.log(data);
-      this.product = [];
-      data.forEach(this.showCoursePlan);
+      this.product = data;
+      this.product.forEach((item, index) => {
+        this.showCourseDown(item, index);
+        this.showCoursePlan(item, index);
+      });
       // this.$czapi
       // .getCoursePlan({
       //   pid: 3,
