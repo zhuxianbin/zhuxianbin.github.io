@@ -159,11 +159,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="it in downList" :key='it.id'>
-                                            <td>{{it.file_name}}</td>
+                                        <tr v-for="item in it.downList" :key='item.id'>
+                                            <td>{{item.file_name}}</td>
                                             <td>
                                                 <!--<a :href="it.file" download class="ant-btn ant-btn-success"></a>-->
-                                                <a href="javascript:;" class="ant-btn ant-btn-success ant-btn-sm">
+                                                <a :href="item.file" target='_blank' class="ant-btn ant-btn-success ant-btn-sm">
                                                     <v-icon type="download"></v-icon>
                                                     下载
                                                 </a>
@@ -194,9 +194,9 @@ export default {
 
       product: [],
 
-      planLine: [],
+      // planLine: [],
 
-      downList: [],
+      // downList: [],
 
       cateList: []
     };
@@ -217,7 +217,7 @@ export default {
         .getCoursePlan({
           pid: item.product_id,
           p: 1,
-          offset: 10
+          offset: 100
         })
         .then(({ code, data, msg }) => {
           this.product[index].planLine = data.rows;
@@ -229,7 +229,7 @@ export default {
         .getCourseInfo({
           pid: item.product_id,
           p: 1,
-          offset: 10
+          offset: 100
         })
         .then(({ data, code }) => {
           this.product[index].downList = data.rows;
