@@ -151,9 +151,6 @@ export default {
   },
   mounted() {
     this.loadData();
-    document.write(
-      '<script id="kf" src="http://lead.soperson.com/20003131/10088703.js"><\/script>'
-    );
   },
   activated() {
     let doyoo = document.getElementById("doyoo_panel");
@@ -162,7 +159,7 @@ export default {
     }
   },
   deactivated() {
-     let doyoo = document.getElementById("doyoo_panel");
+    let doyoo = document.getElementById("doyoo_panel");
     if(doyoo){
         doyoo.style.display = "none";
     }

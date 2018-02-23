@@ -18,7 +18,16 @@
     <script src="static/font/iconfont.js"></script>
     <!--上传用的input，请勿删除，很重要-->
     <input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">
-    <!-- <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script> -->
+    <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script>
+    <script>
+        window.onload = function () {
+            let doyoo = document.getElementById("doyoo_panel");
+            if (doyoo) {
+                doyoo.style.display = "none";
+            }
+        }
+
+    </script>
 </body>
 
 </html>
