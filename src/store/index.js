@@ -38,12 +38,12 @@ export default new Vuex.Store({
     mutations: {
         [USER_INFO](state, data) {
             state.userInfo = data;
-            if (data.code == 201) {
-                Vue.$modal.info({
-                    title: '温馨提示',
-                    content: '您的报考资料还未提交'
-                });
-            }
+            // if (data.code == 201) {
+            //     Vue.$modal.info({
+            //         title: '温馨提示',
+            //         content: '您的报考资料还未提交'
+            //     });
+            // }
         },
         [CATE_LIST](state, {
             data
