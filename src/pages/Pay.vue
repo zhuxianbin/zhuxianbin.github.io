@@ -39,7 +39,8 @@
                             </v-form-item>
 
                             <v-form-item :wrapper-col="{span:22,offset:2}" style="margin-top:24px">
-                                <v-button type="warning" html-type="button" @click="pay">转到支付</v-button>
+                                <a v-if='payStyle=="alipay"' class='ant-btn ant-btn-warning' target='_blank' :href='"http://aci-api.chaozhiedu.com/api/pay/alipay/"+payState.token'>转到支付</a>
+                                <a v-else class='ant-btn ant-btn-warning' @click="pay">转到支付</a>
                             </v-form-item>
                         </v-form>
                     </div>
