@@ -320,6 +320,7 @@ export default {
         })
         .then(data => {
           this.payState = data;
+          this.payData.price = data.price
         });
     } else {
       this.$router.push({ name: "Male" });
