@@ -77,12 +77,9 @@
         @cancel="yhkPayDialogCancle"
         wrap-class-name="vertical-center-modal">
         <div style="font-size: 16px;">
-            <p style="font-weight: bold;">使用银行卡对公转账</p>
-            <p>收款人：北京超职教育机构<br/>
-                收款银行：招商银行<br/>
-                收款账号：899912828111288</p>
-            <p>注：转账填写相关备注，如购买多套，原价X数量，并请填写相关的报考人手机号及名字<br/>
-                转账成功后，请联系客服010-51657777</p>
+            <p style="font-weight: bold;">{{payState.data.title}}</p>
+            <pre v-html='payState.data.content'></pre>
+            <p>{{payState.data.tip}}</p>
         </div>
         <div slot="footer">
             <v-button key="cancel" type="ghost" size="large" @click="yhkPayDialogCancle">关闭</v-button>
@@ -235,7 +232,10 @@ export default {
 
     pay() {
       var vm = this;
-
+      if (vm.payStyle === "yhk") {
+        vm.yhkPayDialog = true;
+        return false;
+      }
       this.$czapi
         .pay({
           product_id: this.payData.id,
@@ -253,28 +253,25 @@ export default {
           if (vm.payStyle === "wechat") {
             vm.wechatPayDialog = true;
           }
-          if (vm.payStyle === "yhk") {
-            vm.yhkPayDialog = true;
-          }
 
           this.payResult = data;
           //console.log(data, "pay");
           //this.$nextTick(() => {
-        //   if (this.payStyle === "alipay") {
-        //     this.alipayPayDialog1 = true;
-        //     // vm.alipayPayDialog2 = true;
-        //     // vm.alipayPayDialog3 = true;
-        //     this.openNew(
-        //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
-        //         this.payState.token
-        //       }`
-        //     );
-        //     // let form = $(data.form)[0];
-        //     // $("body").append(form);
-        //     // form.submit();
-        //     // $(form).remove();
-        //     //document.forms["alipaysubmit"].submit();
-        //   }
+          //   if (this.payStyle === "alipay") {
+          //     this.alipayPayDialog1 = true;
+          //     // vm.alipayPayDialog2 = true;
+          //     // vm.alipayPayDialog3 = true;
+          //     this.openNew(
+          //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
+          //         this.payState.token
+          //       }`
+          //     );
+          //     // let form = $(data.form)[0];
+          //     // $("body").append(form);
+          //     // form.submit();
+          //     // $(form).remove();
+          //     //document.forms["alipaysubmit"].submit();
+          //   }
           //});
         });
 
@@ -300,15 +297,8 @@ export default {
     },
     alipayPayDialogCancle3() {
       this.alipayPayDialog3 = false;
-    }
-
-    // getCateList() {
-    //   var vm = this;
-    //   this.$czapi.getCateogry().then(function(data) {
-    //     console.log(data);
-    //     vm.cateList = data.data;
-    //   });
-    // }
+    },
+    getPayResult() {}
   },
   mounted() {},
   activated() {
@@ -320,12 +310,13 @@ export default {
         })
         .then(data => {
           this.payState = data;
-          this.payData.price = data.price
+          this.payData.price = data.price;
         });
     } else {
       this.$router.push({ name: "Male" });
     }
-  }
+  },
+  deactivated() {}
 };
 </script>
 
