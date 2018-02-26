@@ -77,6 +77,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: "default.html",
       template: 'index.html',
+      excludeChunks: ['app','vendor','manifest']
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
