@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>超职 专业ACI国际心理咨询师培训</title>
-    <meta name="description" content="超职是专业的ACI国际心理咨询师培训机构"/>
-    <meta name="keywords" content="ACI,心理咨询师,国际心理咨询师培训,心理咨询,心理咨询师报名"/>
+    <meta name="description" content="超职是专业的ACI国际心理咨询师培训机构" />
+    <meta name="keywords" content="ACI,心理咨询师,国际心理咨询师培训,心理咨询,心理咨询师报名" />
     <link rel="stylesheet" href="./static/js/swiper/swiper-4.1.0.min.css">
     <link rel="stylesheet" href="./static/css/animate.css">
     <link rel="stylesheet" href="./static/css/vue-beauty.min.css">
@@ -55,8 +55,9 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <li v-for="it in cateList" :key='it.id'>
-                                        <a :href="'#m'+it.id">{{it.name}}</a>
+                                    <li v-for="(it,id) in cateList" :key='it.id'>
+                                        <a v-if="id>0" href="#czkc">{{it.name}}</a>
+                                        <a v-else :href="'#m'+it.id">{{it.name}}</a>
                                     </li>
                                     <!-- <li><a>经济师</a></li>
                                 <li><a>人力资源管理师</a></li>
@@ -110,7 +111,7 @@
 
             </div>
 
-            <div style="width: 1200px;margin: 0 auto;">
+            <div id='czkc' style="width: 1200px;margin: 0 auto;">
                 <div>
                     <div class="text-center padding-25 wow bounceInDown" style="font-size: 40px;font-weight: 600;color: #000000;">超职课程</div>
                     <div class="text-center color-3">
@@ -808,7 +809,7 @@
                         clickable: true
                     },
                     autoplay: {
-                        delay: 2500,
+                        delay: 5000,
                         disableOnInteraction: false
                     }
                 });
