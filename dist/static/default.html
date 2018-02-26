@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>超职网</title>
-    <link rel="stylesheet" href="./js/swiper/swiper-4.1.0.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/vue-beauty.min.css">
-    <link rel="stylesheet" href="font/iconfont.css">
-    <link rel="stylesheet" href="css/front.css">
+    <link rel="stylesheet" href="./static/js/swiper/swiper-4.1.0.min.css">
+    <link rel="stylesheet" href="./static/css/animate.css">
+    <link rel="stylesheet" href="./static/css/vue-beauty.min.css">
+    <link rel="stylesheet" href="./static/font/iconfont.css">
+    <link rel="stylesheet" href="./static/css/front.css">
     <style>
         .swiper-container {
             width: 100%;
@@ -39,7 +39,7 @@
         <div class="ant-layout">
             <div class="ant-layout-header" style="position: fixed;top: 0;left: 0;right: 0;z-index: 50;">
                 <div class="logo">
-                    <img src="./images/logo-1.png" alt="logo">
+                    <img src="./static/images/logo-1.png" alt="logo">
                 </div>
                 <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
                     <li class="ant-menu-item ant-menu-item-selected">
@@ -54,7 +54,7 @@
                             <div>
                                 <ul>
                                     <li v-for="it in cateList" :key='it.id'>
-                                        <a :href="'http://aci-api.chaozhiedu.com/api/product/list/' + it.id" target="_blank">{{it.name}}</a>
+                                        <a :href="'#m'+it.id">{{it.name}}</a>
                                     </li>
                                     <!-- <li><a>经济师</a></li>
                                 <li><a>人力资源管理师</a></li>
@@ -64,34 +64,47 @@
                         </div>
                     </li>
                     <li class="ant-menu-item">
-                        <a href='/#/male'>超职商城</a>
+                        <a href='./dist/#/male'>超职商城</a>
                     </li>
                     <li class="ant-menu-item">
                         <a href='#about'>关于超职</a>
                     </li>
                 </ul>
                 <div class="header-login">
-                    <a class='ant-btn ant-btn-background-ghost' style="font-size: 16px;" href="/#/login">学员登录</a>
+                    <a class='ant-btn ant-btn-background-ghost' style="font-size: 16px;" href="./dist/#/login">学员登录</a>
                 </div>
             </div>
 
             <div class="index-banner" ref="indexBanner" style="width: 100%;margin-top: 80px;position:relative;overflow: hidden;">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" style="background-image:url('./images/banner1.png')"></div>
-                        <div class="swiper-slide" style="background-image:url('./images/banner2.png')"></div>
+                        <div class="swiper-slide" style="background-image:url('./static/images/banner1.jpg')">
+
+                            <div style="position: absolute;left: 50%;bottom: 100px;z-index: 2;width:600px;margin-left:-300px;text-align:center;">
+                                <div class="animated bounceInLeft" style="margin-top: 40px; font-size: 64px;color: #05729E;font-weight: 600;">
+                                    <img style='width:500px;' src='./static/images/slogen1.png' />
+                                </div>
+                                <div class="animated fadeIn" style="color:#333;font-size:68px;margin-top: 25px;">
+                                    成就超值人生
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" style="background-image:url('./static/images/banner2.jpg')">
+
+                            <div style="position: absolute;left: 150px;bottom: 200px;z-index: 2;">
+                                <div class="animated bounceInLeft" style="margin-top: 40px; font-size: 64px;color: #05729E;font-weight: 600;">
+                                    超职教育</div>
+                                <div class="animated bounceInUp" style="margin-top: 20px;font-size: 24px;color: #a2a2a2;">CHAOZHI EDUCATION</div>
+                                <div class="animated fadeIn" style="color:#FE741A;font-size:68px;margin-top: 25px;">
+                                    成就超值人生
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- Add Pagination -->
-                    <div class="swiper-pagination swiper-pagination-white"></div>
+                    <!-- <div class="swiper-pagination swiper-pagination-white"></div> -->
                 </div>
-                <div style="position: absolute;left: 150px;bottom: 300px;z-index: 2;">
-                    <div class="animated bounceInLeft" style="font-size: 50px;color: #fff;font-weight: 600;">
-                        <span style="color: #FF4000;">超职</span>提升你的职场能力</div>
-                    <div class="animated bounceInUp" style="margin-top: 20px;font-size: 40px;color: #fff;">学习改变你的人生前途</div>
-                    <div class="animated fadeIn" style="margin-top: 25px;">
-                        <a class="index-banner-btn">点击咨询学习</a>
-                    </div>
-                </div>
+
 
             </div>
 
@@ -102,7 +115,7 @@
                         <v-row>
                             <v-col span="6" class="index-our-items wow fadeIn">
                                 <div>
-                                    <img src="./images/Bitmap1.png" alt="" style="width: 200px;">
+                                    <img src="./static/images/Bitmap1.png" alt="" style="width: 200px;">
                                 </div>
                                 <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">ACI国际心理咨询师</div>
                                 <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
@@ -114,7 +127,7 @@
                             </v-col>
                             <v-col span="6" class="index-our-items wow fadeIn">
                                 <div>
-                                    <img src="./images/Bitmap2.png" alt="" style="width: 200px;">
+                                    <img src="./static/images/Bitmap2.png" alt="" style="width: 200px;">
                                 </div>
                                 <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">经济师</div>
                                 <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
@@ -126,7 +139,7 @@
                             </v-col>
                             <v-col span="6" class="index-our-items wow fadeIn">
                                 <div>
-                                    <img src="./images/Bitmap3.png" alt="" style="width: 200px;">
+                                    <img src="./static/images/Bitmap3.png" alt="" style="width: 200px;">
                                 </div>
                                 <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">人力资源管理师</div>
                                 <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
@@ -138,7 +151,7 @@
                             </v-col>
                             <v-col span="6" class="index-our-items wow fadeIn">
                                 <div>
-                                    <img src="./images/Bitmap4.png" alt="" style="width: 200px;">
+                                    <img src="./static/images/Bitmap4.png" alt="" style="width: 200px;">
                                 </div>
                                 <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">营养师</div>
                                 <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
@@ -233,19 +246,19 @@
                     <v-row type="flex" justify="space-around">
                         <v-col span="4">
                             <div>
-                                <img src="./images/good1.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good1.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">ACI国际心理咨询师</div>
                         </v-col>
                         <v-col span="4">
                             <div>
-                                <img src="./images/good2.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good2.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">人才评定、海外人才库</div>
                         </v-col>
                         <v-col span="4">
                             <div>
-                                <img src="./images/good3.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good3.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">任职资格 升职加薪</div>
                         </v-col>
@@ -254,19 +267,19 @@
                     <v-row type="flex" justify="space-around" class="margin-top-25">
                         <v-col span="4">
                             <div>
-                                <img src="./images/good4.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good4.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">专业人才缺口60万</div>
                         </v-col>
                         <v-col span="4">
                             <div>
-                                <img src="./images/good5.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good5.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">全球通用"求职绿卡"</div>
                         </v-col>
                         <v-col span="4">
                             <div>
-                                <img src="./images/good6.png" alt="" style="width: 200px;">
+                                <img src="./static/images/good6.png" alt="" style="width: 200px;">
                             </div>
                             <div class="margin-top-20 font-size-16 color-3">全球163个WTO成员国认可</div>
                         </v-col>
@@ -276,10 +289,10 @@
 
 
             <div class="text-center" style="width:1200px;margin: 0 auto;margin-top: 30px;">
-                <div class="color-3 wow fadeInLeft" style="font-size: 42px;font-weight: bold">ACI注册国际心理咨询师-课程内容</div>
+                <div id='m2' class="color-3 wow fadeInLeft" style="font-size: 42px;font-weight: bold">ACI注册国际心理咨询师-课程内容</div>
                 <div class="clearfix wow fadeInUp" style="padding:10px;margin-top: 30px;background: #FE741A;border-radius: 6px;position: relative;">
                     <div class="pull-left" style="width: 360px;">
-                        <img src="./images/acibook.png" alt="" style="width: 360px;display: block;">
+                        <img src="./static/images/acibook.png" alt="" style="width: 360px;display: block;">
                     </div>
                     <div class="pull-right" style="width: 770px;font-size: 18px;color: #fff;">
                         <table style="width: 100%;">
@@ -300,7 +313,7 @@
                                         <br/> 实操课程，报表指导
                                     </td>
                                     <td style="padding: 20px 0;border-bottom: 1px solid #fff;">
-                                        <a href="javascript:;" class="index-kecheng-btn1">免费咨询</a>
+                                        <a href="javascript:doKF();" class="index-kecheng-btn1">免费咨询</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -460,63 +473,63 @@
                 <div class="color-3 wow fadeIn" style="font-size: 42px;font-weight: bold">超职网校六大优势</div>
                 <div style="position: relative;height: 500px;margin-top: 20px;">
                     <div class=" wow fadeInLeft" style="position: absolute;top: 0;left: 0;width: 340px;height: 410px;">
-                        <img src="./images/light.png" alt="" style="width: 340px;">
+                        <img src="./static/images/light.png" alt="" style="width: 340px;">
                     </div>
 
                     <div class=" wow fadeInLeft" style="position: absolute;top: 20px;left: 420px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FF9700;border-radius: 100%;color: #fff;font-size: 24px;">1</span>
-                        <img src="./images/better1.png" alt="" style="width: 120px;">
+                        <img src="./static/images/better1.png" alt="" style="width: 120px;">
                         <div style="margin-top: 10px;">金牌名师助阵</div>
                     </div>
 
                     <div class="wow fadeInRight" style="position: absolute;top: 140px;left: 600px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFA829;border-radius: 100%;color: #fff;font-size: 24px;">2</span>
-                        <img src="./images/better2.png" alt="" style="width: 120px;">
+                        <img src="./static/images/better2.png" alt="" style="width: 120px;">
                         <div style="margin-top: 10px;">一站式报考服务</div>
                     </div>
 
                     <div class="wow fadeInRight" style="position: absolute;top: 26px;left: 720px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFC242;border-radius: 100%;color: #fff;font-size: 24px;">3</span>
-                        <img src="./images/better3.png" alt="" style="width: 140px;">
+                        <img src="./static/images/better3.png" alt="" style="width: 140px;">
                         <div style="margin-top: 10px;">名师私教直播</div>
                     </div>
 
                     <div class="wow fadeInRight" style="position: absolute;top: 275px;left: 770px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFC242;border-radius: 100%;color: #fff;font-size: 24px;">4</span>
-                        <img src="./images/better4.png" alt="" style="width: 130px;">
+                        <img src="./static/images/better4.png" alt="" style="width: 130px;">
                         <div style="margin-top: 10px;">教案题库赠送</div>
                     </div>
 
                     <div class="wow fadeInRight" style="position: absolute;top: 175px;left: 990px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFD479;border-radius: 100%;color: #fff;font-size: 24px;">5</span>
-                        <img src="./images/better5.png" alt="" style="width: 110px;">
+                        <img src="./static/images/better5.png" alt="" style="width: 110px;">
                         <div style="margin-top: 10px;">高含金量题库</div>
                     </div>
 
                     <div class="wow fadeInLeft" style="position: absolute;top: 210px;left: 330px;">
                         <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFDE98;border-radius: 100%;color: #fff;font-size: 24px;">6</span>
-                        <img src="./images/better6.png" alt="" style="width: 165px;">
+                        <img src="./static/images/better6.png" alt="" style="width: 165px;">
                         <div style="margin-top: 10px;">社群免费答疑</div>
                     </div>
 
                 </div>
             </div>
 
-            <div style="background: url('./images/bg4.png') no-repeat center top;background-position: center;background-size: cover;">
+            <div style="background: url('./static/images/bg4.png') no-repeat center top;background-position: center;background-size: cover;">
                 <div style="width: 1200px;margin: 0 auto;margin-top: 20px;padding-bottom: 30px;">
                     <div class="wow fadeInLeft" style="font-size: 42px;font-weight: bold;color: #fff;text-align: center;">超职网校加盟名师</div>
 
                     <div class="clearfix text-center wow fadeInUp" style="margin-top: 60px;">
                         <div class="pull-left tc-list-item">
-                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                            <div style="width: 230px;height: 360px;background: url('./static/images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/郭聪荣.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/郭聪荣.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">郭聪荣老师</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -527,9 +540,9 @@
                             </div>
                         </div>
                         <div class="pull-left tc-list-item">
-                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                            <div style="width: 230px;height: 360px;background: url('./static/images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/王海燕.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/王海燕.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">王海燕老师</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -539,9 +552,9 @@
                             </div>
                         </div>
                         <div class="pull-left tc-list-item">
-                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                            <div style="width: 230px;height: 360px;background: url('./static/images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/郑海英.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/郑海英.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">郑海英</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -550,9 +563,9 @@
                             </div>
                         </div>
                         <div class="pull-left tc-list-item">
-                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                            <div style="width: 230px;height: 360px;background: url('./static/images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/树心.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/树心.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">树心</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -561,9 +574,9 @@
                             </div>
                         </div>
                         <div class="pull-left">
-                            <div style="width: 230px;height: 360px;background: url('./images/ro1.png') no-repeat;background-size: contain;">
+                            <div style="width: 230px;height: 360px;background: url('./static/images/ro1.png') no-repeat;background-size: contain;">
                                 <div style="padding-top: 35px;">
-                                    <img src="./images/果果.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/果果.png" alt="" style="width: 130px;">
                                 </div>
                                 <div style="font-size: 24px;color: #029EFF;">果果</div>
                                 <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
@@ -583,7 +596,7 @@
                 </div>
                 <div class="clearfix" style="margin-top: 50px;">
                     <div class="pull-left wow fadeInLeft" style="width: 460px;">
-                        <img src="./images/book.png" alt="" style="width: 460px;">
+                        <img src="./static/images/book.png" alt="" style="width: 460px;">
                     </div>
                     <div class="pull-left wow fadeInRight" style="width: 590px;margin-left: 80px;">
                         <div>
@@ -631,7 +644,7 @@
                         <div class="inline-block clearfix">
                             <div class="pull-left clearfix" style="width: 500px;line-height: 38px;">
                                 <div class="index-select-items pull-left wow fadeInLeft">
-                                    <!-- <img src="./images/fur1.png" alt="" style="width: 700px;display: block;">
+                                    <!-- <img src="./static/images/fur1.png" alt="" style="width: 700px;display: block;">
                                     <div class="bg">
                                         <div style="display: inline-block;margin-top: 60px;width: 470px;height:38px;
                                     line-height:38px;background: #fff;font-size: 20px;color: #56509F;">
@@ -642,7 +655,7 @@
                                         <div>具有能力、经验、责任心的教师！</div>
                                     </div> -->
                                     <div style='width:500px;background-color:#FE741A;color:#fff;font-size:20px;'>5A级专业老师，在超职网，老师就是核心关键！</div>
-                                    <div >
+                                    <div>
                                         <div style="margin-top: 30px;">你还愿意再接受照本宣科的老师吗？你还愿意接收学术平庸责任心差的老师吗？</div>
                                         <div>在超职网，对老师层层把关，保留5A教学质量且</div>
                                         <div>具有能力、经验、责任心的教师！</div>
@@ -652,7 +665,7 @@
                             </div>
                             <div class="index-select-items pull-left wow fadeInRight" style="margin-left: 16px;">
                                 <div>
-                                    <img src="./images/honnr.jpg" alt="" style="width: 314px;display: block;">
+                                    <img src="./static/images/honnr.jpg" alt="" style="width: 314px;display: block;">
                                     <div class="bg"></div>
                                 </div>
                             </div>
@@ -668,50 +681,65 @@
                         <div class="pull-left" style="width: 580px;">
                             <div style="font-size: 18px;color: #000000;">你可以通过以下方式和我们取得联系</div>
                             <div style="padding: 24px 20px;">
-                                <div>
-                                    <div class="inline-block">
-                                        <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
-                                            <use xlink:href="#icon-qq"></use>
-                                        </svg>
+                                <div class="margin-top-5" style='font-size: 20px;'>
+                                    <div class="inline-block" style='width:120px;'>
+                                        售前QQ
                                     </div>
-                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">chaozhiedu@163.com</div>
+                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">
+                                        <img style="CURSOR: pointer;width:180px" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=1845831942&o=超职售前&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"
+                                            border="0" src='./static/images/btn-qq.jpg' alt="点击这里给我发消息" />
+                                        <img style="CURSOR: pointer;width:180px" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=1415758496&o=超职售前&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"
+                                            border="0" src='./static/images/btn-qq.jpg' alt="点击这里给我发消息" />
+                                    </div>
                                 </div>
-                                <div class="margin-top-5">
-                                    <div class="inline-block">
+                                <div class="margin-top-5" style='font-size: 20px;'>
+                                    <div class="inline-block" style='width:120px;'>
+                                        售后QQ
+                                    </div>
+                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">
+                                        <img style="CURSOR: pointer;width:180px" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=3115435838&o=超职售后&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"
+                                            border="0" src='./static/images/btn-qq.jpg' alt="点击这里给我发消息" />
+                                    </div>
+                                </div>
+                                <div class="margin-top-5" style='font-size: 20px;'>
+                                    <div class="inline-block" style='width:120px;'>
+                                        联系电话
+                                    </div>
+                                    <div class="inline-block margin-left-5" style="color: #666;">
                                         <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
                                             <use xlink:href="#icon-dianhua"></use>
                                         </svg>
-                                    </div>
-                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">010-51657777</div>
+                                        010-51657777</div>
                                 </div>
-                                <div class="margin-top-5">
-                                    <div class="inline-block">
-                                        <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
-                                            <use xlink:href="#icon-weixin"></use>
-                                        </svg>
+                                <div class="margin-top-10" style='font-size: 20px;'>
+                                    <div class="inline-block" style='width:120px;vertical-align:top'>
+                                        微信公众号
                                     </div>
-                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">lovechaochi</div>
+                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">
+                                        <img style="width:180px" border="0" src='./static/images/weixin-qr.jpg' />
+                                    </div>
                                 </div>
-                                <div class="margin-top-5">
-                                    <div class="inline-block">
-                                        <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
-                                            <use xlink:href="#icon-huabanfuben"></use>
-                                        </svg>
+                                <div class="margin-top-10" style='font-size: 20px;'>
+                                    <div class="inline-block" style='width:120px;vertical-align:top'>
+
                                     </div>
-                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">chaozhiedu@163.com</div>
+                                    <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">
+                                        <a href="javascript:doKF();" style="display: inline-block; width: 200px;height: 46px;line-height: 46px;text-align: center;
+                                                background: #FE741A;
+                                               border-radius: 6px;color: #fff;font-size: 24px;">马上联系</a>
+                                    </div>
                                 </div>
                             </div>
                             <div style="font-size: 18px;color: #000000;">拥有智能化的在线学习方式，你还在等什么？点击马上和我们联系！</div>
                             <div style="margin-left: 24px;margin-top: 24px;">
-                                <a href="javascript:;" style="display: inline-block; width: 200px;height: 46px;line-height: 46px;text-align: center;
-                             background: #FE741A;
-                            border-radius: 6px;color: #fff;font-size: 24px;">马上联系</a>
+
                             </div>
                         </div>
-                        <div class="pull-left" style="width: 520px;">
+                        <div class="pull-left" style="width: 504px;">
                             <div style="font-size: 18px;color: #333">我们所在位置</div>
-                            <div>
-                                百度地图
+                            <div style='overflow: hidden;border:1px solid #eee;height:360px;'>
+                                <iframe style='margin-top:-30px;' width="504" height="425" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    src="http://j.map.baidu.com/JohxO"></iframe>
                             </div>
                         </div>
                     </div>
@@ -720,7 +748,7 @@
 
             <div class="text-center wow fadeIn" style="background: #666666;padding: 40px 0 100px 0;color: #fff;">
                 <div>
-                    <img src="./images/logo2.png" alt="" style="width: 150px;">
+                    <img src="./static/images/logo2.png" alt="" style="width: 150px;">
                 </div>
                 <div style="margin-top: 10px;">
                     <span class="inline-block">客服热线：</span>
@@ -734,14 +762,14 @@
     </div>
 
     <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
-    <script src="./js/swiper/swiper-4.1.0.min.js"></script>
-    <script src="./js/wow/wow.min.js"></script>
-    <script src="./font/iconfont.js"></script>
+    <script src="./static/js/swiper/swiper-4.1.0.min.js"></script>
+    <script src="./static/js/wow/wow.min.js"></script>
+    <script src="./static/font/iconfont.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.3.0/vue.min.js"></script>
-    <script src="js/vue-beauty.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="./static/js/vue-beauty.min.js"></script>
+    <script src="./static/js/custom.js"></script>
     <script>
-        new Vue({
+        var app = new Vue({
             el: "#app",
             data: function () {
                 return {
@@ -789,6 +817,18 @@
                 };
             }
         });
+
+        function doKF() {
+            var kfs = $('.doyoo_link.doyoo_online');
+            if (kfs.length) {
+                $(kfs[0]).click();
+            } else {
+                app.$modal.info({
+                    title: '当前没有在线的老师',
+                    content: "请拨打客服热线： 010-51657777"
+                });
+            }
+        }
 
     </script>
     <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script>
