@@ -93,7 +93,7 @@
                         </div>
                         <div class="swiper-slide" style="background-image:url('./static/images/banner2.jpg');background-position: bottom;background-repeat: no-repeat;">
 
-                            <div style="position: absolute;left: 150px;bottom: 200px;z-index: 2;">
+                            <div style="position: absolute;left: 150px;bottom: 100px;z-index: 2;">
                                 <div class="animated bounceInLeft" style="margin-top: 40px; font-size: 64px;color: #05729E;font-weight: 600;">
                                     超职教育</div>
                                 <div class="animated bounceInUp" style="margin-top: 20px;font-size: 24px;color: #a2a2a2;">CHAOZHI EDUCATION</div>
@@ -793,11 +793,11 @@
                 /*banner图自适应*/
                 var wh = $(window).height();
                 var $indexBanner = $(this.$refs.indexBanner);
-                $indexBanner.height(wh - 80);
+                $indexBanner.height(430);
 
                 $(window).resize(function () {
                     var wh = $(window).height();
-                    $indexBanner.height(wh - 80);
+                    $indexBanner.height(430);
                 });
 
                 var swiper = new Swiper('.swiper-container', {

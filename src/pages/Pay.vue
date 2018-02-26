@@ -79,7 +79,7 @@
         <div style="font-size: 16px;">
             <p style="font-weight: bold;">{{payState.data.title}}</p>
             <pre v-html='payState.data.content'></pre>
-            <p>{{payState.data.tip}}</p>
+            <p style='color:orange;font-size:12px;'>{{payState.data.tip}}</p>
         </div>
         <div slot="footer">
             <v-button key="cancel" type="ghost" size="large" @click="yhkPayDialogCancle">关闭</v-button>
