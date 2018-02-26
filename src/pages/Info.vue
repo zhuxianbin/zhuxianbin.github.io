@@ -95,7 +95,7 @@
 														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;height: 160px;">
 													</div>
 													<div class="margin-top-10">
-														<v-upload name="avatar_file" :fileList="[]"  :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择图片
 															</v-button>
@@ -211,11 +211,16 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<v-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择文件
 															</v-button>
 														</v-upload>
+														<!-- <v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+															<v-button type="ghost">
+																选择文件
+															</v-button>
+														</v-upload> -->
 														<!-- <a v-if='uploads.degree_file' :href='uploads.degree_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
                                                         <a href="javascript:;" @click="triggerUpload('entry_form_file')" class="ant-btn" style="width: 110px;">选择文件</a> -->
 														<!--<span class="inline-block margin-left-10">报表名.DOC</span>-->
@@ -480,62 +485,62 @@ function verifyFileSuffix(file, arrow) {
   }
 }
 
-/**
- * 我的图标上传
- * */
-window.ajaxFileUploadFn = function() {
-  var path = $("#wtFile")[0];
-  if (!verifyFileSuffix(path, "jpg,png")) {
-    path.value = "";
-  } else {
-    //用到图片高级获取，如果不支持，还是需要后台验证一下。
-    var imgFile = path.files[0];
-    var reader = new FileReader();
-    reader.readAsDataURL(imgFile);
-    reader.onload = function(theFile) {
-      var image = new Image();
-      image.src = theFile.target.result;
-      image.onload = function() {
-        if (imgFile.size / 1000 > 1000) {
-          alert("上传的图片必须小于1M");
-          $("#wtFile").remove();
-          $("body").append(
-            '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
-          );
-          return false;
-        }
+// /**
+//  * 我的图标上传
+//  * */
+// window.ajaxFileUploadFn = function() {
+//   var path = $("#wtFile")[0];
+//   if (!verifyFileSuffix(path, "jpg,png")) {
+//     path.value = "";
+//   } else {
+//     //用到图片高级获取，如果不支持，还是需要后台验证一下。
+//     var imgFile = path.files[0];
+//     var reader = new FileReader();
+//     reader.readAsDataURL(imgFile);
+//     reader.onload = function(theFile) {
+//       var image = new Image();
+//       image.src = theFile.target.result;
+//       image.onload = function() {
+//         if (imgFile.size / 1000 > 1000) {
+//           alert("上传的图片必须小于1M");
+//           $("#wtFile").remove();
+//           $("body").append(
+//             '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
+//           );
+//           return false;
+//         }
 
-        $.ajaxFileUpload({
-          url: "http://aci-api.chaozhiedu.com/api/file/upload",
-          secureuri: false,
-          fileElementId: "file",
-          type: "post",
-          dataType: "json",
-          beforeSend: function(xhr) {
-            var userToken = $.cookie("userToken");
-            console.log(userToken, 1111111111111);
-            if (userToken) {
-              xhr.setRequestHeader("Token", userToken);
-            }
-          },
-          success: function(data) {
-            console.log(data);
+//         $.ajaxFileUpload({
+//           url: "http://aci-api.chaozhiedu.com/api/file/upload",
+//           secureuri: false,
+//           fileElementId: "file",
+//           type: "post",
+//           dataType: "json",
+//           beforeSend: function(xhr) {
+//             var userToken = $.cookie("userToken");
+//             console.log(userToken, 1111111111111);
+//             if (userToken) {
+//               xhr.setRequestHeader("Token", userToken);
+//             }
+//           },
+//           success: function(data) {
+//             console.log(data);
 
-            $("#wtFile").remove();
-            $("body").append(
-              '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
-            );
-          },
-          error: function(data, status, e) {
-            console.log(data, status, e);
-            //showAlert(e, 1070);
-          }
-        });
-      };
-    };
-  }
-  return false;
-};
+//             $("#wtFile").remove();
+//             $("body").append(
+//               '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
+//             );
+//           },
+//           error: function(data, status, e) {
+//             console.log(data, status, e);
+//             //showAlert(e, 1070);
+//           }
+//         });
+//       };
+//     };
+//   }
+//   return false;
+// };
 
 import { mapState } from "vuex";
 
@@ -603,7 +608,7 @@ export default {
         }
       ],
       fileName: "file",
-      uploadAction: "http://aci-api.chaozhiedu.com/api/file/upload"
+      uploadAction: "http://aci-api.chaozhiedu.com/api/file/upload",
       //cateList: [],
       // uploads: {
       //   idcard_front_file: "", //身份证前面照片
@@ -612,7 +617,8 @@ export default {
       //   degree_file: "", //学位证书照片
       //   entry_form_file: "", //报名表照片
       //   avatar_file: "" //头像
-      // }
+			// }
+			fileList:[],
     };
   },
   computed: {
@@ -733,10 +739,12 @@ export default {
             //console.log(reqOptions, this.$refs);
             this.param[reqOptions.filename] = res.data.url;
             this.param[reqOptions.filename.replace("_file", "")] = res.data.id;
-            console.log(this.param);
+						//console.log(this.param);
+						this.$message.success("上传成功");
           }
         });
-
+			
+			this.fileList = [];
       return false;
     },
     doChangeFile(data) {

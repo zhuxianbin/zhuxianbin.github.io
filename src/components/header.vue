@@ -5,7 +5,7 @@
     </div>
     <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
         <li class="ant-menu-item ant-menu-item-selected">
-            <a href="/">首页</a>
+            <a href="/default.html">首页</a>
         </li>
         <li class="ant-menu-item hasSubmenu">
             <a>课程分类 <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i></a>
@@ -13,7 +13,7 @@
                 <em class="arrow"></em>
                 <div>
                     <ul>
-                        <li v-for="it in cateList" :key='it.id'><a :href="'#m' + it.id">{{it.name}}</a></li>
+                        <li v-for="it in cateList" :key='it.id'><a :href="'/default.html#m' + it.id">{{it.name}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <router-link to="/male">超职商城</router-link>
         </li>
         <li class="ant-menu-item">
-            <a href="/#about">关于超职</a>
+            <a href="/default.html#about">关于超职</a>
         </li>
     </ul>
     <div class="header-login">

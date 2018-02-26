@@ -44,7 +44,7 @@
 
                         <v-form-item>
                             <div class="text-center">
-                                <a href="javascript:;">
+                                <a href="/default.html">
                                     <i class="iconfont icon-return"></i>
                                     <span style="margin-left: 5px;">返回</span>
                                 </a>

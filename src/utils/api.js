@@ -197,4 +197,12 @@ export default {
         return conmonAjax("/api/course/cateogry", param, "get");
     },
 
+    /**
+     * 取得课程分类
+     * URL (/api/course/cateogry) METHOD GET
+     * 接收参数 无
+     * */
+    getPayResult: function (param) {
+        return conmonAjax(`/api/pay/result/${param.token}`, param, "get");
+    },
 }

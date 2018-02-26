@@ -135,8 +135,8 @@
                         订单信息：{{payData.name}}
                     </div>
                     <div class="margin-top-20" style="font-size: 14px;color: #FF4000;">
-                        <v-button type="primary">继续挑选课程</v-button>
-                        <v-button type="default" style="margin-left: 10px;">进入我的课程</v-button>
+                        <v-button @click="$router.push('/male')" type="primary">继续挑选课程</v-button>
+                        <v-button @click="$router.push('/courselist')" type="default" style="margin-left: 10px;">进入我的课程</v-button>
                     </div>
                     <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
                 </div>
@@ -178,6 +178,8 @@
 </template>
 
 <script>
+let timer = 0;
+
 export default {
   name: "Index",
   data() {
@@ -298,7 +300,20 @@ export default {
     alipayPayDialogCancle3() {
       this.alipayPayDialog3 = false;
     },
-    getPayResult() {}
+    getPayResult(token) {
+      this.$czapi.getPayResult({ token }).then(({ code, msg }) => {
+        if (code != 200) {
+          timer = setTimeout(() => {
+            this.getPayResult(token);
+          }, 3000);
+          return false;
+        }
+
+        this.alipayPayDialog2 = true;
+        //this.alipayPayDialog1 = false;
+        this.wechatPayDialog = false;
+      });
+    }
   },
   mounted() {},
   activated() {
@@ -311,12 +326,15 @@ export default {
         .then(data => {
           this.payState = data;
           this.payData.price = data.price;
+          this.getPayResult(data.token);
         });
     } else {
       this.$router.push({ name: "Male" });
     }
   },
-  deactivated() {}
+  deactivated() {
+    clearTimeout(timer);
+  }
 };
 </script>
 

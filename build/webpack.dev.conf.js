@@ -57,6 +57,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'src/index.html',
       inject: true
     }),
+
+    new HtmlWebpackPlugin({
+      filename: "default.html",
+      template: 'static/default.html',
+      excludeChunks: ['app','vendor','manifest']
+    }),
+
     // copy custom static assets
     new CopyWebpackPlugin([
       {
