@@ -26,6 +26,7 @@
         </li>
     </ul>
     <div class="header-login">
+        <span style='color:#fff;margin-right:20px;font-size:18px;'>{{info.user.phone}}</span>
         <v-button @click="$router.push('/index')" ghost>个人中心</v-button>
         <v-button @click="doLogout" ghost>退出登录</v-button>
     </div>

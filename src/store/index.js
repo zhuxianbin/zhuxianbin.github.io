@@ -21,16 +21,25 @@ export default new Vuex.Store({
     },
     actions: {
         [USER_INFO](context, data) {
-          var userToken = storage.get("userToken").token;
-            userToken && api.getUserInfo().then((data) => {
-                context.commit(USER_INFO, data);
-            }).fail((data) => {
-                context.commit(USER_INFO, data);
+            var {
+                token
+            } = storage.get("userToken");
+            token && api.getUserInfo().then((res) => {
+                if (res.code == 404) {
+                    window.localStorage.removeItem('userToken');
+                    window.location.reload();
+                    return false;
+                }
+                context.commit(USER_INFO, res);
+            }).fail((res) => {
+                context.commit(USER_INFO, res);
             })
         },
         [CATE_LIST](context, data) {
-          var userToken = storage.get("userToken").token;
-            userToken && api.getCateogry().then(function (data) {
+            var {
+                token
+            } = storage.get("userToken");
+            token && api.getCateogry().then(function (data) {
                 context.commit(CATE_LIST, data);
             });
         },

@@ -9,7 +9,7 @@
 							<div class="ant-menu-submenu-title">
 								<router-link to="/index">
 									<i class="iconfont icon-shouye"></i>
-									<span class="margin-left-5">后台首页</span>
+									<span class="margin-left-5">我的首页</span>
 								</router-link>
 							</div>
 						</li>

@@ -39,8 +39,8 @@
                             </v-form-item>
 
                             <v-form-item :wrapper-col="{span:22,offset:2}" style="margin-top:24px">
-                                <a v-if='payStyle=="alipay"&&payState.token' class='ant-btn ant-btn-warning' target='_blank' :href='"http://aci-api.chaozhiedu.com/api/pay/alipay/"+payState.token'>转到支付</a>
-                                <a v-if="payStyle!='alipay'" class='ant-btn ant-btn-warning' @click="pay">转到支付</a>
+                                <a v-if='payStyle=="alipay"&&payState.token' style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' target='_blank' :href='"http://aci-api.chaozhiedu.com/api/pay/alipay/"+payState.token'>去支付</a>
+                                <a v-if="payStyle!='alipay'" style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' @click="pay">去支付</a>
                             </v-form-item>
                         </v-form>
                     </div>

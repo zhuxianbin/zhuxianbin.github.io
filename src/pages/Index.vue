@@ -9,7 +9,7 @@
                             <div class="ant-menu-submenu-title">
                                 <router-link to="/index">
                                     <i class="iconfont icon-shouye"></i>
-                                    <span class="margin-left-5">后台首页</span>
+                                    <span class="margin-left-5">我的首页</span>
                                 </router-link>
                             </div>
                         </li>
@@ -103,68 +103,8 @@ export default {
       //cateList: state => state.cateList
     })
   },
-  //   methods: {
-  //     getCateList() {
-  //       var vm = this;
-  //       this.$czapi.getCateogry().then(function(data) {
-  //         console.log(data);
-  //         vm.cateList = data.data;
-  //       });
-  //     }
-  //   },
   mounted() {
     var vm = this;
-    // vm.$czapi.getUserInfo().then(function(data) {
-    //   console.log(data);
-    //   vm.info = data;
-    // });
-
-    /*var data = {
-                "code": 201, //201 等待完善信息 202 审核未通过 203 审核中 200 审核通过
-                "msg": "等待完善信息",
-                "user": {
-                    "phone": "18243188033"//学员账号
-                },
-                "ext_info": {//用户之前保存的数据 服务端保存一周 格式同 user仅在用户未填写信息时显示
-                    "cn_name": "",//中文名
-                    "en_name": "",//英文名
-                    "sex": "F",//姓别 F 女 M 男
-                    "birthday": "2017-01-01", //出生日期
-                    "college": "大学", //毕业学校
-                    "edu_num": "10000000", //学历编号
-                    "idcard": "",//身份证,护照
-                    "email": "",
-                    "contacts_phone": "",//联系电话
-                    "addr": "人民大街",//居住地址
-                    "period": "1",//选择的课时ID
-                    "idcard_front": "1", //身份证 正面资源ID
-                    "idcard_reverse": "1", //身份证 反面资源ID
-                    "edu": "1", //学历复印件资源ID
-                    "degree": "1",//学位资源ID
-                    "entry_form": "1",//报名表资源ID
-                    "avatar": "1",//一寸照ID 下面为回显图片和资源的地址
-                    "idcard_front_file": "http:\/\/aci.zhj\/api\/file\/1",
-                    "idcard_reverse_file": "http:\/\/aci.zhj\/api\/file\/1",
-                    "edu_file": "http:\/\/aci.zhj\/api\/file\/1",
-                    "degree_file": "http:\/\/aci.zhj\/api\/file\/1",
-                    "entry_form_file": "http:\/\/aci.zhj\/api\/file\/1",
-                    "avatar_file": "http:\/\/aci.zhj\/api\/file\/1"
-                },
-                //课时
-                "period": [
-                    {
-                        "id": 1,
-                        "name": "上午7点"
-                    }
-                ],
-                //报表名示例
-                "entry_form_example_url": "http:\/\/aci.zhj\/api\/file\/1"
-            }
-
-            this.info = data;*/
-
-    //获取分类
-    //this.getCateList();
   }
 };
 </script>
