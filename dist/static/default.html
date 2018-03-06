@@ -41,10 +41,12 @@
             background: url('./static/images/ro2.png') no-repeat;
             background-size: contain;
         }
+
         .teacher-item:hover {
             background: url('./static/images/ro1.png') no-repeat;
             background-size: contain;
         }
+
     </style>
 </head>
 
@@ -59,7 +61,7 @@
                     <li class="ant-menu-item ant-menu-item-selected">
                         <a href="/default.html#firstpage">首页</a>
                     </li>
-                    <li class="ant-menu-item hasSubmenu">
+                    <!-- <li class="ant-menu-item hasSubmenu">
                         <a>课程分类
                             <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i>
                         </a>
@@ -71,13 +73,19 @@
                                         <a v-if="id>0" href="#czkc">{{it.name}}</a>
                                         <a v-else :href="'#m'+it.id">{{it.name}}</a>
                                     </li>
-                                    <!-- <li><a>经济师</a></li>
-                                <li><a>人力资源管理师</a></li>
-                                <li><a>营养师</a></li> -->
+                                    <li>
+                                        <a>经济师</a>
+                                    </li>
+                                    <li>
+                                        <a>人力资源管理师</a>
+                                    </li>
+                                    <li>
+                                        <a>营养师</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="ant-menu-item">
                         <a href='/index.html#/male'>超职商城</a>
                     </li>
