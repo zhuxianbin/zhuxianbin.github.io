@@ -1,12 +1,6 @@
 <template>
     <div class="index">
-			<v-carousel autoplay>
-				<v-carousel-item>
-						<img src="../../static/images/Group8.png" />
-				</v-carousel-item>
-				<v-carousel-item>
-						<img src="../../static/images/Group8.png" />
-				</v-carousel-item>
+			<v-carousel autoplay :autoplaySpeed='5000'>
 				<v-carousel-item>
 						<img src="../../static/images/Group8.png" />
 				</v-carousel-item>
@@ -24,10 +18,13 @@
 
                         <div style='padding:15px;border:1px solid #eee;margin-bottom:15px;'>
                             课程分类:
-														<v-tag color="orange-inverse">ACI注册国际心理咨询师</v-tag>
-                            <v-tag>ACI注册国际心理咨询师</v-tag>
-														<v-tag>ACI注册国际心理咨询师</v-tag>
-														<v-tag>ACI注册国际心理咨询师</v-tag>
+                            <v-tag :color='categroy_id==0?"orange-inverse":""' @click.native='categroy_id=0'>全部</v-tag>
+														<v-tag 
+                              v-for='item in cateList' 
+                              :key='item.id' 
+                              :color='categroy_id==item.id?"orange-inverse":""'  
+                              @click.native='categroy_id=item.id'>{{item.name}}</v-tag>
+                            
                         </div>
                         <v-row :gutter="30">
                             <v-col :span="12" v-for="it in rows" :key="it.id">
@@ -96,14 +93,20 @@ export default {
         p: 1,
         total: 1,
         offset: 10
-      }
+      },
       //cateList: []
+      categroy_id: 0
     };
+  },
+  watch: {
+    categroy_id(val) {
+      this.loadData();
+    }
   },
   computed: {
     ...mapState({
-      info: state => state.userInfo
-      //cateList: state => state.cateList
+      info: state => state.userInfo,
+      cateList: state => state.cateList
     })
   },
   methods: {
@@ -123,7 +126,8 @@ export default {
       this.$czapi
         .getProductList({
           p: this.page.p,
-          offset: this.page.offset
+          offset: this.page.offset,
+          categroy_id: this.categroy_id
         })
         .then(({ data }) => {
           this.page.total = data.total;
@@ -167,7 +171,9 @@ export default {
     }
   },
   mounted() {
-    this.loadData();
+    let { query: { cate } } = this.$route;
+    this.categroy_id = cate || 0;
+    //this.loadData();
   },
   activated() {
     let doyoo = document.getElementById("doyoo_panel");
