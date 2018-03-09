@@ -113,7 +113,8 @@
                                 <div class='video-box-padd'>
                                     <div class='video-box-hd clearfix'>
                                         <div class='pull-left' style='width:250px;text-align:left;height:40px;overflow: hidden;'>
-                                            <img src='./images/logo-4.png' style='height:40px;vertical-align: top;' /> <span style='font-size:18px;margin-left:10px'>在线课程</span>
+                                            <img src='./images/logo-4.png' style='height:40px;vertical-align: top;' />
+                                            <span style='font-size:18px;margin-left:10px'>在线课程</span>
                                         </div>
                                         <div class='pull-left clearfix' style='width:810px'>
                                             <div class='pull-left' style='line-height:1.5;text-align:left;'>
@@ -350,14 +351,19 @@
                     </div>\
                 </li>";
 
-            $(".video-list").html(rows.map(function (item) {
+            var $vedioList = rows.map(function (item) {
                 return $(template.format(item)).click(function () {
                     var temp = "<embed id='flashBox' src='{src}' width='810' height='510'></embed>";
                     flashBox.html(temp.format({
                         src: $(this).data("src")
                     }));
+                        
+                    $('.video-list-item').removeClass('video-list-item-active');
+                    $(this).addClass('video-list-item-active');
                 })
-            }));
+            });
+
+            $(".video-list").html($vedioList);
         }
 
     </script>

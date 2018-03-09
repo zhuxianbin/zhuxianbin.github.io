@@ -193,8 +193,8 @@ export default {
      * URL (/api/course/cateogry) METHOD GET
      * 接收参数 无
      * */
-    getCateogry: function (param) {
-        return conmonAjax("/api/course/cateogry", param, "get");
+    getCategory: function (param) {
+        return conmonAjax("/api/course/category", param, "get");
     },
 
     /**

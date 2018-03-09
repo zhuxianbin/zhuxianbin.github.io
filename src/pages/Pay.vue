@@ -37,7 +37,12 @@
                                     </v-radio>
                                 </v-radio-group>
                             </v-form-item>
-
+                            <v-form-item :wrapper-col="{span:22,offset:2}">
+                                购买及表示您同意
+                                《<a href='../static/docs/【超职教育】18年＜VIP保障实操班＞·协议.docx'>【超职教育】18年＜VIP保障实操班＞·协议</a>》
+                                《<a href='../static/docs/【超职教育】18年＜高效私教取证班＞·协议.docx'>【超职教育】18年＜高效私教取证班＞·协议</a>》
+                                《<a href='../static/docs/【超职教育】18年＜零基础特招班＞· 协议.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》
+                            </v-form-item>
                             <v-form-item :wrapper-col="{span:22,offset:2}" style="margin-top:24px">
                                 <a v-if='payStyle=="alipay"&&payState.token' style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' target='_blank' :href='"http://aci-api.chaozhiedu.com/api/pay/alipay/"+payState.token'>去支付</a>
                                 <a v-if="payStyle!='alipay'" style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' @click="pay">去支付</a>

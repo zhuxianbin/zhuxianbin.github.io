@@ -18,12 +18,12 @@
 
                         <div style='padding:15px;border:1px solid #eee;margin-bottom:15px;'>
                             课程分类:
-                            <v-tag :color='categroy_id==0?"orange-inverse":""' @click.native='categroy_id=0'>全部</v-tag>
+                            <v-tag :color='category_id==0?"orange-inverse":""' @click.native='category_id=0'>全部</v-tag>
 														<v-tag 
                               v-for='item in cateList' 
                               :key='item.id' 
-                              :color='categroy_id==item.id?"orange-inverse":""'  
-                              @click.native='categroy_id=item.id'>{{item.name}}</v-tag>
+                              :color='category_id==item.id?"orange-inverse":""'  
+                              @click.native='category_id=item.id'>{{item.name}}</v-tag>
                             
                         </div>
                         <v-row :gutter="30">
@@ -95,11 +95,11 @@ export default {
         offset: 10
       },
       //cateList: []
-      categroy_id: 0
+      category_id: 0
     };
   },
   watch: {
-    categroy_id(val) {
+    category_id(val) {
       this.loadData();
     }
   },
@@ -123,12 +123,15 @@ export default {
       this.loadData();
     },
     loadData() {
+      let params = {
+        p: this.page.p,
+        offset: this.page.offset
+      };
+      if (this.category_id) {
+        params.category_id = this.category_id;
+      }
       this.$czapi
-        .getProductList({
-          p: this.page.p,
-          offset: this.page.offset,
-          categroy_id: this.categroy_id
-        })
+        .getProductList(params)
         .then(({ data }) => {
           this.page.total = data.total;
           this.rows = data.rows;
@@ -172,8 +175,8 @@ export default {
   },
   mounted() {
     let { query: { cate } } = this.$route;
-    this.categroy_id = cate || 0;
-    //this.loadData();
+    this.category_id = cate || 0;
+    this.loadData();
   },
   activated() {
     let doyoo = document.getElementById("doyoo_panel");

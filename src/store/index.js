@@ -39,7 +39,7 @@ export default new Vuex.Store({
             var {
                 token
             } = storage.get("userToken");
-            token && api.getCateogry().then(function (data) {
+            token && api.getCategory().then(function (data) {
                 context.commit(CATE_LIST, data);
             });
         },
