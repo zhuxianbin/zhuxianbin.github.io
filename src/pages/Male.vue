@@ -76,6 +76,15 @@
         </div>
     </div>
 </template>
+<style>
+.ant-tag {
+  font-size: 14px;
+  padding: 0 16px;
+  height: 24px;
+  line-height: 24px;
+  margin-left:5px;
+}
+</style>
 
 <script>
 import { mapState } from "vuex";
@@ -130,12 +139,10 @@ export default {
       if (this.category_id) {
         params.category_id = this.category_id;
       }
-      this.$czapi
-        .getProductList(params)
-        .then(({ data }) => {
-          this.page.total = data.total;
-          this.rows = data.rows;
-        });
+      this.$czapi.getProductList(params).then(({ data }) => {
+        this.page.total = data.total;
+        this.rows = data.rows;
+      });
 
       /*var data = {
                               "code": 200,
