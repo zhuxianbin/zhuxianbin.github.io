@@ -82,7 +82,6 @@
   padding: 0 16px;
   height: 24px;
   line-height: 24px;
-  margin-left:5px;
 }
 </style>
 
