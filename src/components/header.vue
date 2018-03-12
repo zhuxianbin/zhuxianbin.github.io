@@ -12,8 +12,22 @@
             <div class="sub-menu-tip">
                 <em class="arrow"></em>
                 <div>
-                    <ul>
+                    <!-- <ul>
                         <li v-for="it in cateList" :key='it.id'><a :href="'/default.html#m' + it.id">{{it.name}}</a></li>
+                    </ul> -->
+                    <ul>
+                        <li>
+                            <a href='./static/course_01.html'>ACI心理咨询师课程</a>
+                        </li>
+                        <li>
+                            <a href='./index.html#/male?cate=5'>专科/本科教育</a>
+                        </li>
+                        <li>
+                            <a href='./index.html#/male?cate=3'>人力资源管理师</a>
+                        </li>
+                        <li>
+                            <a href='./index.html#/male?cate=4'>ACI国际注册营养师</a>
+                        </li>
                     </ul>
                 </div>
             </div>
