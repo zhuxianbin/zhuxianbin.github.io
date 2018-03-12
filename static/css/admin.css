@@ -293,8 +293,7 @@ p {
 }
 .ant-layout-header{
     height: 80px;
-    background:#fff;
-    /* background: #56509F url('../images/top_bg.png') left top repeat-x; */
+    background: #56509F url('../images/top_bg.png') left top repeat-x;
 }
 .ant-menu-dark.ant-menu-horizontal{
     line-height: 75px;
@@ -312,15 +311,15 @@ p {
     font-size: 20px;
 }
 .ant-menu-dark .ant-menu-item > a{
-    color: #444;
+    color: #fff;
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected{
     background: none;
     border-bottom: 5px solid #fff;
-    color: #444;
+    color: #fff;
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected > a{
-    color: #444;
+    color: #fff;
 }
 .ant-layout-sider{
     flex: 0 0 180px;
@@ -332,9 +331,6 @@ p {
     padding: 0 0;
     font-size: 14px;
 }
-.ant-menu-dark .ant-menu-item:hover{
-    color: #444;
-}
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
     background: #56509F;
 }
@@ -343,7 +339,7 @@ p {
     color: #333;
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .ant-menu-submenu-title > a{
-    color: #444;
+    color: #fff;
 }
 .ant-menu-inline .ant-menu-item:after, .ant-menu-vertical .ant-menu-item:after{
     border-right: 10px solid #FE6500;
@@ -550,10 +546,4 @@ p {
     visibility: visible;
     animation-duration: 0.2s;
     animation-name: antSlideUpIn;
-}
-
-
-
-.ant-menu-dark .ant-menu-item-active>a, .ant-menu-dark .ant-menu-item:hover>a, .ant-menu-dark .ant-menu-submenu-active>a, .ant-menu-dark .ant-menu-submenu-selected>a, .ant-menu-dark .ant-menu-submenu-title:hover>a, .ant-menu-dark:not(.ant-menu-inline) .ant-menu-submenu-open>a{
-    color:#444;
 }

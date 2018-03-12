@@ -88,23 +88,24 @@
     text-align: left;
 }
 
-.ant-menu-dark.ant-menu-horizontal{
+.ant-layout .ant-layout-header{
+    background: #fff;
+}
+.ant-layout-header .ant-menu-dark.ant-menu-horizontal{
     border:none;
 }
-.ant-menu-dark.ant-menu-horizontal > .ant-menu-item, .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu{
+.ant-layout-header .ant-menu-dark.ant-menu-horizontal > .ant-menu-item, .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu{
     border:none;
 }
-.ant-menu-dark .ant-menu-item:hover > a, .ant-menu-dark .ant-menu-item-active > a, .ant-menu-dark .ant-menu-submenu-active > a, .ant-menu-dark:not(.ant-menu-inline) .ant-menu-submenu-open > a, .ant-menu-dark .ant-menu-submenu-selected > a, .ant-menu-dark .ant-menu-submenu-title:hover > a{
+.ant-layout-header .ant-menu-dark .ant-menu-item:hover > a, .ant-menu-dark .ant-menu-item-active > a, .ant-menu-dark .ant-menu-submenu-active > a, .ant-menu-dark:not(.ant-menu-inline) .ant-menu-submenu-open > a, .ant-menu-dark .ant-menu-submenu-selected > a, .ant-menu-dark .ant-menu-submenu-title:hover > a{
     color:#333;
 }
 
-.ant-layout-header{
-    background: #fff;
-}
 
-.ant-menu-dark .ant-menu-item a {
+
+.ant-layout-header .ant-menu-dark .ant-menu-item a {
     color: #555;
 }
-.ant-menu.ant-menu-dark .ant-menu-item-selected > a {
+.ant-layout-header .ant-menu.ant-menu-dark .ant-menu-item-selected > a {
     color: #333;
 }
