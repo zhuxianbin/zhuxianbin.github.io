@@ -54,10 +54,10 @@
                                         <span class="inline-block text-right" style="width: 100px;">当前课时：</span>
                                         <span class="inline-block">第{{it.products.current_course}}节</span>
                                     </div>
-                                    <div class="margin-top-20">
+                                    <!-- <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">总课时：</span>
                                         <span class="inline-block">{{it.products.total_course}}节</span>
-                                    </div>
+                                    </div> -->
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">直播开始时间：</span>
                                         <span class="inline-block">{{it.products.live_time}}</span>

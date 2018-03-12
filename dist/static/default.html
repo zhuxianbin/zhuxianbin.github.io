@@ -70,10 +70,6 @@
                             <em class="arrow"></em>
                             <div>
                                 <ul>
-                                    <!-- <li v-for="(it,id) in cateList" :key='it.id'>
-                                        <a v-if="id>0" href="#czkc">{{it.name}}</a>
-                                        <a v-else :href="'#m'+it.id">{{it.name}}</a>
-                                    </li> -->
                                     <li>
                                         <a href='./static/course_01.html'>ACI心理咨询师课程</a>
                                     </li>
@@ -814,34 +810,8 @@
                 }
             },
             mounted: function () {
-                this.getCateList();
-                /*banner图自适应*/
-                var wh = $(window).height();
-                var $indexBanner = $(this.$refs.indexBanner);
-                $indexBanner.height(430);
+                //this.getCateList();
 
-                $(window).resize(function () {
-                    var wh = $(window).height();
-                    $indexBanner.height(430);
-                });
-
-                var swiper = new Swiper('.swiper-container', {
-                    spaceBetween: 30,
-                    effect: 'fade',
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true
-                    },
-                    autoplay: {
-                        delay: 5000,
-                        disableOnInteraction: false
-                    }
-                });
-
-                //启动滚屏动画
-                if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
-                    new WOW().init();
-                };
             }
         });
 
@@ -856,6 +826,35 @@
                 });
             }
         }
+        $(function () {
+            /*banner图自适应*/
+            var wh = $(window).height();
+            var $indexBanner = $("#firstpage");
+            $indexBanner.height(430);
+
+            $(window).resize(function () {
+                var wh = $(window).height();
+                $indexBanner.height(430);
+            });
+
+            var swiper = new Swiper('.swiper-container', {
+                spaceBetween: 30,
+                effect: 'fade',
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false
+                }
+            });
+
+            //启动滚屏动画
+            if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+                new WOW().init();
+            };
+        })
 
     </script>
     <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script>
