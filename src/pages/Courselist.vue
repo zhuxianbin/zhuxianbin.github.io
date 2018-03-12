@@ -36,7 +36,7 @@
                         <div v-for="it in product" :key='it.id' class="padding-10" style="border: 1px solid #E8E8E8;border-radius: 6px;margin-bottom:10px;box-shadow:0 0 5px 0 #ccc;">
                             <v-row :gutter="layout.gutter">
                                 <v-col :span="layout.span">
-                                    <div style="width: 100%;height: 330px;background: #f2f2f2;">
+                                    <div style="width: 100%;height: 330px;">
                                         <img :src="it.products.img" alt="" style="height: 330px;">
                                     </div>
                                 </v-col>
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">直播课程：</span>
-                                        <span class="inline-block">{{it.live_name}}</span>
+                                        <span class="inline-block">{{it.products.live_name}}</span>
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">当前课时：</span>
@@ -60,17 +60,17 @@
                                     </div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">直播开始时间：</span>
-                                        <span class="inline-block">{{it.live_time}}</span>
+                                        <span class="inline-block">{{it.products.live_time}}</span>
                                     </div>
                                     <div class="margin-top-20 text-center">
-                                        <template v-if="it.live_status == 0">
+                                        <template v-if="it.products.live_status == 0">
                                             <a href="javascript:;" class="ant-btn ant-btn-warning margin-left-20" disabled style="font-size: 16px;">
                                                 <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
                                                 <span class="inline-block">直播课堂还未开始</span>
                                             </a>
                                         </template>
                                         <template v-else>
-                                            <a :href="it.live_url" class="ant-btn ant-btn-warning" style="font-size: 16px;">
+                                            <a :href="it.products.live_url" target="_blank" class="ant-btn ant-btn-warning" style="font-size: 16px;">
                                                 <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
                                                 <span class="inline-block">进入直播课堂</span>
                                             </a>
@@ -236,7 +236,7 @@ export default {
         });
     }
   },
-  mounted() {
+  activated() {
     //var vm = this;
     //请求用不了，暂时直接模拟
     this.$czapi.getCourseList().then(({ data }) => {
@@ -245,6 +245,7 @@ export default {
         item.downList = [];
         return item;
       });
+      console.log(this.product);
       this.product.forEach((item, index) => {
         this.showCourseDown(item, index);
         this.showCoursePlan(item, index);
