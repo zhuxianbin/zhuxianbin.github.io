@@ -197,7 +197,7 @@ export default {
 
       payData: {},
 
-      payStyle: "alipay",
+      payStyle: "wechat",
 
       payState: {
         data: {}
@@ -321,7 +321,13 @@ export default {
   },
   mounted() {},
   activated() {
-      console.log(window.payData);
+    console.log(window.payData);
+    //console.log(this.$route.query);
+    let { id } = this.$route.query;
+    if (id) {
+      window.payData = { id };
+    }
+
     if (window.payData) {
       this.payData = window.payData;
       this.$czapi
@@ -329,6 +335,7 @@ export default {
           product_id: this.payData.id
         })
         .then(data => {
+          this.payData = data.product;
           this.payState = data;
           this.payData.price = data.price;
           this.getPayResult(data.token);

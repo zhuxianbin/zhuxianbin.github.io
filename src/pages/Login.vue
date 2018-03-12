@@ -256,8 +256,8 @@ export default {
               this.getCateList();
 
               //登录成功跳转页面（三种用法）
-              this.$router.push({ name: "Index" });
-
+              //this.$router.push({ name: "Index" });
+              this.$router.back();
               // 字符串
               //vm.$router.push('/home/first')
 
