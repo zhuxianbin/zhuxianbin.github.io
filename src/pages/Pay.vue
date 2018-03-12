@@ -19,11 +19,11 @@
                             </v-form-item>
                             <v-form-item label="支付方式" :label-col="labelCol" :wrapper-col="wrapperCol">
                                 <v-radio-group v-model="payStyle" style="margin-top: 17px;">
-                                    <v-radio label="alipay">
+                                    <!-- <v-radio label="alipay">
                                         <svg class="icon inline-block" aria-hidden="true" style="font-size: 180px;margin-top: -60px;">
                                             <use xlink:href="#icon-zhifubao"></use>
                                         </svg>
-                                    </v-radio>
+                                    </v-radio> -->
                                     <v-radio label="wechat">
                                         <svg class="icon inline-block" aria-hidden="true" style="font-size: 180px;margin-top: -60px;">
                                             <use xlink:href="#icon-weixinzhifu"></use>
