@@ -200,5 +200,10 @@ export default {
 </script>
 
 <style>
-
+.ant-tag {
+  font-size: 14px;
+  padding: 0 25px;
+  height: 40px;
+  line-height: 40px;
+}
 </style>
