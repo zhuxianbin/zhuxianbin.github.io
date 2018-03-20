@@ -17,26 +17,34 @@
                                 <div class="inline-block" style="font-size: 28px;margin-right: 20px;"><span class="color-warn">{{payData.price}}</span>元</div>
                                 <v-button type="default" html-type="button" @click="refreshPrice()">刷新价格</v-button>
                             </v-form-item>
-                            <v-form-item label="扫码支付" :label-col="labelCol" :wrapper-col="wrapperCol">
-                                <div style='width:200px;height:200px;padding:10px;border:1px solid #eee;'>
-                                    <img :src='payResult.qrcode' style='width:100%;' />    
-                                </div>
-                                
+                            <v-form-item label="支付方式" :label-col="labelCol" :wrapper-col="wrapperCol">
+                                <v-radio-group v-model="payStyle" style="margin-top: 17px;">
+                                    <!-- <v-radio label="alipay">
+                                        <svg class="icon inline-block" aria-hidden="true" style="font-size: 180px;margin-top: -60px;">
+                                            <use xlink:href="#icon-zhifubao"></use>
+                                        </svg>
+                                    </v-radio> -->
+                                    <v-radio label="wechat">
+                                        <svg class="icon inline-block" aria-hidden="true" style="font-size: 180px;margin-top: -60px;">
+                                            <use xlink:href="#icon-weixinzhifu"></use>
+                                        </svg>
+                                    </v-radio>
+                                    <v-radio label="yhk">
+                                        <svg class="icon inline-block" aria-hidden="true" style="font-size: 80px;margin-bottom: 40px;">
+                                            <use xlink:href="#icon-weibiaoti-"></use>
+                                        </svg>
+                                        <span class="inline-block" style="vertical-align: top;margin-top: 11px;font-size: 24px;">银行账户</span>
+                                    </v-radio>
+                                </v-radio-group>
+                            </v-form-item>
+                            <v-form-item :wrapper-col="{span:22,offset:2}">
                                 <span v-if='payData.id==10'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜VIP保障实操班＞·协议.docx'>【超职教育】18年＜VIP保障实操班＞·协议</a>》</span>
                                 <span v-if='payData.id==9'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜高效私教取证班＞·协议.docx'>【超职教育】18年＜高效私教取证班＞·协议</a>》</span>
                                 <span v-if='payData.id==8'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜零基础特招班＞· 协议.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span>
                             </v-form-item>
-                            <v-form-item label="支持支付类型" :label-col="labelCol" :wrapper-col="wrapperCol">
-                                <svg class="icon inline-block" aria-hidden="true" style="font-size: 120px;margin-top: -60px;margin-right:20px;">
-                                    <use xlink:href="#icon-weixinzhifu"></use>
-                                </svg>
-                                <svg class="icon inline-block" aria-hidden="true" style="font-size: 120px;margin-top: -60px;margin-right:20px;">
-                                    <use xlink:href="#icon-zhifubao"></use>
-                                </svg>
-                                <svg class="icon inline-block" aria-hidden="true" style="font-size: 50px;margin-bottom: 25px;">
-                                    <use xlink:href="#icon-weibiaoti-"></use>
-                                </svg>
-                                <span class="inline-block" style="vertical-align: top;font-size: 24px;">银行账户</span>
+                            <v-form-item :wrapper-col="{span:22,offset:2}" style="margin-top:24px">
+                                <a v-if='payStyle=="alipay"&&payState.token' style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' target='_blank' :href='"http://aci-api.chaozhiedu.com/api/pay/alipay/"+payState.token'>去支付</a>
+                                <a v-if="payStyle!='alipay'" style='padding:0 50px;' class='ant-btn ant-btn-warning ant-btn-lg' @click="pay">去支付</a>
                             </v-form-item>
                         </v-form>
                     </div>
@@ -227,16 +235,7 @@ export default {
                 vm.payData.price = data.data;
                 vm.$message.success("刷新价格成功");*/
     },
-    getQRcode() {
-      this.$czapi
-        .pay({
-          product_id: this.payData.id,
-          channel: "ums"
-        })
-        .then(data => {
-          this.payResult = data;
-        });
-    },
+
     pay() {
       var vm = this;
       if (vm.payStyle === "yhk") {
@@ -322,7 +321,7 @@ export default {
   },
   mounted() {},
   activated() {
-    //console.log(window.payData);
+    console.log(window.payData);
     //console.log(this.$route.query);
     let { id } = this.$route.query;
     if (id) {
@@ -340,7 +339,6 @@ export default {
           this.payState = data;
           this.payData.price = data.price;
           this.getPayResult(data.token);
-          this.getQRcode();
         });
     } else {
       this.$router.push({ name: "Male" });
