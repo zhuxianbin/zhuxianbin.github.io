@@ -216,6 +216,7 @@ export default {
         .then(data => {
           this.payData.price = data.data;
           this.$message.success("刷新价格成功");
+          this.getQRcode();
         });
 
       //假设已经获取了
