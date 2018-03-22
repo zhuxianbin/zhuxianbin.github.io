@@ -20,13 +20,13 @@
                             <a href='./static/course_01.html'>ACI心理咨询师课程</a>
                         </li>
                         <li>
-                            <a href='./index.html#/male?cate=5'>专科/本科教育</a>
+                            <a href='./index.html?r=123#/male?cate=5'>专科/本科教育</a>
                         </li>
                         <li>
-                            <a href='./index.html#/male?cate=3'>人力资源管理师</a>
+                            <a href='./index.html?r=456#/male?cate=3'>人力资源管理师</a>
                         </li>
                         <li>
-                            <a href='./index.html#/male?cate=4'>ACI国际注册营养师</a>
+                            <a href='./index.html?r=789#/male?cate=4'>ACI国际注册营养师</a>
                         </li>
                     </ul>
                 </div>
