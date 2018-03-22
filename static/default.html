@@ -40,13 +40,13 @@
         .teacher-list-item {
             width: 230px;
             height: 360px;
-            background: url('./static/images/ro2.png') no-repeat;
-            background-size: contain;
+            /* background: url('./static/images/ro2.png') no-repeat;
+            background-size: contain; */
         }
 
         .teacher-list-item:hover {
-            background: url('./static/images/ro1.png') no-repeat;
-            background-size: contain;
+            /* background: url('./static/images/ro1.png') no-repeat;
+            background-size: contain; */
         }
 
     </style>
@@ -184,50 +184,54 @@
 
 </head>
 
-<body>
+<body style='color:#fff;'>
     <div id="app" style="min-height: 100%;">
         <div class="ant-layout">
             <div class="ant-layout-header" style="position: fixed;top: 0;left: 0;right: 0;z-index: 50;">
-                <div class="logo">
-                    <img src="./static/images/logo-3.png" alt="logo">
-                </div>
-                <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
-                    <li class="ant-menu-item ant-menu-item-selected">
-                        <a href="/default.html#firstpage">首页</a>
-                    </li>
-                    <li class="ant-menu-item hasSubmenu">
-                        <a>课程分类
-                            <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i>
-                        </a>
-                        <div class="sub-menu-tip">
-                            <em class="arrow"></em>
-                            <div>
-                                <ul>
-                                    <li>
-                                        <a href='./static/course_01.html'>ACI心理咨询师课程</a>
-                                    </li>
-                                    <li>
-                                        <a href='./index.html#/male?cate=5'>专科/本科教育</a>
-                                    </li>
-                                    <li>
-                                        <a href='./index.html#/male?cate=3'>人力资源管理师</a>
-                                    </li>
-                                    <li>
-                                        <a href='./index.html#/male?cate=4'>ACI国际注册营养师</a>
-                                    </li>
-                                </ul>
+                <div style='width:1200px;margin:0 auto;'>
+                    <div class="logo">
+                        <img src="./static/images/logo-4.png" alt="logo">
+                    </div>
+                    <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
+                        <li class="ant-menu-item ant-menu-item-selected">
+                            <a href="/default.html#firstpage">首页</a>
+                        </li>
+                        <li class="ant-menu-item hasSubmenu">
+                            <a>课程分类
+                                <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i>
+                            </a>
+                            <div class="sub-menu-tip">
+                                <em class="arrow"></em>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <a href='./static/course_01.html'>ACI心理咨询师课程</a>
+                                        </li>
+                                        <li>
+                                            <a href='./index.html#/male?cate=5'>专科/本科教育</a>
+                                        </li>
+                                        <li>
+                                            <a href='./index.html#/male?cate=3'>人力资源管理师</a>
+                                        </li>
+                                        <li>
+                                            <a href='./index.html#/male?cate=4'>ACI国际注册营养师</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="ant-menu-item">
-                        <a href='./index.html#/male'>超职商城</a>
-                    </li>
-                    <li class="ant-menu-item">
-                        <a href='#about'>关于超职</a>
-                    </li>
-                </ul>
-                <div class="header-login">
-                    <a class='ant-btn' style="font-size: 16px;" href="/index.html#/login">学员登录</a>
+                        </li>
+                        <li class="ant-menu-item">
+                            <a href='./index.html#/male'>超职商城</a>
+                        </li>
+                        <li class="ant-menu-item">
+                            <a href='#about'>关于超职</a>
+                        </li>
+                    </ul>
+                    <div class="header-login">
+											<img src='./static/images/icon-tel.png' style='height:24px;vertical-align:middle'>
+												<span style='font-size:16px;margin-right:50px;'>010-56537777</span>
+                        <a class='ant-btn' style="font-size: 16px;" href="/index.html#/login">学员登录</a>
+                    </div>
                 </div>
             </div>
 
@@ -263,65 +267,65 @@
 
 
             </div>
-
-            <div id='czkc' style="width: 1200px;margin: 0 auto;">
-                <div>
-                    <div class="text-center padding-25 wow bounceInDown" style="font-size: 40px;font-weight: 600;color: #000000;">超职课程</div>
-                    <div class="text-center color-3">
-                        <v-row>
-                            <v-col span="6" class="index-our-items wow fadeIn">
-                                <div>
-                                    <img src="./static/images/Bitmap1.png" alt="" style="width: 200px;">
-                                </div>
-                                <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">ACI国际心理咨询师</div>
-                                <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
-                                    教育部规定每个学校必须配备心理咨询师、中小学增设心理课外辅导 一些灾难事件也需要更多心理咨询师加入安慰家属服务行列，如汶川地震、马航失踪……
-                                </div>
-                                <div class="margin-top-15">
-                                    <!-- <a class="index-our-btn">点击了解更多</a> -->
-                                </div>
-                            </v-col>
-                            <v-col span="6" class="index-our-items wow fadeIn">
-                                <div>
-                                    <img src="./static/images/Bitmap2.png" alt="" style="width: 200px;">
-                                </div>
-                                <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">经济师</div>
-                                <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
-                                    2018年经济师报考条件：凡中华人民共和国公民、遵守国家法律法规、恪守职业道德、并具备下列条件的，可申请参加初/中级经济师考试
-                                </div>
-                                <div class="margin-top-15">
-                                    <!-- <a class="index-our-btn">点击了解更多</a> -->
-                                </div>
-                            </v-col>
-                            <v-col span="6" class="index-our-items wow fadeIn">
-                                <div>
-                                    <img src="./static/images/Bitmap3.png" alt="" style="width: 200px;">
-                                </div>
-                                <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">人力资源管理师</div>
-                                <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
-                                    尽快考人力资源师证书，错过本次考试，将延误至少半年，甚至是一辈子
-                                </div>
-                                <div class="margin-top-15">
-                                    <!-- <a class="index-our-btn">点击了解更多</a> -->
-                                </div>
-                            </v-col>
-                            <v-col span="6" class="index-our-items wow fadeIn">
-                                <div>
-                                    <img src="./static/images/Bitmap4.png" alt="" style="width: 200px;">
-                                </div>
-                                <div class="margin-top-20" style="font-size: 20px;font-weight: bold;">营养师</div>
-                                <div class="margin-top-20 text-left color-6 inline-block" style="width: 260px;height: 84px;font-size: 14px;">
-                                    通常只涉及教学大纲，并不会通过条框教材进行限定 。课程是由ACI授权 讲师根据教学大纲设置课程内容和考核方式
-                                </div>
-                                <div class="margin-top-15">
-                                    <!-- <a class="index-our-btn">点击了解更多</a> -->
-                                </div>
-                            </v-col>
-                        </v-row>
+            <div style="background: #777;padding:20px;">
+                <div id='czkc' style=" width: 1200px;margin: 0 auto;">
+                    <div>
+                        <div class="text-center padding-25 wow bounceInDown" style="font-size: 40px;color: #fff;">超职课程</div>
+                        <div class="text-center">
+                            <v-row>
+                                <v-col span="6" class="index-our-items wow fadeIn">
+                                    <div>
+                                        <img src="./static/images/Bitmap1.png" alt="" style="width: 200px;">
+                                    </div>
+                                    <div class="margin-top-20" style="font-size: 20px;">ACI国际心理咨询师</div>
+                                    <div class="margin-top-20 text-left  inline-block" style="width: 260px;height: 84px;font-size: 14px;">
+                                        教育部规定每个学校必须配备心理咨询师、中小学增设心理课外辅导 一些灾难事件也需要更多心理咨询师加入安慰家属服务行列，如汶川地震、马航失踪……
+                                    </div>
+                                    <div class="margin-top-15">
+                                        <!-- <a class="index-our-btn">点击了解更多</a> -->
+                                    </div>
+                                </v-col>
+                                <v-col span="6" class="index-our-items wow fadeIn">
+                                    <div>
+                                        <img src="./static/images/Bitmap2.png" alt="" style="width: 200px;">
+                                    </div>
+                                    <div class="margin-top-20" style="font-size: 20px;">经济师</div>
+                                    <div class="margin-top-20 text-left  inline-block" style="width: 260px;height: 84px;font-size: 14px;">
+                                        2018年经济师报考条件：凡中华人民共和国公民、遵守国家法律法规、恪守职业道德、并具备下列条件的，可申请参加初/中级经济师考试
+                                    </div>
+                                    <div class="margin-top-15">
+                                        <!-- <a class="index-our-btn">点击了解更多</a> -->
+                                    </div>
+                                </v-col>
+                                <v-col span="6" class="index-our-items wow fadeIn">
+                                    <div>
+                                        <img src="./static/images/Bitmap3.png" alt="" style="width: 200px;">
+                                    </div>
+                                    <div class="margin-top-20" style="font-size: 20px;">人力资源管理师</div>
+                                    <div class="margin-top-20 text-left  inline-block" style="width: 260px;height: 84px;font-size: 14px;">
+                                        尽快考人力资源师证书，错过本次考试，将延误至少半年，甚至是一辈子
+                                    </div>
+                                    <div class="margin-top-15">
+                                        <!-- <a class="index-our-btn">点击了解更多</a> -->
+                                    </div>
+                                </v-col>
+                                <v-col span="6" class="index-our-items wow fadeIn">
+                                    <div>
+                                        <img src="./static/images/Bitmap4.png" alt="" style="width: 200px;">
+                                    </div>
+                                    <div class="margin-top-20" style="font-size: 20px;">营养师</div>
+                                    <div class="margin-top-20 text-left  inline-block" style="width: 260px;height: 84px;font-size: 14px;">
+                                        通常只涉及教学大纲，并不会通过条框教材进行限定 。课程是由ACI授权 讲师根据教学大纲设置课程内容和考核方式
+                                    </div>
+                                    <div class="margin-top-15">
+                                        <!-- <a class="index-our-btn">点击了解更多</a> -->
+                                    </div>
+                                </v-col>
+                            </v-row>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <!-- <div class="text-center" style="height: 176px; background: url('./images/hh-bg.png') no-repeat center top;background-position: center;background-size: cover;">
                 <div class="index-gg-menu wow fadeIn">
                     <ul>
@@ -335,7 +339,7 @@
             <!-- <div class="wow bounceIn" v-show="ggMenuActiveIndex == 0">
             <div style="width: 1200px;margin: 0 auto;">
                 <div>
-                    <div class="text-center color-3">
+                    <div class="text-center ">
                         <div style="font-size: 40px;">ACI注册国际心理咨询师</div>
                         <div style="margin-top: 20px;display: inline-block;width: 570px;height: 64px;line-height: 60px;color:#fff;font-size: 32px;
                     background: url('./images/bg2.png') no-repeat; background-size: 100%;">考试全新政策调整（必读）</div>
@@ -353,7 +357,7 @@
             <div style="width: 1200px;margin: 0 auto;">
                 <div style="width: 770px;">
                     <i class="iconfont icon-dianhua1" style="color: #FF4000;"></i>
-                    <span class="margin-left-5 color-3">7*12h在线免费咨询：ACI心理咨询师报考信息</span>
+                    <span class="margin-left-5 ">7*12h在线免费咨询：ACI心理咨询师报考信息</span>
                     <a href="javascript:;" class="index-ctn-btn2 margin-left-20">马上联系咨询</a>
                     <a href="javascript:;" class="index-ctn-btn1 margin-left-20">立即购买课程 </a>
                 </div>
@@ -380,7 +384,7 @@
                         </div>
                     </div>
                     <div class="pull-right" style="width: 600px;">
-                        <div class="color-3" style="font-size: 42px;">资源紧缺，市场需求量大</div>
+                        <div class="" style="font-size: 42px;">资源紧缺，市场需求量大</div>
                         <div class="margin-top-25" style="font-size: 32px;color:#FF4000; ">每1000人中配一名心理咨询师</div>
                         <div class="margin-top-25" style="font-size: 18px;color:#666; ">国内100万人口只有5名心理师，缺口巨大，<br/>
                             取消认定是为降低就业门槛，提高就业率高成长的职业发展空间<br/>
@@ -390,62 +394,61 @@
             </div>
         </div> -->
 
-            <div class="wow bounceIn">
+            <div style='background:url(./static/images/bg2.jpg)'>
                 <div class="text-center" style="width: 1200px;margin: 0 auto;padding-top: 20px;padding-bottom: 34px;">
                     <div style="margin-bottom: 50px;">
-                        <div class="inline-block color-3" style="font-size: 42px;padding-left: 5px;padding-right: 35px;border-bottom: 10px solid #FF4000;">注册国际心理咨询师证书</div>
-                        <div class="inline-block" style="width: 80px;height: 80px;background: #FF4000;
-                    border-radius: 100%;font-size: 60px;color: #fff;line-height: 72px;margin-left: -26px;">6</div>
-                        <div class="inline-block" style="font-size: 60px;color: #4A4A4A;">大优势</div>
+                        <div class="inline-block " style="font-size: 40px;">注册国际心理咨询师证书</div>
+                        <div style='color:#aaa;font-size: 20px;'>
+                            六大学科优势
+                        </div>
                     </div>
 
                     <v-row type="flex" justify="space-around">
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good1.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d1.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">ACI国际心理咨询师</div>
+                            <div class="margin-top-20 font-size-16 ">ACI国际心理咨询师</div>
                         </v-col>
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good2.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d2.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">人才评定、海外人才库</div>
+                            <div class="margin-top-20 font-size-16 ">人才评定、海外人才库</div>
                         </v-col>
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good3.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d3.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">任职资格 升职加薪</div>
+                            <div class="margin-top-20 font-size-16 ">任职资格 升职加薪</div>
                         </v-col>
                     </v-row>
 
                     <v-row type="flex" justify="space-around" class="margin-top-25">
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good4.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d4.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">专业人才缺口60万</div>
+                            <div class="margin-top-20 font-size-16 ">专业人才缺口60万</div>
                         </v-col>
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good5.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d5.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">全球通用"求职绿卡"</div>
+                            <div class="margin-top-20 font-size-16 ">全球通用"求职绿卡"</div>
                         </v-col>
-                        <v-col span="4">
+                        <v-col span="8">
                             <div>
-                                <img src="./static/images/good6.png" alt="" style="width: 200px;">
+                                <img src="./static/images/d6.png" alt="" style="width: 300px;">
                             </div>
-                            <div class="margin-top-20 font-size-16 color-3">全球163个WTO成员国认可</div>
+                            <div class="margin-top-20 font-size-16 ">全球163个WTO成员国认可</div>
                         </v-col>
                     </v-row>
                 </div>
             </div>
 
-
             <!-- <div class="text-center" style="width:1200px;margin: 0 auto;margin-top: 30px;">
-                <div id='m2' class="color-3 wow fadeInLeft" style="font-size: 42px;font-weight: bold">ACI注册国际心理咨询师-课程内容</div>
+                <div id='m2' class=" wow fadeInLeft" style="font-size: 42px;font-weight: bold">ACI注册国际心理咨询师-课程内容</div>
                 <div class="clearfix wow fadeInUp" style="padding:10px;margin-top: 30px;background: #FE741A;border-radius: 6px;position: relative;">
                     <div class="pull-left" style="width: 360px;">
                         <img src="./static/images/acibook.png" alt="" style="width: 360px;display: block;">
@@ -501,10 +504,10 @@
                                     <i class="iconfont icon-kecheng" style="font-size: 60px;color: #6D65B7;"></i>
                                 </div>
                                 <div class="pull-right" style="width: 490px;">
-                                    <div class="color-3" style="font-size: 18px;">理论课程
+                                    <div class="" style="font-size: 18px;">理论课程
                                         <span class="margin-left-20">35课时</span>
                                     </div>
-                                    <div class="color-6" style="margin-top: 20px;">
+                                    <div class="" style="margin-top: 20px;">
                                         <span class="margin-right-20">普通心理学</span>
                                         <span class="margin-right-20">社会心理学</span>
                                         <span class="margin-right-20">发展心理学</span>
@@ -521,10 +524,10 @@
                                     <i class="iconfont icon-kecheng" style="font-size: 60px;color: #6D65B7;"></i>
                                 </div>
                                 <div class="pull-right" style="width: 490px;">
-                                    <div class="color-3" style="font-size: 18px;">技能课程
+                                    <div class="" style="font-size: 18px;">技能课程
                                         <span class="margin-left-20">15课时</span>
                                     </div>
-                                    <div class="color-6" style="margin-top: 20px;">
+                                    <div class="" style="margin-top: 20px;">
                                         <span class="margin-right-20">心理诊断技能</span>
                                         <span class="margin-right-20">心理咨询技能</span>
                                         <span class="margin-right-20">心理测验技能</span>
@@ -542,8 +545,8 @@
                                     <i class="iconfont icon-kecheng" style="font-size: 60px;color: #6D65B7;"></i>
                                 </div>
                                 <div class="pull-right" style="width: 490px;">
-                                    <div class="color-3" style="font-size: 18px;">班次体系</div>
-                                    <div class="color-6" style="margin-top: 20px;">
+                                    <div class="" style="font-size: 18px;">班次体系</div>
+                                    <div class="" style="margin-top: 20px;">
                                         <span class="margin-right-20">2大授课班次</span>
                                         <span class="margin-right-20">精讲内容+密训习题录播</span>
                                         <span>咨询心理学</span>
@@ -555,8 +558,8 @@
                                     <i class="iconfont icon-kecheng" style="font-size: 60px;color: #6D65B7;"></i>
                                 </div>
                                 <div class="pull-right" style="width: 490px;">
-                                    <div class="color-3" style="font-size: 18px;">授课形式</div>
-                                    <div class="color-6" style="margin-top: 20px;">
+                                    <div class="" style="font-size: 18px;">授课形式</div>
+                                    <div class="" style="margin-top: 20px;">
                                         <span class="margin-right-20">直播+录播课程，满足不同学员需求</span>
                                     </div>
                                 </div>
@@ -624,71 +627,74 @@
                 </div>
             </div>
         </div> -->
+            <div style="background: #777;padding:20px;">
+                <div class="text-center" style="width:1200px;margin: 0 auto;margin-top: 30px;">
+                    <div class=" wow fadeIn" style="font-size: 42px;font-weight: bold">超职网校六大优势</div>
+                    <div style="position: relative;height: 500px;margin-top: 20px;">
+                        <div class=" wow fadeInLeft" style="position: absolute;top: 0;left: 0;width: 340px;height: 410px;">
+                            <img src="./static/images/light.png" alt="" style="width: 340px;">
+                        </div>
 
-            <div class="text-center" style="width:1200px;margin: 0 auto;margin-top: 30px;">
-                <div class="color-3 wow fadeIn" style="font-size: 42px;font-weight: bold">超职网校六大优势</div>
-                <div style="position: relative;height: 500px;margin-top: 20px;">
-                    <div class=" wow fadeInLeft" style="position: absolute;top: 0;left: 0;width: 340px;height: 410px;">
-                        <img src="./static/images/light.png" alt="" style="width: 340px;">
-                    </div>
-
-                    <div class=" wow fadeInLeft" style="position: absolute;top: 20px;left: 420px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class=" wow fadeInLeft" style="position: absolute;top: 20px;left: 420px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FF9700;border-radius: 100%;color: #fff;font-size: 24px;">1</span>
-                        <img src="./static/images/better1.png" alt="" style="width: 120px;">
-                        <div style="margin-top: 10px;">金牌名师助阵</div>
-                    </div>
+                            <img src="./static/images/better1.png" alt="" style="width: 120px;">
+                            <div style="margin-top: 10px;">金牌名师助阵</div>
+                        </div>
 
-                    <div class="wow fadeInRight" style="position: absolute;top: 140px;left: 600px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class="wow fadeInRight" style="position: absolute;top: 140px;left: 600px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFA829;border-radius: 100%;color: #fff;font-size: 24px;">2</span>
-                        <img src="./static/images/better2.png" alt="" style="width: 120px;">
-                        <div style="margin-top: 10px;">一站式报考服务</div>
-                    </div>
+                            <img src="./static/images/better2.png" alt="" style="width: 120px;">
+                            <div style="margin-top: 10px;">一站式报考服务</div>
+                        </div>
 
-                    <div class="wow fadeInRight" style="position: absolute;top: 26px;left: 720px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class="wow fadeInRight" style="position: absolute;top: 26px;left: 720px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFC242;border-radius: 100%;color: #fff;font-size: 24px;">3</span>
-                        <img src="./static/images/better3.png" alt="" style="width: 140px;">
-                        <div style="margin-top: 10px;">名师私教直播</div>
-                    </div>
+                            <img src="./static/images/better3.png" alt="" style="width: 140px;">
+                            <div style="margin-top: 10px;">名师私教直播</div>
+                        </div>
 
-                    <div class="wow fadeInRight" style="position: absolute;top: 275px;left: 770px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class="wow fadeInRight" style="position: absolute;top: 275px;left: 770px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFC242;border-radius: 100%;color: #fff;font-size: 24px;">4</span>
-                        <img src="./static/images/better4.png" alt="" style="width: 130px;">
-                        <div style="margin-top: 10px;">教案题库赠送</div>
-                    </div>
+                            <img src="./static/images/better4.png" alt="" style="width: 130px;">
+                            <div style="margin-top: 10px;">教案题库赠送</div>
+                        </div>
 
-                    <div class="wow fadeInRight" style="position: absolute;top: 175px;left: 990px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class="wow fadeInRight" style="position: absolute;top: 175px;left: 990px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFD479;border-radius: 100%;color: #fff;font-size: 24px;">5</span>
-                        <img src="./static/images/better5.png" alt="" style="width: 110px;">
-                        <div style="margin-top: 10px;">高含金量题库</div>
-                    </div>
+                            <img src="./static/images/better5.png" alt="" style="width: 110px;">
+                            <div style="margin-top: 10px;">高含金量题库</div>
+                        </div>
 
-                    <div class="wow fadeInLeft" style="position: absolute;top: 210px;left: 330px;">
-                        <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
+                        <div class="wow fadeInLeft" style="position: absolute;top: 210px;left: 330px;">
+                            <span style="position: absolute;left:0;top:0;width:30px;height:30px;line-height: 30px;text-align: center;
                     background: #FFDE98;border-radius: 100%;color: #fff;font-size: 24px;">6</span>
-                        <img src="./static/images/better6.png" alt="" style="width: 165px;">
-                        <div style="margin-top: 10px;">社群免费答疑</div>
-                    </div>
+                            <img src="./static/images/better6.png" alt="" style="width: 165px;">
+                            <div style="margin-top: 10px;">社群免费答疑</div>
+                        </div>
 
+                    </div>
                 </div>
             </div>
 
-            <div style="background: url('./static/images/b1.jpg') no-repeat center top;background-position: center;background-size: cover;">
+            <div style="background: url('./static/images/bg3.jpg') no-repeat center top;background-position: center;background-size: cover;">
                 <div style="width: 1200px;margin: 0 auto;margin-top: 20px;padding-bottom: 30px;">
-                    <div class="wow fadeInLeft" style="font-size: 42px;font-weight: bold;color: #333;text-align: center;">ACI国际心理咨询师名师介绍</div>
-
-                    <div class="clearfix text-center wow fadeInUp" style="margin-top: 60px;">
+                    <div class="wow fadeInLeft" style="font-size: 40px;color: #fff;text-align: center;">ACI国际心理咨询师名师介绍</div>
+                    <div style="text-align: center;font-size:20px;color:#ccc;">
+                        为您上好每一节课
+                    </div>
+                    <div class="clearfix text-center wow fadeInUp" style="margin: 60px 0;">
                         <div class="pull-left tc-list-item">
                             <div class='teacher-list-item'>
                                 <div style="padding-top: 35px;">
-                                    <img src="./static/images/郭聪荣.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/e1.png" alt="" style="width: 200px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">郭聪荣老师</div>
-                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin-left: 20px;">
+                                <div style="font-size: 24px;color: #fff;">郭聪荣老师</div>
+                                <div class="text-left" style="font-size: 14px;color: #eee;line-height: 24px;margin-left: 20px;">
                                     心理学硕士，心理专家。
                                     <br/> 北京中医药大学心理讲师，
                                     <br/> 共青团心理辅导员培训与督导师
@@ -698,10 +704,10 @@
                         <div class="pull-left tc-list-item">
                             <div class='teacher-list-item'>
                                 <div style="padding-top: 35px;">
-                                    <img src="./static/images/王海燕.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/e2.png" alt="" style="width: 200px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">王海燕老师</div>
-                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin:0 20px;">
+                                <div style="font-size: 24px;color: #fff;">王海燕老师</div>
+                                <div class="text-left" style="font-size: 14px;color: #eee;line-height: 24px;margin:0 20px;">
                                     心理学硕士，心理治疗师，
                                     <br/> 北大医院心理医生
                                 </div>
@@ -710,10 +716,10 @@
                         <div class="pull-left tc-list-item">
                             <div class='teacher-list-item'>
                                 <div style="padding-top: 35px;">
-                                    <img src="./static/images/郑海英.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/e3.png" alt="" style="width: 200px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">郑海英</div>
-                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin:0 20px;">
+                                <div style="font-size: 24px;color: #fff;">郑海英</div>
+                                <div class="text-left" style="font-size: 14px;color: #eee;line-height: 24px;margin:0 20px;">
                                     硕士研究生，国家二级心理咨询师，华北理工大学心理学院教师，华北理工大学附属医院心理科心理咨询师
                                 </div>
                             </div>
@@ -721,10 +727,10 @@
                         <div class="pull-left tc-list-item">
                             <div class='teacher-list-item'>
                                 <div style="padding-top: 35px;">
-                                    <img src="./static/images/树心.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/e4.png" alt="" style="width: 200px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">树心</div>
-                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin:0 20px;">
+                                <div style="font-size: 24px;color: #fff;">树心</div>
+                                <div class="text-left" style="font-size: 14px;color: #eee;line-height: 24px;margin:0 20px;">
                                     心理学硕士，国内实力派咨询专家，二级心理咨询师
                                 </div>
                             </div>
@@ -732,10 +738,10 @@
                         <div class="pull-left">
                             <div class='teacher-list-item'>
                                 <div style="padding-top: 35px;">
-                                    <img src="./static/images/果果.png" alt="" style="width: 130px;">
+                                    <img src="./static/images/e5.png" alt="" style="width: 200px;">
                                 </div>
-                                <div style="font-size: 24px;color: #029EFF;">果果</div>
-                                <div class="text-left" style="font-size: 14px;color: #333;line-height: 24px;margin:0 20px;">
+                                <div style="font-size: 24px;color: #fff;">果果</div>
+                                <div class="text-left" style="font-size: 14px;color: #eee;line-height: 24px;margin:0 20px;">
                                     心理学硕士，心理治疗师
                                 </div>
                             </div>
@@ -743,62 +749,60 @@
                     </div>
                 </div>
             </div>
-
-            <div id='about' style="width:1200px;margin: 0 auto;margin-top: 30px;padding-bottom: 30px;">
-                <div class="color-3 text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">关于超职</div>
-                <div class="wow fadeInUp" style="font-size: 18px;text-indent: 36px;margin-top: 20px;">
-                    超职网—超职时代（北京）教育科技有限公司打造的综合性考试培训网站，致力于提供快乐、高效、超值的课程体验，课程推出至今，高质量与好口碑是我们的核心发展前提，在师资建设方面，我们不断完善，加强与学员的情感联系，努力为学员提供最便利、最享受、最信任的学习体验课程。
-                    <br>超职网集职业教育类、财会类、学历教育类、建筑工程类、教师资格证类等多领域五大体系课程于一体，“精益求精”是超职的核心理念，在职业教育类和学历教育类已取得了高于行业内平均通过率的骄人成绩，在财会类、学历教育类、建筑工程类、教师资格证类获得了行业内的认可和学员的一致好评，但我们不止于此，未来，超职将为更多的追梦人，提供多元化、专业化、人性化的教学课程体系。
-                </div>
-                <div class="clearfix" style="margin-top: 50px;">
-                    <div class="pull-left wow fadeInLeft" style="width: 460px;">
-                        <img src="./static/images/book.png" alt="" style="width: 460px;">
+            <div style="background: #777;padding:20px;">
+                <div id='about' style="width:1200px;margin: 0 auto;margin-top: 30px;padding-bottom: 30px;">
+                    <div class=" text-center wow fadeInLeft" style="font-size: 40px">关于超职</div>
+                    <div class="wow fadeInUp" style="font-size: 14px;text-indent: 36px;margin-top: 20px;">
+                        超职网—超职时代（北京）教育科技有限公司打造的综合性考试培训网站，致力于提供快乐、高效、超值的课程体验，课程推出至今，高质量与好口碑是我们的核心发展前提，在师资建设方面，我们不断完善，加强与学员的情感联系，努力为学员提供最便利、最享受、最信任的学习体验课程。
+                        <br>超职网集职业教育类、财会类、学历教育类、建筑工程类、教师资格证类等多领域五大体系课程于一体，“精益求精”是超职的核心理念，在职业教育类和学历教育类已取得了高于行业内平均通过率的骄人成绩，在财会类、学历教育类、建筑工程类、教师资格证类获得了行业内的认可和学员的一致好评，但我们不止于此，未来，超职将为更多的追梦人，提供多元化、专业化、人性化的教学课程体系。
                     </div>
-                    <div class="pull-left wow fadeInRight" style="width: 590px;margin-left: 80px;">
-                        <div>
-                            <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
+                    <div class="clearfix" style="margin-top: 50px;">
+                        <div class="pull-left wow fadeInLeft" style="width: 460px;">
+                            <img src="./static/images/book.png" alt="" style="width: 460px;">
+                        </div>
+                        <div class="pull-left wow fadeInRight" style="width: 590px;margin-left: 80px;">
+                            <div>
+                                <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
                     text-align: center;font-size: 14px;color: #666666;background: #FFDE1A;border-radius: 100%;">01</div>
-                            <div class="inline-block margin-left-10" style="color: #2A2A2A;font-size: 14px;">
-                                <span style="font-size: 24px;color: #56509F;">互动教学</span>-专业团队匠心打造的优质课程内容,精心设计的教学环节省时高效！
+                                <div class="inline-block margin-left-10" style="color: #ccc;font-size: 14px;">
+                                    <span style="font-size: 24px;color: #fff;">互动教学</span>-专业团队匠心打造的优质课程内容,精心设计的教学环节省时高效！
+                                </div>
                             </div>
-                        </div>
 
-                        <div style="margin-top: 35px;">
-                            <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
+                            <div style="margin-top: 35px;">
+                                <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
                     text-align: center;font-size: 14px;color: #666666;background: #FFDE1A;border-radius: 100%;">02</div>
-                            <div class="inline-block margin-left-10" style="color: #2A2A2A;font-size: 14px;">
-                                <span style="font-size: 24px;color: #56509F;">智能题库</span>-个性化智能匹配学习效果,巩固知识点,强化记忆。
+                                <div class="inline-block margin-left-10" style="color: #ccc;font-size: 14px;">
+                                    <span style="font-size: 24px;color: #fff;">智能题库</span>-个性化智能匹配学习效果,巩固知识点,强化记忆。
+                                </div>
                             </div>
-                        </div>
 
-                        <div style="margin-top: 35px;">
-                            <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
+                            <div style="margin-top: 35px;">
+                                <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
                     text-align: center;font-size: 14px;color: #666666;background: #FFDE1A;border-radius: 100%;">02</div>
-                            <div class="inline-block margin-left-10" style="color: #2A2A2A;font-size: 14px;">
-                                <span style="font-size: 24px;color: #56509F;">社交服务</span>-贴心的班主任、助教团队全天候贴心答疑，解决各类学习问题。
+                                <div class="inline-block margin-left-10" style="color: #ccc;font-size: 14px;">
+                                    <span style="font-size: 24px;color: #fff;">社交服务</span>-贴心的班主任、助教团队全天候贴心答疑，解决各类学习问题。
+                                </div>
                             </div>
-                        </div>
 
-                        <div style="margin-top: 35px;">
-                            <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
+                            <div style="margin-top: 35px;">
+                                <div class="inline-block" style="width: 34px;height: 34px;line-height: 34px;
                     text-align: center;font-size: 14px;color: #666666;background: #FFDE1A;border-radius: 100%;">02</div>
-                            <div class="inline-block margin-left-10" style="color: #2A2A2A;font-size: 14px;">
-                                <span style="font-size: 24px;color: #56509F;">互动小组</span>-同窗好友一起聊天学习，共同督促，共同成长。
+                                <div class="inline-block margin-left-10" style="color: #ccc;font-size: 14px;">
+                                    <span style="font-size: 24px;color: #fff;">互动小组</span>-同窗好友一起聊天学习，共同督促，共同成长。
+                                </div>
                             </div>
+
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
-
-            <div style="background: #F5F5F5;">
+            <div style="background: #333;">
                 <div style="width:1200px;margin: 0 auto;margin-top: 30px;padding-bottom: 40px;">
-                    <div class="color-3 text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">选择超职，选择未来</div>
+                    <div class=" text-center wow fadeInLeft" style="font-size: 42px;">选择超职，选择未来</div>
                     <div class="text-center" style="margin-top: 30px;">
                         <div class="inline-block clearfix">
-                            <div class="pull-left clearfix" style="width: 500px;line-height: 38px;">
+                            <div class="pull-left clearfix" style="width: 500px;line-height: 38px;margin:0 100px;">
                                 <div class="index-select-items pull-left wow fadeInLeft">
                                     <!-- <img src="./static/images/fur1.png" alt="" style="width: 700px;display: block;">
                                     <div class="bg">
@@ -810,7 +814,7 @@
                                         <div>在超职网，对老师层层把关，保留5A教学质量且</div>
                                         <div>具有能力、经验、责任心的教师！</div>
                                     </div> -->
-                                    <div style='width:500px;background-color:#FE741A;color:#fff;font-size:20px;'>5A级专业老师，在超职网，老师就是核心关键！</div>
+                                    <div style='width:500px;background-color:#00AAEE;color:#fff;font-size:20px;'>5A级专业老师，在超职网，老师就是核心关键！</div>
                                     <div>
                                         <div style="margin-top: 30px;">你还愿意再接受照本宣科的老师吗？你还愿意接收学术平庸责任心差的老师吗？</div>
                                         <div>在超职网，对老师层层把关，保留5A教学质量且</div>
@@ -832,7 +836,7 @@
 
             <!-- <div>
                 <div style="width:1200px;margin: 0 auto;margin-top: 30px;padding-bottom: 50px;">
-                    <div class="color-3 text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">联系我们-超职网</div>
+                    <div class=" text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">联系我们-超职网</div>
                     <div class="clearfix" style="margin-top: 30px;">
                         <div class="pull-left" style="width: 580px;">
                             <div style="font-size: 18px;color: #000000;">你可以通过以下方式和我们取得联系</div>
@@ -901,12 +905,12 @@
                     </div>
                 </div>
             </div> -->
-            <div>
+            <div style="background: #666;">
                 <div style="width:1200px;margin: 0 auto;margin-top: 30px;padding-bottom: 50px;">
-                    <div class="color-3 text-center wow fadeInLeft" style="font-size: 42px;font-weight: bold">联系我们-超职网</div>
-                    <div class="clearfix" style="margin-top: 30px;">
+                    <div class=" text-center wow fadeInLeft" style="font-size: 42px">联系我们-超职网</div>
+                    <div class="clearfix" style="margin-top: 30px;padding:20px;border-radius:10px;border:1px solid #999;">
                         <div class="pull-left" style="width: 580px;">
-                            <div style="font-size: 18px;color: #000000;">你可以通过以下方式和我们取得联系</div>
+                            <div style="font-size: 18px;color: #fff;">你可以通过以下方式和我们取得联系</div>
                             <div style="padding: 24px 20px;">
                                 <div class="margin-top-5" style='font-size: 20px;'>
                                     <div class="inline-block" style='width:120px;'>
@@ -933,7 +937,7 @@
                                     <div class="inline-block" style='width:120px;'>
                                         联系电话
                                     </div>
-                                    <div class="inline-block margin-left-5" style="color: #666;">
+                                    <div class="inline-block margin-left-5" style="color: #fff;">
                                         <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
                                             <use xlink:href="#icon-dianhua"></use>
                                         </svg>
@@ -943,7 +947,7 @@
                                     <div class="inline-block" style='width:120px;'>
                                         客服邮箱
                                     </div>
-                                    <div class="inline-block margin-left-5" style="color: #666;">
+                                    <div class="inline-block margin-left-5" style="color: #fff;">
                                         <svg class="icon" aria-hidden="true" style="width: 20px;height: 23px;">
                                             <use xlink:href="#icon-dianhua"></use>
                                         </svg>
@@ -951,20 +955,21 @@
                                 </div>
                                 <div class="margin-top-10" style='font-size: 20px;'>
                                     <div class="inline-block" style='width:120px;vertical-align:top'>
-
+                                        微信公众号
                                     </div>
                                     <div class="inline-block margin-left-5" style="font-size: 18px;color: #666;">
-                                        <a href="javascript:doKF();" style="display: inline-block; width: 200px;height: 46px;line-height: 46px;text-align: center; background: #FE741A; border-radius: 6px;color: #fff;font-size: 24px;">马上联系</a>
+                                        <!-- <a href="javascript:doKF();" style="display: inline-block; width: 130px;height: 33px;line-height: 33px;text-align: center; background: #00AAEE; border-radius: 6px;color: #fff;font-size: 16px;">马上联系</a> -->
+                                        <img src="./static/images/weixin-qr.jpg" alt="超职网微信公众平台" style="width: 150px;">
                                     </div>
                                 </div>
                             </div>
-                            <div style="font-size: 18px;color: #000000;">拥有智能化的在线学习方式，还在等什么？马上和我们联系！</div>
+                            <!-- <div style="font-size: 18px;color: #fff;">拥有智能化的在线学习方式，还在等什么？马上和我们联系！</div>
                             <div style="margin-left: 24px;margin-top: 24px;">
 
-                            </div>
+                            </div> -->
                         </div>
                         <div class="pull-left" style="width: 504px;">
-                            <div style="font-size: 18px;color: #333">我们所在位置</div>
+                            <div style="font-size: 18px;color: #fff">我们所在位置</div>
                             <div style='overflow: hidden;border:1px solid #eee;height:360px;'>
                                 <iframe style='margin-top:-30px;' width="504" height="425" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                                     src="http://j.map.baidu.com/SEmCO"></iframe>
@@ -973,129 +978,74 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center wow fadeIn" style="background: #f0f0f0;padding: 1px 0 0px 0;color: #000;">
-                <div>
-                    <tr>
-                        <th>
-                            <img src="./static/images/logo-1.png" alt="超职网logo" class="imgPlace">
-                        </th>
-
-                        <div class="imgPla">
-
-                            <th>
-                                <a href="http://www.chaozhiedu.com/default.html#about">
-                                    <font color="#000">关于我们</font>
-                                </a> | </th>
-                            <th>
-                                <a href="http://www.chaozhiedu.com/default.html#about">
-                                    <font color="#000">加入我们</font>
-                                </a> | </th>
-                            <th>
-                                <a href="http://www.chaozhiedu.com/default.html#about">
-                                    <font color="#000">合作申请</font>
-                                </a> | </th>
-                            <th>
-                                <a data-toggle="modal" data-target="#myModal">
-                                    <font color="#000">常见问题</font>
-                                </a>
-                            </th>
+            <div class="wow fadeIn" style="background: #333;padding:30px 0;color:#ccc;">
+                <div class="clearfix" style="width:1000px;margin:0 auto;padding-left:200px;">
+                    <div class="pull-left" style='margin-left:-200px;width:200px;'>
+                        <img src="./static/images/logo-4.png" alt="超职网logo">
+                    </div>
+                    <div class="pull-left">
+                        <div>
+                            客服热线：
                         </div>
-                        <th>
-                            <img src="./static/images/weixin-qr.jpg" alt="超职网微信公众平台" style="width: 150px;" class="imgweixin">
-                        </th>
-                    </tr>
+                        <div style='font-size:28px;margin-top: 15px;'>
+                            010-51657777
+                        </div>
+                        <div style="margin-top: 15px;">&copy;-2017 超职时代（北京）教育科技有限公司 版权所有 京ICP备17033346号</div>
+                        <div style="margin-top: 15px;">北京市海淀区地锦路7号院14号楼五层</div>
+                        <div style="margin-top: 15px;">
+                            <img src="./static/images/knet.jpg">
+                            <img src="./static/images/bottom_01.jpg">
+                            <img src="./static/images/bottom_04.jpg">
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            友情链接:
+
+                            <a target="_blank" title="ACI心理咨询师" href="http://www.baidu.com">
+                                <font color="#FFF">ACI心理咨询师</font>
+                            </a>
+
+                            <a target="_blank" title="心理咨询师" href="http://www.baidu.com">
+                                <font color="#FFF">心理咨询师</font>
+                            </a>
+
+                            <a target="_blank" title="国际心理咨询师培训" href="http://www.baidu.com">
+                                <font color="#FFF">国际心理咨询师培训</font>
+                            </a>
+
+                            <a target="_blank" title="心理咨询" href="http://www.baidu.com">
+                                <font color="#FFF">心理咨询</font>
+                            </a>
+
+                            <a target="_blank" title="心理咨询师报名" href="http://www.baidu.com">
+                                <font color="#FFF">心理咨询师报名</font>
+                            </a>
+
+                            <a target="_blank" title="初级中级高级营养师" href="http://www.baidu.com">
+                                <font color="#FFF">初级中级高级营养师</font>
+                            </a>
+
+                            <a target="_blank" title=" 经济师" href="http://www.baidu.com">
+                                <font color="#FFF"> 经济师</font>
+                            </a>
+
+                            <a target="_blank" title="报考条件" href="http://www.baidu.com">
+                                <font color="#FFF">报考条件</font>
+                            </a>
+
+                            <a target="_blank" title="报考费用时间" href="http://www.baidu.com">
+                                <font color="#FFF">报考费用时间</font>
+                            </a>
+
+                            <a target="_blank" title="报考费用时间" href="http://hao.360.cn/">
+                                <font color="#FFF">360安全网址导航</font>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center wow fadeIn" style="background: #9B9797;padding: 1px 0 80px 0;color: #fff;">
-
-            <div style="margin-top: 10px;">&copy;-2017 超职时代（北京）教育科技有限公司 版权所有 京ICP备17033346号</div>
-            <div style="margin-top: 5px;">北京市海淀区地锦路7号院14号楼五层</div>
-
-            <div id="denglu">
-                <img src="./static/images/knet.jpg">
-                <img src="./static/images/bottom_01.jpg">
-                <img src="./static/images/bottom_04.jpg">
-            </div>
-            <section class="area clearfix friends">
-                <ul>
-                    <div class="friends_l">友情链接：</div>
-                    <div class="friends_r friends_scroll">
-                        <font color="#FFF">
-                            <li>
-                                <a target="_blank" title="ACI心理咨询师" href="http://www.baidu.com">
-                                    <font color="#FFF">ACI心理咨询师</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="心理咨询师" href="http://www.baidu.com">
-                                    <font color="#FFF">心理咨询师</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="国际心理咨询师培训" href="http://www.baidu.com">
-                                    <font color="#FFF">国际心理咨询师培训</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="心理咨询" href="http://www.baidu.com">
-                                    <font color="#FFF">心理咨询</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="心理咨询师报名" href="http://www.baidu.com">
-                                    <font color="#FFF">心理咨询师报名</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="初级中级高级营养师" href="http://www.baidu.com">
-                                    <font color="#FFF">初级中级高级营养师</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title=" 经济师" href="http://www.baidu.com">
-                                    <font color="#FFF"> 经济师</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="报考条件" href="http://www.baidu.com">
-                                    <font color="#FFF">报考条件</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="报考费用时间" href="http://www.baidu.com">
-                                    <font color="#FFF">报考费用时间</font>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="报考费用时间" href="http://hao.360.cn/">
-                                    <font color="#FFF">360安全网址导航</font>
-                                </a>
-                            </li>
-                </ul>
-
-                </div>
-            </section>
-
-
         </div>
     </div>
-
-    <!-- <div class="text-center wow fadeIn" style="background: #666666;padding: 40px 0 100px 0;color: #fff;">
-                <div>
-                    <img src="./static/images/logo2.png" alt="" style="width: 150px;">
-                </div>
-                <div style="margin-top: 10px;">
-                    <span class="inline-block">客服热线：</span>
-                    <span class="inline-block margin-left-15" style="font-size: 28px;">010-51657777</span>
-                </div>
-
-                <div style="margin-top: 10px;">&copy;-2017 超职时代（北京）教育科技有限公司 版权所有 京ICP备17033346号</div>
-                <div style="margin-top: 20px;">北京市海淀区地锦路7号院14号楼五层</div>
-            </div> -->
-    <!-- </div>
-    </div> -->
-
     <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
     <script src="./static/js/bootstrap.min.js"></script>
     <script src="./static/js/index.js"></script>
@@ -1150,7 +1100,7 @@
         })
 
     </script>
-    <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script>
+    <!-- <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script> -->
     <script>
         var _hmt = _hmt || [];
         (function () {
