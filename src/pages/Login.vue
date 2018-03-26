@@ -197,18 +197,22 @@ export default {
     //获取验证码
     getQcode: function() {
       var vm = this;
-      console.log(vm.isSend);
+      //console.log(vm.isSend);
       if (!vm.isSend) {
         vm.isSend = true;
 
         //获取验证码需要校验手机号码是否填写
-        this.$refs.ruleForm.validateField("phoneNumber", function(a) {
+        this.$refs.ruleForm.validateField("phoneNumber", a => {
           if (a === "") {
             vm.$czapi
               .getPhoneCaptcha({
                 phone: vm.ruleForm.phoneNumber
               })
-              .then(function(data) {
+              .then(data => {
+                if (data.code != 200) {
+                  return this.$message.error(data.msg);
+                }
+
                 vm.isSend = true;
                 var count = data.interval,
                   timer = null;
