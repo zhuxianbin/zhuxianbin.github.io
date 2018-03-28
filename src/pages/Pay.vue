@@ -21,10 +21,10 @@
                                 <div style='width:200px;height:200px;padding:10px;border:1px solid #eee;'>
                                     <img :src='payResult.qrcode' style='width:100%;' />    
                                 </div>
-                                
-                                <span v-if='payData.id==10'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜VIP保障实操班＞·协议.docx'>【超职教育】18年＜VIP保障实操班＞·协议</a>》</span>
-                                <span v-if='payData.id==9'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜高效私教取证班＞·协议.docx'>【超职教育】18年＜高效私教取证班＞·协议</a>》</span>
-                                <span v-if='payData.id==8'>购买及表示您同意《<a href='../static/docs/【超职教育】18年＜零基础特招班＞· 协议.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span>
+                                <span v-if='payData.id==20'>购买及表示您同意《<a href='http://news.chaozhiedu.com/wj/jinpailubo.docx'>【超职教育】18年＜金牌录播＞·协议</a>》</span>
+                                <span v-if='payData.id==10'>购买及表示您同意《<a href='http://news.chaozhiedu.com/wj/vipshicao.docx'>【超职教育】18年＜VIP保障实操班＞·协议</a>》</span>
+                                <span v-if='payData.id==9'>购买及表示您同意《<a href='http://news.chaozhiedu.com/wj/gaoxiaoquzheng.docx'>【超职教育】18年＜高效私教取证班＞·协议</a>》</span>
+                                <span v-if='payData.id==8'>购买及表示您同意《<a href='http://news.chaozhiedu.com/wj/lingjichutezhao.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span>
                             </v-form-item>
                             <v-form-item label="支持支付类型" :label-col="labelCol" :wrapper-col="wrapperCol">
                                 <svg class="icon inline-block" aria-hidden="true" style="font-size: 120px;margin-top: -60px;margin-right:20px;">
