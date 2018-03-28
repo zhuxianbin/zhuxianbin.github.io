@@ -323,8 +323,7 @@ export default {
   },
   mounted() {},
   activated() {
-    //console.log(window.payData);
-    //console.log(this.$route.query);
+    this.payResult = {};
     let { id } = this.$route.query;
     if (id) {
       window.payData = { id };
