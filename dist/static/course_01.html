@@ -335,24 +335,24 @@
 
         function getVedios() {
             
-            // $.get("./static/config/config.json", function(res) {
-            //     bindVedios(res.course_01);
-            // })
+            $.get("http://aci-api.chaozhiedu.com/api/get-live-info", function(res) {
+                bindVedios(res);
+            })
 
-            var rows = [{
-                img: './images/vedio-pic.png',
-                title: "变态心理学与健康心理学",
-                teacher: '王海燕老师',
-                time: '35:41',
-                src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jzbe669b19ac564ba1acd5df4c916a0964'
-            }, {
-                img: './images/vedio-pic.png',
-                title: "思维、语言及想象",
-                teacher: '郭聪荣老师',
-                time: '12:17',
-                src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jz8f082c7722c04038aaab3af85772dd53'
-            }];
-            bindVedios(rows);
+            // var rows = [{
+            //     img: './images/vedio-pic.png',
+            //     title: "变态心理学与健康心理学",
+            //     teacher: '王海燕老师',
+            //     time: '35:41',
+            //     src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jzbe669b19ac564ba1acd5df4c916a0964'
+            // }, {
+            //     img: './images/vedio-pic.png',
+            //     title: "思维、语言及想象",
+            //     teacher: '郭聪荣老师',
+            //     time: '12:17',
+            //     src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jz8f082c7722c04038aaab3af85772dd53'
+            // }];
+            // bindVedios(rows);
             
         }
 
