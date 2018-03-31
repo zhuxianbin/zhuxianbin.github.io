@@ -1,0 +1,20 @@
+{
+    "course_01": [
+        {
+            "img": "./images/685878375614039289.jpg",
+            "title": "ACI国际注册心理咨询师",
+            "teacher": "果果",
+            "time": "11:19",
+            "src":
+                "https://xue.duobeiyun.com/app/room/auto?roomId=jzbe669b19ac564ba1acd5df4c916a0964"
+        },
+        {
+            "img": "./images/685878375614039289.jpg",
+            "title": "ACI国际注册心理咨询师",
+            "teacher": "果果",
+            "time": "11:19",
+            "src":
+                "https://xue.duobeiyun.com/app/room/auto?roomId=jz8f082c7722c04038aaab3af85772dd53"
+        }
+    ]
+}

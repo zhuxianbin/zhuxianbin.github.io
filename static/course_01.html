@@ -334,14 +334,31 @@
         }
 
         function getVedios() {
-            var flashBox = $('#flashBox');
+            
+            // $.get("./static/config/config.json", function(res) {
+            //     bindVedios(res.course_01);
+            // })
+
             var rows = [{
-                img: './images/685878375614039289.jpg',
-                title: "ACI国际注册心理咨询师",
-                teacher: '果果',
-                time: '11:19',
-                src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jz035b0d5c6d9640f6a19e621ef0a5659b'
+                img: './images/vedio-pic.png',
+                title: "变态心理学与健康心理学",
+                teacher: '王海燕老师',
+                time: '35:41',
+                src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jzbe669b19ac564ba1acd5df4c916a0964'
+            }, {
+                img: './images/vedio-pic.png',
+                title: "思维、语言及想象",
+                teacher: '郭聪荣老师',
+                time: '12:17',
+                src: 'https://xue.duobeiyun.com/app/room/auto?roomId=jz8f082c7722c04038aaab3af85772dd53'
             }];
+            bindVedios(rows);
+            
+        }
+
+        function bindVedios(rows) {
+            var flashBox = $('#flashBox');
+
             var template =
                 "<li class='video-list-item clearfix' data-src='{src}'>\
                     <div class='video-list-item-img'>\
@@ -368,10 +385,11 @@
 
             $(".video-list").html($vedioList);
         }
-        
+
         function doKF() {
             $('#looyu_dom_1').click();
-        }    
+        }
+
     </script>
     <!-- <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script> -->
 </body>
