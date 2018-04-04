@@ -114,6 +114,9 @@
 .sub-menu-tip{
     background:#666;
 }
+.sub-menu-tip li{
+    border-left: 4px solid transparent;
+}
 .sub-menu-tip li:hover{
     background:#333;
 }

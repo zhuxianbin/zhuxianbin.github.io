@@ -33,7 +33,7 @@
                         </v-form-item>
 
                         <v-form-item :label-col="labelCol" :wrapper-col="wrapperCol">
-                            <v-button type="primary" :disabled='!ruleForm.isTy' html-type="submit"
+                            <v-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy' html-type="submit"
                                       @click.prevent="submitForm('ruleForm')"
                                       style="display: block;width: 100%;font-size: 22px;">登录超职</v-button>
                         </v-form-item>
@@ -141,6 +141,7 @@ export default {
   name: "Login",
   data() {
     return {
+      isLoading: false,
       labelCol: {
         span: 6
       },
@@ -242,12 +243,20 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           //alert('提交了!');
+          this.isLoading = true;
           this.$czapi
             .doLogin({
               phone: this.ruleForm.phoneNumber,
               captcha: this.ruleForm.qcode
             })
             .then(data => {
+              this.isLoading = false;
+
+              if (data.code != 200) {
+                this.$message.error(data.msg);
+                return false;
+              }
+
               //var expiresDate = new Date(data.expired);
               //在cookie中写用户token信息
               // $.cookie("userToken", data.token, {
@@ -271,7 +280,14 @@ export default {
 
               // 命名的路由
               //vm.$router.push({ name: 'home', params: { userId: wise }})
+            })
+            .catch(() => {
+              this.isLoading = false;
             });
+
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 20000);
         } else {
           return false;
         }
