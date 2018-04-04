@@ -34,13 +34,11 @@
                 <div class="ant-layout ant-layout-chaozhi">
                     <div class="ant-layout-content">
                         <div v-for="it in product" :key='it.id' class="padding-10" style="border: 1px solid #E8E8E8;border-radius: 6px;margin-bottom:10px;box-shadow:0 0 5px 0 #ccc;">
-                            <v-row :gutter="layout.gutter">
-                                <v-col :span="layout.span">
-                                    <div style="width: 100%;height: 330px;">
-                                        <img :src="it.products.img" alt="" style="height: 330px;">
-                                    </div>
-                                </v-col>
-                                <v-col :span="layout.span">
+                            <div style='padding-left:500px;overflow:hidden'>
+                                <div style='float:left;display:inline;margin-left:-500px;width:460px;'>
+                                    <img :src="it.products.img" :alt="it.product_name" style="width: 100%;">
+                                </div>
+                                <div style='float:left;display:inline;'>
                                     <div style="font-size: 24px;color: #333333;">{{it.product_name}}</div>
                                     <div class="margin-top-20">
                                         <span class="inline-block text-right" style="width: 100px;">课程介绍：</span>
@@ -79,8 +77,8 @@
                                     <!--<div class="margin-top-20">
                                         购买价：<span style="font-size: 28px;color: #FE6500;">{{product.price}}</span> 元
                                     </div>-->
-                                </v-col>
-                            </v-row>
+                                </div>
+                            </div>
 
                             <div class="admin-tab margin-top-20">
                                 <ul class="clearfix">
@@ -95,6 +93,11 @@
 
                             <div v-show="activeTabIndex == 0">
                                 <table class="ui-table margin-top-20">
+                                    <colgroup>
+                                        <col width="200px">
+                                        <col width="100px">
+                                        <col width="100px">
+                                    </colgroup>
                                     <thead>
                                         <tr>
                                             <th>课程</th>
@@ -110,8 +113,8 @@
                                                 <v-popover placement="right" title="" trigger="hover" :controlled="false">
                                                     <div>
                                                         <span class="inline-block" style="width: 28px;height: 28px;overflow:hidden;border-radius: 100%;">
-																													<img :src='item.teacher_img_url' style='width:28px;' />
-																												</span>
+                                                            <img :src='item.teacher_img_url' style='width:28px;' />
+                                                        </span>
                                                         <span class="inline-block" style="cursor: pointer;">{{item.teacher}}</span>
                                                     </div>
                                                     <div slot="content">
@@ -132,14 +135,14 @@
                                             </td>
                                             <td>{{item.total_unit}}</td>
                                             <td>
-																							<div>
-																								<a :href="teach_plan.view_url" target="_blank" class='ant-btn ant-btn-primary ant-btn-sm' style='margin-right:5px;' v-for='teach_plan in item.teach_plan' :key="teach_plan.id">
-																										<i class="anticon anticon-play-circle-o"></i>
-																										<span v-text='teach_plan.name'></span>
-																								</a>		
+                                                <div>
+                                                    <a :href="teach_plan.view_url" target="_blank" class='ant-btn ant-btn-primary ant-btn-sm' style='margin-right:5px;margin-bottom:5px;width:100px;' v-for='teach_plan in item.teach_plan' :key="teach_plan.id">
+                                                            <i class="anticon anticon-play-circle-o"></i>
+                                                            <span v-text='teach_plan.name'></span>
+                                                    </a>		
 
-																							</div>
-																						</td>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>合计</td>
