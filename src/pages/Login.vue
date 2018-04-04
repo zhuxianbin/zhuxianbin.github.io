@@ -240,6 +240,7 @@ export default {
       }
     },
     submitForm(formName) {
+      //console.log(formName);
       this.$refs[formName].validate(valid => {
         if (valid) {
           //alert('提交了!');
@@ -250,9 +251,8 @@ export default {
               captcha: this.ruleForm.qcode
             })
             .then(data => {
-              this.isLoading = false;
-
               if (data.code != 200) {
+                this.isLoading = false;
                 this.$message.error(data.msg);
                 return false;
               }
