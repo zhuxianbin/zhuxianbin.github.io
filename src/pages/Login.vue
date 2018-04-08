@@ -295,7 +295,7 @@ export default {
     }
   },
   mounted() {
-    //console.log(this.$czapi);
+    //console.log(this.$router);
   }
 };
 </script>
