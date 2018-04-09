@@ -61,18 +61,18 @@
                                         <span class="inline-block">{{it.products.live_time}}</span>
                                     </div>
                                     <div class="margin-top-20 text-center">
-                                        <template v-if="it.products.live_status == 0">
+                                        <!-- <template v-if="it.products.live_status == 0">
                                             <a href="javascript:;" class="ant-btn ant-btn-warning margin-left-20" disabled style="font-size: 16px;">
                                                 <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
                                                 <span class="inline-block">直播课堂还未开始</span>
                                             </a>
                                         </template>
-                                        <template v-else>
+                                        <template v-else> -->
                                             <a :href="it.products.live_url" target="_blank" class="ant-btn ant-btn-warning" style="font-size: 16px;">
                                                 <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
                                                 <span class="inline-block">进入直播课堂</span>
                                             </a>
-                                        </template>
+                                        <!-- </template> -->
                                     </div>
                                     <!--<div class="margin-top-20">
                                         购买价：<span style="font-size: 28px;color: #FE6500;">{{product.price}}</span> 元
