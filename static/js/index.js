@@ -13,7 +13,7 @@ function lanPosScroll() {
     var shortcutBox = $('.modal .modal-dialog .shortcut-add-box');              //快捷方式展示区
     var shortcutBoxList = $('.shortcut-add-box-right .shortcut-element-list');  //快捷方式列表
 
-    $('.lanPos').css('top',$('.shortcut-add-box-left .active').position().top);
+    // $('.lanPos').css('top',$('.shortcut-add-box-left .active').position().top);
     $('.shortcut-add-box-left ul li').hover(function(){
         $('.lanPos').css('top',$(this).position().top);
     },function(){
