@@ -83,10 +83,10 @@
                             <div class="admin-tab margin-top-20">
                                 <ul class="clearfix">
                                     <li :class="{active: activeTabIndex == 0}" @click="activeTabIndex = 0">
-                                        <a href="jkavascript:;">课程安排计划</a>
+                                        <a href="javascript:;">课程安排计划</a>
                                     </li>
                                     <li :class="{active: activeTabIndex == 1}" @click="activeTabIndex = 1">
-                                        <a href="jkavascript:;">课程资料下载</a>
+                                        <a href="javascript:;">课程资料下载</a>
                                     </li>
                                 </ul>
                             </div>
