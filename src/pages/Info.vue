@@ -727,8 +727,23 @@ export default {
       }
 
       //确认提交资料
-      this.$czapi.addUserInfo(params).then(({ code, msg }) => {
-        this.$message[code == 200 ? "success" : "error"](msg);
+      this.$czapi.addUserInfo(params).then(({ code, msg, data_msg = [] }) => {
+        if (code != 200) {
+                let keys = Object.keys.call(this, data_msg);
+                //console.log(this);
+
+                if (keys.length > 0) {
+                  this.$modal.error({
+                    title: "保存失败",
+                    content: data_msg[keys[0]]
+                  });
+                } else {
+                  this.$message.error(msg);
+                }
+                return false;
+              }
+
+              this.$message.success(msg);
       });
     },
     onBeforeUpload(file, reqOptions, ccc) {
