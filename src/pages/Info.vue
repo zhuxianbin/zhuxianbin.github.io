@@ -617,8 +617,8 @@ export default {
       //   degree_file: "", //学位证书照片
       //   entry_form_file: "", //报名表照片
       //   avatar_file: "" //头像
-			// }
-			fileList:[],
+      // }
+      fileList: []
     };
   },
   computed: {
@@ -686,9 +686,26 @@ export default {
             }
           }
           //确认提交资料
-          this.$czapi.submitUserInfo(params).then(({ code, msg }) => {
-            this.$message[code == 200 ? "success" : "error"](msg);
-          });
+          this.$czapi
+            .submitUserInfo(params)
+            .then(({ code, msg, data_msg = [] }) => {
+              if (code != 200) {
+                let keys = Object.keys.call(this, data_msg);
+                //console.log(this);
+
+                if (keys.length > 0) {
+                  this.$modal.error({
+                    title: "提交失败",
+                    content: data_msg[keys[0]]
+                  });
+                } else {
+                  this.$message.error(msg);
+                }
+                return false;
+              }
+
+              this.$message.success(msg);
+            });
         },
         onCancle: function() {
           console.log("返回修改资料");
@@ -739,12 +756,12 @@ export default {
             //console.log(reqOptions, this.$refs);
             this.param[reqOptions.filename] = res.data.url;
             this.param[reqOptions.filename.replace("_file", "")] = res.data.id;
-						//console.log(this.param);
-						this.$message.success("上传成功");
+            //console.log(this.param);
+            this.$message.success("上传成功");
           }
         });
-			
-			this.fileList = [];
+
+      this.fileList = [];
       return false;
     },
     doChangeFile(data) {
