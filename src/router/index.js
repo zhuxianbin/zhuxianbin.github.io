@@ -35,16 +35,7 @@ export default new Router({
                     name: 'Courselist',
                     component: Courselist
                 },
-                {
-                    path: '/male',
-                    name: 'Male',
-                    component: Male
-                },
-                {
-                    path: '/pay',
-                    name: 'Pay',
-                    component: Pay
-                },
+                
                 {
                     path: '/info',
                     name: 'Info',
@@ -52,6 +43,15 @@ export default new Router({
                 }
             ]
         },
-
+        {
+            path: '/pay',
+            name: 'Pay',
+            component: Pay
+        },
+        {
+            path: '/male',
+            name: 'Male',
+            component: Male
+        },
     ]
 })

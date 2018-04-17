@@ -1,82 +1,98 @@
 <template>
-    <div class="index">
-			<v-carousel autoplay :autoplaySpeed='5000'>
-				<v-carousel-item>
-						<img src="../../static/images/Group8.png" />
-				</v-carousel-item>
-				<v-carousel-item>
-						<img src="../../static/images/Group8.png" />
-				</v-carousel-item>
-			</v-carousel>
-        <div class="ant-layout">
-            <div class="ant-layout ant-layout-has-sider">
-							
-                <div class="ant-layout" style="padding: 20px 0;background: #fff;">
-									
-                    <div style="width: 1200px;margin: 0 auto;background: #fff;">
-                        <div style="margin-bottom: 10px;font-size: 16px;">超职商城欢迎您</div>
-
-                        <div style='padding:15px;border:1px solid #eee;margin-bottom:15px;'>
-                            课程分类:
-                            <v-tag :color='category_id==0?"orange-inverse":""' @click.native='category_id=0'>全部</v-tag>
-														<v-tag 
-                              v-for='item in cateList' 
-                              :key='item.id' 
-                              :color='category_id==item.id?"orange-inverse":""'  
-                              @click.native='category_id=item.id'>{{item.name}}</v-tag>
-                            
-                        </div>
-                        <v-row :gutter="30">
-                            <v-col :span="12" v-for="it in rows" :key="it.id">
-                                <div class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
-                                    <v-row :gutter="layout.gutter">
-                                        <v-col :span="10">
-                                            <div style="width: 100%;height: 120px;line-height: 330px;text-align: center; background: #f2f2f2;">
-                                                <template v-if="it.img == ''">
-                                                    <i class="iconfont icon-zanwutupian" style="font-size: 210px;color:#ccc;"></i>
-                                                </template>
-                                                <template v-else>
-                                                    <img :src="it.img" style="vertical-align: top;width:100%;">
-                                                </template>
-                                            </div>
-                                        </v-col>
-                                        <v-col :span="14">
-                                            <div style="font-size: 22px;color: #333333;height:72px;">{{it.name}}</div>
-
-                                            <div class="margin-top-10">
-                                                <span class="inline-block text-right">活动价：</span>
-                                                <span class="inline-block">
-                                                    <span style="font-size: 28px;color: #FE6500;">{{it.price}}</span> 元
-                                                    <span style="text-decoration: line-through;font-size: 20px;margin-left: 20px;">{{it.original_price}}元</span>
-                                                </span>
-                                            </div>
-                                            <div class="margin-top-10 text-center">
-                                                <a href="javascript:;" class="ant-btn ant-btn-warning" @click="goPay(it)" style="font-size: 16px;width: 140px;">
-                                                    立即购买
-                                                </a>
-                                                <a href="javascript:;" @click="doKF" class="ant-btn" style="font-size: 16px;width: 140px;margin-left: 20px;">
-                                                    立即咨询
-                                                </a>
-                                            </div>
-                                        </v-col>
-                                    </v-row>
-                                    <div class="margin-top-20" style='padding-left:60px;height:80px;overflow:hidden'>
-                                        <span class="inline-block text-right" style="vertical-align: top;margin-left:-60px;">课程介绍：</span>
-                                        <span class="inline-block" style="width: 90%;" v-html="it.description"></span>
-                                    </div>
-                                </div>
-                            </v-col>
-                        </v-row>
-                        <div class="text-right">
-                            <v-pagination show-size-changer @change="changePage" @sizechange="pageSizeChange" :total="page.total" show-quick-jumper :show-total="showTotal"></v-pagination>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <el-container>
+    <el-header>
+      <layoutHeader></layoutHeader>
+    </el-header>
+    <el-container>
+      <el-main>
+        <div style="margin:-20px;margin-bottom:0;">
+          <img src="../../static/images/Group8.png" style='width:100%;' />
         </div>
-    </div>
+        <div class="male-main">
+        
+          <div class="ant-layout">
+              <div class="ant-layout ant-layout-has-sider">
+                
+                  <div class="ant-layout" style="padding: 20px 0;background: #fff;">
+                    
+                      <div style="width: 1200px;margin: 0 auto;background: #fff;">
+                          <div style="margin-bottom: 10px;font-size: 16px;">超职商城欢迎您</div>
+
+                          <div style='padding:15px;border:1px solid #eee;margin-bottom:15px;'>
+                              课程分类:
+                              <el-tag 
+                                style='margin-left:5px'
+                                v-for='item in cateList' 
+                                :key='item.id' 
+                                :class='{"el-tag--warning":category_id==item.id}'  
+                                @click.native='category_id=item.id'>{{item.name}}</el-tag>
+                          </div>
+                          <el-row :gutter="30">
+                              <el-col :span="12" v-for="it in rows" :key="it.id">
+                                  <div class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
+                                      <el-row :gutter="layout.gutter">
+                                          <el-col :span="10">
+                                              <div style="width: 100%;height: 120px;line-height: 330px;text-align: center; background: #f2f2f2;">
+                                                  <template v-if="it.img == ''">
+                                                      <i class="iconfont icon-zanwutupian" style="font-size: 210px;color:#ccc;"></i>
+                                                  </template>
+                                                  <template v-else>
+                                                      <img :src="it.img" style="vertical-align: top;width:100%;border-radius: 6px;">
+                                                  </template>
+                                              </div>
+                                          </el-col>
+                                          <el-col :span="14">
+                                              <div style="font-size: 22px;color: #333333;height:72px;">{{it.name}}</div>
+
+                                              <div class="margin-top-10">
+                                                  <span class="inline-block text-right">活动价：</span>
+                                                  <span class="inline-block">
+                                                      <span style="font-size: 28px;color: #FE6500;">{{it.price}}</span> 元
+                                                      <s style="font-size: 20px;margin-left: 20px;">{{it.original_price}}元</s>
+                                                  </span>
+                                              </div>
+                                              <div class="margin-top-10 text-center">
+                                                  <a href="javascript:;" class="el-button el-button--warning" @click="goPay(it)" style="font-size: 16px;width: 140px;">
+                                                      立即购买
+                                                  </a>
+                                                  <a href="javascript:;" @click="doKF" class="el-button el-button--default" style="font-size: 16px;width: 140px;margin-left: 20px;">
+                                                      立即咨询
+                                                  </a>
+                                              </div>
+                                          </el-col>
+                                      </el-row>
+                                      <div class="margin-top-20" style='padding-left:60px;height:80px;overflow:hidden'>
+                                          <span class="inline-block text-right" style="vertical-align: top;margin-left:-60px;">课程介绍：</span>
+                                          <span class="inline-block" style="width: 90%;" v-html="it.description"></span>
+                                      </div>
+                                  </div>
+                              </el-col>
+                          </el-row>
+                          <div class="text-right">
+                            <el-pagination
+                              background
+                              layout="sizes,prev,pager,next"
+                              @current-change="changePage"
+                              @size-change="pageSizeChange"
+                              :page-size='page.offset'
+                              :total="page.total">
+                            </el-pagination>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 <style>
+.male-main {
+  display: block;
+  width: 1200px;
+  margin: 0 auto;
+}
 .ant-tag {
   font-size: 14px;
   padding: 0 16px;
@@ -87,9 +103,11 @@
 
 <script>
 import { mapState } from "vuex";
+import layoutHeader from "@/components/header.vue";
 
 export default {
   name: "Index",
+  components: { layoutHeader },
   data() {
     return {
       layout: {
@@ -114,7 +132,10 @@ export default {
   computed: {
     ...mapState({
       info: state => state.userInfo,
-      cateList: state => state.cateList
+      cateList: state => {
+        state.cateList = [{ id: 0, name: "全部" }, ...state.cateList];
+        return state.cateList;
+      }
     })
   },
   methods: {
@@ -198,12 +219,19 @@ export default {
   }
 };
 </script>
-
-<style>
-.ant-tag {
-  font-size: 14px;
-  padding: 0 25px;
-  height: 40px;
-  line-height: 40px;
+<style lang="less" scoped>
+.male-main {
+  .el-tag {
+    font-size: 14px;
+    padding: 0 25px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  .el-tag--warning {
+    background: #f56a00;
+    border-color: #f56a00;
+    color: #fff;
+  }
 }
 </style>

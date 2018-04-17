@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import $ from "jquery";
+// import $ from "jquery";
 import { mapActions } from "vuex";
 export default {
   name: "App",
@@ -18,7 +18,7 @@ export default {
   mounted() {
     //console.log(this.$czapi);
     //console.log($.cookie("userToken"));
-    $("head").append('<link rel="stylesheet" href="static/css/admin.css">');
+    // $("head").append('<link rel="stylesheet" href="static/css/admin.css">');
 
     this.getUserInfo();
     

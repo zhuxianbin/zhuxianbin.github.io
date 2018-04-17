@@ -2,35 +2,6 @@
     <div class="course-list">
         <div class="ant-layout">
             <div class="ant-layout ant-layout-has-sider">
-                <div class="ant-layout-sider" style="">
-                    <div class="color-9 padding-15">我的超职管理后台</div>
-                    <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="height: 100%;">
-                        <li class="ant-menu-item">
-                            <div class="ant-menu-submenu-title">
-                                <router-link to="/index">
-                                    <i class="iconfont icon-shouye"></i>
-                                    <span class="margin-left-5">我的首页</span>
-                                </router-link>
-                            </div>
-                        </li>
-                        <li class="ant-menu-item">
-                            <div class="ant-menu-submenu-title">
-                                <router-link to="/info">
-                                    <i class="iconfont icon-baoming"></i>
-                                    <span class="margin-left-5">我的报考资料</span>
-                                </router-link>
-                            </div>
-                        </li>
-                        <li class="ant-menu-item ant-menu-item-selected">
-                            <div class="ant-menu-submenu-title">
-                                <router-link to="/courselist">
-                                    <i class="iconfont icon-kecheng"></i>
-                                    <span class="margin-left-5">我购买的课程</span>
-                                </router-link>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
                 <div class="ant-layout ant-layout-chaozhi">
                     <div class="ant-layout-content">
                         <div v-for="it in product" :key='it.id' class="padding-10" style="border: 1px solid #E8E8E8;border-radius: 6px;margin-bottom:10px;box-shadow:0 0 5px 0 #ccc;">

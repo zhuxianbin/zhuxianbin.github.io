@@ -2,35 +2,7 @@
 	<div class="info">
 		<div class="ant-layout">
 			<div class="ant-layout ant-layout-has-sider">
-				<div class="ant-layout-sider" style="">
-					<div class="color-9 padding-15">我的超职管理后台</div>
-					<ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="height: 100%;">
-						<li class="ant-menu-item">
-							<div class="ant-menu-submenu-title">
-								<router-link to="/index">
-									<i class="iconfont icon-shouye"></i>
-									<span class="margin-left-5">我的首页</span>
-								</router-link>
-							</div>
-						</li>
-						<li class="ant-menu-item ant-menu-item-selected">
-							<div class="ant-menu-submenu-title">
-								<router-link to="/info">
-									<i class="iconfont icon-baoming"></i>
-									<span class="margin-left-5">我的报考资料</span>
-								</router-link>
-							</div>
-						</li>
-						<li class="ant-menu-item">
-							<div class="ant-menu-submenu-title">
-								<router-link to="/courselist">
-									<i class="iconfont icon-kecheng"></i>
-									<span class="margin-left-5">我购买的课程</span>
-								</router-link>
-							</div>
-						</li>
-					</ul>
-				</div>
+				
 				<div class="ant-layout ant-layout-chaozhi">
 					<div class="ant-layout-content">
 						<div class="color-6 font-size-16">报名表当前状态</div>
@@ -40,7 +12,12 @@
 							</div>
 						</template>
 						<template v-else>
-							<div class="ui-step margin-top-20">
+							<el-steps class="margin-top-20" :active="0" simple finish-status="success">
+								<el-step title="填写资料"></el-step>
+								<el-step title="资料审核中"></el-step>
+								<el-step title="报名成功"></el-step>
+							</el-steps>
+							<!-- <div class="ui-step margin-top-20">
 								<div class="bar"></div>
 								<v-row :gutter="200">
 									<v-col span="8">
@@ -74,7 +51,7 @@
 										</div>
 									</v-col>
 								</v-row>
-							</div>
+							</div> -->
 							<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 
 							<template v-if="info.code === 201">
@@ -84,22 +61,22 @@
 											<tr>
 												<td style='width:300px'>中文姓名</td>
 												<td >
-													<v-input placeholder="" v-model="param.cn_name" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.cn_name" style="width:300px;"></el-input>
 												</td>
 												<td style='width:200px'>英文姓名</td>
 												<td >
-													<v-input placeholder="" v-model="param.en_name" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.en_name" style="width:300px;"></el-input>
 												</td>
 												<td rowspan="4" style="width: 150px;">
 													<div>
 														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;height: 160px;">
 													</div>
 													<div class="margin-top-10">
-														<v-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+														<el-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+															<el-button type="ghost">
 																选择图片
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('avatar_file')" style="display: block;">选择图片</a> -->
 													</div>
 												</td>
@@ -107,59 +84,59 @@
 											<tr>
 												<td>性别</td>
 												<td>
-													<v-select placeholder="请选择性别" style="width: 300px;" v-model='param.sex' :data="sexType"></v-select>
+													<el-select placeholder="请选择性别" style="width: 300px;" v-model='param.sex' :data="sexType"></el-select>
 												</td>
 												<td>出生日期</td>
 												<td>
-													<v-date-picker v-model="param.birthday" clearable :disabled-date="disabledDate" style="width:300px;"></v-date-picker>
+													<el-date-picker v-model="param.birthday" clearable :disabled-date="disabledDate" style="width:300px;"></el-date-picker>
 												</td>
 											</tr>
 											<tr>
 												<td>毕业院校</td>
 												<td>
-													<v-input placeholder="" v-model="param.college" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.college" style="width:300px;"></el-input>
 												</td>
 												<td>学历编号</td>
 												<td>
-													<v-input placeholder="" v-model="param.edu_num" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.edu_num" style="width:300px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>身份证/护照</td>
 												<td>
-													<v-input placeholder="" v-model="param.idcard" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.idcard" style="width:300px;"></el-input>
 												</td>
 												<td>电子邮件</td>
 												<td>
-													<v-input placeholder="" v-model="param.email" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.email" style="width:300px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>联系电话</td>
 												<td>
-													<v-input placeholder="" v-model="param.contacts_phone" style="width:300px;"></v-input>
+													<el-input placeholder="" v-model="param.contacts_phone" style="width:300px;"></el-input>
 												</td>
 												<td>居住地址</td>
 												<td colspan="2">
-													<v-input placeholder="" v-model="param.addr" style="width:470px;"></v-input>
+													<el-input placeholder="" v-model="param.addr" style="width:470px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>课时选择</td>
 												<td colspan="4" class="color-6">
-													<v-select placeholder="请课时选择" style="width: 300px;" v-model='param.period' :data="ksType"></v-select>
+													<el-select placeholder="请课时选择" style="width: 300px;" v-model='param.period' :data="ksType"></el-select>
 												</td>
 											</tr>
 											<tr>
 												<td>身份证复印件上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction" @change="doChangeFile"
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction" @change="doChangeFile"
 														 :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+															<el-button type="ghost">
 																选择正面图片
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件</a>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_front_file')" style="width: 110px;">选择正面图片</a> -->
 
@@ -167,12 +144,12 @@
 													<div class="margin-top-10">
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
 														<!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile"
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile"
 														 :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+															<el-button type="ghost">
 																选择反面图片
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件</a>
 													</div>
 												</td>
@@ -183,11 +160,11 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+															<el-button type="ghost">
 																选择图片
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的学历证书复印件</a>
 													</div>
 												</td>
@@ -198,11 +175,11 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-														<v-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+															<el-button type="ghost">
 																选择图片
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">学位证书复印件</a>
 													</div>
 												</td>
@@ -211,11 +188,11 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<v-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<v-button type="ghost">
+														<el-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+															<el-button type="ghost">
 																选择文件
-															</v-button>
-														</v-upload>
+															</el-button>
+														</el-upload>
 														<!-- <v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择文件
@@ -242,8 +219,8 @@
 								</div>
 
 								<div class="text-center margin-top-20">
-									<v-button @click='doSave' type="primary">保存报名表</v-button>
-									<v-button type="warning" class="margin-left-20" @click="showConfirmForm">提交报名表</v-button>
+									<el-button @click='doSave' type="primary">保存报名表</el-button>
+									<el-button type="warning" class="margin-left-20" @click="showConfirmForm">提交报名表</el-button>
 								</div>
 							</template>
 							<template v-if="info.code === 203">
@@ -852,6 +829,11 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.ant-layout-content {
+  background: #fff;
+  padding: 24px;
+  margin: 0;
+  min-height: 800px;
+}
 </style>

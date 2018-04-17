@@ -16,10 +16,16 @@ import api from './utils/api'
 
 
 //import css
-import 'vue-beauty/package/style/vue-beauty.min.css'
+// import 'vue-beauty/package/style/vue-beauty.min.css'
 
-import vueBeauty from 'vue-beauty'
-Vue.use(vueBeauty)
+// import vueBeauty from 'vue-beauty'
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI);
+
+
+// import './assets/less/index.less';
 
 Vue.config.productionTip = false
 
