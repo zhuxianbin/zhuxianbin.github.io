@@ -27,13 +27,13 @@ hr {
     border-color: #ececec;
 }
 
-a:link{
+a:link {
     //color:#08c;
     text-decoration: none;
 }
 
 .link {
-    color:#08c;
+    color: #49f;
     text-decoration: none;
 }
 
@@ -172,12 +172,20 @@ a:link{
     color: #fff;
     background-color: #fe6500;
     border-color: #fe6500;
+    &:hover {
+        background-color: lighten(#fe6500, 10%);
+        border-color: lighten(#fe6500, 10%);
+    }
 }
 
 .el-button--primary {
     color: #fff;
     background-color: #56509F;
     border-color: #56509F;
+    &:hover {
+        background-color: lighten(#56509F, 10%);
+        border-color: lighten(#56509F, 10%);
+    }
 }
 
 .ui-table {

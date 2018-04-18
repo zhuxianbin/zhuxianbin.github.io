@@ -10,57 +10,53 @@
                 </div>
 
                 <div style="width: 360px;margin: 0 auto;">
-                    <v-form direction="horizontal" :model="ruleForm" :rules="rules" ref="ruleForm">
-                        <v-form-item label="" :label-col="labelCol" :wrapper-col="wrapperCol" prop="phoneNumber">
-                            <v-input placeholder="使用的手机号码" v-model="ruleForm.phoneNumber">
+                    <el-form direction="horizontal" label-width="labelCol" :model="ruleForm" :rules="rules" ref="ruleForm">
+                        <el-form-item label="" prop="phoneNumber">
+                            <el-input placeholder="使用的手机号码" v-model="ruleForm.phoneNumber">
                                 <!-- <v-icon slot="before">
                                     <i class="iconfont icon-shoujihao" style="font-size: 22px;"></i>
                                 </v-icon> -->
-                            </v-input>
-                        </v-form-item>
+                            </el-input>
+                        </el-form-item>
 
-                        <v-form-item label="" :label-col="labelCol" :wrapper-col="wrapperCol" prop="qcode">
+                        <el-form-item label="" prop="qcode">
                             <div class="inline-block text-center" style="width: 55%;">
-                                <v-input placeholder="短信验证码" v-model="ruleForm.qcode">
+                                <el-input placeholder="短信验证码" v-model="ruleForm.qcode">
                                     <!-- <v-icon type="123" slot="before">
                                         <i class="iconfont icon-unie615" style="font-size: 22px;"></i>
                                     </v-icon> -->
-                                </v-input>
+                                </el-input>
                             </div>
                             <div class="inline-block text-center" style="width: 43%;">
-                                <a href="javascript:;" @click="getQcode">{{qcodeText}}</a>
+                                <a href="javascript:;" class="link" @click="getQcode">{{qcodeText}}</a>
                             </div>
-                        </v-form-item>
+                        </el-form-item>
 
-                        <v-form-item :label-col="labelCol" :wrapper-col="wrapperCol">
-                            <v-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy' html-type="submit"
+                        <el-form-item>
+                            <el-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy' html-type="submit"
                                       @click.prevent="submitForm('ruleForm')"
-                                      style="display: block;width: 100%;font-size: 22px;">登录超职</v-button>
-                        </v-form-item>
+                                      style="display: block;width: 100%;font-size: 22px;">登录超职</el-button>
+                        </el-form-item>
 
-                        <v-form-item>
-                            <v-checkbox v-model="ruleForm.isTy">登录即表示您同意《<a href="javascript:;" @click.prevent="visible = true">超职用户协议</a>》</v-checkbox>
-                        </v-form-item>
+                        <el-form-item>
+                            <el-checkbox v-model="ruleForm.isTy">登录即表示您同意《<a href="javascript:;" class='link' @click.prevent="visible = true">超职用户协议</a>》</el-checkbox>
+                        </el-form-item>
 
-                        <v-form-item>
+                        <el-form-item>
                             <div class="text-center">
                                 <a href="/default.html">
                                     <i class="iconfont icon-return"></i>
                                     <span style="margin-left: 5px;">返回</span>
                                 </a>
                             </div>
-                        </v-form-item>
-                    </v-form>
+                        </el-form-item>
+                    </el-form>
                 </div>
 
 
-                <v-modal title="查看用户协议"
-                         :visible="visible"
-                         :width="800"
-                         ok-text="同意协议"
-                         cancel-text="关闭"
-                         @ok="handleOk"
-                         @cancel="handleCancel">
+                <el-dialog title="查看用户协议"
+                         :visible.sync="visible"
+                         width="800">
                     <div style="height: 430px;overflow: auto;">1、超职教育服务条款的确认和接纳<br/>
                         　　超职教育的各项网络服务的所有权、运作权归超职教育。超职教育提供的服务将完全按照其发布的章程、服务条款和操作规则严格执行。您必须完全同意所有服务条款并完成注册（报名）程序。<br/>
                         2、服务简介<br/>
@@ -100,7 +96,7 @@
                         　　本声明未涉及的问题参见国家有关法律法规，当本声明与国家法律法规冲突时，以国家法律法规为准。<br/>
                     </div>
 
-                </v-modal>
+                </el-dialog>
             </div>
 
             <div class="text-center">
