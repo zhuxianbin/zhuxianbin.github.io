@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "prod":"git push",
-    "build-test": "node build/build.js && git add -A && git commit -m 'test' && git push https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git"
+    "build-test": "git push https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git"
   },
   "dependencies": {
     "element-ui": "^2.3.4",
