@@ -6,9 +6,8 @@
         </div>
         <el-col>
 					<el-menu
-						:default-active="activeIndex2"
+						default-active="3"
 						mode="horizontal"
-						@select="handleSelect"
 						background-color="#333"
 						text-color="#fff"
 						active-text-color="#fff">
@@ -77,6 +76,12 @@
             </div> -->
 
         </el-col>
+        <div style='width:220px;padding:14px;'>
+            <el-button-group>
+                <el-button size="small" @click="$router.push('/index')">个人中心</el-button>
+                <el-button size="small" @click="doLogout">退出登录</el-button>
+            </el-button-group>
+        </div>
     </el-row>
 </template>
 

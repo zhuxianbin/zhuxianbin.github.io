@@ -15,7 +15,7 @@
                                         请确认您的订单信息，并按提示完成支付
                                     </div>
 
-                                    <el-form direction="horizontal" class="margin-top-20">
+                                    <el-form direction="horizontal" label-width="120px" class="margin-top-20">
                                         <el-form-item label="订单内容">
                                             <span class="ant-form-text" id="userName" name="userName" style="font-size: 18px;">{{payData.name}}</span>
                                         </el-form-item>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <el-dialog title="微信支付" :width="800" :visible="wechatPayDialog" @cancel="wechatPayDialogCancle" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="微信支付" width="800" :visible="wechatPayDialog" @cancel="wechatPayDialogCancle" wrap-class-name="vertical-center-modal">
                         <div class="text-center" style="font-size: 16px;">
                             <p>购买{{payData.name}}
                                 <br/> 支付{{payData.price}} 元</p>
@@ -65,7 +65,7 @@
                         </div>
                     </el-dialog>
 
-                    <el-dialog title="银行卡对公转账" :width="800" :visible="yhkPayDialog" @cancel="yhkPayDialogCancle" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="银行卡对公转账" width="800" :visible="yhkPayDialog" @cancel="yhkPayDialogCancle" wrap-class-name="vertical-center-modal">
                         <div style="font-size: 16px;">
                             <p style="font-weight: bold;">{{payState.data.title}}</p>
                             <pre v-html='payState.data.content'></pre>
@@ -76,7 +76,7 @@
                         </div>
                     </el-dialog>
 
-                    <el-dialog title="支付提醒" :width="800" :visible="alipayPayDialog1" @cancel="alipayPayDialogCancle1" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog1" @cancel="alipayPayDialogCancle1" wrap-class-name="vertical-center-modal">
                         <div class="clearfix" style="font-size: 16px;">
                             <div class="pull-left margin-left-20">
                                 <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
@@ -102,7 +102,7 @@
                         </div>
                     </el-dialog>
 
-                    <el-dialog title="支付提醒" :width="800" :visible="alipayPayDialog2" @cancel="alipayPayDialogCancle2" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog2" @cancel="alipayPayDialogCancle2" wrap-class-name="vertical-center-modal">
                         <div class="clearfix" style="font-size: 16px;">
                             <div class="pull-left margin-left-20">
                                 <i class="iconfont icon-chenggong" style="font-size: 100px;color: #7ED321;"></i>
@@ -126,7 +126,7 @@
                         </div>
                     </el-dialog>
 
-                    <el-dialog title="支付提醒" :width="800" :visible="alipayPayDialog3" @cancel="alipayPayDialogCancle3" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog3" @cancel="alipayPayDialogCancle3" wrap-class-name="vertical-center-modal">
                         <div class="clearfix" style="font-size: 16px;">
                             <div class="pull-left margin-left-20">
                                 <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
@@ -157,201 +157,196 @@
 </template>
 
 <script>
-    let timer = 0;
-    import layoutHeader from "@/components/header.vue";
+let timer = 0;
+import layoutHeader from "@/components/header.vue";
 
-    export default {
-        name: "Pay",
-        components: {
-            layoutHeader
-        },
-        data() {
-            return {
-                labelCol: {
-                    span: 2
-                },
-                wrapperCol: {
-                    span: 22
-                },
+export default {
+  name: "Pay",
+  components: {
+    layoutHeader
+  },
+  data() {
+    return {
+      labelCol: {
+        span: 2
+      },
+      wrapperCol: {
+        span: 22
+      },
 
-                payData: {},
+      payData: {},
 
-                payStyle: "wechat",
+      payStyle: "wechat",
 
-                payState: {
-                    data: {}
-                },
+      payState: {
+        data: {}
+      },
 
-                wechatPayDialog: false,
+      wechatPayDialog: false,
 
-                yhkPayDialog: false,
+      yhkPayDialog: false,
 
-                alipayPayDialog1: false,
-                alipayPayDialog2: false,
-                alipayPayDialog3: false,
-                cateList: [],
-                payResult: {}
-            };
-        },
-        methods: {
-            refreshPrice() {
-                //console.log(this.payState);
-                this.$czapi
-                    .refreshPrice({
-                        token: this.payState.token
-                    })
-                    .then(data => {
-                        this.payData.price = data.data;
-                        this.$message.success("刷新价格成功");
-                        this.getQRcode();
-                    });
+      alipayPayDialog1: false,
+      alipayPayDialog2: false,
+      alipayPayDialog3: false,
+      cateList: [],
+      payResult: {}
+    };
+  },
+  methods: {
+    refreshPrice() {
+      //console.log(this.payState);
+      this.$czapi
+        .refreshPrice({
+          token: this.payState.token
+        })
+        .then(data => {
+          this.payData.price = data.data;
+          this.$message.success("刷新价格成功");
+          this.getQRcode();
+        });
 
-                //假设已经获取了
-                /*var data = {
+      //假设已经获取了
+      /*var data = {
                               "code": 200,
                               "msg": "获取成功",
                               "data": "100"
                           };
                           vm.payData.price = data.data;
                           vm.$message.success("刷新价格成功");*/
-            },
-            getQRcode() {
-                this.$czapi
-                    .pay({
-                        product_id: this.payData.id,
-                        channel: "ums"
-                    })
-                    .then(data => {
-                        this.payResult = data;
-                    });
-            },
-            pay() {
-                var vm = this;
-                if (vm.payStyle === "yhk") {
-                    vm.yhkPayDialog = true;
-                    return false;
-                }
-                this.$czapi
-                    .pay({
-                        product_id: this.payData.id,
-                        channel: this.payStyle
-                    })
-                    .then(data => {
-                        if (data.code !== 200) {
-                            this.$modal.error({
-                                title: "温馨提示",
-                                content: data.msg
-                            });
-                            return false;
-                        }
+    },
+    getQRcode() {
+      this.$czapi
+        .pay({
+          product_id: this.payData.id,
+          channel: "ums"
+        })
+        .then(data => {
+          this.payResult = data;
+        });
+    },
+    pay() {
+      var vm = this;
+      if (vm.payStyle === "yhk") {
+        vm.yhkPayDialog = true;
+        return false;
+      }
+      this.$czapi
+        .pay({
+          product_id: this.payData.id,
+          channel: this.payStyle
+        })
+        .then(data => {
+          if (data.code !== 200) {
+            this.$modal.error({
+              title: "温馨提示",
+              content: data.msg
+            });
+            return false;
+          }
 
-                        if (vm.payStyle === "wechat") {
-                            vm.wechatPayDialog = true;
-                        }
+          if (vm.payStyle === "wechat") {
+            vm.wechatPayDialog = true;
+          }
 
-                        this.payResult = data;
-                        //console.log(data, "pay");
-                        //this.$nextTick(() => {
-                        //   if (this.payStyle === "alipay") {
-                        //     this.alipayPayDialog1 = true;
-                        //     // vm.alipayPayDialog2 = true;
-                        //     // vm.alipayPayDialog3 = true;
-                        //     this.openNew(
-                        //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
-                        //         this.payState.token
-                        //       }`
-                        //     );
-                        //     // let form = $(data.form)[0];
-                        //     // $("body").append(form);
-                        //     // form.submit();
-                        //     // $(form).remove();
-                        //     //document.forms["alipaysubmit"].submit();
-                        //   }
-                        //});
-                    });
+          this.payResult = data;
+          //console.log(data, "pay");
+          //this.$nextTick(() => {
+          //   if (this.payStyle === "alipay") {
+          //     this.alipayPayDialog1 = true;
+          //     // vm.alipayPayDialog2 = true;
+          //     // vm.alipayPayDialog3 = true;
+          //     this.openNew(
+          //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
+          //         this.payState.token
+          //       }`
+          //     );
+          //     // let form = $(data.form)[0];
+          //     // $("body").append(form);
+          //     // form.submit();
+          //     // $(form).remove();
+          //     //document.forms["alipaysubmit"].submit();
+          //   }
+          //});
+        });
 
-                /*console.log({
+      /*console.log({
                               product_id: vm.payData.id,
                               channel: vm.payStyle
                           })*/
-            },
+    },
 
-            wechatPayDialogCancle() {
-                this.wechatPayDialog = false;
-            },
+    wechatPayDialogCancle() {
+      this.wechatPayDialog = false;
+    },
 
-            yhkPayDialogCancle() {
-                this.yhkPayDialog = false;
-            },
+    yhkPayDialogCancle() {
+      this.yhkPayDialog = false;
+    },
 
-            alipayPayDialogCancle1() {
-                this.alipayPayDialog1 = false;
-            },
-            alipayPayDialogCancle2() {
-                this.alipayPayDialog2 = false;
-            },
-            alipayPayDialogCancle3() {
-                this.alipayPayDialog3 = false;
-            },
-            getPayResult(token) {
-                this.$czapi.getPayResult({
-                    token
-                }).then(({
-                    code,
-                    msg
-                }) => {
-                    if (code != 200) {
-                        timer = setTimeout(() => {
-                            this.getPayResult(token);
-                        }, 3000);
-                        return false;
-                    }
+    alipayPayDialogCancle1() {
+      this.alipayPayDialog1 = false;
+    },
+    alipayPayDialogCancle2() {
+      this.alipayPayDialog2 = false;
+    },
+    alipayPayDialogCancle3() {
+      this.alipayPayDialog3 = false;
+    },
+    getPayResult(token) {
+      this.$czapi
+        .getPayResult({
+          token
+        })
+        .then(({ code, msg }) => {
+          if (code != 200) {
+            timer = setTimeout(() => {
+              this.getPayResult(token);
+            }, 3000);
+            return false;
+          }
 
-                    this.alipayPayDialog2 = true;
-                    //this.alipayPayDialog1 = false;
-                    this.wechatPayDialog = false;
-                });
-            }
-        },
-        mounted() {},
-        activated() {
-            this.payResult = {};
-            let {
-                id
-            } = this.$route.query;
-            if (id) {
-                window.payData = {
-                    id
-                };
-            }
-
-            if (window.payData) {
-                this.payData = window.payData;
-                this.$czapi
-                    .getPayInfo({
-                        product_id: this.payData.id
-                    })
-                    .then(data => {
-                        this.payData = data.product;
-                        this.payState = data;
-                        this.payData.price = data.price;
-                        this.getPayResult(data.token);
-                        this.getQRcode();
-                    });
-            } else {
-                this.$router.push({
-                    name: "Male"
-                });
-            }
-        },
-        deactivated() {
-            clearTimeout(timer);
-        }
-    };
-
+          this.alipayPayDialog2 = true;
+          //this.alipayPayDialog1 = false;
+          this.wechatPayDialog = false;
+        });
+    }
+  },
+  mounted() {},
+  activated() {
+    this.payResult = {};
+    let { id } = this.$route.query;
+    if (id) {
+      window.payData = {
+        id
+      };
+    }
+    console.log(window.payData);
+    if (window.payData) {
+      this.payData = window.payData;
+      this.$czapi
+        .getPayInfo({
+          product_id: this.payData.id
+        })
+        .then(data => {
+          this.payData = data.product;
+          this.payState = data;
+          this.payData.price = data.price;
+          this.getPayResult(data.token);
+          this.getQRcode();
+        });
+    } else {
+      this.$router.push({
+        name: "Male"
+      });
+    }
+  },
+  deactivated() {
+    clearTimeout(timer);
+  }
+};
 </script>
 
 <style scoped>
-
 
 </style>

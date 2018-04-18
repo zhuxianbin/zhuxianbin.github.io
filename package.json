@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "build-test": "node build/build.js && git add -A && git commit -m 'test' && git push && git push https://github.com/zhuxianbin/zhuxianbin.github.io.git"
+    "prod":"git push",
+    "build-test": "node build/build.js && git add -A && git commit -m 'test' && git push https://github.com/zhuxianbin/zhuxianbin.github.io.git"
   },
   "dependencies": {
     "element-ui": "^2.3.4",

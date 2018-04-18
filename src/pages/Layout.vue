@@ -7,9 +7,7 @@
                 <el-menu
                 router
                 default-active="index"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose">
+                class="el-menu-vertical-demo">
                 <el-menu-item index="index">
                     <i class="iconfont icon-shouye"></i>
                     <span slot="title">我的首页</span>
@@ -26,9 +24,7 @@
             </el-aside>
             <el-main class="cz-main">
                 <div class="cz-main-body">
-                    <keep-alive>
-                        <router-view></router-view>
-                    </keep-alive>
+                    <router-view></router-view>
                 </div>
             </el-main>
         </el-container>

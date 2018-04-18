@@ -22,6 +22,9 @@
                               课程分类:
                               <el-tag 
                                 style='margin-left:5px'
+                                :class='{"el-tag--warning":category_id==0}'  
+                                @click.native='category_id=0'>全部</el-tag><el-tag 
+                                style='margin-left:5px'
                                 v-for='item in cateList' 
                                 :key='item.id' 
                                 :class='{"el-tag--warning":category_id==item.id}'  
@@ -132,10 +135,7 @@ export default {
   computed: {
     ...mapState({
       info: state => state.userInfo,
-      cateList: state => {
-        state.cateList = [{ id: 0, name: "全部" }, ...state.cateList];
-        return state.cateList;
-      }
+      cateList: state => state.cateList
     })
   },
   methods: {

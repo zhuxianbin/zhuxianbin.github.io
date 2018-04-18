@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <router-view/>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
 </template>
 
@@ -21,7 +23,7 @@ export default {
     // $("head").append('<link rel="stylesheet" href="static/css/admin.css">');
 
     this.getUserInfo();
-    
+
     this.getCateList();
     // this.$czapi
     //   .getUserInfo()
@@ -31,7 +33,7 @@ export default {
     //   .fail(function(data) {
     //     vm.info = data;
     //   });
-  },
+  }
 };
 </script>
 

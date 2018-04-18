@@ -12,9 +12,9 @@
 							</div>
 						</template>
 						<template v-else>
-							<el-steps class="margin-top-20" :active="0" simple finish-status="success">
-								<el-step title="填写资料"></el-step>
-								<el-step title="资料审核中"></el-step>
+							<el-steps class="margin-top-20" :active="steps" simple>
+								<el-step title="填写资料" icon="el-icon-edit"></el-step>
+								<el-step title="资料审核中" icon='el-icon-time'></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
 							<!-- <div class="ui-step margin-top-20">
@@ -61,19 +61,19 @@
 											<tr>
 												<td style='width:300px'>中文姓名</td>
 												<td >
-													<el-input placeholder="" v-model="param.cn_name" style="width:300px;"></el-input>
+													<el-input placeholder="中文姓名" v-model="param.cn_name" style="width:300px;"></el-input>
 												</td>
 												<td style='width:200px'>英文姓名</td>
 												<td >
-													<el-input placeholder="" v-model="param.en_name" style="width:300px;"></el-input>
+													<el-input placeholder="英文姓名" v-model="param.en_name" style="width:300px;"></el-input>
 												</td>
 												<td rowspan="4" style="width: 150px;">
-													<div>
-														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;height: 160px;">
+													<div class="text-center">
+														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;max-height: 160px;">
 													</div>
-													<div class="margin-top-10">
-														<el-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<el-button type="ghost">
+													<div class="margin-top-10 text-center">
+														<el-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'avatar_file')}">
+															<el-button plain>
 																选择图片
 															</el-button>
 														</el-upload>
@@ -84,73 +84,83 @@
 											<tr>
 												<td>性别</td>
 												<td>
-													<el-select placeholder="请选择性别" style="width: 300px;" v-model='param.sex' :data="sexType"></el-select>
+													<el-select placeholder="请选择性别" style="width: 300px;" v-model='param.sex'>
+														<el-option v-for="item in sexType" :key="item.value" :label="item.label" :value="item.value"></el-option>
+													</el-select>
 												</td>
 												<td>出生日期</td>
 												<td>
-													<el-date-picker v-model="param.birthday" clearable :disabled-date="disabledDate" style="width:300px;"></el-date-picker>
+													<el-date-picker v-model="param.birthday" clearable :picker-options="{disabledDate:disabledDate}" value-format='yyyy-MM-dd' style="width:300px;"></el-date-picker>
 												</td>
 											</tr>
 											<tr>
 												<td>毕业院校</td>
 												<td>
-													<el-input placeholder="" v-model="param.college" style="width:300px;"></el-input>
+													<el-input placeholder="毕业院校" v-model="param.college" style="width:300px;"></el-input>
 												</td>
 												<td>学历编号</td>
 												<td>
-													<el-input placeholder="" v-model="param.edu_num" style="width:300px;"></el-input>
+													<el-input placeholder="学历编号" v-model="param.edu_num" style="width:300px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>身份证/护照</td>
 												<td>
-													<el-input placeholder="" v-model="param.idcard" style="width:300px;"></el-input>
+													<el-input placeholder="身份证/护照" v-model="param.idcard" style="width:300px;"></el-input>
 												</td>
 												<td>电子邮件</td>
 												<td>
-													<el-input placeholder="" v-model="param.email" style="width:300px;"></el-input>
+													<el-input placeholder="电子邮件" v-model="param.email" style="width:300px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>联系电话</td>
 												<td>
-													<el-input placeholder="" v-model="param.contacts_phone" style="width:300px;"></el-input>
+													<el-input placeholder="联系电话" v-model="param.contacts_phone" style="width:300px;"></el-input>
 												</td>
 												<td>居住地址</td>
 												<td colspan="2">
-													<el-input placeholder="" v-model="param.addr" style="width:470px;"></el-input>
+													<el-input placeholder="居住地址" v-model="param.addr" style="width:470px;"></el-input>
 												</td>
 											</tr>
 											<tr>
 												<td>课时选择</td>
 												<td colspan="4" class="color-6">
-													<el-select placeholder="请课时选择" style="width: 300px;" v-model='param.period' :data="ksType"></el-select>
+													<el-select placeholder="请课时选择" style="width: 300px;" v-model='param.period'>
+														<el-option v-for="item in ksType" :key="item.id" :label="item.name" :value="item.id"></el-option>
+													</el-select>
 												</td>
 											</tr>
 											<tr>
 												<td>身份证复印件上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction" @change="doChangeFile"
-														 :beforeUpload="onBeforeUpload">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction"
+														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_front_file')}">
 															<el-button type="ghost">
 																选择正面图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件</a>
+														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+															我的身份证复印件</a>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_front_file')" style="width: 110px;">选择正面图片</a> -->
 
 													</div>
 													<div class="margin-top-10">
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
 														<!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction" @change="doChangeFile"
-														 :beforeUpload="onBeforeUpload">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction"
+														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_reverse_file')}">
 															<el-button type="ghost">
+																<i class="el-icon-picture"></i>
 																选择反面图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的身份证复印件</a>
+														
+														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">
+															<i class="el-icon-picture"></i>
+															我的身份证复印件
+														</a>
 													</div>
 												</td>
 											</tr>
@@ -160,12 +170,13 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'edu_file')}">
 															<el-button type="ghost">
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">我的学历证书复印件</a>
+														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+															我的学历证书复印件</a>
 													</div>
 												</td>
 											</tr>
@@ -175,12 +186,13 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'degree_file')}">
 															<el-button type="ghost">
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">学位证书复印件</a>
+														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+															学位证书复印件</a>
 													</div>
 												</td>
 											</tr>
@@ -188,12 +200,12 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
-															<el-button type="ghost">
+														<el-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'entry_form_file')}">
+															<el-button>
 																选择文件
 															</el-button>
 														</el-upload>
-														<!-- <v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" @change="doChangeFile" :beforeUpload="onBeforeUpload">
+														<!-- <v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择文件
 															</v-button>
@@ -201,7 +213,9 @@
 														<!-- <a v-if='uploads.degree_file' :href='uploads.degree_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
                                                         <a href="javascript:;" @click="triggerUpload('entry_form_file')" class="ant-btn" style="width: 110px;">选择文件</a> -->
 														<!--<span class="inline-block margin-left-10">报表名.DOC</span>-->
-														<a class="inline-block margin-left-20" download="" :href="info.entry_form_example_url">点击下载：报名表>></a>
+														<a class="inline-block margin-left-20" download="" :href="info.entry_form_example_url">
+															<i class="el-icon-document"></i>
+														点击下载：报名表>></a>
 													</div>
 												</td>
 											</tr>
@@ -525,6 +539,7 @@ export default {
   name: "Info",
   data() {
     return {
+			steps:0,
       param: {
         cn_name: "", //中文名
         en_name: "", //英文名
@@ -566,24 +581,7 @@ export default {
           label: "女，F"
         }
       ],
-      ksType: [
-        {
-          value: "1",
-          label: "2018年3月开课"
-        },
-        {
-          value: "2",
-          label: "2018年4月开课"
-        },
-        {
-          value: "3",
-          label: "2018年5月开课"
-        },
-        {
-          value: "4",
-          label: "2018年6月开课"
-        }
-      ],
+      ksType: [],
       fileName: "file",
       uploadAction: "http://aci-api.chaozhiedu.com/api/file/upload",
       //cateList: [],
@@ -608,26 +606,15 @@ export default {
     info(val, old) {
       //console.log(val, "112312312");
       this.param = { ...this.param, ...val.ext_info, ...val.user };
-      this.ksType = val.period.map(item => {
-        return {
-          value: item.id,
-          label: item.name
-        };
-      });
+      this.ksType = val.period;
     }
   },
   methods: {
-    // changeSex(val) {
-    //   console.log(val);
-    //   this.param.sex = val;
-    // },
+    
     disabledDate(current) {
       return current && current.valueOf() >= Date.now();
     },
-    // changeKs(val) {
-    // 	console.log(val);
-    // 	this.param.period = val;
-    // },
+    
     onChangeIdCardZm(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -643,14 +630,15 @@ export default {
       document.getElementById("wtFile").click();
     },
     showConfirmForm() {
-      this.$modal.confirm({
-        iconType: "exclamation-circle-o",
-        title: "注意",
-        content: "请确认您填写的资料是否正确\n" + "一经提交不能再修改",
-        okText: "确认提交",
-        cancelText: "返回修改资料",
-        width: 600,
-        onOk: () => {
+      this.$confirm(
+        "请确认您填写的资料是否正确\n" + "一经提交不能再修改",
+        "注意",
+        {
+          confirmButtonText: "确认提交",
+          cancelButtonText: "返回修改资料"
+        }
+      )
+        .then(() => {
           console.log("确认提交");
           let params = {};
 
@@ -668,12 +656,10 @@ export default {
             .then(({ code, msg, data_msg = [] }) => {
               if (code != 200) {
                 let keys = Object.keys.call(this, data_msg);
-                //console.log(this);
-
                 if (keys.length > 0) {
-                  this.$modal.error({
+                  this.$notify.error({
                     title: "提交失败",
-                    content: data_msg[keys[0]]
+                    message: data_msg[keys[0]]
                   });
                 } else {
                   this.$message.error(msg);
@@ -681,13 +667,10 @@ export default {
                 return false;
               }
 
-              this.$message.success(msg);
+              this.$message({ message: msg, type: "success" });
             });
-        },
-        onCancle: function() {
-          console.log("返回修改资料");
-        }
-      });
+        })
+        .catch(() => {});
     },
 
     //临时保存
@@ -710,9 +693,9 @@ export default {
           //console.log(this);
 
           if (keys.length > 0) {
-            this.$modal.error({
+            this.$notify.error({
               title: "保存失败",
-              content: data_msg[keys[0]]
+              message: data_msg[keys[0]]
             });
           } else {
             this.$message.error(msg);
@@ -723,8 +706,8 @@ export default {
         this.$message.success(msg);
       });
     },
-    onBeforeUpload(file, reqOptions, ccc) {
-      //console.log(file, reqOptions, ccc);
+    onBeforeUpload(file, filename) {
+      // console.log(file, reqOptions, ccc);
       //let { token } = this.$storage.get("userToken");
 
       let headers = {
@@ -746,8 +729,8 @@ export default {
           //console.log(data, file, reqOptions, 111);
           if (res.code == 200) {
             //console.log(reqOptions, this.$refs);
-            this.param[reqOptions.filename] = res.data.url;
-            this.param[reqOptions.filename.replace("_file", "")] = res.data.id;
+            this.param[filename] = res.data.url;
+            this.param[filename.replace("_file", "")] = res.data.id;
             //console.log(this.param);
             this.$message.success("上传成功");
           }
@@ -755,19 +738,11 @@ export default {
 
       this.fileList = [];
       return false;
-    },
-    doChangeFile(data) {
-      //console.log(data, 2222222222);
     }
   },
   mounted() {
     this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
-    this.ksType = this.info.period.map(item => {
-      return {
-        value: item.id,
-        label: item.name
-      };
-    });
+    this.ksType = this.info.period;
     // vm.$czapi
     //   .getUserInfo()
     //   .then(function(data) {
