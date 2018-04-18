@@ -141,7 +141,7 @@
 																选择正面图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的身份证复印件</a>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_front_file')" style="width: 110px;">选择正面图片</a> -->
 
@@ -157,7 +157,7 @@
 															</el-button>
 														</el-upload>
 														
-														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10">
+														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link">
 															<i class="el-icon-picture"></i>
 															我的身份证复印件
 														</a>
@@ -175,7 +175,7 @@
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的学历证书复印件</a>
 													</div>
 												</td>
@@ -191,7 +191,7 @@
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10"><i class="el-icon-picture"></i>
+														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															学位证书复印件</a>
 													</div>
 												</td>
@@ -213,7 +213,7 @@
 														<!-- <a v-if='uploads.degree_file' :href='uploads.degree_file' target="_blank" class="inline-block margin-left-10">我的身份证复印件.JPG</a>
                                                         <a href="javascript:;" @click="triggerUpload('entry_form_file')" class="ant-btn" style="width: 110px;">选择文件</a> -->
 														<!--<span class="inline-block margin-left-10">报表名.DOC</span>-->
-														<a class="inline-block margin-left-20" download="" :href="info.entry_form_example_url">
+														<a class="inline-block margin-left-20 link" download="" :href="info.entry_form_example_url">
 															<i class="el-icon-document"></i>
 														点击下载：报名表>></a>
 													</div>
