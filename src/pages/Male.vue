@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <layoutHeader></layoutHeader>
+      <layoutHeader :full='false'></layoutHeader>
     </el-header>
     <el-container>
       <el-main>
