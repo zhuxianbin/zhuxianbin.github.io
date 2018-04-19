@@ -6,7 +6,7 @@
                 <div class="color-9 padding-15">我的超职管理后台</div>
                 <el-menu
                 router
-                default-active="index"
+                :default-active="defaultActive"
                 class="el-menu-vertical-demo">
                 <el-menu-item index="index">
                     <i class="iconfont icon-shouye"></i>
@@ -36,12 +36,25 @@ import layoutHeader from "@/components/header.vue";
 
 export default {
   name: "Layout",
-  components: { layoutHeader }
+  components: { layoutHeader },
+  data() {
+    return {
+      defaultActive: "index"
+    };
+  },
+  watch: {
+    $route(val) {
+      //console.log(val);
+      this.defaultActive = val.name.toLowerCase();
+    }
+  },
+  activated() {
+    this.defaultActive = this.$route.name.toLowerCase();
+  }
 };
 </script>
 
 <style lang="less" scoped>
-
 .el-menu-vertical-demo {
   border-right: none;
   .el-menu-item {
@@ -56,9 +69,9 @@ export default {
 }
 .cz-main {
   background: #ececec;
-  .cz-main-body{
-      background: #fff;
-      min-height: 570px;
+  .cz-main-body {
+    background: #fff;
+    min-height: 570px;
   }
 }
 </style>

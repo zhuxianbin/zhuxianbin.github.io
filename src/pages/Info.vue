@@ -73,7 +73,7 @@
 													</div>
 													<div class="margin-top-10 text-center">
 														<el-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'avatar_file')}">
-															<el-button plain>
+															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
 														</el-upload>
@@ -135,9 +135,9 @@
 												<td>身份证复印件上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction"
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction"
 														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_front_file')}">
-															<el-button type="ghost">
+															<el-button icon='el-icon-upload'>
 																选择正面图片
 															</el-button>
 														</el-upload>
@@ -149,10 +149,9 @@
 													<div class="margin-top-10">
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
 														<!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction"
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction"
 														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_reverse_file')}">
-															<el-button type="ghost">
-																<i class="el-icon-picture"></i>
+															<el-button icon='el-icon-upload'>
 																选择反面图片
 															</el-button>
 														</el-upload>
@@ -170,8 +169,8 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'edu_file')}">
-															<el-button type="ghost">
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'edu_file')}">
+															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
 														</el-upload>
@@ -186,8 +185,8 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-														<el-upload accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'degree_file')}">
-															<el-button type="ghost">
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'degree_file')}">
+															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
 														</el-upload>
@@ -200,8 +199,8 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'entry_form_file')}">
-															<el-button>
+														<el-upload class='inline-block' accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'entry_form_file')}">
+															<el-button icon='el-icon-upload'>
 																选择文件
 															</el-button>
 														</el-upload>
@@ -743,63 +742,6 @@ export default {
   mounted() {
     this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
     this.ksType = this.info.period;
-    // vm.$czapi
-    //   .getUserInfo()
-    //   .then(function(data) {
-    //     vm.info = data;
-    //   })
-    //   .fail(function(data) {
-    //     vm.info = data;
-    //   });
-    // 		setTimeout(()=>{
-    // console.log(111,this.info);
-    // 		},3000)
-
-    /*var data = {
-									"code": 201, //201 等待完善信息 202 审核未通过 203 审核中 200 审核通过
-									"msg": "等待完善信息",
-									"user": {
-											"phone": "18243188033"//学员账号
-									},
-									"ext_info": {//用户之前保存的数据 服务端保存一周 格式同 user仅在用户未填写信息时显示
-											"cn_name": "",//中文名
-											"en_name": "",//英文名
-											"sex": "F",//姓别 F 女 M 男
-											"birthday": "2017-01-01", //出生日期
-											"college": "大学", //毕业学校
-											"edu_num": "10000000", //学历编号
-											"idcard": "",//身份证,护照
-											"email": "",
-											"contacts_phone": "",//联系电话
-											"addr": "人民大街",//居住地址
-											"period": "1",//选择的课时ID
-											"idcard_front": "1", //身份证 正面资源ID
-											"idcard_reverse": "1", //身份证 反面资源ID
-											"edu": "1", //学历复印件资源ID
-											"degree": "1",//学位资源ID
-											"entry_form": "1",//报名表资源ID
-											"avatar": "1",//一寸照ID 下面为回显图片和资源的地址
-											"idcard_front_file": "http:\/\/aci.zhj\/api\/file\/1",
-											"idcard_reverse_file": "http:\/\/aci.zhj\/api\/file\/1",
-											"edu_file": "http:\/\/aci.zhj\/api\/file\/1",
-											"degree_file": "http:\/\/aci.zhj\/api\/file\/1",
-											"entry_form_file": "http:\/\/aci.zhj\/api\/file\/1",
-											"avatar_file": "http:\/\/aci.zhj\/api\/file\/1"
-									},
-									//课时
-									"period": [
-											{
-													"id": 1,
-													"name": "上午7点"
-											}
-									],
-									//报表名示例
-									"entry_form_example_url": "http:\/\/aci.zhj\/api\/file\/1"
-							};
-
-							this.info = data;*/
-
-    //获取分类
   }
 };
 </script>

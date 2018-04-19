@@ -76,7 +76,7 @@
             </div> -->
 
         </el-col>
-        <div style='width:220px;padding:14px;'>
+        <div style='width:250px;padding:14px;'>
             <el-button-group>
                 <el-button size="small" @click="$router.push('/index')">个人中心</el-button>
                 <el-button size="small" @click="doLogout">退出登录</el-button>

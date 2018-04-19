@@ -33,8 +33,8 @@
                         </el-form-item>
 
                         <el-form-item>
-                            <el-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy' html-type="submit"
-                                      @click.prevent="submitForm('ruleForm')"
+                            <el-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy'
+                                      @click="submitForm('ruleForm')"
                                       style="display: block;width: 100%;font-size: 22px;">登录超职</el-button>
                         </el-form-item>
 
