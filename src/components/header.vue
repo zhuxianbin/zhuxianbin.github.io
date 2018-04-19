@@ -5,41 +5,53 @@
                 <img src="static/images/logo-1.png" alt="logo">
             </div>
             <el-col>
-                <el-menu
-                    default-active="3"
-                    mode="horizontal"
-                    background-color="#333"
-                    text-color="#fff"
-                    active-text-color="#fff">
-                    <el-menu-item index="1"><a href="/default.html" class="link">首页</a></el-menu-item>
-                    <el-submenu index="2">
-                        <template slot="title">课程分类</template>
-                        <el-menu-item index="2-1">
-                            <a href='./static/course_01.html' class="link" style='color:#fff;'>ACI心理咨询师课程</a>
+                <el-row>
+                  <el-col :span="12">
+                    <el-menu
+                        default-active="3"
+                        mode="horizontal"
+                        background-color="#333"
+                        text-color="#fff"
+                        active-text-color="#fff">
+                        <el-menu-item index="1"><a href="/default.html" class="link">首页</a></el-menu-item>
+                        <el-submenu index="2">
+                            <template slot="title">课程分类</template>
+                            <el-menu-item index="2-1">
+                                <a href='./static/course_01.html' class="link" style='color:#fff;'>ACI心理咨询师课程</a>
+                            </el-menu-item>
+                            <el-menu-item index="2-2">
+                                <a href='./index.html?r=123#/male?cate=5' class="link" style='color:#fff;'>专科/本科教育</a>
+                            </el-menu-item>
+                            <el-menu-item index="2-3">
+                                <a href='./index.html?r=456#/male?cate=3' class="link" style='color:#fff;'>人力资源管理师</a>
+                            </el-menu-item>
+                            <el-menu-item index="2-4">
+                                <a href='./index.html?r=789#/male?cate=4' class="link" style='color:#fff;'>ACI国际注册营养师</a>
+                            </el-menu-item>
+                        </el-submenu>
+                        <el-menu-item index="3">
+                            <router-link to="/male" class="link">超职商城</router-link>
+                            <!-- <a href="/default.html#about"  target="_blank">超职商城</a> -->
                         </el-menu-item>
-                        <el-menu-item index="2-2">
-                            <a href='./index.html?r=123#/male?cate=5' class="link" style='color:#fff;'>专科/本科教育</a>
-                        </el-menu-item>
-                        <el-menu-item index="2-3">
-                            <a href='./index.html?r=456#/male?cate=3' class="link" style='color:#fff;'>人力资源管理师</a>
-                        </el-menu-item>
-                        <el-menu-item index="2-4">
-                            <a href='./index.html?r=789#/male?cate=4' class="link" style='color:#fff;'>ACI国际注册营养师</a>
-                        </el-menu-item>
-                    </el-submenu>
-                    <el-menu-item index="3">
-                        <router-link to="/male" class="link">超职商城</router-link>
-                        <!-- <a href="/default.html#about"  target="_blank">超职商城</a> -->
-                    </el-menu-item>
-                    <el-menu-item index="4"><a href="/default.html#about" class="link" target="_blank">关于超职</a></el-menu-item>
-                </el-menu>
+                        <el-menu-item index="4"><a href="/default.html#about" class="link" target="_blank">关于超职</a></el-menu-item>
+                    </el-menu>
+                  </el-col>
+                  <el-col :span="12">
+                    <div class='text-right' style='padding:14px;'>
+                        <div class="inline-block" style="margin-right:20px;">
+                            <img src="/static/images/icon-tel.png" style="height:24px;vertical-align:middle">
+                            <span>010-51657777</span>
+                        </div>
+                        <el-button-group class="inline-block">
+                            <el-button size="small" @click="$router.push('/index')">个人中心</el-button>
+                            <el-button size="small" @click="doLogout">退出登录</el-button>
+                        </el-button-group>
+                    </div>
+                  </el-col>
+                </el-row>
+                
             </el-col>
-            <div style='width:250px;padding:14px;'>
-                <el-button-group>
-                    <el-button size="small" @click="$router.push('/index')">个人中心</el-button>
-                    <el-button size="small" @click="doLogout">退出登录</el-button>
-                </el-button-group>
-            </div>
+            
         </el-row>
     </div>
 </template>
