@@ -142,7 +142,7 @@ export default {
     showTotal(total) {
       return `全部 ${total} 条`;
     },
-    pageSizeChange(current, size) {
+    pageSizeChange(size) {
       //console.log(current, size);
       this.page.offset = size;
       this.loadData();
