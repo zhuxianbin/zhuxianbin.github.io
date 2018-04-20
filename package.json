@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "prod":"git push",
+    "prod": "git push",
     "build-test": "git push https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git"
   },
   "dependencies": {
@@ -17,8 +17,8 @@
     "es6-promise": "^4.2.4",
     "fetch-ie8": "^1.5.0",
     "jquery": "^3.3.1",
+    "store": "^2.0.12",
     "vue": "^2.5.2",
-    "vue-beauty": "^2.0.0-beta.11",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
