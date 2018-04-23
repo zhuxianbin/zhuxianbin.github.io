@@ -172,7 +172,9 @@ a:link {
     color: #fff;
     background-color: #fe6500;
     border-color: #fe6500;
-    &:hover,&:active,&:focus {
+    &:hover,
+    &:active,
+    &:focus {
         background-color: lighten(#fe6500, 10%);
         border-color: lighten(#fe6500, 10%);
     }
@@ -182,7 +184,9 @@ a:link {
     color: #fff;
     background-color: #56509F;
     border-color: #56509F;
-    &:hover,&:active,&:focus {
+    &:hover,
+    &:active,
+    &:focus {
         background-color: lighten(#56509F, 10%);
         border-color: lighten(#56509F, 10%);
     }
@@ -215,4 +219,22 @@ a:link {
 .ui-table.ui-table-nbr th,
 .ui-table.ui-table-nbr td {
     border-right: 0;
+}
+
+.clearfix {
+    zoom: 1;
+    &:after {
+        content: ””;
+        display: table;
+        clear: both;
+    }
+}
+
+.pull-left{
+    float:left;
+    display: inline;
+}
+.pull-right{
+    float:right;
+    display: inline;
 }

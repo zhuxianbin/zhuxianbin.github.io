@@ -1,0 +1,235 @@
+<template>
+    <div class="course-list">
+        <div class="ant-layout">
+            <div class="ant-layout ant-layout-has-sider">
+                <div class="ant-layout ant-layout-chaozhi">
+                    <div class="ant-layout-content">
+                        <div v-for="it in product" :key='it.id' class="padding-15 course-item" style="">
+                            <div style='padding-left:500px;overflow:hidden'>
+                                <div style='float:left;display:inline;margin-left:-500px;width:460px;'>
+                                    <img :src="it.products.img" :alt="it.product_name" style="width: 100%;">
+                                </div>
+                                <div style='float:left;display:inline;'>
+                                    <div style="font-size: 24px;color: #333333;">{{it.product_name}}</div>
+                                    <div class="margin-top-20">
+                                        <span class="inline-block text-right" style="width: 100px;">课程介绍：</span>
+                                        <span class="inline-block" v-html='it.products.description'></span>
+                                    </div>
+                                    <div class="margin-top-20">
+                                        <span class="inline-block text-right" style="width: 100px;">直播课程：</span>
+                                        <span class="inline-block">{{it.products.live_name}}</span>
+                                    </div>
+                                    <div class="margin-top-20">
+                                        <span class="inline-block text-right" style="width: 100px;">当前课时：</span>
+                                        <span class="inline-block">第{{it.products.current_course}}节</span>
+                                    </div>
+                                    <!-- <div class="margin-top-20">
+                                        <span class="inline-block text-right" style="width: 100px;">总课时：</span>
+                                        <span class="inline-block">{{it.products.total_course}}节</span>
+                                    </div> -->
+                                    <div class="margin-top-20">
+                                        <span class="inline-block text-right" style="width: 100px;">直播开始时间：</span>
+                                        <span class="inline-block">{{it.products.live_time}}</span>
+                                    </div>
+                                    <div class="margin-top-20 text-center">
+                                        <!-- <template v-if="it.products.live_status == 0">
+                                            <a href="javascript:;" class="ant-btn ant-btn-warning margin-left-20" disabled style="font-size: 16px;">
+                                                <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
+                                                <span class="inline-block">直播课堂还未开始</span>
+                                            </a>
+                                        </template>
+                                        <template v-else> -->
+                                        <a :href="it.products.live_url" target="_blank" class="el-button el-button--warning" style="font-size: 16px;">
+                                            <i class="inline-block iconfont icon-jiaoxue" style="font-size: 22px;"></i>
+                                            <span class="inline-block">进入直播课堂</span>
+                                        </a>
+                                        <!-- </template> -->
+                                    </div>
+                                    <!--<div class="margin-top-20">
+                                        购买价：<span style="font-size: 28px;color: #FE6500;">{{product.price}}</span> 元
+                                    </div>-->
+                                </div>
+                            </div>
+
+                            <el-tabs value="first">
+                                <el-tab-pane label="课程安排计划" name="first">
+                                    <table class="ui-table margin-top-20">
+                                        <colgroup>
+                                            <col width="200px">
+                                            <col width="100px">
+                                            <col width="100px">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>课程</th>
+                                                <th>讲师</th>
+                                                <th>总课时</th>
+                                                <th>视频课件学习</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for='item in it.planLine' :key='item.id'>
+                                                <td>{{item.name}}</td>
+                                                <td>
+                                                    <el-popover placement="right" title="" trigger="hover" :controlled="false">
+                                                        <div>
+                                                            <span class="inline-block" style="width: 28px;height: 28px;overflow:hidden;border-radius: 100%;">
+                                                                <img :src='item.teacher_img_url' style='width:28px;' />
+                                                            </span>
+                                                            <span class="inline-block" style="cursor: pointer;">{{item.teacher}}</span>
+                                                        </div>
+                                                        <div slot="content">
+                                                            <div class="clearfix">
+                                                                <div class="pull-left" style="width: 130px;">
+                                                                    <div style="width: 130px;height: 150px;overflow:hidden">
+                                                                        <img :src='item.teacher_img_url' style='width:130px;' />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pull-right" style="width: 230px;margin-left: 20px;">
+                                                                    <div style="font-size: 24px;color: #029EFF;">{{item.teacher}}老师</div>
+                                                                    <div class="margin-top-15 font-size-14">{{item.teacher_description}}</div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </el-popover>
+                                                </td>
+                                                <td>{{item.total_unit}}</td>
+                                                <td>
+                                                    <div>
+                                                        <a :href="teach_plan.view_url" target="_blank" class='el-button el-button--primary el-button--small' style='margin-bottom:5px;margin-left: 10px;width:100px;'
+                                                            v-for='teach_plan in item.teach_plan' :key="teach_plan.id">
+                                                            <i class="iconfont icon-bofang1"></i>
+                                                            <span v-text='teach_plan.name'></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>合计</td>
+                                                <td></td>
+                                                <td>{{it.planLine|totalUnit}}课时</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </el-tab-pane>
+                                <el-tab-pane label="课程资料下载" name="second">
+                                    <table class="ui-table margin-top-20">
+                                        <thead>
+                                            <tr>
+                                                <th>课程资料名称</th>
+                                                <th>下载资料</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in it.downList" :key='item.id'>
+                                                <td>{{item.file_name}}</td>
+                                                <td>
+                                                    <!--<a :href="it.file" download class="ant-btn ant-btn-success"></a>-->
+                                                    <a :href="item.file" target='_blank' class="el-button el-button--success el-button--small">
+                                                        <i class="el-icon-download"></i><span>下载</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </el-tab-pane>
+                            </el-tabs>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: "Courselist",
+  data() {
+    return {
+      layout: {
+        gutter: 32,
+        span: 12
+      },
+
+      activeTabIndex: 0,
+
+      product: [],
+
+      // planLine: [],
+
+      // downList: [],
+
+      cateList: []
+    };
+  },
+  filters: {
+    totalUnit(arr) {
+      if (!arr) return 0;
+      let ret = 0;
+      arr.forEach(item => {
+        ret += item.total_unit;
+      });
+      return ret;
+    }
+  },
+  methods: {
+    showCoursePlan(item, index) {
+      this.$czapi
+        .getCoursePlan({
+          pid: item.product_id,
+          p: 1,
+          offset: 100
+        })
+        .then(({ code, data, msg }) => {
+          this.product[index].planLine = data.rows;
+        });
+    },
+
+    showCourseDown(item, index) {
+      this.$czapi
+        .getCourseInfo({
+          pid: item.product_id,
+          p: 1,
+          offset: 100
+        })
+        .then(({ data, code }) => {
+          this.product[index].downList = data.rows;
+        });
+    }
+  },
+  mounted() {
+    //console.log(111111111111111);
+    //var vm = this;
+    //请求用不了，暂时直接模拟
+    this.$czapi.getCourseList().then(({ data }) => {
+      this.product = data.map(item => {
+        item.planLine = [];
+        item.downList = [];
+        return item;
+      });
+      console.log(this.product);
+      this.product.forEach((item, index) => {
+        this.showCourseDown(item, index);
+        this.showCoursePlan(item, index);
+      });
+    });
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.course-list {
+  background: #ececec;
+}
+.course-item {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px 0 #ccc;
+}
+</style>

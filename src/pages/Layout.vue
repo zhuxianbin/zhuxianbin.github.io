@@ -16,9 +16,17 @@
                     <i class="iconfont icon-baoming"></i>
                     <span slot="title">我的报考资料</span>
                 </el-menu-item>
+                <el-menu-item index="livelist">
+                    <i class="iconfont icon-kecheng"></i>
+                    <span slot="title">我的直播课程</span>
+                </el-menu-item>
                 <el-menu-item index="courselist">
                     <i class="iconfont icon-kecheng"></i>
-                    <span slot="title">我购买的课程</span>
+                    <span slot="title">我的预习课程</span>
+                </el-menu-item>
+                <el-menu-item index="filelist">
+                    <i class="iconfont icon-kecheng"></i>
+                    <span slot="title">我的学习资料</span>
                 </el-menu-item>
                 </el-menu>
             </el-aside>
@@ -62,7 +70,7 @@ export default {
     line-height: 50px;
     &.is-active {
       color: #fff;
-      background: #56509f;
+      background: #222;
       border-right: 10px solid #fe6500;
     }
   }
