@@ -4,7 +4,8 @@ import storage from "./storage";
 /**
  * 接口前缀
  * */
-var contentPath = "http://101.201.222.8:8081" || "http://aci-api.chaozhiedu.com";
+var contentPath =
+    "http://101.201.222.8:8081" || "http://aci-api.chaozhiedu.com";
 
 var conmonAjax = function(url, param, type) {
     param = param || {};
@@ -209,5 +210,13 @@ export default {
      * */
     getPayResult: function(param) {
         return conmonAjax(`/api/pay/result/${param.token}`, param, "get");
+    },
+    /**
+     * 支付报名费
+     * URL (/api/user/paysingup) METHOD POST
+     * 接收参数 无
+     * */
+    paySingup: function(param) {
+        return conmonAjax(`/api/user/paysingup`, param, "post");
     }
 };

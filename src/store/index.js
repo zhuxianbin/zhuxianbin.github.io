@@ -25,11 +25,12 @@ export default new Vuex.Store({
                 token
             } = storage.get("userToken");
             token && api.getUserInfo().then((res) => {
-                if (res.code == 404) {
-                    window.localStorage.removeItem('userToken');
-                    window.location.reload();
-                    return false;
-                }
+                console.log(res);
+                // if (res.code == 404) {
+                //     window.localStorage.removeItem('userToken');
+                //     window.location.reload();
+                //     return false;
+                // }
                 context.commit(USER_INFO, res);
             }).fail((res) => {
                 context.commit(USER_INFO, res);

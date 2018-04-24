@@ -5,7 +5,7 @@
 				
 				<div class="ant-layout ant-layout-chaozhi">
 					<div class="ant-layout-content">
-						<div class="color-6 font-size-16">报名表当前状态</div>
+						<div class="color-6 font-size-16" @click='steps = steps?0:1'>报名表当前状态</div>
 						<template v-if="info.code === 202">
 							<div class="margin-top-20" style="color: #f00;">
 								报名表审核失败
@@ -53,9 +53,13 @@
 									</v-col>
 								</v-row>
 							</div> -->
-							<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 
-							<template v-if="info.code === 201">
+							
+							<paySiginUp v-if='steps==0'></paySiginUp>
+
+							
+							<template v-if="info.status === 1">
+								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
 										<tbody>
@@ -237,97 +241,104 @@
 									<el-button type="warning" class="margin-left-20" @click="showConfirmForm">提交报名表</el-button>
 								</div>
 							</template>
-							<template v-if="info.code === 203">
+							<template v-if="info.status === 2">
+								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
 										<tr>
 											<td>中文姓名</td>
 											<td style="width: 300px;">
-												冯xx
+												{{param.cn_name}}
 											</td>
 											<td>英文姓名</td>
 											<td style="width: 300px;">
-												Hel Yan
+												{{param.en_name}}
 											</td>
 											<td rowspan="4" style="width: 130px;">
 												<div>
-													<img src="http://img.juimg.com/tuku/yulantu/121216/234733-12121621553935.jpg" alt="" style="width: 130px;height: 160px;">
+													<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;max-height: 160px;">
 												</div>
 											</td>
 										</tr>
 										<tr>
 											<td>性别</td>
 											<td>
-												男，F
+												{{param.sex=="M"?"女":"男"}}
 											</td>
 											<td>出生日期</td>
 											<td>
-												19901010
+												{{param.birthday}}
 											</td>
 										</tr>
 										<tr>
 											<td>毕业院校</td>
 											<td>
-												北京大学
+												{{param.college}}
 											</td>
 											<td>学历编号</td>
 											<td>
-												12311199k122
+												{{param.edu_num}}
 											</td>
 										</tr>
 										<tr>
 											<td>身份证/护照</td>
 											<td>
-												2233998111244111123
+												{{param.idcard}}
 											</td>
 											<td>电子邮件</td>
 											<td>
-												lovs1887@sina.com
+												{{param.email}}
 											</td>
 										</tr>
 										<tr>
 											<td>联系电话</td>
 											<td>
-												13798721112
+												{{param.contacts_phone}}
 											</td>
 											<td>居住地址</td>
 											<td colspan="2">
-												浙江省宁波市江北区幸福小区12幢19楼
+												{{param.addr}}
 											</td>
 										</tr>
 										<tr>
-											<td>身份证复印件上传</td>
+											<td>身份证复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">我的身份证复印件.JPG</a>
-													<a href="javascript:;" class="margin-left-20">我的身份证复印件.JPG</a>
+													<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															我的身份证复印件</a>
+													<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-20 link">
+															<i class="el-icon-picture"></i>
+															我的身份证复印件
+														</a>
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td>学历证书复印件上传</td>
+											<td>学历证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">学历证书.JPG</a>
+													<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															我的学历证书复印件</a>
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td>学位证书复印件上传</td>
+											<td>学位证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">学位证书.JPG</a>
+													<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															学位证书复印件</a>
 												</div>
 											</td>
 										</tr>
-										<tr>
-											<td>报名表上传</td>
+										<!-- <tr>
+											<td>报名表</td>
 											<td colspan="4" class="color-6">
 												<div>
 													<a href="javascript:;">报名表.DOC</a>
 												</div>
 											</td>
-										</tr>
+										</tr> -->
 									</table>
 								</div>
 
@@ -533,13 +544,17 @@ function verifyFileSuffix(file, arrow) {
 //   return false;
 // };
 
+import paySiginUp from "@/components/paySiginUp";
 import { mapState } from "vuex";
 
 export default {
   name: "Info",
+  components: {
+    paySiginUp
+  },
   data() {
     return {
-			steps:0,
+      steps: 0,
       param: {
         cn_name: "", //中文名
         en_name: "", //英文名
@@ -603,18 +618,21 @@ export default {
     })
   },
   watch: {
-    info(val, old) {
-      //console.log(val, "112312312");
-      this.param = { ...this.param, ...val.ext_info, ...val.user };
-      this.ksType = val.period;
+    info: {
+      handler(val, old) {
+        this.param = { ...this.param, ...val.ext_info, ...val.user };
+        this.ksType = val.period;
+        this.status = val.status;
+        this.steps = [0, 1, 2, 3].indexOf(val.status) || 0;
+      },
+      immediate: true
     }
   },
   methods: {
-    
     disabledDate(current) {
       return current && current.valueOf() >= Date.now();
     },
-    
+
     onChangeIdCardZm(info) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -739,11 +757,11 @@ export default {
       this.fileList = [];
       return false;
     }
-  },
-  mounted() {
-    this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
-    this.ksType = this.info.period;
   }
+  // mounted() {
+  //   this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
+  //   this.ksType = this.info.period;
+  // }
 };
 </script>
 
