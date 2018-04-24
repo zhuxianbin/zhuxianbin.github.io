@@ -213,10 +213,10 @@ export default {
     },
     /**
      * 支付报名费
-     * URL (/api/user/paysingup) METHOD POST
+     * URL (/api/user/paysingup) METHOD GET
      * 接收参数 无
      * */
     paySingup: function(param) {
-        return conmonAjax(`/api/user/paysingup`, param, "post");
+        return conmonAjax(`/api/user/paysingup`, param, "get");
     }
 };

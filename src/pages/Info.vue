@@ -12,7 +12,7 @@
 							</div>
 						</template>
 						<template v-else>
-							<el-steps class="margin-top-20" :active="steps" simple>
+							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
 								<el-step title="缴纳报名费"></el-step>
 								<el-step title="填写资料" icon="el-icon-edit"></el-step>
 								<el-step title="资料审核中" icon='el-icon-time'></el-step>
