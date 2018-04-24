@@ -1,6 +1,9 @@
 import Vue from "vue";
 import storage from "./storage";
 
+var uploadAction =
+    "http://101.201.222.8:8081/api/file/upload" ||
+    "http://aci-api.chaozhiedu.com/api/file/upload";
 /**
  * 接口前缀
  * */
@@ -60,6 +63,8 @@ var conmonAjax = function(url, param, type) {
 // }
 
 export default {
+    uploadAction,
+    contentPath,
     /**
      * 取得登陆验证码
      * URL (/api/phone-captcha) METHOD POST

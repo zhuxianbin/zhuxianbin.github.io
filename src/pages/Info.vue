@@ -12,10 +12,10 @@
 							</div>
 						</template>
 						<template v-else>
-							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
+							<el-steps class="margin-top-20" :process-status="steps>2?'success':'process'" finish-status="success" :active="steps" simple>
 								<el-step title="缴纳报名费"></el-step>
-								<el-step title="填写资料" icon="el-icon-edit"></el-step>
-								<el-step title="资料审核中" icon='el-icon-time'></el-step>
+								<el-step title="填写资料" ></el-step>
+								<el-step :title="steps>2?'资料审核通过':'资料审核中'"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
 							<!-- <div class="ui-step margin-top-20">
@@ -363,97 +363,104 @@
 									</div>
 								</div>
 							</template>
-							<template v-if="info.code === 204">
+							<template v-if="info.status === 3">
+								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
 										<tr>
 											<td>中文姓名</td>
 											<td style="width: 300px;">
-												冯xx
+												{{param.cn_name}}
 											</td>
 											<td>英文姓名</td>
 											<td style="width: 300px;">
-												Hel Yan
+												{{param.en_name}}
 											</td>
 											<td rowspan="4" style="width: 130px;">
 												<div>
-													<img src="http://img.juimg.com/tuku/yulantu/121216/234733-12121621553935.jpg" alt="" style="width: 130px;height: 160px;">
+													<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;max-height: 160px;">
 												</div>
 											</td>
 										</tr>
 										<tr>
 											<td>性别</td>
 											<td>
-												男，F
+												{{param.sex=="M"?"女":"男"}}
 											</td>
 											<td>出生日期</td>
 											<td>
-												19901010
+												{{param.birthday}}
 											</td>
 										</tr>
 										<tr>
 											<td>毕业院校</td>
 											<td>
-												北京大学
+												{{param.college}}
 											</td>
 											<td>学历编号</td>
 											<td>
-												12311199k122
+												{{param.edu_num}}
 											</td>
 										</tr>
 										<tr>
 											<td>身份证/护照</td>
 											<td>
-												2233998111244111123
+												{{param.idcard}}
 											</td>
 											<td>电子邮件</td>
 											<td>
-												lovs1887@sina.com
+												{{param.email}}
 											</td>
 										</tr>
 										<tr>
 											<td>联系电话</td>
 											<td>
-												13798721112
+												{{param.contacts_phone}}
 											</td>
 											<td>居住地址</td>
 											<td colspan="2">
-												浙江省宁波市江北区幸福小区12幢19楼
+												{{param.addr}}
 											</td>
 										</tr>
 										<tr>
-											<td>身份证复印件上传</td>
+											<td>身份证复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">我的身份证复印件.JPG</a>
-													<a href="javascript:;" class="margin-left-20">我的身份证复印件.JPG</a>
+													<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															我的身份证复印件</a>
+													<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-20 link">
+															<i class="el-icon-picture"></i>
+															我的身份证复印件
+														</a>
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td>学历证书复印件上传</td>
+											<td>学历证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">学历证书.JPG</a>
+													<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															我的学历证书复印件</a>
 												</div>
 											</td>
 										</tr>
 										<tr>
-											<td>学位证书复印件上传</td>
+											<td>学位证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a href="javascript:;">学位证书.JPG</a>
+													<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+															学位证书复印件</a>
 												</div>
 											</td>
 										</tr>
-										<tr>
-											<td>报名表上传</td>
+										<!-- <tr>
+											<td>报名表</td>
 											<td colspan="4" class="color-6">
 												<div>
 													<a href="javascript:;">报名表.DOC</a>
 												</div>
 											</td>
-										</tr>
+										</tr> -->
 									</table>
 								</div>
 							</template>
@@ -553,6 +560,7 @@ export default {
     paySiginUp
   },
   data() {
+    //console.log(this.$czapi);
     return {
       steps: 0,
       param: {
@@ -598,7 +606,7 @@ export default {
       ],
       ksType: [],
       fileName: "file",
-      uploadAction: "http://aci-api.chaozhiedu.com/api/file/upload",
+      uploadAction: this.$czapi.uploadAction,
       //cateList: [],
       // uploads: {
       //   idcard_front_file: "", //身份证前面照片
@@ -657,7 +665,7 @@ export default {
         }
       )
         .then(() => {
-          console.log("确认提交");
+          //console.log("确认提交");
           let params = {};
 
           for (const key in this.param) {
@@ -686,6 +694,8 @@ export default {
               }
 
               this.$message({ message: msg, type: "success" });
+
+              this.steps++;
             });
         })
         .catch(() => {});
