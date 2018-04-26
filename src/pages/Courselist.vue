@@ -3,7 +3,11 @@
         <div class="ant-layout">
             <div class="ant-layout ant-layout-has-sider">
                 <div class="ant-layout ant-layout-chaozhi">
-                    <div class="ant-layout-content">
+                    <div class="ant-layout-content text-center" style='background:#fff;padding:100px;' v-if='product.length<=0'>
+                        <img src='/static/images/null-page-draw.png'>
+                        <p style='font-size:20px;margin-top:20px;'>您还没有购买课程,<router-link to="/male">去商城</router-link></p>
+                    </div>
+                    <div class="ant-layout-content" v-if='product.length>0'>
                         <div v-for="it in product" :key='it.id' class="padding-15 course-item" style="">
                             <div style='padding-left:500px;overflow:hidden'>
                                 <div style='float:left;display:inline;margin-left:-500px;width:460px;'>
@@ -129,7 +133,7 @@ export default {
         .then(({ code, data, msg }) => {
           this.product[index].planLine = data.rows;
         });
-    },
+    }
 
     // showCourseDown(item, index) {
     //   this.$czapi

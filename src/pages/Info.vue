@@ -54,10 +54,7 @@
 								</v-row>
 							</div> -->
 
-							
 							<paySiginUp v-if='steps==0'></paySiginUp>
-
-							
 							<template v-if="info.status === 1">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
