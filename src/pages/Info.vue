@@ -12,10 +12,10 @@
 							</div>
 						</template>
 						<template v-else>
-							<el-steps class="margin-top-20" :process-status="steps>2?'success':'process'" finish-status="success" :active="steps" simple>
+							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
 								<el-step title="缴纳报名费"></el-step>
 								<el-step title="填写资料" ></el-step>
-								<el-step :title="steps>2?'资料审核通过':'资料审核中'"></el-step>
+								<el-step title="资料审核"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
 							<!-- <div class="ui-step margin-top-20">
@@ -631,7 +631,7 @@ export default {
         this.param = { ...this.param, ...val.ext_info, ...val.user };
         this.ksType = val.period;
         this.status = val.status;
-        this.steps = [0, 1, 2, 3].indexOf(val.status) || 0;
+        this.steps = [0, 1, 2, 4][val.status];
       },
       immediate: true
     }

@@ -223,5 +223,14 @@ export default {
      * */
     paySingup: function(param) {
         return conmonAjax(`/api/user/paysingup`, param, "get");
+    },
+    
+    /**
+     * 直播列表
+     * URL (/api/userlive/list) METHOD POST
+     * 接收参数 无
+     * */
+    getLiveList: function(param) {
+        return conmonAjax(`/api/userlive/list`, param, "post");
     }
 };
