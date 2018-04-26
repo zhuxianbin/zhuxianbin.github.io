@@ -2,13 +2,14 @@ import Vue from "vue";
 import storage from "./storage";
 
 var uploadAction =
-    "http://101.201.222.8:8081/api/file/upload" ||
+    // "http://101.201.222.8:8081/api/file/upload" ||
     "http://aci-api.chaozhiedu.com/api/file/upload";
 /**
  * 接口前缀
  * */
 var contentPath =
-    "http://101.201.222.8:8081" || "http://aci-api.chaozhiedu.com";
+    // "http://101.201.222.8:8081" || 
+    "http://aci-api.chaozhiedu.com";
 
 var conmonAjax = function(url, param, type) {
     param = param || {};
