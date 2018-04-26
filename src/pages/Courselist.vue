@@ -12,7 +12,7 @@
                                 <div style='float:left;display:inline;'>
                                     <div style="font-size: 24px;color: #333333;">{{it.product_name}}</div>
                                     <div class="margin-top-20">
-                                        <span class="inline-block text-right" style="width: 100px;">课程介绍：</span>
+                                        <!-- <span class="inline-block text-right" style="width: 100px;">课程介绍：</span> -->
                                         <span class="inline-block" v-html='it.products.description'></span>
                                     </div>
                                 </div>
