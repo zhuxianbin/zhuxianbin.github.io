@@ -26,37 +26,34 @@
 </template>
 
 <script>
+let timer = 0;
 export default {
   name: "paySiginUp",
   data() {
     return {
-      qrcode:""
+      qrcode: ""
     };
   },
+  methods: {
+    getPayInfo() {
+      //确认提交资料
+      this.$czapi.paySingup({}).then(({ code, msg, qrcode }) => {
+        console.log(code, msg);
+        this.qrcode = qrcode;
+        
+        if (code == 202) {
+          window.location.reload();
+        }
+      });
+    }
+  },
   mounted() {
-    console.log("mounted");
-
-    //确认提交资料
-    this.$czapi.paySingup({}).then(({ code, msg, qrcode }) => {
-      console.log(code, msg);
-      this.qrcode = qrcode;
-      // if (code != 200) {
-      //   let keys = Object.keys.call(this, data_msg);
-      //   if (keys.length > 0) {
-      //     this.$notify.error({
-      //       title: "提交失败",
-      //       message: data_msg[keys[0]]
-      //     });
-      //   } else {
-      //     this.$message.error(msg);
-      //   }
-      //   return false;
-      // }
-      // this.$message({ message: msg, type: "success" });
-    });
+    this.getPayInfo();
+    timer = setInterval(this.getPayInfo, 5000);
   },
   destroyed() {
     console.log("destroyed");
+    clearTimeout(timer);
   }
 };
 </script>

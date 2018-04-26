@@ -107,7 +107,7 @@ export default {
           this.rows = data.map(item => {
             item.products.live_more = item.products.live_more.map(live => {
               let liveTime = new Date(live.live_time).setHours(0, 0, 0, 0);
-              console.log(now,liveTime);
+              //console.log(now,liveTime);
               if (now > liveTime) {
                 live.status = -1;
               }
@@ -117,12 +117,12 @@ export default {
               if (now == liveTime) {
                 live.status = 1;
               }
-              console.log(live,now,liveTime);
+              //console.log(live,now,liveTime);
               return live;
             });
             return item;
           });
-          console.log(this.rows);
+          //console.log(this.rows);
         });
     }
   },

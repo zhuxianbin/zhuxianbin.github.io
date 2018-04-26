@@ -61,12 +61,6 @@ export default {
   name: "Index",
   data() {
     return {
-      //   info: {
-      //     user: {},
-      //     ext_info: {},
-      //     period: []
-      //   },
-      //cateList: []
     };
   },
   computed: {
@@ -76,7 +70,7 @@ export default {
     })
   },
   mounted() {
-    var vm = this;
+    //var vm = this;
   }
 };
 </script>
