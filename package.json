@@ -9,7 +9,7 @@
     "start-old": "npm run dev",
     "start": "node express.start.js",
     "build": "node build/build.js",
-    "prod": "git push",
+    "prod": "git push http://zhuxianbin:zhuxian124@git.izhzx.com/project/aci/frontend/aci_pc.git",
     "build-test": "git push https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git"
   },
   "dependencies": {
