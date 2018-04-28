@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     getPayInfo() {
-      //确认提交资料
+      //获取支付报名费订单
       this.$czapi.paySingup({}).then(({ code, msg, qrcode }) => {
         console.log(code, msg);
         this.qrcode = qrcode;
@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     this.getPayInfo();
-    timer = setInterval(this.getPayInfo, 5000);
+    timer = setInterval(this.getPayInfo, 10000);
   },
   destroyed() {
     console.log("destroyed");

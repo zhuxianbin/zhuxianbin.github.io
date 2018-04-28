@@ -3,6 +3,7 @@ npm-debug.log*
 selenium-debug.log
 .nuxt/
 /package-lock.json
+/node_modules
 *.tar
 *.md
 

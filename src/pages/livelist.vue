@@ -44,20 +44,18 @@
                                                 </td> -->
                                                 <td>{{item.live_time}}</td>
                                                 <td>
-                                                    <div>
-                                                        <el-button v-if='item.status == 0' disabled>
-                                                            <i class="iconfont icon-zhibodating"></i>
-                                                            <span>直播还没开始</span>
-                                                        </el-button>
-                                                        <a target="_blank" v-if='item.status == 1'  :href="item.live_url" class="el-button el-button--warning">
-                                                            <i class="iconfont icon-bofang1"></i>
-                                                            <span>进入直播课堂</span>
-                                                        </a>
-                                                        <a target="_blank" v-if='item.status == -1'  :href="item.live_url" class="el-button el-button--primary">
-                                                            <i class="iconfont icon-kechenghuifang"></i>
-                                                            <span>回访直播视频</span>
-                                                        </a>
-                                                    </div>
+                                                    <el-button v-if='item.status == 0' disabled>
+                                                        <i class="iconfont icon-zhibodating"></i>
+                                                        <span>直播还没开始</span>
+                                                    </el-button>
+                                                    <a target="_blank" v-if='item.status == 1'  :href="item.live_url" class="el-button el-button--warning">
+                                                        <i class="iconfont icon-bofang1"></i>
+                                                        <span>进入直播课堂</span>
+                                                    </a>
+                                                    <a target="_blank" v-if='item.status == -1'  :href="item.live_url" class="el-button el-button--primary">
+                                                        <i class="iconfont icon-kechenghuifang"></i>
+                                                        <span>回访直播视频</span>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <!-- <tr>
@@ -110,7 +108,7 @@ export default {
         .then(({ code, data, msg }) => {
           this.rows = data.map(item => {
             item.products.live_more = item.products.live_more.map(live => {
-              let liveTime = new Date(live.live_time).setHours(0, 0, 0, 0);
+              let liveTime = new Date(live.live_time.replace(/\-/g,'/')).setHours(0, 0, 0, 0);
               //console.log(now,liveTime);
               if (now > liveTime) {
                 live.status = -1;
