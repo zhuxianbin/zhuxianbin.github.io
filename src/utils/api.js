@@ -233,5 +233,14 @@ export default {
      * */
     getLiveList: function(param) {
         return conmonAjax(`/api/userlive/list`, param, "post");
-    }
+    },
+    
+    /**
+     * 报名费用是否支付
+     * URL (/api/user/getpayinfo) METHOD GET
+     * 接收参数 无
+     * */
+    getPayInfo: function(param) {
+        return conmonAjax(`/api/user/getpayinfo`, param, "get");
+    },
 };

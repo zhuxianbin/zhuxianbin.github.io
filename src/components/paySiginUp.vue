@@ -35,21 +35,25 @@ export default {
     };
   },
   methods: {
-    getPayInfo() {
+    paySingup() {
       //获取支付报名费订单
       this.$czapi.paySingup({}).then(({ code, msg, qrcode }) => {
         console.log(code, msg);
         this.qrcode = qrcode;
-        
-        if (code == 202) {
+      });
+    },
+    getPayInfo(){
+      //获取支付报名费订单
+      this.$czapi.getPayInfo({}).then(({ code, msg, qrcode }) => {
+        if (code == 200) {
           window.location.reload();
         }
       });
     }
   },
   mounted() {
-    this.getPayInfo();
-    timer = setInterval(this.getPayInfo, 10000);
+    this.paySingup();
+    timer = setInterval(this.getPayInfo, 6180);
   },
   destroyed() {
     console.log("destroyed");
