@@ -240,7 +240,7 @@ export default {
      * URL (/api/user/getpayinfo) METHOD GET
      * 接收参数 无
      * */
-    getPayInfo: function(param) {
+    getSingupPayInfo: function(param) {
         return conmonAjax(`/api/user/getpayinfo`, param, "get");
     },
 };

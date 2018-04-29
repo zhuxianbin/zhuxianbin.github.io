@@ -44,7 +44,7 @@ export default {
     },
     getPayInfo(){
       //获取支付报名费订单
-      this.$czapi.getPayInfo({}).then(({ code, msg, qrcode }) => {
+      this.$czapi.getSingupPayInfo({}).then(({ code, msg, qrcode }) => {
         if (code == 200) {
           window.location.reload();
         }
