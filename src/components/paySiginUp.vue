@@ -15,9 +15,9 @@
           </div>
           <!-- <span>购买及表示您同意《<a class="link" href='http://news.chaozhiedu.com/wj/jinpailubo.docx'>这个地方还没定</a>》</span> -->
       </el-form-item>
-      <el-form-item label="支持支付类型">
+      <!-- <el-form-item label="支持支付类型">
           <img src="/static/images/20180316111851.png">
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="">
           该费用是ACI国际注册心理咨询师的报考费用，超职教育为服务代收详情请点击<a>这里了解</a>
       </el-form-item>
