@@ -12,7 +12,7 @@
                 <div style="width: 360px;margin: 0 auto;">
                     <el-form direction="horizontal" label-width="labelCol" :model="ruleForm" :rules="rules" ref="ruleForm">
                         <el-form-item label="" prop="phoneNumber">
-                            <el-input placeholder="使用的手机号码" v-model="ruleForm.phoneNumber">
+                            <el-input placeholder="注册的手机号码" v-model="ruleForm.phoneNumber">
                                 <!-- <v-icon slot="before">
                                     <i class="iconfont icon-shoujihao" style="font-size: 22px;"></i>
                                 </v-icon> -->

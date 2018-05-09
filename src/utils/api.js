@@ -11,27 +11,31 @@ var contentPath =
     // "http://101.201.222.8:8081" || 
     "http://aci-api.chaozhiedu.com";
 
-var conmonAjax = function(url, param, type) {
-    param = param || {};
+var conmonAjax = function (url, param, type) {
+    var userToken = storage.get("userToken").token;
+    param = { ...param,
+        token: userToken
+    };
     var defer = $.Deferred();
-    let headers = {};
+    //let headers = {};
+
     $.ajax({
         url: contentPath + url,
         type: type || "post",
         data: param,
-        headers,
+        //headers,
         dataType: "json",
-        beforeSend: function(xhr) {
-            if (url != "/api/login" && url != "/api/phone-captcha") {
-                var userToken = storage.get("userToken").token;
-                // console.log(userToken);
-                // console.log("!=====");
-                if (userToken) {
-                    xhr.setRequestHeader("Token", userToken);
-                }
-            }
-        },
-        success: function(data) {
+        // beforeSend: function(xhr) {
+        //     if (url != "/api/login" && url != "/api/phone-captcha") {
+
+        //         // console.log(userToken);
+        //         // console.log("!=====");
+        //         if (userToken) {
+        //             xhr.setRequestHeader("Token", userToken);
+        //         }
+        //     }
+        // },
+        success: function (data) {
             //console.log(data);
 
             if (data.code >= 600 && data.code < 700) {
@@ -71,7 +75,7 @@ export default {
      * URL (/api/phone-captcha) METHOD POST
      * @param phone
      * */
-    getPhoneCaptcha: function(param) {
+    getPhoneCaptcha: function (param) {
         return conmonAjax("/api/phone-captcha", param);
     },
 
@@ -81,7 +85,7 @@ export default {
      * @param phone
      * @param captcha 手机验证码 在测试环境中 先调用 phone-captcha 可以使用 1111 做为验证码
      * */
-    doLogin: function(param) {
+    doLogin: function (param) {
         return conmonAjax("/api/login", param);
     },
 
@@ -90,7 +94,7 @@ export default {
      * URL (/api/user) METHOD get
      * 无需参数，直接获取 ，注意要带上token
      * */
-    getUserInfo: function(param) {
+    getUserInfo: function (param) {
         return conmonAjax("/api/user", param || {}, "get");
     },
 
@@ -101,7 +105,7 @@ export default {
      * cn_name en_name sex birthday college edu_num idcard
      * email contacts_phone addr period idcard_front idcard_reverse edu degree entry_form avatar
      * */
-    addUserInfo: function(param) {
+    addUserInfo: function (param) {
         return conmonAjax("/api/user", param);
     },
 
@@ -112,7 +116,7 @@ export default {
      * cn_name en_name sex birthday college edu_num idcard
      * email contacts_phone addr period idcard_front idcard_reverse edu degree entry_form avatar
      * */
-    submitUserInfo: function(param) {
+    submitUserInfo: function (param) {
         return conmonAjax("/api/user/submit", param);
     },
 
@@ -121,7 +125,7 @@ export default {
      * URL (/api/course/list) METHOD post
      * 无需参数，直接获取 ，注意要带上token
      * */
-    getCourseList: function(param) {
+    getCourseList: function (param) {
         return conmonAjax("/api/course/list", param);
     },
 
@@ -131,7 +135,7 @@ export default {
      * 接收参数
      * pid 产品ID 必传 p 分页 必传 offset 每页显示的数量 默认为10
      * */
-    getCourseInfo: function(param) {
+    getCourseInfo: function (param) {
         return conmonAjax("/api/course/information", param);
     },
 
@@ -141,7 +145,7 @@ export default {
      * 接收参数
      * pid 产品ID 必传 p 分页 必传 offset 每页显示的数量 默认为10
      * */
-    getCoursePlan: function(param) {
+    getCoursePlan: function (param) {
         return conmonAjax("/api/course/plan", param);
     },
 
@@ -151,7 +155,7 @@ export default {
      * 接收参数
      * 上传名称为 file
      * */
-    fileUpload: function(param) {
+    fileUpload: function (param) {
         return conmonAjax("/api/file/upload", param);
     },
 
@@ -161,7 +165,7 @@ export default {
      * 接收参数
      * p 分页 必传 offset 每页显示的数量 默认为10
      * */
-    getProductList: function(param) {
+    getProductList: function (param) {
         return conmonAjax("/api/product/list", param);
     },
 
@@ -171,7 +175,7 @@ export default {
      * 接收参数
      * product_id 产品列表的ID字段
      * */
-    getPayInfo: function(param) {
+    getPayInfo: function (param) {
         return conmonAjax("/api/get-pay-info", param);
     },
 
@@ -182,7 +186,7 @@ export default {
      * token 直接拼在url后
      * 示例: /api/pay/refresh-price/1802055004745729
      * */
-    refreshPrice: function(param) {
+    refreshPrice: function (param) {
         return conmonAjax(
             "/api/pay/refresh-price/" + param.token,
             param,
@@ -196,7 +200,7 @@ export default {
      * 接收参数
      * product_id 产品列表的ID字段 channel 支付渠道 wechat,alipay
      * */
-    pay: function(param) {
+    pay: function (param) {
         return conmonAjax("/api/pay", param);
     },
 
@@ -205,7 +209,7 @@ export default {
      * URL (/api/course/cateogry) METHOD GET
      * 接收参数 无
      * */
-    getCategory: function(param) {
+    getCategory: function (param) {
         return conmonAjax("/api/course/category", param, "get");
     },
 
@@ -214,7 +218,7 @@ export default {
      * URL (/api/course/cateogry) METHOD GET
      * 接收参数 无
      * */
-    getPayResult: function(param) {
+    getPayResult: function (param) {
         return conmonAjax(`/api/pay/result/${param.token}`, param, "get");
     },
     /**
@@ -222,25 +226,25 @@ export default {
      * URL (/api/user/paysingup) METHOD GET
      * 接收参数 无
      * */
-    paySingup: function(param) {
+    paySingup: function (param) {
         return conmonAjax(`/api/user/paysingup`, param, "get");
     },
-    
+
     /**
      * 直播列表
      * URL (/api/userlive/list) METHOD POST
      * 接收参数 无
      * */
-    getLiveList: function(param) {
+    getLiveList: function (param) {
         return conmonAjax(`/api/userlive/list`, param, "post");
     },
-    
+
     /**
      * 报名费用是否支付
      * URL (/api/user/getpayinfo) METHOD GET
      * 接收参数 无
      * */
-    getSingupPayInfo: function(param) {
+    getSingupPayInfo: function (param) {
         return conmonAjax(`/api/user/getpayinfo`, param, "get");
     },
 };

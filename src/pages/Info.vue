@@ -260,7 +260,7 @@
 										<tr>
 											<td>性别</td>
 											<td>
-												{{param.sex=="M"?"女":"男"}}
+												{{param.sex=="M"?"男":"女"}}
 											</td>
 											<td>出生日期</td>
 											<td>
