@@ -21,38 +21,37 @@
 
                         <el-form-item label="" prop="qcode">
                             <div class="inline-block text-center" style="width: 55%;">
-                                <el-input placeholder="短信验证码" v-model="ruleForm.qcode">
-                                    <!-- <v-icon type="123" slot="before">
-                                        <i class="iconfont icon-unie615" style="font-size: 22px;"></i>
-                                    </v-icon> -->
-                                </el-input>
+                              <el-input placeholder="短信验证码" v-model="ruleForm.qcode">
+                                  <!-- <v-icon type="123" slot="before">
+                                      <i class="iconfont icon-unie615" style="font-size: 22px;"></i>
+                                  </v-icon> -->
+                              </el-input>
                             </div>
                             <div class="inline-block text-center" style="width: 43%;">
-                                <a href="javascript:;" class="link" @click="getQcode">{{qcodeText}}</a>
+                              <a href="javascript:;" class="link" @click="getQcode">{{qcodeText}}</a>
                             </div>
                         </el-form-item>
 
                         <el-form-item>
-                            <el-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy'
-                                      @click="submitForm('ruleForm')"
-                                      style="display: block;width: 100%;font-size: 22px;">登录超职</el-button>
+                          <el-button type="primary" :loading="isLoading" :disabled='!ruleForm.isTy'
+                            @click="submitForm('ruleForm')"
+                            style="display: block;width: 100%;font-size: 22px;">登录超职</el-button>
                         </el-form-item>
 
                         <el-form-item>
-                            <el-checkbox v-model="ruleForm.isTy">登录即表示您同意《<a href="javascript:;" class='link' @click.prevent="visible = true">超职用户协议</a>》</el-checkbox>
+                          <el-checkbox v-model="ruleForm.isTy">登录即表示您同意《<a href="javascript:;" class='link' @click.prevent="visible = true">超职用户协议</a>》</el-checkbox>
                         </el-form-item>
 
                         <el-form-item>
-                            <div class="text-center">
-                                <a href="/default.html">
-                                    <i class="iconfont icon-return"></i>
-                                    <span style="margin-left: 5px;">返回</span>
-                                </a>
-                            </div>
+                          <div class="text-center">
+                            <a href="/default.html">
+                              <i class="iconfont icon-return"></i>
+                              <span style="margin-left: 5px;">返回</span>
+                            </a>
+                          </div>
                         </el-form-item>
                     </el-form>
                 </div>
-
 
                 <el-dialog title="查看用户协议"
                          :visible.sync="visible"
