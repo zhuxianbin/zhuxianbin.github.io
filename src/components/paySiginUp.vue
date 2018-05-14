@@ -37,15 +37,15 @@ export default {
   methods: {
     paySingup() {
       //获取支付报名费订单
-      this.$czapi.paySingup({}).then(({ code, msg, qrcode }) => {
+      this.$czapi.toPaySingUp({}).then(({ code, msg, qrcode }) => {
         console.log(code, msg);
         this.qrcode = qrcode;
       });
     },
-    getPayInfo(){
+    getPayInfo() {
       //获取支付报名费订单
-      this.$czapi.getSingupPayInfo({}).then(({ code, msg, qrcode }) => {
-        if (code == 200) {
+      this.$czapi.getUserSignPayinfo({}).then(({ code, status }) => {
+        if (status == 1) {
           window.location.reload();
         }
       });

@@ -15,7 +15,7 @@
 							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
 								<el-step title="填写资料"></el-step>
 								<el-step title="资料审核" ></el-step>
-								<el-step title="缴纳报名费"></el-step>
+								<el-step title="审核中"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
 							<!-- <div class="ui-step margin-top-20">
@@ -455,13 +455,19 @@
 									</table>
 								</div>
 							</template> -->
-							<paySiginUp v-if='steps==2'></paySiginUp>
+							
 						</template>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		<el-dialog title="报名支付"
+			:visible.sync="pay.show"
+			:show-close="false" 
+			:close-on-click-modal='false' 
+			:close-on-press-escape='false'>
+			<paySiginUp v-if='pay.show' ></paySiginUp>
+		</el-dialog>
 	</div>
 </template>
 
@@ -486,62 +492,6 @@ function verifyFileSuffix(file, arrow) {
   }
 }
 
-// /**
-//  * 我的图标上传
-//  * */
-// window.ajaxFileUploadFn = function() {
-//   var path = $("#wtFile")[0];
-//   if (!verifyFileSuffix(path, "jpg,png")) {
-//     path.value = "";
-//   } else {
-//     //用到图片高级获取，如果不支持，还是需要后台验证一下。
-//     var imgFile = path.files[0];
-//     var reader = new FileReader();
-//     reader.readAsDataURL(imgFile);
-//     reader.onload = function(theFile) {
-//       var image = new Image();
-//       image.src = theFile.target.result;
-//       image.onload = function() {
-//         if (imgFile.size / 1000 > 1000) {
-//           alert("上传的图片必须小于1M");
-//           $("#wtFile").remove();
-//           $("body").append(
-//             '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
-//           );
-//           return false;
-//         }
-
-//         $.ajaxFileUpload({
-//           url: "http://aci-api.chaozhiedu.com/api/file/upload",
-//           secureuri: false,
-//           fileElementId: "file",
-//           type: "post",
-//           dataType: "json",
-//           beforeSend: function(xhr) {
-//             var userToken = $.cookie("userToken");
-//             console.log(userToken, 1111111111111);
-//             if (userToken) {
-//               xhr.setRequestHeader("Token", userToken);
-//             }
-//           },
-//           success: function(data) {
-//             console.log(data);
-
-//             $("#wtFile").remove();
-//             $("body").append(
-//               '<input type="file" id="wtFile" name="file" onchange="ajaxFileUploadFn();" style="display: none;">'
-//             );
-//           },
-//           error: function(data, status, e) {
-//             console.log(data, status, e);
-//             //showAlert(e, 1070);
-//           }
-//         });
-//       };
-//     };
-//   }
-//   return false;
-// };
 
 import paySiginUp from "@/components/paySiginUp";
 import { mapState } from "vuex";
@@ -608,7 +558,10 @@ export default {
       //   entry_form_file: "", //报名表照片
       //   avatar_file: "" //头像
       // }
-      fileList: []
+      fileList: [],
+      pay: {
+        show: false
+      }
     };
   },
   // computed: {
@@ -758,18 +711,27 @@ export default {
 
       this.fileList = [];
       return false;
-		},
-		getUserSign(){
-			this.$czapi.getUserSign().then((res)=>{
-				console.log(res);
-				this.info = res;
-			});
-		}
+    },
+    getUserSign() {
+      this.$czapi.getUserSign().then(res => {
+        if (res.status == 1) {
+          this.getUserSignPayinfo();
+        }
+
+        this.info = res;
+      });
+    },
+    getUserSignPayinfo() {
+      this.$czapi.getUserSignPayinfo().then(res => {
+        //this.info = res;
+        this.pay.show = res.status == 0;
+      });
+    }
   },
   mounted() {
-		this.getUserSign();
-  //   this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
-  //   this.ksType = this.info.period;
+    this.getUserSign();
+    //   this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
+    //   this.ksType = this.info.period;
   }
 };
 </script>

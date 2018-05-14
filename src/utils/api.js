@@ -256,4 +256,10 @@ export default {
     submitUserSign: function (param) {
         return conmonAjax(`/api/usersign/submit`, param, "post");
     },
+    getUserSignPayinfo: function (param) {
+        return conmonAjax(`/api/usersign/getpayinfo`, param, "get");
+    },
+    toPaySingUp: function (param) {
+        return conmonAjax(`/api/usersign/paysingup`, param, "get");
+    },
 };
