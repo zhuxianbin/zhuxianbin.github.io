@@ -714,7 +714,7 @@ export default {
     },
     getUserSign() {
       this.$czapi.getUserSign().then(res => {
-        if (res.status == 1) {
+        if (res.status == 3) {
           this.getUserSignPayinfo();
         }
 
