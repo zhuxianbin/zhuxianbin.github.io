@@ -6,16 +6,16 @@
 				<div class="ant-layout ant-layout-chaozhi">
 					<div class="ant-layout-content">
 						<div class="color-6 font-size-16" @click='steps = steps?0:1'>报名表当前状态</div>
-						<template v-if="info.code === 202">
+						<template v-if="info.status === 4">
 							<div class="margin-top-20" style="color: #f00;">
 								报名表审核失败
 							</div>
 						</template>
 						<template v-else>
 							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
+								<el-step title="填写资料"></el-step>
+								<el-step title="资料审核" ></el-step>
 								<el-step title="缴纳报名费"></el-step>
-								<el-step title="填写资料" ></el-step>
-								<el-step title="资料审核"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
 							<!-- <div class="ui-step margin-top-20">
@@ -54,8 +54,8 @@
 								</v-row>
 							</div> -->
 
-							<paySiginUp v-if='steps==0'></paySiginUp>
-							<template v-if="info.status === 1">
+							
+							<template v-if="info.status === 0 || info.status === 1">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
@@ -238,7 +238,7 @@
 									<el-button type="warning" class="margin-left-20" @click="showConfirmForm">提交报名表</el-button>
 								</div>
 							</template>
-							<template v-if="info.status === 2">
+							<template v-if="info.status ===3">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
@@ -338,7 +338,8 @@
 										</tr> -->
 									</table>
 								</div>
-
+								<div v-if='info.status ==1'>
+								
 								<div class="margin-top-20">
 									<p class="font-size-18 color-warn">恭喜您提交报名信息成功！</p>
 									<p>超职会在3～5个工作日进行审核，请及时关注网校QQ群/微信群公告！</p>
@@ -359,8 +360,9 @@
 										<div class="margin-top-10">微信群二维码</div>
 									</div>
 								</div>
+								</div>
 							</template>
-							<template v-if="info.status === 3">
+							<!-- <template v-if="info.status === 3">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
@@ -450,17 +452,10 @@
 												</div>
 											</td>
 										</tr>
-										<!-- <tr>
-											<td>报名表</td>
-											<td colspan="4" class="color-6">
-												<div>
-													<a href="javascript:;">报名表.DOC</a>
-												</div>
-											</td>
-										</tr> -->
 									</table>
 								</div>
-							</template>
+							</template> -->
+							<paySiginUp v-if='steps==2'></paySiginUp>
 						</template>
 					</div>
 				</div>
@@ -585,11 +580,11 @@ export default {
         entry_form_file: "", //报名表照片
         avatar_file: "" //头像
       },
-      // info: {
-      //   user: {},
-      //   ext_info: {},
-      //   period: []
-      // },
+      info: {
+        user: {},
+        ext_info: {},
+        period: []
+      },
 
       sexType: [
         {
@@ -616,12 +611,12 @@ export default {
       fileList: []
     };
   },
-  computed: {
-    ...mapState({
-      info: state => state.userInfo
-      //cateList: state => state.cateList
-    })
-  },
+  // computed: {
+  //   ...mapState({
+  //     info: state => state.userInfo
+  //     //cateList: state => state.cateList
+  //   })
+  // },
   watch: {
     info: {
       handler(val, old) {
@@ -675,7 +670,7 @@ export default {
           }
           //确认提交资料
           this.$czapi
-            .submitUserInfo(params)
+            .submitUserSign(params)
             .then(({ code, msg, data_msg = [] }) => {
               if (code != 200) {
                 let keys = Object.keys.call(this, data_msg);
@@ -712,7 +707,7 @@ export default {
       }
 
       //确认提交资料
-      this.$czapi.addUserInfo(params).then(({ code, msg, data_msg = [] }) => {
+      this.$czapi.saveUserSign(params).then(({ code, msg, data_msg = [] }) => {
         if (code != 200) {
           let keys = Object.keys.call(this, data_msg);
           //console.log(this);
@@ -763,12 +758,19 @@ export default {
 
       this.fileList = [];
       return false;
-    }
-  }
-  // mounted() {
+		},
+		getUserSign(){
+			this.$czapi.getUserSign().then((res)=>{
+				console.log(res);
+				this.info = res;
+			});
+		}
+  },
+  mounted() {
+		this.getUserSign();
   //   this.param = { ...this.param, ...this.info.ext_info, ...this.info.user };
   //   this.ksType = this.info.period;
-  // }
+  }
 };
 </script>
 

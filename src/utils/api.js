@@ -1,15 +1,14 @@
 import Vue from "vue";
 import storage from "./storage";
 
-var uploadAction =
-    //"http://101.201.222.8:8081/api/file/upload" ||
-    "http://aci-api.chaozhiedu.com/api/file/upload";
 /**
  * 接口前缀
  * */
 var contentPath =
-    //"http://101.201.222.8:8081" || 
+    "http://101.201.222.8:8081" ||
     "http://aci-api.chaozhiedu.com";
+
+var uploadAction = contentPath + "/api/file/upload";
 
 var conmonAjax = function (url, param, type) {
     var userToken = storage.get("userToken").token;
@@ -246,5 +245,15 @@ export default {
      * */
     getSingupPayInfo: function (param) {
         return conmonAjax(`/api/user/getpayinfo`, param, "get");
+    },
+
+    getUserSign: function (param) {
+        return conmonAjax(`/api/usersign`, param, "get");
+    },
+    saveUserSign: function (param) {
+        return conmonAjax(`/api/usersign`, param, "post");
+    },
+    submitUserSign: function (param) {
+        return conmonAjax(`/api/usersign/submit`, param, "post");
     },
 };
