@@ -5,57 +5,18 @@
 				
 				<div class="ant-layout ant-layout-chaozhi">
 					<div class="ant-layout-content">
-						<div class="color-6 font-size-16" @click='steps = steps?0:1'>报名表当前状态</div>
-						<template v-if="info.status === 4">
-							<div class="margin-top-20" style="color: #f00;">
-								报名表审核失败
-							</div>
-						</template>
-						<template v-else>
-							<el-steps class="margin-top-20" finish-status="success" :active="steps" simple>
+						<!-- <div class="color-6 font-size-16" @click='steps = steps?0:1'>报名表当前状态</div>-->
+							<el-alert v-if='info.status === 4' title="报名表审核失败!" :description="info.user.reason" type="error"></el-alert>
+							
+							<el-steps v-else class="margin-top-20" finish-status="success" :active="steps" simple>
 								<el-step title="填写资料"></el-step>
 								<el-step title="资料审核" ></el-step>
 								<el-step title="审核中"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
-							<!-- <div class="ui-step margin-top-20">
-								<div class="bar"></div>
-								<v-row :gutter="200">
-									<v-col span="8">
-										<div class="item" :class="{active: info.code === 201 || info.code === 203 || info.code === 204}">
-											<div>
-												<span class="num">1</span>
-											</div>
-											<div class="margin-top-10 color-6">
-												<span class="text">填写资料</span>
-											</div>
-										</div>
-									</v-col>
-									<v-col span="8">
-										<div class="item" :class="{active: info.code === 203 || info.code === 204}">
-											<div>
-												<span class="num">2</span>
-											</div>
-											<div class="margin-top-10 color-6">
-												<span class="text">资料审核中</span>
-											</div>
-										</div>
-									</v-col>
-									<v-col span="8">
-										<div class="item" :class="{active: info.code === 204}">
-											<div>
-												<span class="num">3</span>
-											</div>
-											<div class="margin-top-10 color-6">
-												<span class="text">报名成功</span>
-											</div>
-										</div>
-									</v-col>
-								</v-row>
-							</div> -->
 
 							
-							<template v-if="info.status === 0 || info.status === 1">
+							<template v-if="info.status === 0 || info.status === 1 || info.status === 4">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
@@ -362,101 +323,6 @@
 								</div>
 								</div>
 							</template>
-							<!-- <template v-if="info.status === 3">
-								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
-								<div class="margin-top-10">
-									<table class="ui-table">
-										<tr>
-											<td>中文姓名</td>
-											<td style="width: 300px;">
-												{{param.cn_name}}
-											</td>
-											<td>英文姓名</td>
-											<td style="width: 300px;">
-												{{param.en_name}}
-											</td>
-											<td rowspan="4" style="width: 130px;">
-												<div>
-													<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;max-height: 160px;">
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>性别</td>
-											<td>
-												{{param.sex=="M"?"男":"女"}}
-											</td>
-											<td>出生日期</td>
-											<td>
-												{{param.birthday}}
-											</td>
-										</tr>
-										<tr>
-											<td>毕业院校</td>
-											<td>
-												{{param.college}}
-											</td>
-											<td>学历编号</td>
-											<td>
-												{{param.edu_num}}
-											</td>
-										</tr>
-										<tr>
-											<td>身份证/护照</td>
-											<td>
-												{{param.idcard}}
-											</td>
-											<td>电子邮件</td>
-											<td>
-												{{param.email}}
-											</td>
-										</tr>
-										<tr>
-											<td>联系电话</td>
-											<td>
-												{{param.contacts_phone}}
-											</td>
-											<td>居住地址</td>
-											<td colspan="2">
-												{{param.addr}}
-											</td>
-										</tr>
-										<tr>
-											<td>身份证复印件</td>
-											<td colspan="4" class="color-6">
-												<div>
-													<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
-															我的身份证复印件</a>
-													<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-20 link">
-															<i class="el-icon-picture"></i>
-															我的身份证复印件
-														</a>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>学历证书复印件</td>
-											<td colspan="4" class="color-6">
-												<div>
-													<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
-															我的学历证书复印件</a>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>学位证书复印件</td>
-											<td colspan="4" class="color-6">
-												<div>
-													<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
-															学位证书复印件</a>
-												</div>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</template> -->
-							
-						</template>
 					</div>
 				</div>
 			</div>
