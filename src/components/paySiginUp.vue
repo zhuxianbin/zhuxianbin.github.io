@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item label="订单价格" >
           <div class="inline-block" style="font-size: 28px;margin-right: 20px;">
-          <span class="color-warn">800.00</span>元</div>
+          <span class="color-warn">{{price}}</span>元</div>
           <!-- <el-button type="default" html-type="button" @click="refreshPrice()">刷新价格</el-button> -->
       </el-form-item>
       <el-form-item label="扫码支付" >
@@ -31,15 +31,17 @@ export default {
   name: "paySiginUp",
   data() {
     return {
-      qrcode: ""
+      qrcode: "",
+      price:""
     };
   },
   methods: {
     paySingup() {
       //获取支付报名费订单
-      this.$czapi.toPaySingUp({}).then(({ code, msg, qrcode }) => {
+      this.$czapi.toPaySingUp({}).then(({ code, msg, qrcode,price=800 }) => {
         console.log(code, msg);
         this.qrcode = qrcode;
+        this.price = price.toFixed(2);
       });
     },
     getPayInfo() {

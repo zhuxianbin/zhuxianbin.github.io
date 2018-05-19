@@ -10,7 +10,7 @@
 							
 							<el-steps v-else class="margin-top-20" finish-status="success" :active="steps" simple>
 								<el-step title="填写资料"></el-step>
-								<el-step title="资料审核" ></el-step>
+								<el-step title="提交资料" ></el-step>
 								<el-step title="审核中"></el-step>
 								<el-step title="报名成功"></el-step>
 							</el-steps>
@@ -199,7 +199,7 @@
 									<el-button type="warning" class="margin-left-20" @click="showConfirmForm">提交报名表</el-button>
 								</div>
 							</template>
-							<template v-if="info.status ===3">
+							<template v-if="info.status === 2 || info.status === 3">
 								<div class="text-center margin-top-20" style="font-size: 28px;">ACI注册国际心理咨询师培训考试报名表</div>
 								<div class="margin-top-10">
 									<table class="ui-table">
@@ -299,7 +299,7 @@
 										</tr> -->
 									</table>
 								</div>
-								<div v-if='info.status ==1'>
+								<div v-if='info.status == 2'>
 								
 								<div class="margin-top-20">
 									<p class="font-size-18 color-warn">恭喜您提交报名信息成功！</p>
