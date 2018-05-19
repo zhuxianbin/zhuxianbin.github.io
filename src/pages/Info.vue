@@ -35,7 +35,7 @@
 														<img :src="param.avatar_file+'?token='+Token" alt="" style="width: 130px;max-height: 160px;">
 													</div>
 													<div class="margin-top-10 text-center">
-														<el-upload name="avatar_file" :fileList="[]" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'avatar_file')}">
+														<el-upload name="avatar_file" :show-file-list="false" accept="image/jpeg,image/jpg,image/png" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'avatar_file')}">
 															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
@@ -98,13 +98,13 @@
 												<td>身份证复印件上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_front_file" :action="uploadAction"
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :show-file-list="false" name="idcard_front_file" :action="uploadAction"
 														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_front_file')}">
 															<el-button icon='el-icon-upload'>
 																选择正面图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+														<a v-if='param.idcard_front' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的身份证复印件</a>
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_front_file')" style="width: 110px;">选择正面图片</a> -->
 
@@ -112,14 +112,14 @@
 													<div class="margin-top-10">
 														<!-- <a class="ant-btn" href="javascript:;" @click="triggerUpload('idcard_reverse_file')" style="width: 110px;">选择反面图片</a> -->
 														<!--<span class="inline-block margin-left-10">我的身份证复印件.JPG</span>-->
-														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="idcard_reverse_file" :action="uploadAction"
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :show-file-list="false" name="idcard_reverse_file" :action="uploadAction"
 														 :before-upload="(file)=>{onBeforeUpload(file,'idcard_reverse_file')}">
 															<el-button icon='el-icon-upload'>
 																选择反面图片
 															</el-button>
 														</el-upload>
 														
-														<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link">
+														<a v-if='param.idcard_reverse' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link">
 															<i class="el-icon-picture"></i>
 															我的身份证复印件
 														</a>
@@ -132,12 +132,12 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('edu_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学历证书.JPG</span>-->
-														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="edu_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'edu_file')}">
+														<el-upload class='inline-block'  accept="image/jpeg,image/jpg,image/png" :show-file-list="false" name="edu_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'edu_file')}">
 															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+														<a v-if='param.edu' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的学历证书复印件</a>
 													</div>
 												</td>
@@ -148,12 +148,12 @@
 													<div>
 														<!-- <a href="javascript:;" @click="triggerUpload('degree_file')" class="ant-btn" style="width: 110px;">选择图片</a> -->
 														<!--<span class="inline-block margin-left-10">学位证书.JPG</span>-->
-														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :fileList="[]" name="degree_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'degree_file')}">
+														<el-upload class='inline-block' accept="image/jpeg,image/jpg,image/png" :show-file-list="false" name="degree_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'degree_file')}">
 															<el-button icon='el-icon-upload'>
 																选择图片
 															</el-button>
 														</el-upload>
-														<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+														<a v-if='param.degree' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															学位证书复印件</a>
 													</div>
 												</td>
@@ -162,12 +162,12 @@
 												<td>报名表上传</td>
 												<td colspan="4" class="color-6">
 													<div>
-														<el-upload class='inline-block' accept=".doc" :fileList="fileList" name="entry_form_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'entry_form_file')}">
+														<el-upload class='inline-block' accept=".doc" :show-file-list="false" name="entry_form_file" :action="uploadAction" :before-upload="(file)=>{onBeforeUpload(file,'entry_form_file')}">
 															<el-button icon='el-icon-upload'>
 																选择文件
 															</el-button>
 														</el-upload>
-														<!-- <v-upload name="entry_form_file" :fileList="[]" :action="uploadAction" :beforeUpload="onBeforeUpload">
+														<!-- <v-upload name="entry_form_file" :show-file-list="false" :action="uploadAction" :beforeUpload="onBeforeUpload">
 															<v-button type="ghost">
 																选择文件
 															</v-button>
@@ -262,9 +262,9 @@
 											<td>身份证复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a v-if='param.idcard_front_file' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+													<a v-if='param.idcard_front' :href='param.idcard_front_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的身份证复印件</a>
-													<a v-if='param.idcard_reverse_file' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-20 link">
+													<a v-if='param.idcard_reverse' :href='param.idcard_reverse_file+"?token="+Token' target="_blank" class="inline-block margin-left-20 link">
 															<i class="el-icon-picture"></i>
 															我的身份证复印件
 														</a>
@@ -275,7 +275,7 @@
 											<td>学历证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a v-if='param.edu_file' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+													<a v-if='param.edu' :href='param.edu_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															我的学历证书复印件</a>
 												</div>
 											</td>
@@ -284,7 +284,7 @@
 											<td>学位证书复印件</td>
 											<td colspan="4" class="color-6">
 												<div>
-													<a v-if='param.degree_file' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
+													<a v-if='param.degree' :href='param.degree_file+"?token="+Token' target="_blank" class="inline-block margin-left-10 link"><i class="el-icon-picture"></i>
 															学位证书复印件</a>
 												</div>
 											</td>
@@ -358,7 +358,6 @@ function verifyFileSuffix(file, arrow) {
   }
 }
 
-
 import paySiginUp from "@/components/paySiginUp";
 import { mapState } from "vuex";
 
@@ -424,7 +423,7 @@ export default {
       //   entry_form_file: "", //报名表照片
       //   avatar_file: "" //头像
       // }
-      fileList: [],
+      //fileList: [],
       pay: {
         show: false
       }
@@ -452,16 +451,16 @@ export default {
       return current && current.valueOf() >= Date.now();
     },
 
-    onChangeIdCardZm(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        console.log(info.file.name + " 上传成功.");
-      } else if (info.file.status === "error") {
-        console.log(info.file.name + " 上传失败.");
-      }
-    },
+    // onChangeIdCardZm(info) {
+    //   if (info.file.status !== "uploading") {
+    //     console.log(info.file, info.fileList);
+    //   }
+    //   if (info.file.status === "done") {
+    //     console.log(info.file.name + " 上传成功.");
+    //   } else if (info.file.status === "error") {
+    //     console.log(info.file.name + " 上传失败.");
+    //   }
+    // },
     triggerUpload(type) {
       console.log(type);
       document.getElementById("wtFile").click();
@@ -549,16 +548,13 @@ export default {
       // console.log(file, reqOptions, ccc);
       //let { token } = this.$storage.get("userToken");
 
-      let headers = {
-          Token: this.Token
-        },
-        formData = new FormData();
+      let formData = new FormData();
 
       formData.append("file", file);
 
-      fetch(this.uploadAction, {
+      fetch(`${this.uploadAction}?token=${this.Token}`, {
         method: "POST",
-        headers,
+        //headers,
         body: formData
       })
         .then(res => {
@@ -575,7 +571,8 @@ export default {
           }
         });
 
-      this.fileList = [];
+      //this.fileList = [];
+
       return false;
     },
     getUserSign() {

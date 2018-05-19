@@ -2,7 +2,7 @@
     <div class="index">
         <div class="ant-layout">
             <div class="ant-layout ant-layout-has-sider">
-                
+
                 <div class="ant-layout ant-layout-chaozhi">
                     <div class="ant-layout-content" style="padding: 0;">
                         <div class="color-6" style="padding: 25px 25px 0 25px;">
@@ -13,8 +13,7 @@
                                     </svg>
                                 </template>
                                 <template v-else>
-                                    <img :src="info.ext_info.avatar_file"
-                                         alt="" style="width: 80px;height: 80px;border-radius: 100%;">
+                                    <img :src="info.ext_info.avatar_file" alt="" style="width: 80px;height: 80px;border-radius: 100%;">
                                 </template>
                             </div>
                             <div class="inline-block margin-left-10">
@@ -60,8 +59,7 @@ import { mapState } from "vuex";
 export default {
   name: "Index",
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState({
@@ -76,5 +74,4 @@ export default {
 </script>
 
 <style>
-
 </style>
