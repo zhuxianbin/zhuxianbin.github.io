@@ -7,12 +7,12 @@
                     <div class="ant-layout-content" style="padding: 0;">
                         <div class="color-6" style="padding: 25px 25px 0 25px;">
                             <div class="inline-block">
-                                <template v-if="info.code !== 200">
+                                <template v-if="info.user.avatar==0">
                                     <svg class="icon inline-block" aria-hidden="true" style="width: 80px;height: 80px;">
                                         <use xlink:href="#icon-touxiang1"></use>
                                     </svg>
                                 </template>
-                                <template v-if="info.code === 200">
+                                <template v-else>
                                     <img :src="info.ext_info.avatar_file"
                                          alt="" style="width: 80px;height: 80px;border-radius: 100%;">
                                 </template>
