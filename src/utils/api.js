@@ -5,7 +5,7 @@ import storage from "./storage";
  * 接口前缀
  * */
 var contentPath =
-    "http://101.201.222.8:8081" ||
+    //"http://101.201.222.8:8081" ||
     "http://aci-api.chaozhiedu.com";
 
 var uploadAction = contentPath + "/api/file/upload";
