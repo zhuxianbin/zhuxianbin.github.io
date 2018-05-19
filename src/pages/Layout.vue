@@ -12,7 +12,7 @@
                     <i class="iconfont icon-shouye"></i>
                     <span slot="title">我的首页</span>
                 </el-menu-item>
-                <el-menu-item index="info">
+                <el-menu-item index="info" v-if='info.orders'>
                     <i class="iconfont icon-baoming"></i>
                     <span slot="title">我的报考资料</span>
                 </el-menu-item>
@@ -41,7 +41,7 @@
 
 <script>
 import layoutHeader from "@/components/header.vue";
-
+import { mapState } from "vuex";
 export default {
   name: "Layout",
   components: { layoutHeader },
@@ -49,6 +49,12 @@ export default {
     return {
       defaultActive: "index"
     };
+  },
+  computed: {
+    ...mapState({
+      info: state => state.userInfo
+      //cateList: state => state.cateList
+    })
   },
   watch: {
     $route(val) {

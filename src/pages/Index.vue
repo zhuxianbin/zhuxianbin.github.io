@@ -40,7 +40,7 @@
                             </p>
                         </div>
                         <hr>
-                        <div class="color-6" style="padding: 0 25px 25px 25px;">
+                        <div v-if='info.orders' class="color-6" style="padding: 0 25px 25px 25px;">
                             <p>亲爱的学员：</p>
                             <p style="margin-left: 28px;">您已参考网校的ACI注册国际心理咨询师课程培训，可以进行报名。</p>
                             <p style="margin-left: 28px;">职业培训教育网为您提供ACI注册国际心理咨询师培训考试一站式服务。</p>
