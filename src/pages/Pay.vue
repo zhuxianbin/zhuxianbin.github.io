@@ -24,6 +24,12 @@
                                                 <span class="color-warn">{{payData.price}}</span>元</div>
                                             <el-button type="default" html-type="button" @click="refreshPrice()">刷新价格</el-button>
                                         </el-form-item>
+                                        <el-form-item label="支付方式">
+                                            <el-radio-group v-model="payType" @change="getQRcode">
+                                                <el-radio label="wechat">微信支付</el-radio>
+                                                <el-radio label="alipay">支付宝</el-radio>
+                                            </el-radio-group>
+                                        </el-form-item>
                                         <el-form-item label="扫码支付" >
                                             <div style='width:200px;height:200px;padding:10px;border:1px solid #eee;'>
                                                 <img :src='payResult.qrcode' style='width:100%;' />
@@ -38,7 +44,9 @@
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/lingjichutezhao.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span>
                                         </el-form-item>
                                         <el-form-item label="支持支付类型">
-                                            <img src="/static/images/20180316111851.png">
+                                            <div style='width:320px;overflow:hidden;'>
+                                                <img src="/static/images/20180316111851.png">
+                                            </div>
                                         </el-form-item>
                                     </el-form>
                                 </div>
@@ -76,12 +84,14 @@
                         </div>
                     </el-dialog>
 
-                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog1" @cancel="alipayPayDialogCancle1" wrap-class-name="vertical-center-modal">
-                        <div class="clearfix" style="font-size: 16px;">
-                            <div class="pull-left margin-left-20">
-                                <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
-                            </div>
-                            <div class="pull-left margin-left-20" style="width: 450px;">
+                    <el-dialog title="支付提醒" width="800" :visible.sync="dialogs.alipay">
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="text-center" style='margin-top:30px;'>
+                                    <i class="iconfont icon-warning" style="font-size: 90px;color: #FF4000;"></i>
+                                </div>
+                            </el-col>
+                            <el-col :span="18">
                                 <div style="font-size: 24px;">
                                     请您在新打开的平台支付页面进行支付，
                                     <br/> 支付完成前请不要关闭该窗口
@@ -90,15 +100,14 @@
                                     在订单支付完成前请不要关闭此窗口，否则会影响购买。
                                 </div>
                                 <div class="margin-top-20">
-                                    <el-button type="primary">已完成支付</el-button>
-                                    <el-button type="default" style="margin-left: 10px;">未完成支付</el-button>
+                                    <el-button type="primary" @click='jumpAliPage()'>去支付</el-button>
+                                    <el-button @click='jumpAliPage()'>已支付完成</el-button>
                                 </div>
                                 <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
-                            </div>
-                            <!-- <div v-html="payResult.form"></div> -->
-                        </div>
+                            </el-col>
+                        </el-row>
                         <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle1">关闭</el-button>
+                            <div v-html='payResult.form'></div>
                         </div>
                     </el-dialog>
 
@@ -176,12 +185,15 @@ export default {
 
       payData: {},
 
-      payStyle: "wechat",
+      payType: "wechat",
 
       payState: {
         data: {}
       },
 
+      dialogs: {
+        alipay: false
+      },
       wechatPayDialog: false,
 
       yhkPayDialog: false,
@@ -205,75 +217,18 @@ export default {
           this.$message.success("刷新价格成功");
           this.getQRcode();
         });
-
-      //假设已经获取了
-      /*var data = {
-                              "code": 200,
-                              "msg": "获取成功",
-                              "data": "100"
-                          };
-                          vm.payData.price = data.data;
-                          vm.$message.success("刷新价格成功");*/
     },
     getQRcode() {
       this.$czapi
         .pay({
           product_id: this.payData.id,
-          channel: "ums"
+          channel: this.payType
         })
         .then(data => {
           this.payResult = data;
+
+          this.dialogs[this.payType] = true;
         });
-    },
-    pay() {
-      var vm = this;
-      if (vm.payStyle === "yhk") {
-        vm.yhkPayDialog = true;
-        return false;
-      }
-      this.$czapi
-        .pay({
-          product_id: this.payData.id,
-          channel: this.payStyle
-        })
-        .then(data => {
-          if (data.code !== 200) {
-            this.$modal.error({
-              title: "温馨提示",
-              content: data.msg
-            });
-            return false;
-          }
-
-          if (vm.payStyle === "wechat") {
-            vm.wechatPayDialog = true;
-          }
-
-          this.payResult = data;
-          //console.log(data, "pay");
-          //this.$nextTick(() => {
-          //   if (this.payStyle === "alipay") {
-          //     this.alipayPayDialog1 = true;
-          //     // vm.alipayPayDialog2 = true;
-          //     // vm.alipayPayDialog3 = true;
-          //     this.openNew(
-          //       `http://aci-api.chaozhiedu.com/api/pay/alipay/${
-          //         this.payState.token
-          //       }`
-          //     );
-          //     // let form = $(data.form)[0];
-          //     // $("body").append(form);
-          //     // form.submit();
-          //     // $(form).remove();
-          //     //document.forms["alipaysubmit"].submit();
-          //   }
-          //});
-        });
-
-      /*console.log({
-                              product_id: vm.payData.id,
-                              channel: vm.payStyle
-                          })*/
     },
 
     wechatPayDialogCancle() {
@@ -310,6 +265,11 @@ export default {
           //this.alipayPayDialog1 = false;
           this.wechatPayDialog = false;
         });
+    },
+    jumpAliPage() {
+      console.log(document.getElementById("alipaysubmit"));
+      document.getElementById("alipaysubmit").target = "_blank";
+      document.forms["alipaysubmit"].submit();
     }
   },
   mounted() {},
@@ -348,5 +308,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
