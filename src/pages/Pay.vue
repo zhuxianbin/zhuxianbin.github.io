@@ -173,6 +173,7 @@ export default {
         })
         .then(({ code, msg }) => {
           if (code != 200) {
+            clearTimeout(timer);
             timer = setTimeout(() => {
               this.getPayResult(token);
             }, 5000);
