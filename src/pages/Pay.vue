@@ -32,8 +32,14 @@
                                         </el-form-item>
                                         <el-form-item label="扫码支付" >
                                             <div style='width:200px;height:200px;padding:10px;border:1px solid #eee;'>
-                                                <img :src='payResult.qrcode' style='width:100%;' />
+                                                <img :src='qrcode' style='width:100%;' />
                                             </div>
+                                        </el-form-item>
+                                        <!-- <el-form-item v-if='payType=="alipay"' label="">
+                                            
+                                            <el-button type="primary" @click='jumpAliPage()'>去支付宝支付</el-button>
+                                        </el-form-item> -->
+                                        <el-form-item label="">
                                             <span v-if='payData.id==20'>购买及表示您同意《
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/jinpailubo.docx'>【超职教育】18年＜金牌录播＞·协议</a>》</span>
                                             <span v-if='payData.id==10'>购买及表示您同意《
@@ -49,69 +55,12 @@
                                             </div>
                                         </el-form-item>
                                     </el-form>
+                                    <div v-html='payResult.form'></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <el-dialog title="微信支付" width="800" :visible="wechatPayDialog" @cancel="wechatPayDialogCancle" wrap-class-name="vertical-center-modal">
-                        <div class="text-center" style="font-size: 16px;">
-                            <p>购买{{payData.name}}
-                                <br/> 支付{{payData.price}} 元</p>
-                            <p>
-                                <img :src='payResult.qrcode' style='width:200px;height:200px;' />
-                            </p>
-                            <p>
-                                <svg class="icon inline-block" aria-hidden="true" style="font-size: 60px;margin-top: -20px;">
-                                    <use xlink:href="#icon-weixinzhifu"></use>
-                                </svg>
-                            </p>
-                            <p style="font-size: 18px;">支付遇到问题：请联系010-51657777</p>
-                        </div>
-                        <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="wechatPayDialogCancle">关闭</el-button>
-                        </div>
-                    </el-dialog>
-
-                    <el-dialog title="银行卡对公转账" width="800" :visible="yhkPayDialog" @cancel="yhkPayDialogCancle" wrap-class-name="vertical-center-modal">
-                        <div style="font-size: 16px;">
-                            <p style="font-weight: bold;">{{payState.data.title}}</p>
-                            <pre v-html='payState.data.content'></pre>
-                            <p style='color:orange;font-size:12px;'>{{payState.data.tip}}</p>
-                        </div>
-                        <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="yhkPayDialogCancle">关闭</el-button>
-                        </div>
-                    </el-dialog>
-
-                    <el-dialog title="支付提醒" width="800" :visible.sync="dialogs.alipay">
-                        <el-row>
-                            <el-col :span="6">
-                                <div class="text-center" style='margin-top:30px;'>
-                                    <i class="iconfont icon-warning" style="font-size: 90px;color: #FF4000;"></i>
-                                </div>
-                            </el-col>
-                            <el-col :span="18">
-                                <div style="font-size: 24px;">
-                                    请您在新打开的平台支付页面进行支付，
-                                    <br/> 支付完成前请不要关闭该窗口
-                                </div>
-                                <div class="margin-top-20" style="font-size: 14px;color: #FF4000;">
-                                    在订单支付完成前请不要关闭此窗口，否则会影响购买。
-                                </div>
-                                <div class="margin-top-20">
-                                    <el-button type="primary" @click='jumpAliPage()'>去支付</el-button>
-                                    <el-button @click='jumpAliPage()'>已支付完成</el-button>
-                                </div>
-                                <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
-                            </el-col>
-                        </el-row>
-                        <div slot="footer">
-                            <div v-html='payResult.form'></div>
-                        </div>
-                    </el-dialog>
-
-                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog2" @cancel="alipayPayDialogCancle2" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="支付提醒" width="800" :visible.sync="dialogSuccess">
                         <div class="clearfix" style="font-size: 16px;">
                             <div class="pull-left margin-left-20">
                                 <i class="iconfont icon-chenggong" style="font-size: 100px;color: #7ED321;"></i>
@@ -130,12 +79,12 @@
                                 <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
                             </div>
                         </div>
-                        <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle2">关闭</el-button>
-                        </div>
+                        <!-- <div slot="footer">
+                            <el-button key="cancel" type="ghost" size="large" @click="dialogSuccess=false">关闭</el-button>
+                        </div> -->
                     </el-dialog>
 
-                    <el-dialog title="支付提醒" width="800" :visible="alipayPayDialog3" @cancel="alipayPayDialogCancle3" wrap-class-name="vertical-center-modal">
+                    <el-dialog title="支付提醒" width="800" :visible.sync="dialogFail">
                         <div class="clearfix" style="font-size: 16px;">
                             <div class="pull-left margin-left-20">
                                 <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
@@ -154,9 +103,9 @@
                                 <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
                             </div>
                         </div>
-                        <div slot="footer">
+                        <!-- <div slot="footer">
                             <el-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle3">关闭</el-button>
-                        </div>
+                        </div> -->
                     </el-dialog>
                 </div>
             </el-main>
@@ -167,6 +116,8 @@
 
 <script>
 let timer = 0;
+
+import QRCode from "qrcode";
 import layoutHeader from "@/components/header.vue";
 
 export default {
@@ -176,41 +127,20 @@ export default {
   },
   data() {
     return {
-      labelCol: {
-        span: 2
-      },
-      wrapperCol: {
-        span: 22
-      },
-
       payData: {},
-
       payType: "wechat",
-
-      payState: {
-        data: {}
-      },
-
-      dialogs: {
-        alipay: false
-      },
-      wechatPayDialog: false,
-
-      yhkPayDialog: false,
-
-      alipayPayDialog1: false,
-      alipayPayDialog2: false,
-      alipayPayDialog3: false,
+      dialogSuccess: false,
+      dialogFail: false,
       cateList: [],
-      payResult: {}
+      payResult: {},
+      qrcode: ""
     };
   },
   methods: {
     refreshPrice() {
-      //console.log(this.payState);
       this.$czapi
         .refreshPrice({
-          token: this.payState.token
+          token: this.payResult.token
         })
         .then(data => {
           this.payData.price = data.data;
@@ -226,27 +156,15 @@ export default {
         })
         .then(data => {
           this.payResult = data;
-
-          this.dialogs[this.payType] = true;
+          this.getPayResult(data.token);
+          data.qrtext &&
+            QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
+              url => {
+                console.log(url);
+                this.qrcode = url;
+              }
+            );
         });
-    },
-
-    wechatPayDialogCancle() {
-      this.wechatPayDialog = false;
-    },
-
-    yhkPayDialogCancle() {
-      this.yhkPayDialog = false;
-    },
-
-    alipayPayDialogCancle1() {
-      this.alipayPayDialog1 = false;
-    },
-    alipayPayDialogCancle2() {
-      this.alipayPayDialog2 = false;
-    },
-    alipayPayDialogCancle3() {
-      this.alipayPayDialog3 = false;
     },
     getPayResult(token) {
       this.$czapi
@@ -257,19 +175,30 @@ export default {
           if (code != 200) {
             timer = setTimeout(() => {
               this.getPayResult(token);
-            }, 3000);
+            }, 5000);
             return false;
           }
 
-          this.alipayPayDialog2 = true;
-          //this.alipayPayDialog1 = false;
-          this.wechatPayDialog = false;
+          this.dialogSuccess = true;
         });
     },
-    jumpAliPage() {
-      console.log(document.getElementById("alipaysubmit"));
-      document.getElementById("alipaysubmit").target = "_blank";
-      document.forms["alipaysubmit"].submit();
+    // jumpAliPage() {
+    //   console.log(document.getElementById("alipaysubmit"));
+    //   document.getElementById("alipaysubmit").target = "_blank";
+    //   document.forms["alipaysubmit"].submit();
+    // },
+    getPayInfo() {
+      this.$czapi
+        .getPayInfo({
+          product_id: this.payData.id,
+          channel: this.payType
+        })
+        .then(data => {
+          this.payData = data.product;
+          this.payData.price = data.price;
+
+          this.getQRcode();
+        });
     }
   },
   mounted() {},
@@ -281,20 +210,10 @@ export default {
         id
       };
     }
-    console.log(window.payData);
+    //console.log(window.payData);
     if (window.payData) {
       this.payData = window.payData;
-      this.$czapi
-        .getPayInfo({
-          product_id: this.payData.id
-        })
-        .then(data => {
-          this.payData = data.product;
-          this.payState = data;
-          this.payData.price = data.price;
-          this.getPayResult(data.token);
-          this.getQRcode();
-        });
+      this.getPayInfo();
     } else {
       this.$router.push({
         name: "Male"
