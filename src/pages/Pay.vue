@@ -156,6 +156,14 @@ export default {
           channel: this.payType
         })
         .then(data => {
+          if (data.code == 202) {
+            return this.$alert("您已经购买该商品", "温馨提示", {
+              confirmButtonText: "确定",
+              callback: action => {
+                this.$router.back();
+              }
+            });
+          }
           this.payResult = data;
           this.getPayResult(data.token);
           data.qrtext &&
@@ -172,17 +180,6 @@ export default {
           token
         })
         .then(({ code, msg }) => {
-          if (code == 202) {
-            return this.$alert("您已经购买该商品", "温馨提示", {
-              confirmButtonText: "确定",
-              callback: action => {
-                this.$message({
-                  type: "info",
-                  message: `action: ${action}`
-                });
-              }
-            });
-          }
           if (code != 200) {
             clearTimeout(timer);
             timer = setTimeout(() => {
