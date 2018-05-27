@@ -127,7 +127,7 @@ export default {
     return {
       payData: {},
       payType: "wechat",
-      dialogSuccess: true,
+      dialogSuccess: false,
       dialogFail: false,
       cateList: [],
       payResult: {},
