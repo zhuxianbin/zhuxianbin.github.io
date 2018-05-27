@@ -61,12 +61,14 @@
                         </div>
                     </div>
                     <el-dialog title="支付提醒" width="800" :visible.sync="dialogSuccess">
-                        <div class="clearfix" style="font-size: 16px;">
-                            <div class="pull-left margin-left-20">
-                                <i class="iconfont icon-chenggong" style="font-size: 100px;color: #7ED321;"></i>
+                        <el-row>
+                          <el-col :span="6">
+                            <div class="text-center" style='padding-top:20px;'>
+                                <i class="iconfont icon-chenggong" style="font-size: 70px;color: #7ED321;"></i>
                             </div>
-                            <div class="pull-left margin-left-20" style="width: 450px;">
-                                <div style="font-size: 24px;">
+                          </el-col>
+                          <el-col :span="18">
+                               <div style="font-size: 24px;">
                                     恭喜您，支付成功
                                 </div>
                                 <div class="margin-top-20" style="font-size: 14px;">
@@ -77,19 +79,18 @@
                                     <el-button @click="$router.push('/courselist')" type="default" style="margin-left: 10px;">进入我的课程</el-button>
                                 </div>
                                 <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
-                            </div>
-                        </div>
-                        <!-- <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="dialogSuccess=false">关闭</el-button>
-                        </div> -->
+                          </el-col>
+                        </el-row>
                     </el-dialog>
 
                     <el-dialog title="支付提醒" width="800" :visible.sync="dialogFail">
-                        <div class="clearfix" style="font-size: 16px;">
-                            <div class="pull-left margin-left-20">
-                                <i class="iconfont icon-warning" style="font-size: 100px;color: #FF4000;"></i>
-                            </div>
-                            <div class="pull-left margin-left-20" style="width: 450px;">
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="text-center" style='padding-top:20px;'>
+                                    <i class="iconfont icon-warning" style="font-size: 70px;color: #FF4000;"></i>
+                                </div>
+                            </el-col>
+                            <el-col :span="18">
                                 <div style="font-size: 24px;">
                                     支付失败，请点击重新支付
                                 </div>
@@ -97,15 +98,12 @@
                                     订单信息：{{payData.name}}
                                 </div>
                                 <div class="margin-top-20">
-                                    <el-button type="error">重新支付</el-button>
-                                    <el-button type="default" style="margin-left: 10px;">返回商城</el-button>
+                                    <el-button type="error" @click='dialogFail = false '>重新支付</el-button>
+                                    <el-button type="default" @click="$router.push('/male')" style="margin-left: 10px;">返回商城</el-button>
                                 </div>
                                 <div class="margin-top-20" style="font-size: 18px;">支付遇到问题：请联系010-51657777</div>
-                            </div>
-                        </div>
-                        <!-- <div slot="footer">
-                            <el-button key="cancel" type="ghost" size="large" @click="alipayPayDialogCancle3">关闭</el-button>
-                        </div> -->
+                            </el-col>
+                        </el-row>
                     </el-dialog>
                 </div>
             </el-main>
@@ -143,6 +141,9 @@ export default {
           token: this.payResult.token
         })
         .then(data => {
+          if (data.code != 200) {
+            return this.$message.error(data.msg);
+          }
           this.payData.price = data.data;
           this.$message.success("刷新价格成功");
           this.getQRcode();
@@ -171,7 +172,7 @@ export default {
           token
         })
         .then(({ code, msg }) => {
-          if (data.code == 202) {
+          if (code == 202) {
             return this.$alert("您已经购买该商品", "温馨提示", {
               confirmButtonText: "确定",
               callback: action => {
@@ -212,8 +213,7 @@ export default {
         });
     }
   },
-  mounted() {},
-  activated() {
+  mounted() {
     this.payResult = {};
     let { id } = this.$route.query;
     if (id) {
@@ -231,7 +231,7 @@ export default {
       });
     }
   },
-  deactivated() {
+  beforeDestroy() {
     clearTimeout(timer);
   }
 };

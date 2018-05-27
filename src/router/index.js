@@ -15,13 +15,13 @@ export default new Router({
         {
             path: "/",
             name: "Login",
-            component: () => import("@/pages/Login"),
+            component: () => import("@/pages/Login")
         },
         {
             path: "/login",
             name: "Login",
             // component: Login
-            component: () => import("@/pages/Login"),
+            component: () => import("@/pages/Login")
         },
         {
             path: "/page",
@@ -33,29 +33,44 @@ export default new Router({
                     path: "/index",
                     name: "Index",
                     // component: Index
-                    component: () => import("@/pages/Index")
+                    component: () => import("@/pages/Index"),
+                    meta: {
+                        keepAlive: true
+                    }
                 },
                 {
                     path: "/courselist",
                     name: "Courselist",
-                    component: () => import("@/pages/courselist")
+                    component: () => import("@/pages/courselist"),
+                    meta: {
+                        keepAlive: true
+                    }
                 },
                 {
                     path: "/livelist",
                     name: "livelist",
-                    component: () => import("@/pages/livelist")
+                    component: () => import("@/pages/livelist"),
+                    meta: {
+                        keepAlive: true
+                    }
                 },
                 {
                     path: "/filelist",
                     name: "filelist",
-                    component: () => import("@/pages/filelist")
+                    component: () => import("@/pages/filelist"),
+                    meta: {
+                        keepAlive: true
+                    }
                 },
-                
+
                 {
                     path: "/info",
                     name: "Info",
                     // component: Info
-                    component: () => import("@/pages/Info")
+                    component: () => import("@/pages/Info"),
+                    meta: {
+                        keepAlive: true
+                    }
                 }
             ]
         },
@@ -68,7 +83,10 @@ export default new Router({
         {
             path: "/male",
             name: "Male",
-            component: () => import("@/pages/Male")
+            component: () => import("@/pages/Male"),
+            meta: {
+                keepAlive: true
+            }
         }
     ]
 });
