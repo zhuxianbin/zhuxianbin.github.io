@@ -30,15 +30,15 @@
                                                 <el-radio label="alipay">支付宝</el-radio>
                                             </el-radio-group>
                                         </el-form-item>
-                                        <el-form-item label="扫码支付" >
+                                        <el-form-item v-if='payType=="wechat"' label="扫码支付" >
                                             <div style='width:200px;height:200px;padding:10px;border:1px solid #eee;'>
                                                 <img :src='qrcode' style='width:100%;' />
                                             </div>
                                         </el-form-item>
-                                        <!-- <el-form-item v-if='payType=="alipay"' label="">
+                                        <el-form-item v-if='payType=="alipay"' label="">
                                             
                                             <el-button type="primary" @click='jumpAliPage()'>去支付宝支付</el-button>
-                                        </el-form-item> -->
+                                        </el-form-item>
                                         <el-form-item label="">
                                             <span v-if='payData.id==20'>购买及表示您同意《
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/jinpailubo.docx'>【超职教育】18年＜金牌录播＞·协议</a>》</span>
@@ -160,7 +160,6 @@ export default {
           data.qrtext &&
             QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
               url => {
-                console.log(url);
                 this.qrcode = url;
               }
             );
@@ -172,6 +171,17 @@ export default {
           token
         })
         .then(({ code, msg }) => {
+          if (data.code == 202) {
+            return this.$alert("您已经购买该商品", "温馨提示", {
+              confirmButtonText: "确定",
+              callback: action => {
+                this.$message({
+                  type: "info",
+                  message: `action: ${action}`
+                });
+              }
+            });
+          }
           if (code != 200) {
             clearTimeout(timer);
             timer = setTimeout(() => {
@@ -183,11 +193,11 @@ export default {
           this.dialogSuccess = true;
         });
     },
-    // jumpAliPage() {
-    //   console.log(document.getElementById("alipaysubmit"));
-    //   document.getElementById("alipaysubmit").target = "_blank";
-    //   document.forms["alipaysubmit"].submit();
-    // },
+    jumpAliPage() {
+      //console.log(document.getElementById("alipaysubmit"));
+      document.getElementById("alipaysubmit").target = "_blank";
+      document.forms["alipaysubmit"].submit();
+    },
     getPayInfo() {
       this.$czapi
         .getPayInfo({
