@@ -13,7 +13,7 @@
     "test": "git push https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git"
   },
   "dependencies": {
-    "element-ui": "^2.3.4",
+    "element-ui": "^2.3.9",
     "es5-shim": "^4.5.10",
     "es6-promise": "^4.2.4",
     "fetch-ie8": "^1.5.0",

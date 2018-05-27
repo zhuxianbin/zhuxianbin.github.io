@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <el-dialog title="支付提醒" width="800" :visible.sync="dialogSuccess">
+                    <el-dialog title="支付提醒" width="800" :show-close='false' :close-on-press-escape='false' :close-on-click-modal='false' :visible.sync="dialogSuccess">
                         <el-row>
                           <el-col :span="6">
                             <div class="text-center" style='padding-top:20px;'>
@@ -127,7 +127,7 @@ export default {
     return {
       payData: {},
       payType: "wechat",
-      dialogSuccess: false,
+      dialogSuccess: true,
       dialogFail: false,
       cateList: [],
       payResult: {},
