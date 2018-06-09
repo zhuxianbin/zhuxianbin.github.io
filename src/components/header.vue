@@ -28,6 +28,9 @@
                             <el-menu-item index="2-4">
                                 <a href='./index.html?r=789#/male?cate=4' class="link" style='color:#fff;'>ACI国际注册营养师</a>
                             </el-menu-item>
+                            <el-menu-item index="2-5">
+                                <a href='./index.html?r=789#/male?cate=35' class="link" style='color:#fff;'>消防工程师</a>
+                            </el-menu-item>
                         </el-submenu>
                         <el-menu-item index="3">
                             <router-link to="/male" class="link">超职商城</router-link>
