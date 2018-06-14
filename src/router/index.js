@@ -71,11 +71,19 @@ export default new Router({
                     meta: {
                         keepAlive: true
                     }
+                },{
+                    path: "/orders",
+                    name: "orders",
+                    // component: Info
+                    component: () => import("@/pages/orders"),
+                    meta: {
+                        keepAlive: true
+                    }
                 }
             ]
         },
         {
-            path: "/pay",
+            path: "/pay/:id?",
             name: "Pay",
             // component: Pay
             component: () => import("@/pages/Pay")

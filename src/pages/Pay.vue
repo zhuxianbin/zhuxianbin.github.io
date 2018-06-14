@@ -212,7 +212,7 @@ export default {
   },
   mounted() {
     this.payResult = {};
-    let { id } = this.$route.query;
+    let { id } = this.$route.params;
     if (id) {
       window.payData = {
         id

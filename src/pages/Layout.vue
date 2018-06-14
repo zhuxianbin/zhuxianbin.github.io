@@ -8,26 +8,30 @@
                 router
                 :default-active="defaultActive"
                 class="el-menu-vertical-demo">
-                <el-menu-item index="index">
-                    <i class="iconfont icon-shouye"></i>
-                    <span slot="title">我的首页</span>
-                </el-menu-item>
-                <el-menu-item index="info" v-if='info.orders'>
-                    <i class="iconfont icon-baoming"></i>
-                    <span slot="title">我的报考资料</span>
-                </el-menu-item>
-                <el-menu-item index="livelist">
-                    <i class="iconfont icon-kecheng"></i>
-                    <span slot="title">我的直播课程</span>
-                </el-menu-item>
-                <el-menu-item index="courselist">
-                    <i class="iconfont icon-kecheng"></i>
-                    <span slot="title">我的预习课程</span>
-                </el-menu-item>
-                <el-menu-item index="filelist">
-                    <i class="iconfont icon-kecheng"></i>
-                    <span slot="title">我的学习资料</span>
-                </el-menu-item>
+                  <el-menu-item index="index">
+                      <i class="iconfont icon-shouye"></i>
+                      <span slot="title">我的首页</span>
+                  </el-menu-item>
+                  <el-menu-item index="info" v-if='info.orders'>
+                      <i class="iconfont icon-baoming"></i>
+                      <span slot="title">我的报考资料</span>
+                  </el-menu-item>
+                  <el-menu-item index="livelist">
+                      <i class="iconfont icon-kecheng"></i>
+                      <span slot="title">我的直播课程</span>
+                  </el-menu-item>
+                  <el-menu-item index="courselist">
+                      <i class="iconfont icon-kecheng"></i>
+                      <span slot="title">我的预习课程</span>
+                  </el-menu-item>
+                  <el-menu-item index="filelist">
+                      <i class="iconfont icon-kecheng"></i>
+                      <span slot="title">我的学习资料</span>
+                  </el-menu-item>
+                  <el-menu-item index="orders">
+                      <i class="iconfont icon-kecheng"></i>
+                      <span slot="title">我的课程订单</span>
+                  </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-main class="cz-main">
