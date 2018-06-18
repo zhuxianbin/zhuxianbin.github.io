@@ -68,7 +68,7 @@ export default {
       });
     },
     doOption(item) {
-      if (item.status < 0) {
+      if (item.status <= 0) {
         return this.$router.push(`/pay/${item.product_id}`);
       }
 
