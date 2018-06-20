@@ -50,8 +50,8 @@
                                               <div class="margin-top-10">
                                                   <span class="inline-block text-right">活动价：</span>
                                                   <span class="inline-block">
-                                                      <span style="font-size: 28px;color: #FE6500;">{{it.price}}</span> 元
-                                                      <s style="font-size: 20px;margin-left: 20px;">{{it.original_price}}元</s>
+                                                      <span style="font-size: 26px;color: #FE6500;">{{it.price}}</span> 元
+                                                      <s style="font-size: 18px;margin-left: 10px;">{{it.original_price}}元</s>
                                                   </span>
                                               </div>
                                               <div class="margin-top-10 text-center">
@@ -114,7 +114,7 @@ export default {
   data() {
     return {
       layout: {
-        gutter: 32,
+        gutter: 20,
         span: 12
       },
       rows: [],
