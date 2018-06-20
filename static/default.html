@@ -126,7 +126,6 @@
 </head>
 
 <body style='color:#fff;'>
-<<<<<<< HEAD
 	<div id="app" style="min-height: 100%;">
 		<div class="ant-layout">
 			<div class="ant-layout-header">
@@ -182,63 +181,6 @@
 					</div>
 				</div>
 			</div>
-=======
-    <div id="app" style="min-height: 100%;">
-        <div class="ant-layout">
-            <div class="ant-layout-header">
-                <div style='width:1200px;margin:0 auto;'>
-                    <div class="logo" style="margin-right:60px;">
-                        <img src="./static/images/logo-4.png" alt="logo">
-                    </div>
-                    <ul class="ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark">
-                        <li class="ant-menu-item ant-menu-item-selected">
-                            <a href="/default.html#firstpage">首页</a>
-                        </li>
-                        <li class="ant-menu-item hasSubmenu">
-                            <a>课程分类
-                                <i class="iconfont icon-jiantou font-size-14 margin-left-10"></i>
-                            </a>
-                            <div class="sub-menu-tip">
-                                <em class="arrow"></em>
-                                <div>
-                                    <ul>
-                                        <li>
-                                            <a target="_blank" href='./static/course_01.html'>ACI心理咨询师课程</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href='./index.html#/male?cate=5'>专科/本科教育</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href='./index.html#/male?cate=3'>人力资源管理师</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href='./index.html#/male?cate=4'>ACI国际注册营养师</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href='./index.html#/male?cate=35'>消防工程师</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ant-menu-item">
-                            <a target="_blank" href='./index.html#/male'>超职商城</a>
-                        </li>
-                        <li class="ant-menu-item">
-                            <a target="_blank" href='http://news.chaozhiedu.com'>资讯中心</a>
-                        </li>
-                        <li class="ant-menu-item">
-                            <a target="_blank" href='./static/about.html'>关于超职</a>
-                        </li>
-                    </ul>
-                    <div class="header-login">
-                        <img src='./static/images/icon-tel.png' style='height:24px;vertical-align:middle'>
-                        <span style='font-size:16px;margin-right:50px;'>010-51657777</span>
-                        <a class='ant-btn ant-btn-background-ghost' style="font-size: 16px;" href="/index.html#/login">学员登录</a>
-                    </div>
-                </div>
-            </div>
->>>>>>> 7242a0399ec82559ce6142ea46211de1dd2ac0c2
 
 			<div id='firstpage' class="index-banner" ref="indexBanner" style="width: 100%;position:relative;overflow: hidden;">
 				<div class="swiper-container">
@@ -1035,101 +977,6 @@
 							</a>
 						</div>
 
-<<<<<<< HEAD
-						<div style="margin-top: 5px;">
-							友情链接:
-							<a target="_blank" title="ACI心理咨询师" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">ACI心理咨询师</font>
-							</a>
-
-							<a target="_blank" title="心理咨询师" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">心理咨询师</font>
-							</a>
-							<a target="_blank" title="国际心理咨询师培训" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">国际心理咨询师培训</font>
-							</a>
-							<a target="_blank" title="心理咨询" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">心理咨询</font>
-							</a>
-							<a target="_blank" title="心理咨询师报名" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">心理咨询师报名</font>
-							</a>
-							<a target="_blank" title="初级中级高级营养师" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">初级中级高级营养师</font>
-							</a>
-							<a target="_blank" title="经济师" href="http://www.chaozhiedu.com/">
-								<font color="#FFF"> 经济师</font>
-							</a>
-							<a target="_blank" title="报考条件" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">报考条件</font>
-							</a>
-							<a target="_blank" title="报考费用时间" href="http://www.chaozhiedu.com/">
-								<font color="#FFF">报考费用时间</font>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="./static/js/bootstrap.min.js"></script>
-	<script src="./static/js/index.js"></script>
-	<script src="./static/js/swiper/idangerous.swiper.min.js"></script>
-	<!-- <script src="http://2.swiper.com.cn/dist/js/idangerous.swiper.min.js"></script> -->
-	<script src="./static/js/wow/wow.min.js"></script>
-	<script src="./static/font/iconfont.js"></script>
-	<script src="./static/js/custom.js"></script>
-	<script>
-		function doKF() {
-			$('#looyu_dom_1').click();
-		}
-
-		$(function () {
-			/*banner图自适应*/
-			var wh = $(window).height();
-			var $indexBanner = $("#firstpage");
-			$indexBanner.height(430);
-
-			$(window).resize(function () {
-				var wh = $(window).height();
-				$indexBanner.height(430);
-			});
-
-			var swiper = new Swiper('.swiper-container', {
-				//spaceBetween: 30,
-				//effect: 'fade',
-				// pagination: {
-				//     el: '.swiper-pagination',
-				//     clickable: true
-				// },
-				// autoplay: {
-				//     delay: 5000,
-				//     disableOnInteraction: false
-				// }
-			});
-
-			//启动滚屏动画
-			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
-				new WOW().init();
-			};
-		})
-
-	</script>
-	<!-- <script type="text/javascript" charset="utf-8" src="http://lead.soperson.com/20003131/10088703.js"></script> -->
-	<script>
-		var _hmt = _hmt || [];
-		(function () {
-			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?7bfd0785edee59ac062cb5f55b999fae";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-
-	</script>
-	<script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script>
-	<!-- <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script> -->
-=======
                         <div style="margin-top: 5px;">
                             友情链接:
                             <a target="_blank" title="ACI心理咨询师" href="http://www.chaozhiedu.com/">
@@ -1227,7 +1074,6 @@
     </script>
     <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script>
     <!-- <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script> -->
->>>>>>> 7242a0399ec82559ce6142ea46211de1dd2ac0c2
 </body>
 
 </html>
