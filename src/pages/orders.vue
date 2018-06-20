@@ -11,7 +11,9 @@
         </template>
       </el-table-column>
       <el-table-column width="120" label="支付状态">
-
+        <template slot-scope="scope">
+          {{status[scope.row.status]}}
+        </template>
       </el-table-column>
       <el-table-column width="180" label="下单时间">
         <template slot-scope="scope">
@@ -23,7 +25,6 @@
           <div class='text-center'>
             <div v-if="scope.row.status==2">
               <el-button @click="doOption(scope.row)" type="primary">学员协议</el-button>
-              
               <a type="button" target="_blank" :href="getPIAO(scope.row)" class="el-button el-button--text"><!----><!----><span>电子收据</span></a>
             </div>
             <el-button @click="doOption(scope.row)" v-if="scope.row.status==0" type="success">去支付</el-button>
@@ -50,6 +51,12 @@ export default {
       dialogs: {
         show: false,
         data: ""
+      },
+      status: {
+        "-2": "订单超时",
+        "-1": "订单取消",
+        "0": "待支付",
+        "2": "支付完成"
       }
     };
   },
