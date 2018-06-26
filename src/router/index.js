@@ -14,14 +14,26 @@ export default new Router({
     routes: [
         {
             path: "/",
-            name: "Login",
-            component: () => import("@/pages/Login")
+            name: "home",
+            redirect: "/login"
         },
         {
             path: "/login",
             name: "Login",
             // component: Login
-            component: () => import("@/pages/Login")
+            component: () => import("@/pages/login/index")
+        },
+        {
+            path: "/forget",
+            name: "forget",
+            // component: Login
+            component: () => import("@/pages/login/forget")
+        },
+        {
+            path: "/register",
+            name: "register",
+            // component: Login
+            component: () => import("@/pages/login/register")
         },
         {
             path: "/page",

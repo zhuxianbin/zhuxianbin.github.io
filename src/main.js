@@ -6,7 +6,8 @@ import router from './router'
 import store from './store/index'
 import mixins from './utils/mixins'
 import storage from './utils/storage'
-
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 //jquery插件
 import cookie from './jPlugins/jquery.cookie.min'
 import ajaxfileupload from './jPlugins/ajaxfileupload.min'
@@ -30,22 +31,27 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+    NProgress.start()
     var userToken = storage.get("userToken").token;
-    console.log(userToken);
-    if(userToken){
-        if(to.fullPath === "/" || to.fullPath === "/login"){
+    var passPath = ["/", "/login", "/forget", "/register"];
+    if (userToken) {
+        if (passPath.indexOf(to.fullPath) >= 0) {
             next("/index")
-        }else{
+        } else {
             next()
         }
-    }else{
-        if(to.fullPath === "/" || to.fullPath === "/login"){
+    } else {
+        if (passPath.indexOf(to.fullPath) >= 0) {
             next()
-        }else{
+        } else {
             next("/login")
         }
         //next("/login")
     }
+})
+
+router.afterEach(() => {
+    NProgress.done() // finish progress bar
 })
 
 /**
@@ -58,6 +64,8 @@ new Vue({
     el: '#app',
     router,
     store,
-    components: {App},
+    components: {
+        App
+    },
     template: '<App/>'
 })
