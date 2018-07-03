@@ -19,7 +19,10 @@ import api from './utils/api'
 //import css
 // import 'vue-beauty/package/style/vue-beauty.min.css'
 
-// import vueBeauty from 'vue-beauty'
+import {
+    setToken,
+    getToken
+} from './utils/auth'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -32,9 +35,8 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
     NProgress.start()
-    var userToken = storage.get("userToken").token;
     var passPath = ["/", "/login", "/forget", "/register"];
-    if (userToken) {
+    if (getToken()) {
         if (passPath.indexOf(to.fullPath) >= 0) {
             next("/index")
         } else {

@@ -360,7 +360,9 @@ function verifyFileSuffix(file, arrow) {
 
 import paySiginUp from "@/components/paySiginUp";
 import { mapState } from "vuex";
-
+import {
+    getToken
+} from '@/utils/auth'
 export default {
   name: "Info",
   components: {
@@ -545,8 +547,6 @@ export default {
       });
     },
     onBeforeUpload(file, filename) {
-      // console.log(file, reqOptions, ccc);
-      //let { token } = this.$storage.get("userToken");
 
       let formData = new FormData();
 

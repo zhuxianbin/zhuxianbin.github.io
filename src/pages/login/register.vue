@@ -32,7 +32,7 @@
                             </div>
                         </el-form-item>
                         <el-form-item label="" prop="password">
-                            <el-input placeholder="设置登陆密码至少6位" v-model="ruleForm.password">
+                            <el-input  type="password" placeholder="设置登陆密码至少6位" v-model="ruleForm.password">
                                 <!-- <v-icon slot="before">
                                     <i class="iconfont icon-shoujihao" style="font-size: 22px;"></i>
                                 </v-icon> -->
@@ -195,9 +195,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      getUserInfo: "USER_INFO",
-      getCateList: "CATE_LIST"
+    ...mapActions("user", {
+      reg: "reg"
     }),
     //点击确定同意协议
     handleOk: function() {
@@ -212,43 +211,44 @@ export default {
 
     //获取验证码
     getQcode: function() {
-      var vm = this;
       //console.log(vm.isSend);
-      if (!vm.isSend) {
-        vm.isSend = true;
+      if (!this.isSend) {
+        this.isSend = true;
 
         //获取验证码需要校验手机号码是否填写
         this.$refs.ruleForm.validateField("phoneNumber", a => {
           if (a === "") {
-            vm.$czapi
+            this.$czapi
               .getPhoneCaptcha({
-                phone: vm.ruleForm.phoneNumber
+                phone: this.ruleForm.phoneNumber,
+                type: "reg"
               })
               .then(data => {
                 if (data.code != 200) {
+                  this.isSend = false;
                   return this.$message.error(data.msg);
                 }
 
-                vm.isSend = true;
+                this.isSend = true;
                 var count = data.interval,
                   timer = null;
-                vm.qcodeText = count + "秒后再次获取验证码";
-                timer = setInterval(function() {
+                this.qcodeText = count + "秒后再次获取验证码";
+                timer = setInterval(() => {
                   count--;
                   if (count > 0) {
-                    vm.qcodeText = count + "秒后再次获取验证码";
+                    this.qcodeText = count + "秒后再次获取验证码";
                   } else {
-                    vm.isSend = false;
-                    vm.qcodeText = "获取验证码";
+                    this.isSend = false;
+                    this.qcodeText = "获取验证码";
                     clearInterval(timer);
                   }
                 }, 1000);
               })
-              .fail(function() {
-                vm.isSend = false;
+              .fail(() => {
+                this.isSend = false;
               });
           } else {
-            vm.isSend = false;
+            this.isSend = false;
           }
         });
       }
@@ -259,10 +259,11 @@ export default {
         if (valid) {
           //alert('提交了!');
           this.isLoading = true;
-          this.$czapi
-            .doLogin({
+          this.reg({
               phone: this.ruleForm.phoneNumber,
-              captcha: this.ruleForm.qcode
+              captcha: this.ruleForm.qcode,
+              password: this.ruleForm.password,
+              name:this.ruleForm.name
             })
             .then(data => {
               if (data.code != 200) {
@@ -270,30 +271,12 @@ export default {
                 this.$message.error(data.msg);
                 return false;
               }
-
-              //var expiresDate = new Date(data.expired);
-              //在cookie中写用户token信息
-              // $.cookie("userToken", data.token, {
-              //   path: "/", //cookie的作用域
-              //   expires: expiresDate
-              // });
-              //data里有token
-              this.$storage.set("userToken", data);
-
-              this.getUserInfo();
-              this.getCateList();
-
-              //登录成功跳转页面（三种用法）
-              //this.$router.push({ name: "Index" });
-              this.$router.back();
-              // 字符串
-              //vm.$router.push('/home/first')
-
-              // 对象
-              //vm.$router.push({ path: '/home/first' })
-
-              // 命名的路由
-              //vm.$router.push({ name: 'home', params: { userId: wise }})
+              this.$alert("现在去登录...", "注册成功", {
+                confirmButtonText: "确定",
+                callback: action => {
+                  this.$router.back();
+                }
+              });
             })
             .catch(() => {
               this.isLoading = false;

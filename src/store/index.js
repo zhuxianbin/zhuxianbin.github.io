@@ -2,13 +2,20 @@ import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
 
-import api from "../utils/api";
-import storage from "../utils/storage";
+import api from "@/utils/api";
+import {
+    getToken
+} from "@/utils/auth";
 
 const USER_INFO = "USER_INFO";
 const CATE_LIST = "CATE_LIST";
 
+import user from "./user";
+
 export default new Vuex.Store({
+    modules: {
+        user
+    },
     state: {
         userInfo: {
             user: {},
@@ -21,34 +28,30 @@ export default new Vuex.Store({
     },
     actions: {
         [USER_INFO](context, data) {
-            var { token } = storage.get("userToken");
-            token &&
+            getToken() &&
                 api
-                    .getUserInfo()
-                    .then(res => {
-                        console.log(res);
-                        // if (res.code == 404) {
-                        //     window.localStorage.removeItem('userToken');
-                        //     window.location.reload();
-                        //     return false;
-                        // }
-                        context.commit(USER_INFO, res);
-                    })
-                    .fail(res => {
-                        context.commit(USER_INFO, res);
-                    });
+                .getUserInfo()
+                .then(res => {
+                    context.commit(USER_INFO, res);
+                })
+                .fail(res => {
+                    context.commit(USER_INFO, res);
+                });
         },
         [CATE_LIST](context, data) {
-            var { token } = storage.get("userToken");
-            token &&
-                api.getCategory().then(function(data) {
+            getToken() &&
+                api.getCategory().then(function (data) {
                     context.commit(CATE_LIST, data);
                 });
         }
     },
     mutations: {
         [USER_INFO](state, data) {
-            state.userInfo = { ...data, ext_info: { avatar_file: "" } };
+            state.userInfo = { ...data,
+                ext_info: {
+                    avatar_file: ""
+                }
+            };
             // if (data.code == 201) {
             //     Vue.$modal.info({
             //         title: '温馨提示',
@@ -56,7 +59,9 @@ export default new Vuex.Store({
             //     });
             // }
         },
-        [CATE_LIST](state, { data }) {
+        [CATE_LIST](state, {
+            data
+        }) {
             state.cateList = data;
         }
     }

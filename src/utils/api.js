@@ -1,6 +1,14 @@
 import Vue from "vue";
 import storage from "./storage";
-import { baseURL } from "./config";
+import {
+    baseURL
+} from "./config";
+
+import {
+    setToken,
+    getToken,
+    removeToken
+} from './auth'
 /**
  * 接口前缀
  * */
@@ -9,10 +17,9 @@ var contentPath = baseURL;
 var uploadAction = baseURL + "/api/file/upload";
 
 var conmonAjax = function (url, param, type) {
-    var userToken = storage.get("userToken").token;
     param = {
         ...param,
-        token: userToken
+        token: getToken()
     };
     var defer = $.Deferred();
     //let headers = {};
@@ -21,23 +28,13 @@ var conmonAjax = function (url, param, type) {
         url: contentPath + url,
         type: type || "post",
         data: param,
-        //headers,
         dataType: "json",
-        // beforeSend: function(xhr) {
-        //     if (url != "/api/login" && url != "/api/phone-captcha") {
 
-        //         // console.log(userToken);
-        //         // console.log("!=====");
-        //         if (userToken) {
-        //             xhr.setRequestHeader("Token", userToken);
-        //         }
-        //     }
-        // },
         success: function (data) {
             //console.log(data);
 
             if (data.code >= 600 && data.code < 700) {
-                storage.remove("userToken");
+                removeToken();
                 window.location.href = "./index.html#/login";
                 return;
             }
@@ -58,12 +55,6 @@ var conmonAjax = function (url, param, type) {
     });
     return defer.promise();
 };
-
-// let conmonAjax = function (url, param, type) {
-//     //let headers = {};
-//     //var userToken = $.cookie("userToken");
-//     return fetch();
-// }
 
 export default {
     uploadAction,
@@ -266,5 +257,14 @@ export default {
     },
     getAgreement(param) {
         return conmonAjax(`/api/orders/agreement`, param, "post");
+    },
+    userLogin(params) {
+        return conmonAjax(`/api/user/login`, params, "post");
+    },
+    userReset(params) {
+        return conmonAjax(`/api/user/reset`, params, "post");
+    },
+    userRegister(params) {
+        return conmonAjax(`/api/user/reg`, params, "post");
     }
 };

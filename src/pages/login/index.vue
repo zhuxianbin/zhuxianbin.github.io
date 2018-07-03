@@ -16,7 +16,7 @@
                           </el-input>
                         </el-form-item>
                         <el-form-item label="" prop="password">
-                          <el-input placeholder="请输入密码" v-model="ruleForm.password">
+                          <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
                           </el-input>
                         </el-form-item>
                         <el-form-item>
@@ -61,11 +61,7 @@
 
 <script>
 var isMobileNum = function(num) {
-  return /^(1[3-8]\d{9})$/.test(num);
-};
-
-var isLoginQcode = function(n) {
-  return /^\d{4}$/.test(n);
+  return /^(\d{11})$/.test(num);
 };
 
 var validatePhoneNumber = function(rule, value, callback) {
@@ -77,6 +73,8 @@ var validatePhoneNumber = function(rule, value, callback) {
 };
 
 import { mapActions } from "vuex";
+import { setToken } from "@/utils/auth";
+
 export default {
   name: "Login",
   data() {
@@ -111,6 +109,9 @@ export default {
     ...mapActions({
       getUserInfo: "USER_INFO",
       getCateList: "CATE_LIST"
+    }),
+    ...mapActions("user", {
+      login: "login"
     }),
     //获取验证码
     getQcode: function() {
@@ -161,11 +162,10 @@ export default {
         if (valid) {
           //alert('提交了!');
           this.isLoading = true;
-          this.$czapi
-            .doLogin({
-              phone: this.ruleForm.phoneNumber,
-              captcha: this.ruleForm.qcode
-            })
+          this.login({
+            phone: this.ruleForm.phoneNumber,
+            password: this.ruleForm.password
+          })
             .then(data => {
               if (data.code != 200) {
                 this.isLoading = false;
@@ -173,21 +173,14 @@ export default {
                 return false;
               }
 
-              //var expiresDate = new Date(data.expired);
-              //在cookie中写用户token信息
-              // $.cookie("userToken", data.token, {
-              //   path: "/", //cookie的作用域
-              //   expires: expiresDate
-              // });
-              //data里有token
-              this.$storage.set("userToken", data);
+              setToken(data.token);
 
               this.getUserInfo();
               this.getCateList();
 
               //登录成功跳转页面（三种用法）
               //this.$router.push({ name: "Index" });
-              this.$router.back();
+              this.$router.push("/index");
               // 字符串
               //vm.$router.push('/home/first')
 

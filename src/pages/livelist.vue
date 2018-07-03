@@ -22,16 +22,14 @@
                                 </div>
                             </div>
 
-                            <table v-if='it.products.live_more.length>0' class="ui-table margin-top-20">
+                            <table v-if='it.products.length>0' class="ui-table margin-top-20">
                                         <colgroup>
                                             <col width="300px">
-                                            <!-- <col width="100px"> -->
                                             <col width="300px">
                                         </colgroup>
                                         <thead>
                                             <tr>
                                                 <th>直播课程名称</th>
-                                                <!-- <th>总课时</th> -->
                                                 <th>直播开始时间</th>
                                                 <th></th>
                                             </tr>
@@ -39,31 +37,23 @@
                                         <tbody>
                                             <tr v-for='item in it.products.live_more' :key='item.id'>
                                                 <td>{{item.live_name}}</td>
-                                                <!-- <td>
-                                                    {{item.current_course}}
-                                                </td> -->
                                                 <td>{{item.live_time}}</td>
                                                 <td>
                                                     <el-button v-if='item.status == 0' disabled>
                                                         <i class="iconfont icon-zhibodating"></i>
                                                         <span>直播还没开始</span>
                                                     </el-button>
-                                                    <a target="_blank" v-if='item.status == 1'  :href="item.live_url" class="el-button el-button--warning">
+                                                    <a target="_blank" v-if='item.status == 1' :href="item.live_url+'?token='+Token" class="el-button el-button--warning">
                                                         <i class="iconfont icon-bofang1"></i>
                                                         <span>进入直播课堂</span>
                                                     </a>
-                                                    <a target="_blank" v-if='item.status == -1'  :href="item.live_url" class="el-button el-button--primary">
+                                                    <a target="_blank" v-if='item.status == -1' :href="item.live_url+'?token='+Token" class="el-button el-button--primary">
                                                         <i class="iconfont icon-kechenghuifang"></i>
                                                         <span>回访直播视频</span>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                <td>合计</td>
-                                                <td>{{it.products.total_course}}课时</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr> -->
+                                            
                                         </tbody>
                                     </table>
                         </div>
@@ -79,11 +69,6 @@ export default {
   name: "Courselist",
   data() {
     return {
-      layout: {
-        gutter: 32,
-        span: 12
-      },
-
       rows: []
     };
   },
@@ -99,36 +84,38 @@ export default {
   },
   methods: {
     getLiveList() {
-      let now = new Date().setHours(0, 0, 0, 0);
+      //let now = new Date().setHours(0, 0, 0, 0);
       this.$czapi
         .getLiveList({
           p: 1,
           offset: 100
         })
         .then(({ code, data, msg }) => {
-          this.rows = data.map(item => {
-            item.products.live_more = item.products.live_more.map(live => {
-              let liveTime = new Date(live.live_time.replace(/\-/g,'/')).setHours(0, 0, 0, 0);
-              //console.log(now,liveTime);
-              if (now > liveTime) {
-                live.status = -1;
-              }
-              if (now < liveTime) {
-                live.status = 0;
-              }
-              if (now == liveTime) {
-                live.status = 1;
-              }
-              //console.log(live,now,liveTime);
-              return live;
-            });
-            return item;
-          });
+          this.rows = data;
+          console.log(data, this.rows, this.rows.length);
+          //   this.rows = data.map(item => {
+          //     item.products.live_more = item.products.live_more.map(live => {
+          //       let liveTime = new Date(live.live_time.replace(/\-/g,'/')).setHours(0, 0, 0, 0);
+          //       //console.log(now,liveTime);
+          //       if (now > liveTime) {
+          //         live.status = -1;
+          //       }
+          //       if (now < liveTime) {
+          //         live.status = 0;
+          //       }
+          //       if (now == liveTime) {
+          //         live.status = 1;
+          //       }
+          //       //console.log(live,now,liveTime);
+          //       return live;
+          //     });
+          //     return item;
+          //   });
           //console.log(this.rows);
         });
     }
   },
-  mounted() {
+  created() {
     this.getLiveList();
     // //console.log(111111111111111);
     // //var vm = this;

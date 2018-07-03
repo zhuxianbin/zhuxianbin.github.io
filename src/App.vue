@@ -19,10 +19,7 @@ export default {
     })
   },
   mounted() {
-    //console.log(this.$czapi);
-    //console.log($.cookie("userToken"));
-    // $("head").append('<link rel="stylesheet" href="static/css/admin.css">');
-
+    
     this.getUserInfo();
 
     this.getCateList();
