@@ -47,7 +47,7 @@
                                                         <i class="iconfont icon-bofang1"></i>
                                                         <span>进入直播课堂</span>
                                                     </a>
-                                                    <a target="_blank" v-if='item.status == -1' :href="item.live_url+'?token='+Token" class="el-button el-button--primary">
+                                                    <a target="_blank" v-if='item.status == -1' :href="item.live_url+'&token='+Token" class="el-button el-button--primary">
                                                         <i class="iconfont icon-kechenghuifang"></i>
                                                         <span>回访直播视频</span>
                                                     </a>
