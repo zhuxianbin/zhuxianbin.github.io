@@ -11,7 +11,7 @@
                         <div v-for="it in rows" :key='it.id' class="padding-15 course-item" style="">
                             <div style='padding-left:500px;overflow:hidden'>
                                 <div style='float:left;display:inline;margin-left:-500px;width:460px;'>
-                                    <img :src="it.products.img" :alt="it.product_name" style="width: 100%;">
+                                    <img :src="it.product_img" :alt="it.product_name" style="width: 100%;">
                                 </div>
                                 <div style='float:left;display:inline;'>
                                     <div style="font-size: 24px;color: #333333;">{{it.product_name}}</div>
