@@ -35,9 +35,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for='item in it.products.live_more' :key='item.id'>
+                                            <tr v-for='item in it.products' :key='item.id'>
                                                 <td>{{item.live_name}}</td>
-                                                <td>{{item.live_time}}</td>
+                                                <td>{{item.live_st}}</td>
                                                 <td>
                                                     <el-button v-if='item.status == 0' disabled>
                                                         <i class="iconfont icon-zhibodating"></i>
