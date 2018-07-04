@@ -55,7 +55,7 @@
 
 <script>
 var isMobileNum = function(num) {
-  return /^(1[3-8]\d{9})$/.test(num);
+  return /^(\d{11})$/.test(num);
 };
 
 var isLoginQcode = function(n) {
