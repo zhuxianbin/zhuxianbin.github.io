@@ -23,7 +23,7 @@
                                 <a href='./index.html?r=123#/male?cate=5' class="link" style='color:#fff;'>专科/本科教育</a>
                             </el-menu-item>
                             <el-menu-item index="2-3">
-                                <a href='./index.html?r=456#/male?cate=3' class="link" style='color:#fff;'>人力资源管理师</a>
+                                <a href='./index.html?r=456#/male?cate=3' class="link" style='color:#fff;'>自考专科/本科教育</a>
                             </el-menu-item>
                             <el-menu-item index="2-4">
                                 <a href='./index.html?r=789#/male?cate=4' class="link" style='color:#fff;'>ACI国际注册营养师</a>
