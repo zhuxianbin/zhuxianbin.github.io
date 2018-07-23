@@ -250,7 +250,8 @@ export default {
         return conmonAjax(`/api/usersign/getpayinfo`, param, "get");
     },
     toPaySingUp: function (param) {
-        return conmonAjax(`/api/usersign/paysingup`, param, "get");
+        return conmonAjax(`/api/usersign/paysignup`, param, "post");
+        // return conmonAjax(`/api/usersign/paysingup`, param, "get");
     },
     getOrderList(param) {
         return conmonAjax(`/api/user/order-list`, param, "post");

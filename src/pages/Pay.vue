@@ -36,7 +36,6 @@
                                             </div>
                                         </el-form-item>
                                         <el-form-item v-if='payType=="alipay"' label="">
-                                            
                                             <el-button type="primary" @click='jumpAliPage()'>去支付宝支付</el-button>
                                         </el-form-item>
                                         <el-form-item label="">

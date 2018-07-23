@@ -12,11 +12,11 @@
                 <div style="width: 360px;margin: 0 auto;">
                     <el-form direction="horizontal" label-width="labelCol" :model="ruleForm" :rules="rules" ref="ruleForm">
                         <el-form-item label="" prop="phoneNumber">
-                          <el-input placeholder="注册的手机号码" v-model="ruleForm.phoneNumber">
+                          <el-input @keyup.native.enter="$refs.pwd.focus()" placeholder="注册的手机号码" v-model="ruleForm.phoneNumber">
                           </el-input>
                         </el-form-item>
                         <el-form-item label="" prop="password">
-                          <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password">
+                          <el-input ref="pwd" @keyup.native.enter="submitForm" type="password" placeholder="请输入密码" v-model="ruleForm.password">
                           </el-input>
                         </el-form-item>
                         <el-form-item>
@@ -27,7 +27,7 @@
                             </el-col>
                             <el-col :span="14">
                               <el-button type="primary" :loading="isLoading"
-                              @click="submitForm('ruleForm')" style="width:100%" size="medium">登录超职</el-button>
+                              @click="submitForm" style="width:100%" size="medium">登录超职</el-button>
                             </el-col>
                           </el-row>
                         </el-form-item>
@@ -106,10 +106,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      getUserInfo: "USER_INFO",
-      getCateList: "CATE_LIST"
-    }),
+    
     ...mapActions("user", {
       login: "login"
     }),
@@ -158,7 +155,7 @@ export default {
     },
     submitForm(formName) {
       //console.log(formName);
-      this.$refs[formName].validate(valid => {
+      this.$refs.ruleForm.validate(valid => {
         if (valid) {
           //alert('提交了!');
           this.isLoading = true;
@@ -175,9 +172,7 @@ export default {
 
               setToken(data.token);
 
-              this.getUserInfo();
-              this.getCateList();
-
+              
               //登录成功跳转页面（三种用法）
               //this.$router.push({ name: "Index" });
               this.$router.push("/index");

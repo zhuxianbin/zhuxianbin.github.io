@@ -45,7 +45,7 @@
 
 <script>
 import layoutHeader from "@/components/header.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Layout",
   components: { layoutHeader },
@@ -65,6 +65,16 @@ export default {
       //console.log(val);
       this.defaultActive = val.name.toLowerCase();
     }
+  },
+  methods: {
+    ...mapActions({
+      getUserInfo: "USER_INFO",
+      getCateList: "CATE_LIST"
+    })
+  },
+  created() {
+    this.getUserInfo();
+    this.getCateList();
   },
   activated() {
     this.defaultActive = this.$route.name.toLowerCase();

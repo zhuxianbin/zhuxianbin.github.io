@@ -344,17 +344,19 @@
         }
 
         function getVedios() {
-
-            var res = [{
-                img: "http://www.chaozhiedu.com/static/images/vedio-pic.png",
-                src: "http://open.talk-fun.com/playout/PT42PSgpbipoICc.html?st=L3lUi72iXnFYGVmDYOTSIQ&e=1537509986&from=cms101572",
-                teacher: "李丛蔚",
-                time: "1小时",
-                title: "注册消防工程师"
-            }]
+            $.get("http://aci-api.chaozhiedu.com/api/get-live-info?cat_id=35", function (res) {
+                bindVedios(res);
+            })
+            // var res = [{
+            //     img: "http://www.chaozhiedu.com/static/images/vedio-pic.png",
+            //     src: "http://open.talk-fun.com/playout/PT42PSgpbipoICc.html?st=L3lUi72iXnFYGVmDYOTSIQ&e=1537509986&from=cms101572",
+            //     teacher: "李丛蔚",
+            //     time: "1小时",
+            //     title: "注册消防工程师"
+            // }]
 
             //$.get("http://aci-api.chaozhiedu.com/api/get-live-info", function (res) {
-            bindVedios(res);
+            //bindVedios(res);
             //})
 
             // var rows = [{

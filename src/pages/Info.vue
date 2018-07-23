@@ -301,26 +301,13 @@
 								</div>
 								<div v-if='info.status == 2'>
 								
-								<div class="margin-top-20">
-									<p class="font-size-18 color-warn">恭喜您提交报名信息成功！</p>
-									<p>超职会在3～5个工作日进行审核，请及时关注网校QQ群/微信群公告！</p>
-									<p>审核通过即代表报名成功，网校会及时通知您</p>
-								</div>
+									<div class="margin-top-20">
+										<p class="font-size-18 color-warn">恭喜您提交报名信息成功！</p>
+										<p>超职会在3～5个工作日进行审核，请及时关注网校QQ群/微信群公告！</p>
+										<p>审核通过即代表报名成功，网校会及时通知您</p>
+									</div>
 
-								<div class="margin-top-20">
-									<div class="inline-block">
-										<div>
-											<img src="" alt="">
-										</div>
-										<div class="margin-top-10">QQq群二维码</div>
-									</div>
-									<div class="inline-block margin-left-20">
-										<div>
-											<img src="" alt="">
-										</div>
-										<div class="margin-top-10">微信群二维码</div>
-									</div>
-								</div>
+									<!-- mn,xcxmmmclkc -->
 								</div>
 							</template>
 					</div>
@@ -328,6 +315,7 @@
 			</div>
 		</div>
 		<el-dialog title="报名支付"
+		width="800px"
 			:visible.sync="pay.show"
 			:show-close="false" 
 			:close-on-click-modal='false' 
