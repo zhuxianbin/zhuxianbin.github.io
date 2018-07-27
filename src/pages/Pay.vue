@@ -39,7 +39,7 @@
                                             
                                             <el-button type="primary" @click='jumpAliPage()'>去支付宝支付</el-button>
                                         </el-form-item>
-                                        <el-form-item label="">
+                                        <el-form-item label="" v-if="payData.agreement">
                                             <span>购买及表示您同意《
                                                 <a class="link" @click="dolookAgreement" href='javascript:;'>{{payData.product_name}}·协议</a>》</span>
                                             <!-- <span v-if='payData.id==20'>购买及表示您同意《
