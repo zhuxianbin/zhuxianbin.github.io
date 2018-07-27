@@ -186,9 +186,11 @@ export default {
     },
 
     goPay(it) {
-      window.payData = it;
       this.$router.push({
-        name: "Pay"
+        path: "./Pay",
+        query: {
+          id: it.id
+        }
       });
     },
     doKF() {

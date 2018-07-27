@@ -17,15 +17,15 @@
 
                                     <el-form direction="horizontal" label-width="120px" class="margin-top-20">
                                         <el-form-item label="订单内容">
-                                            <span class="ant-form-text" id="userName" name="userName" style="font-size: 18px;">{{payData.name}}</span>
+                                            <span class="ant-form-text" style="font-size: 18px;">{{payData.product_name}}</span>
                                         </el-form-item>
                                         <el-form-item label="订单价格" >
                                             <div class="inline-block" style="font-size: 28px;margin-right: 20px;">
-                                                <span class="color-warn">{{payData.price}}</span>元</div>
+                                                <span class="color-warn">{{(payData.price/100).toFixed(2)}}</span>元</div>
                                             <el-button type="default" html-type="button" @click="refreshPrice()">刷新价格</el-button>
                                         </el-form-item>
                                         <el-form-item label="支付方式">
-                                            <el-radio-group v-model="payType" @change="getQRcode">
+                                            <el-radio-group v-model="payType" @change="getOrderPay">
                                                 <el-radio label="wechat">微信支付</el-radio>
                                                 <el-radio label="alipay">支付宝</el-radio>
                                             </el-radio-group>
@@ -55,7 +55,7 @@
                                             </div>
                                         </el-form-item>
                                     </el-form>
-                                    <div v-html='payResult.form'></div>
+                                    <div v-html='alipay'></div>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ let timer = 0;
 
 import QRCode from "qrcode";
 import layoutHeader from "@/components/header.vue";
-
+import { orderPay, getOrder } from "@/utils/api";
 export default {
   name: "Pay",
   components: {
@@ -130,54 +130,23 @@ export default {
       dialogSuccess: false,
       dialogFail: false,
       cateList: [],
-      payResult: {},
-      qrcode: ""
+      //   payResult: {},
+      qrcode: "",
+      order_id: "",
+      product_id: "",
+      alipay: ""
     };
   },
   methods: {
     refreshPrice() {
-      this.$czapi
-        .refreshPrice({
-          token: this.payResult.token
-        })
-        .then(data => {
-          if (data.code != 200) {
-            return this.$message.error(data.msg);
-          }
-          this.payData.price = data.data;
-          this.$message.success("刷新价格成功");
-          this.getQRcode();
-        });
+      this.getOrderPay();
+      this.$message.success("刷新价格成功");
     },
-    getQRcode() {
-      this.$czapi
-        .pay({
-          product_id: this.payData.id,
-          channel: this.payType
-        })
-        .then(data => {
-          if (data.code == 202) {
-            return this.$alert("您已经购买该商品", "温馨提示", {
-              confirmButtonText: "确定",
-              callback: action => {
-                this.$router.back();
-              }
-            });
-          }
-          this.payResult = data;
-          this.getPayResult(data.token);
-          data.qrtext &&
-            QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
-              url => {
-                this.qrcode = url;
-              }
-            );
-        });
-    },
+    changePayType() {},
     getPayResult(token) {
       this.$czapi
         .getPayResult({
-          token
+          token: this.order_id
         })
         .then(({ code, msg }) => {
           if (code != 200) {
@@ -187,7 +156,6 @@ export default {
             }, 5000);
             return false;
           }
-
           this.dialogSuccess = true;
         });
     },
@@ -196,37 +164,68 @@ export default {
       document.getElementById("alipaysubmit").target = "_blank";
       document.forms["alipaysubmit"].submit();
     },
-    getPayInfo() {
-      this.$czapi
-        .getPayInfo({
-          product_id: this.payData.id,
-          channel: this.payType
-        })
-        .then(data => {
-          this.payData = data.product;
-          this.payData.price = data.price;
-
-          this.getQRcode();
+    getOrderPay() {
+      this.order_id &&
+        orderPay({ order_id: this.order_id, channel: this.payType }).then(
+          data => {
+            this.payData = data.order_info;
+            this.alipay = data.form;
+            data.qrtext &&
+              QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
+                url => {
+                  this.qrcode = url;
+                }
+              );
+          }
+        );
+    },
+    getOrderByProductId() {
+      this.product_id &&
+        getOrder({ product_id: this.product_id }).then(res => {
+          if (res.code == 202) {
+            return this.$alert("您已经购买过该课程,请勿重复购买", "温馨提示", {
+              confirmButtonText: "确定",
+              callback: action => {
+                this.$router.push({
+                  path: "./Male"
+                });
+              }
+            });
+          }
+          if (res.code == 210) {
+            return this.$alert(
+              "您已经购买过该课程,并申请了订单分期,请勿重复购买",
+              "温馨提示",
+              {
+                confirmButtonText: "确定",
+                callback: action => {
+                  this.$router.push({
+                    path: "./orders"
+                  });
+                }
+              }
+            );
+          }
+          this.order_id = res.order_id;
+          this.getOrderPay();
         });
     }
   },
-  mounted() {
-    this.payResult = {};
-    let { id } = this.$route.params;
+  created() {
+
+    let { id, order_id } = this.$route.query;
     if (id) {
-      window.payData = {
-        id
-      };
+      this.product_id = id;
+      return this.getOrderByProductId();
     }
-    //console.log(window.payData);
-    if (window.payData) {
-      this.payData = window.payData;
-      this.getPayInfo();
-    } else {
-      this.$router.push({
-        name: "Male"
-      });
+    if (order_id) {
+      this.order_id = order_id;
+      return this.getOrderPay();
     }
+
+    this.$router.push({
+      path: "./Male"
+    });
   },
   beforeDestroy() {
     clearTimeout(timer);

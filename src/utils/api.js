@@ -267,4 +267,13 @@ export default {
     userRegister(params) {
         return conmonAjax(`/api/user/reg`, params, "post");
     }
+
 };
+
+export function orderPay(params) {
+    return conmonAjax(`/api/pay/order-pay`, params, "post");
+}
+
+export function getOrder(params) {
+    return conmonAjax(`/api/pay/get-order`, params, "post");
+}
