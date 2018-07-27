@@ -315,7 +315,7 @@
 			</div>
 		</div>
 		<el-dialog title="报名支付"
-		width="800px"
+			width="800px"
 			:visible.sync="pay.show"
 			:show-close="false" 
 			:close-on-click-modal='false' 
