@@ -5,7 +5,7 @@
         </el-header>
         <el-container>
             <el-main>
-                <div class="male-main">
+                <div class="male-main" v-if="!!payData">
                     <div class="ant-layout">
                         <div class="ant-layout ant-layout-has-sider">
                             <div class="ant-layout" style="padding: 20px 0;background: #fff;">
@@ -40,14 +40,16 @@
                                             <el-button type="primary" @click='jumpAliPage()'>去支付宝支付</el-button>
                                         </el-form-item>
                                         <el-form-item label="">
-                                            <span v-if='payData.id==20'>购买及表示您同意《
+                                            <span>购买及表示您同意《
+                                                <a class="link" @click="dolookAgreement" href='javascript:;'>{{payData.product_name}}·协议</a>》</span>
+                                            <!-- <span v-if='payData.id==20'>购买及表示您同意《
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/jinpailubo.docx'>【超职教育】18年＜金牌录播＞·协议</a>》</span>
                                             <span v-if='payData.id==10'>购买及表示您同意《
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/vipshicao.docx'>【超职教育】18年＜VIP保障实操班＞·协议</a>》</span>
                                             <span v-if='payData.id==9'>购买及表示您同意《
                                                 <a class="link" href='http://news.chaozhiedu.com/wj/gaoxiaoquzheng.docx'>【超职教育】18年＜高效私教取证班＞·协议</a>》</span>
                                             <span v-if='payData.id==8'>购买及表示您同意《
-                                                <a class="link" href='http://news.chaozhiedu.com/wj/lingjichutezhao.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span>
+                                                <a class="link" href='http://news.chaozhiedu.com/wj/lingjichutezhao.docx'>【超职教育】18年＜零基础特招班＞· 协议</a>》</span> -->
                                         </el-form-item>
                                         <el-form-item label="支持支付类型">
                                             <div style='width:320px;overflow:hidden;'>
@@ -105,11 +107,13 @@
                             </el-col>
                         </el-row>
                     </el-dialog>
+                    <el-dialog title="协议说明" top="20px" width="800px" :visible.sync="dialog.show">
+                        <div v-html="payData.agreement"></div>
+                    </el-dialog>
                 </div>
             </el-main>
         </el-container>
     </el-container>
-
 </template>
 
 <script>
@@ -125,7 +129,7 @@ export default {
   },
   data() {
     return {
-      payData: {},
+      payData: null,
       payType: "wechat",
       dialogSuccess: false,
       dialogFail: false,
@@ -134,7 +138,11 @@ export default {
       qrcode: "",
       order_id: "",
       product_id: "",
-      alipay: ""
+      alipay: "",
+      dialog: {
+        show: false,
+        data: ""
+      }
     };
   },
   methods: {
@@ -194,7 +202,7 @@ export default {
           }
           if (res.code == 210) {
             return this.$alert(
-              "您已经购买过该课程,并申请了订单分期,请勿重复购买",
+              "您的订单已经被分期，请到【个人中心】的【我的课程订单】中进行付款。",
               "温馨提示",
               {
                 confirmButtonText: "确定",
@@ -209,10 +217,15 @@ export default {
           this.order_id = res.order_id;
           this.getOrderPay();
         });
+    },
+    dolookAgreement() {
+      this.dialog = {
+        show: true,
+        data: this.payData.agreement
+      };
     }
   },
   created() {
-
     let { id, order_id } = this.$route.query;
     if (id) {
       this.product_id = id;
