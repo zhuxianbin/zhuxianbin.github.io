@@ -176,31 +176,8 @@ export default {
       this.order_id &&
         orderPay({ order_id: this.order_id, channel: this.payType }).then(
           data => {
-            this.payData = data.order_info;
-            this.alipay = data.form;
-            data.qrtext &&
-              QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
-                url => {
-                  this.qrcode = url;
-                }
-              );
-          }
-        );
-    },
-    getOrderByProductId() {
-      this.product_id &&
-        getOrder({ product_id: this.product_id }).then(res => {
-          if (res.code == 202) {
-            return this.$alert("您已经购买过该课程,请勿重复购买", "温馨提示", {
-              confirmButtonText: "确定",
-              callback: action => {
-                this.$router.push({
-                  path: "./Male"
-                });
-              }
-            });
-          }
-          if (res.code == 210) {
+
+            if (data.code == 210) {
             return this.$alert(
               "您的订单已经被分期，请到【个人中心】的【我的课程订单】中进行付款。",
               "温馨提示",
@@ -214,7 +191,47 @@ export default {
               }
             );
           }
-          this.order_id = res.order_id;
+
+
+            this.payData = data.order_info;
+            this.alipay = data.form;
+            data.qrtext &&
+              QRCode.toDataURL(data.qrtext, { errorCorrectionLevel: "H" }).then(
+                url => {
+                  this.qrcode = url;
+                }
+              );
+          }
+        );
+    },
+    getOrderByProductId() {
+      this.product_id &&
+        getOrder({ product_id: this.product_id }).then(data => {
+          if (data.code == 202) {
+            return this.$alert("您已经购买过该课程,请勿重复购买", "温馨提示", {
+              confirmButtonText: "确定",
+              callback: action => {
+                this.$router.push({
+                  path: "./Male"
+                });
+              }
+            });
+          }
+          if (data.code == 210) {
+            return this.$alert(
+              "您的订单已经被分期，请到【个人中心】的【我的课程订单】中进行付款。",
+              "温馨提示",
+              {
+                confirmButtonText: "确定",
+                callback: action => {
+                  this.$router.push({
+                    path: "./orders"
+                  });
+                }
+              }
+            );
+          }
+          this.order_id = data.order_id;
           this.getOrderPay();
         });
     },
