@@ -54,8 +54,9 @@
               </div>
               <template v-if="!scope.row.is_split">
                 <el-button size="small" @click="doPay(scope.row)" v-if="scope.row.status==0" type="success">去支付</el-button>
+                <el-button size="small" @click="doOption(scope.row)" v-if="scope.row.status<0&&!scope.row.old" type="warning">重新下单</el-button>
               </template>
-              <el-button size="small" @click="doOption(scope.row)" v-if="scope.row.status<0&&!scope.row.old" type="warning">重新下单</el-button>
+              
           </template>
         </el-table-column>
       </el-table>
@@ -123,7 +124,7 @@ export default {
       if (item.status <= 0) {
         return this.$router.push({
           path: "./pay",
-          query: { order_id: item.order_id }
+          query: { id: item.product_id }
         });
       }
       if (item.status == 2) {
