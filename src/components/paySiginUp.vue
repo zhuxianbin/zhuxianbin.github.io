@@ -56,7 +56,7 @@ export default {
         .toPaySingUp({
           channel: this.payType
         })
-        .then(({ code, msg, price, form, qrtext, qrcode }) => {
+        .then(({ code, order_info, msg, form, pay_order_id, qrtext }) => {
           //console.log(code, msg);
           if (this.payType === "alipay") {
             this.alipayForm = form;
@@ -67,7 +67,7 @@ export default {
               }
             );
           }
-          this.price = (price / 100).toFixed(2);
+          this.price = (order_info.price / 100).toFixed(2);
         });
     },
     getPayInfo() {
