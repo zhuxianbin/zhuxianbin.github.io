@@ -1,0 +1,122 @@
+.video-box {
+    margin: 40px 60px;
+    background: #444444;
+    color: #fff;
+    height: 580px;
+}
+
+.video-box-padd {
+    padding: 10px;
+}
+
+.tc-list-item {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.teacher-item {
+    width: 280px;
+    height: 450px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.teacher-item:hover {
+    border: 2px solid #ccc;
+}
+
+.teacher-item.teacher-item-active {
+    border: 2px solid #FF5C00;
+}
+
+.teacher-item-img {}
+
+.teacher-item-img img {
+    width: 100%;
+}
+
+.video-box-hd {
+    height: 50px;
+    line-height: 50px;
+}
+
+.video-box-bd {
+    height: 510px;
+    position: relative;
+}
+
+.video-box-bd-left {
+    width: 250px;
+}
+.video-box-bd-right{
+    width: 810px;
+}
+
+.video-list {
+    height: 460px;
+    overflow: auto;
+    width: 240px;
+    background: #585858;
+}
+
+.video-list-item {
+    overflow: hidden;
+    padding: 5px;
+}
+
+.video-list-item-active{
+    background: #333;
+}
+
+.video-list-item:hover {
+    background: #999;
+}
+
+.video-list-item-img {
+    width: 90px;
+    float: left;
+}
+.video-list-item-img img{
+  width: 90px;
+}
+
+.video-list-item-desc {
+    float: left;
+    width: 140px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.ant-layout .ant-layout-header{
+    background: #333;
+    color: #fff;
+}
+.ant-layout-header .ant-menu-dark.ant-menu-horizontal{
+    border:none;
+}
+.ant-layout-header .ant-menu-dark.ant-menu-horizontal > .ant-menu-item, .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu{
+    border:none;
+}
+.ant-layout-header .ant-menu-dark .ant-menu-item:hover > a, .ant-menu-dark .ant-menu-item-active > a, .ant-menu-dark .ant-menu-submenu-active > a, .ant-menu-dark:not(.ant-menu-inline) .ant-menu-submenu-open > a, .ant-menu-dark .ant-menu-submenu-selected > a, .ant-menu-dark .ant-menu-submenu-title:hover > a{
+    color:#fff;
+}
+
+
+
+.ant-layout-header .ant-menu-dark .ant-menu-item a {
+    color: #eee;
+}
+.ant-layout-header .ant-menu.ant-menu-dark .ant-menu-item-selected > a {
+    color: #fff;
+}
+
+.sub-menu-tip{
+    background:#666;
+}
+.sub-menu-tip li{
+    border-left: 4px solid transparent;
+}
+.sub-menu-tip li:hover{
+    background:#333;
+}
