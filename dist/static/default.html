@@ -1,7 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <script>
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "http://m.chaozhiedu.com";
+        }
+    </script>
     <meta charset="UTF-8">
     <!-- <meta name="360-site-verification" content="14bf573a486c172ec727575c51a030b0" /> -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -13,7 +18,6 @@
     />
     <meta name="keywords" content="ACI,心理咨询师,国际心理咨询师培训,心理咨询,心理咨询师报名,初级中级高级营养师,经济师,报考条件,报考费用时间" />
     <link rel="stylesheet" href="./static/js/swiper/idangerous.swiper.css">
-    <!-- <link rel="stylesheet" href="http://2.swiper.com.cn/dist/css/idangerous.swiper.css"> -->
 
     <link rel="stylesheet" href="./static/css/animate.css">
     <link rel="stylesheet" href="./static/css/vue-beauty.min.css">
@@ -47,84 +51,7 @@
         }
 
     </style>
-    <!--友情链接css开始-->
-    <style>
-        div,
-        ul,
-        li {
-            padding: 0;
-            margin: 0
-        }
 
-        .area {
-            margin: 0 auto;
-            width: 1200px;
-            margin-top: 30px;
-            height: 80px;
-        }
-
-        .clearfix {
-            display: block;
-        }
-
-        .friends {
-            padding: 12px 0;
-            padding-bottom: 6px;
-            border-top: #c5d5c8 solid 1px;
-            border-bottom: #c5d5c8 solid 1px;
-        }
-
-        .friends_l {
-            float: left;
-            width: 94px;
-            height: 32px;
-            line-height: 10px;
-            color: #FFF;
-            font-size: 16px;
-        }
-
-        .friends_r {
-            float: right;
-            overflow: hidden;
-            width: 1104px;
-            height: 80px;
-        }
-
-        .friends_r ul {
-            display: block;
-            height: 32px;
-            width: 12000em;
-        }
-
-        .friends_r li {
-            float: left;
-            overflow: hidden;
-            width: 150px;
-            height: 28px;
-        }
-
-        .friends_r a img {
-            width: 75px;
-            height: 26px;
-            /*border:#fff solid 1px;*/
-        }
-
-        li {
-            display: list-item;
-        }
-
-    </style>
-    <!--友情链接CSS结束-->
-    <!--可信图片-->
-    <style>
-        #denglu * {
-            vertical-align: middle;
-            /* 居中对齐， */
-            font-size: 14px;
-        }
-
-    </style>
-    <!--可信图片-->
     <!-- <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951"></script> -->
 </head>
 
@@ -1049,8 +976,8 @@
             });
 
             var swiper = new Swiper('.swiper-container', {
-				autoplay: 5000,
-				loop : true
+                autoplay: 5000,
+                loop: true
                 //spaceBetween: 30,
                 //effect: 'fade',
                 // pagination: {
