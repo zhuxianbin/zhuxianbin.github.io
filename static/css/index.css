@@ -139,7 +139,14 @@
 
 .home-page .floor-3 {
     background: url(../images/bg2.jpg) no-repeat center top;
+    background-size: cover;
 }
+/* 
+@media (min-width:1000px) {
+    .home-page .floor-3 {
+        background-size: cover;
+    }
+} */
 
 .home-page .floor-body {
     background: url(../images/line.png) no-repeat center;
@@ -226,37 +233,38 @@
     font-size: 12px;
 }
 
-
-
-.col-xs-1-5,.col-sm-1-5,.col-md-1-5,.col-lg-1-5 {
+.col-xs-1-5,
+.col-sm-1-5,
+.col-md-1-5,
+.col-lg-1-5 {
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
-  }
-  
-  .col-xs-1-5 {
+}
+
+.col-xs-1-5 {
     width: 20%;
     float: left;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .col-sm-1-5 {
-      width: 20%;
-      float: left;
+        width: 20%;
+        float: left;
     }
-  }
-  
-  @media (min-width: 992px) {
+}
+
+@media (min-width: 992px) {
     .col-md-1-5 {
-      width: 20%;
-      float: left;
+        width: 20%;
+        float: left;
     }
-  }
-  
-  @media (min-width: 1200px) {
+}
+
+@media (min-width: 1200px) {
     .col-lg-1-5 {
-      width: 20%;
-      float: left;
+        width: 20%;
+        float: left;
     }
-  }
+}
