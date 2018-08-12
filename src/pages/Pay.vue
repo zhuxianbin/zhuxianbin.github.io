@@ -150,7 +150,7 @@ export default {
       this.$message.success("刷新价格成功");
     },
     changePayType() {},
-    getPayResult(token) {
+    getPayResult() {
       this.$czapi
         .getPayResult({
           token: this.order_id
@@ -159,7 +159,7 @@ export default {
           if (code != 200) {
             clearTimeout(timer);
             timer = setTimeout(() => {
-              this.getPayResult(token);
+              this.getPayResult();
             }, 5000);
             return false;
           }
@@ -175,22 +175,20 @@ export default {
       this.order_id &&
         orderPay({ order_id: this.order_id, channel: this.payType }).then(
           data => {
-
             if (data.code == 210) {
-            return this.$alert(
-              "您的订单已经被分期，请到【个人中心】的【我的课程订单】中进行付款。",
-              "温馨提示",
-              {
-                confirmButtonText: "确定",
-                callback: action => {
-                  this.$router.push({
-                    path: "./orders"
-                  });
+              return this.$alert(
+                "您的订单已经被分期，请到【个人中心】的【我的课程订单】中进行付款。",
+                "温馨提示",
+                {
+                  confirmButtonText: "确定",
+                  callback: action => {
+                    this.$router.push({
+                      path: "./orders"
+                    });
+                  }
                 }
-              }
-            );
-          }
-
+              );
+            }
 
             this.payData = data.order_info;
             this.alipay = data.form;
@@ -200,6 +198,8 @@ export default {
                   this.qrcode = url;
                 }
               );
+
+            this.getPayResult(this.order_id);
           }
         );
     },
