@@ -73,7 +73,7 @@
                                     恭喜您，支付成功
                                 </div>
                                 <div class="margin-top-20" style="font-size: 14px;">
-                                    订单信息：{{payData.name}}
+                                    订单信息：{{payData.product_name}}
                                 </div>
                                 <div class="margin-top-20" style="font-size: 14px;color: #FF4000;">
                                     <el-button @click="$router.push('/male')" type="primary">继续挑选课程</el-button>
@@ -96,7 +96,7 @@
                                     支付失败，请点击重新支付
                                 </div>
                                 <div class="margin-top-20" style="font-size: 14px;">
-                                    订单信息：{{payData.name}}
+                                    订单信息：{{payData.product_name}}
                                 </div>
                                 <div class="margin-top-20">
                                     <el-button type="error" @click='dialogFail = false '>重新支付</el-button>
