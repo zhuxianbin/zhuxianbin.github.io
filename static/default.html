@@ -40,9 +40,8 @@
             margin-bottom: 20px;
             margin-right: 10px;
         }
-
     </style>
-
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=YZcKHSdA4b3ZV1gmOhfSbZ7ZYCDwZCqQ"></script>
     <!-- <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951"></script> -->
 </head>
 
@@ -598,8 +597,7 @@
                     <div class="pull-left" style="width: 504px;">
                         <div style="font-size: 18px;color: #fff">我们所在位置</div>
                         <div style='overflow: hidden;border:1px solid #eee;height:360px;'>
-                            <iframe style='margin-top:-30px;' width="504" height="425" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                                src="//j.map.baidu.com/SEmCO"></iframe>
+                            <div style="width:500px;height:360px;border:#ccc solid 1px;font-size:12px" id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -711,6 +709,48 @@
 
     </script>
     <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script>
+    <script type="text/javascript">
+        //创建和初始化地图函数：
+        function initMap() {
+            createMap();//创建地图
+            addMapOverlay();//向地图添加覆盖物
+        }
+        function createMap() {
+            map = new BMap.Map("map");
+            map.centerAndZoom(new BMap.Point(116.186097, 40.066269), 16);
+        }
+
+        function addClickHandler(target, window) {
+            target.addEventListener("click", function () {
+                target.openInfoWindow(window);
+            });
+        }
+        function addMapOverlay() {
+            var markers = [
+                { content: "北京市海淀区地锦路7号院14号楼五层", title: "超职教育", imageOffset: { width: -46, height: 3 }, position: { lat: 40.064199, lng: 116.184193 } }
+            ];
+            for (var index = 0; index < markers.length; index++) {
+                var point = new BMap.Point(markers[index].position.lng, markers[index].position.lat);
+                var marker = new BMap.Marker(point, {
+                    icon: new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png", new BMap.Size(20, 25), {
+                        imageOffset: new BMap.Size(markers[index].imageOffset.width, markers[index].imageOffset.height)
+                    })
+                });
+                var label = new BMap.Label(markers[index].title, { offset: new BMap.Size(25, 5) });
+                var opts = {
+                    width: 200,
+                    title: markers[index].title,
+                    enableMessage: false
+                };
+                var infoWindow = new BMap.InfoWindow(markers[index].content, opts);
+                marker.setLabel(label);
+                addClickHandler(marker, infoWindow);
+                map.addOverlay(marker);
+            };
+        }
+        var map;
+        initMap();
+    </script>
     <!-- <script type="text/javascript" src="//trusted.shuidi.cn/trusted.js?id=1951&jump=0&style=1"></script> -->
 </body>
 
