@@ -6,7 +6,7 @@
     <el-container>
       <el-main>
         <div style="margin:-20px;margin-bottom:0;">
-          <img src="../../static/images/Group8.png" style='width:100%;' />
+          <img src="/static/images/Group8.png" style='width:100%;' />
         </div>
         <div class="male-main">
         

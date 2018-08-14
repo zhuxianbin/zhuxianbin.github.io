@@ -1,42 +1,21 @@
 <template>
-    <div id="app">
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive"></router-view>
-    </div>
+      <router-view></router-view>
 </template>
 
 <script>
-// import $ from "jquery";
 import { mapActions } from "vuex";
 export default {
   name: "App",
   methods: {
-    ...mapActions({
-      getUserInfo: "USER_INFO",
-      getCateList: "CATE_LIST"
-    })
+    // ...mapActions({
+    //   getUserInfo: "USER_INFO",
+    //   getCateList: "CATE_LIST"
+    // })
   },
   mounted() {
-    
-    this.getUserInfo();
-
-    this.getCateList();
-    // this.$czapi
-    //   .getUserInfo()
-    //   .then(function(data) {
-    //     vm.info = data;
-    //   })
-    //   .fail(function(data) {
-    //     vm.info = data;
-    //   });
+    // this.getUserInfo();
+    // this.getCateList();
   }
 };
 </script>
 
-<style>
-#app .sub-menu-tip {
-  width: auto;
-}
-</style>
