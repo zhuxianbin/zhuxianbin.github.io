@@ -5,7 +5,7 @@
 				<div class="container">
 					<el-row>
 						<el-col :span="12">
-							超职小logo
+							<img class="header-top-logo" src='/static/images/v2/logo_black.png' />
 						</el-col>
 						<el-col :span="12" class="t-right">
 							<template v-if="!userinfo">
@@ -20,12 +20,12 @@
 				<div class="container">
 					<el-row>
 						<el-col :span="5">
-							大logo
+							<img class="header-logo" src='/static/images/v2/logo_big.png' />
 						</el-col>
 						<el-col :span="16">
 							<div class="search">
 								<div class="search-input">
-									<input type="text">
+									<input type="text" placeholder="请输入您要搜索的课程">
 								</div>
 								<div class="search-submit">
 									<button>搜索</button>
@@ -42,7 +42,7 @@
 				<div class="container">
 					<el-row>
 						<el-col :span="5">
-							<div class="menu active">
+							<div class="menu" :class="{active:!!$route.meta.openMenu}">
 								<div class="menu-target">全部课程</div>
 								<div class="menu-body">
 									<div class="menu-body-padd">
@@ -71,7 +71,7 @@
 							<div class="nav">
 								<router-link to="/">首页</router-link>
 								<router-link to="/">选课</router-link>
-								<router-link to="/">名师</router-link>
+								<router-link to="/teacher">名师</router-link>
 								<router-link to="/">资讯</router-link>
 								<router-link to="/">超值</router-link>
 							</div>
@@ -117,6 +117,7 @@
 </template>
 
 <script>
+import "swiper/dist/css/swiper.min.css";
 import "@/assets/less/home.less";
 export default {
   data() {

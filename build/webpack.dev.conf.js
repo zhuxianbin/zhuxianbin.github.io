@@ -74,7 +74,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       }
     ]),
 
-    new OpenBrowserPlugin({ url: `http://localhost:${config.dev.port}` })
+    // new OpenBrowserPlugin({ url: `http://localhost:${config.dev.port}` })
   ]
 })
 

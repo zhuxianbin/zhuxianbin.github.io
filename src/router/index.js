@@ -18,12 +18,20 @@ const router = new Router({
                 {
                     path: "/index",
                     name: "index",
-                    component: () => import("@/views/home/index")
+                    component: () => import("@/views/home/index"),
+                    meta:{
+                        openMenu:true
+                    }
                 },
                 {
                     path: "/male",
                     name: "male",
                     component: () => import("@/views/home/male")
+                },
+                {
+                    path: "/teacher",
+                    name: "teacher",
+                    component: () => import("@/views/home/teacher")
                 }
             ]
         },
@@ -122,8 +130,8 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-		NProgress.start();
-		next();
+    NProgress.start();
+    next();
     // var passPath = ["/", "/login", "/forget", "/register"];
     // if (getToken()) {
     //     if (passPath.indexOf(to.fullPath) >= 0) {
