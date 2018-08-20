@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <category></category>
         <vue-waterfall-easy 
         :imgsArr="rows" 
         :height="1600"
@@ -20,11 +21,13 @@
 </template>
 
 <script>
+import category from "./components/category";
 import vueWaterfallEasy from "vue-waterfall-easy";
 export default {
   name: "teacher",
   components: {
-    vueWaterfallEasy
+    vueWaterfallEasy,
+    category
   },
   data() {
     return {

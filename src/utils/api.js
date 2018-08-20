@@ -1,7 +1,7 @@
 import Vue from "vue";
 import storage from "./storage";
 import {
-    baseURL
+    baseUrl
 } from "./config";
 
 import {
@@ -12,9 +12,9 @@ import {
 /**
  * 接口前缀
  * */
-var contentPath = baseURL;
+var contentPath = baseUrl;
 
-var uploadAction = baseURL + "/api/file/upload";
+var uploadAction = baseUrl + "/api/file/upload";
 
 var conmonAjax = function (url, param, type) {
     param = {

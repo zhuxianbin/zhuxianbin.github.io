@@ -79,7 +79,8 @@
 
 <script>
 import api from "@/utils/api";
-import { baseURL, Token } from "@/utils/config";
+import { getToken } from "@/utils/auth";
+import { baseUrl } from "@/utils/config";
 export default {
   data() {
     return {
@@ -146,8 +147,9 @@ export default {
       });
     },
     getPIAO(item) {
-      let token = Token();
-      return `${baseURL}/api/orders/receipt?order_id=${item.id}&token=${token}`;
+      return `${baseUrl}/api/orders/receipt?order_id=${
+        item.id
+      }&token=${getToken()}`;
     }
   },
   created() {

@@ -70,7 +70,7 @@
 						<el-col :span="19">
 							<div class="nav">
 								<router-link to="/">首页</router-link>
-								<router-link to="/">选课</router-link>
+								<router-link to="/male">选课</router-link>
 								<router-link to="/teacher">名师</router-link>
 								<router-link to="/">资讯</router-link>
 								<router-link to="/">超值</router-link>
