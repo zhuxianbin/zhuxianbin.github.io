@@ -6,6 +6,6 @@ if (
 }
 
 
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
     window.location.href = "//m.chaozhiedu.com";
 }

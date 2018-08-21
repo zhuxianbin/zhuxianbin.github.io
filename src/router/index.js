@@ -19,8 +19,8 @@ const router = new Router({
                     path: "/index",
                     name: "index",
                     component: () => import("@/views/home/index"),
-                    meta:{
-                        openMenu:true
+                    meta: {
+                        openMenu: true
                     }
                 },
                 {
@@ -32,6 +32,11 @@ const router = new Router({
                     path: "/teacher",
                     name: "teacher",
                     component: () => import("@/views/home/teacher")
+                },
+                {
+                    path: "/about",
+                    name: "about",
+                    component: () => import("@/views/home/about")
                 }
             ]
         },

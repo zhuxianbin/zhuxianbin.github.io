@@ -3,17 +3,15 @@
 		<div class="header">
 			<div class="header-top">
 				<div class="container">
-					<el-row>
-						<el-col :span="12">
+						<div class="pull-left">
 							<img class="header-top-logo" src='/static/images/v2/logo_black.png' />
-						</el-col>
-						<el-col :span="12" class="t-right">
+						</div>
+						<div class="pull-right">
 							<template v-if="!userinfo">
-								<router-link to="/login">登录</router-link>
-								<router-link to="/login/register">注册</router-link>
+								<router-link class="link" to="/login">登录</router-link>
+								<router-link class="link" to="/login/register">注册</router-link>
 							</template>
-						</el-col>
-					</el-row>
+						</div>
 				</div>
 			</div>
 			<div class="header-body">
@@ -73,7 +71,7 @@
 								<router-link to="/male">选课</router-link>
 								<router-link to="/teacher">名师</router-link>
 								<router-link to="/">资讯</router-link>
-								<router-link to="/">超值</router-link>
+								<router-link to="/about">超职</router-link>
 							</div>
 						</el-col>
 					</el-row>

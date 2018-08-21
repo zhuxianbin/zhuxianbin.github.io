@@ -1,22 +1,22 @@
 <template>
     <div class="container">
-        <category></category>
-        <vue-waterfall-easy 
-        :imgsArr="rows" 
-        :height="1600"
-        :imgWidth="220"
-        @click="clickFn">
-            <template slot-scope="scope">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div>
-                            {{scope.value.name}}
-                        </div>
-                        {{scope.value.desc}}
-                    </div>
-                </div>
-            </template>
-        </vue-waterfall-easy>
+      <category></category>
+      <vue-waterfall-easy 
+      :imgsArr="rows" 
+      :height="1600"
+      :imgWidth="220"
+      @click="clickFn">
+        <template slot-scope="scope">
+          <div class="card shadow">
+            <div class="card-body">
+              <div>
+                  {{scope.value.name}}
+              </div>
+              {{scope.value.desc}}
+            </div>
+          </div>
+        </template>
+      </vue-waterfall-easy>
     </div>
 </template>
 
@@ -131,5 +131,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+.vue-waterfall-easy-scroll{
+  overflow-y: auto !important;
+}
 </style>
+

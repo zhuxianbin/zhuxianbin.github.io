@@ -9,106 +9,59 @@
               <el-tab-pane label="最热" name="hot"></el-tab-pane>
               <el-tab-pane label="免费" name="free"></el-tab-pane>
             </el-tabs>
+            <div class='bin-panel-more'>
+              <el-pagination
+                  class='mt-10'
+                  layout="prev,slot,next"
+                  @current-change="getProductList"
+                  :page-size='query.offset'
+                  :total="total">
+                  <span class='t-center'><b class='t-orange'>{{query.p}}</b>/{{totalPage}}页</span>
+                </el-pagination>
+            </div>
           </div>
           <div class='bin-panel-body'>
             <template v-for='item in rows'>
               <div class="product" :key='item.id'>
                 <div class='product-media'>
                   <img :src='item.img'>
-                  <span></span>
                 </div>
                 <div class='product-body'>
                     <div class='clearfix'>
                       <div class='pull-left'>
-                          <div>{{item.name}}</div>
-                          <div class=''>
-                            <template v-html='item.description'></template>
+                          <a class='product-title'>{{item.name}}</a>
+                          <div class='product-subtitle'>
+                              副标题
+                          </div>
+                          <div class='product-price'>
+                            <span class='t-18 t-orange'>￥ {{item.price}}</span>
+                            <s class='t-gray inline-block ml-10'>￥ {{item.original_price}}</s>
+                          </div>
+                          <div class='product-tags'>
+
                           </div>
                       </div>
-                      <div class='pull-right'></div>
+                      <div class='pull-right'>
+                        <div class="mt-30">
+                          <el-button plain type='warning' size="small">查看详情</el-button>
+                        </div>
+                        <div class='mt-10'>
+                          <el-button type='success' size="small">立即购买</el-button>
+                        </div>
+                      </div>
                     </div>
                 </div>
               </div>
             </template>
           </div>
         </div>
-
-        <div class="male-main">
-        
-          <div class="ant-layout">
-              <div class="ant-layout ant-layout-has-sider">
-                
-                  <div class="ant-layout" style="padding: 20px 0;background: #fff;">
-                    
-                      <div style="width: 1200px;margin: 0 auto;background: #fff;">
-                          <!-- <div style="margin-bottom: 10px;font-size: 16px;">超职商城欢迎您</div> -->
-
-                          <!-- <div style='padding:15px;border:1px solid #eee;margin-bottom:15px;'>
-                              课程分类:
-                              <el-tag 
-                                style='margin-left:5px'
-                                :class='{"el-tag--warning":category_id==0}'  
-                                @click.native='category_id=0'>全部</el-tag><el-tag 
-                                style='margin-left:5px'
-                                v-for='item in cateList' 
-                                :key='item.id' 
-                                :class='{"el-tag--warning":category_id==item.id}'  
-                                @click.native='category_id=item.id'>{{item.name}}</el-tag>
-                          </div> -->
-                          <el-row :gutter="30">
-                              <el-col :span="12" v-for="it in rows" :key="it.id">
-                                  <div class="padding-10 margin-bottom-15" style="border: 1px solid #E8E8E8;border-radius: 6px;">
-                                      <el-row :gutter="10">
-                                          <el-col :span="10">
-                                              <div style="width: 100%;height: 120px;line-height: 330px;text-align: center; background: #f2f2f2;">
-                                                  <template v-if="it.img == ''">
-                                                      <i class="iconfont icon-zanwutupian" style="font-size: 210px;color:#ccc;"></i>
-                                                  </template>
-                                                  <template v-else>
-                                                      <img :src="it.img" style="vertical-align: top;width:100%;border-radius: 6px;">
-                                                  </template>
-                                              </div>
-                                          </el-col>
-                                          <el-col :span="14">
-                                              <div style="font-size: 22px;color: #333333;height:72px;">{{it.name}}</div>
-
-                                              <div class="margin-top-10">
-                                                  <span class="inline-block text-right">活动价：</span>
-                                                  <span class="inline-block">
-                                                      <span style="font-size: 26px;color: #FE6500;">{{it.price}}</span> 元
-                                                      <s style="font-size: 18px;margin-left: 10px;">{{it.original_price}}元</s>
-                                                  </span>
-                                              </div>
-                                              <div class="margin-top-10 text-center">
-                                                  <a href="javascript:;" class="el-button el-button--warning" @click="goPay(it)" style="font-size: 16px;width: 140px;">
-                                                      立即购买
-                                                  </a>
-                                                  <a href="javascript:;" class="el-button el-button--default" style="font-size: 16px;width: 140px;margin-left: 20px;">
-                                                      立即咨询
-                                                  </a>
-                                              </div>
-                                          </el-col>
-                                      </el-row>
-                                      <div class="margin-top-20" style='padding-left:60px;height:80px;overflow:hidden'>
-                                          <span class="inline-block text-right" style="vertical-align: top;margin-left:-60px;">课程介绍：</span>
-                                          <span class="inline-block" style="width: 90%;" v-html="it.description"></span>
-                                      </div>
-                                  </div>
-                              </el-col>
-                          </el-row>
-                          <div class="text-right">
-                            <el-pagination
-                              background
-                              layout="total,prev,pager,next"
-                              @current-change="getProductList"
-                              :page-size='query.offset'
-                              :total="total">
-                            </el-pagination>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        <div class="t-center mt-20">
+          <el-pagination
+            layout="total,prev,pager,next"
+            @current-change="getProductList"
+            :page-size='query.offset'
+            :total="total">
+          </el-pagination>
         </div>
   </div>
 </template>
@@ -150,12 +103,11 @@ export default {
   //     this.loadData();
   //   }
   // },
-  // computed: {
-  //   ...mapState({
-  //     info: state => state.userInfo,
-  //     cateList: state => state.cateList
-  //   })
-  // },
+  computed: {
+    totalPage() {
+      return Math.ceil(this.total / this.query.offset);
+    }
+  },
   created() {
     let { cate } = this.$route.query;
     this.category_id = cate || 0;
@@ -164,9 +116,6 @@ export default {
   methods: {
     changeOrderBy(orderby) {
       console.log(orderby);
-    },
-    showTotal(total) {
-      return `全部 ${total} 条`;
     },
     pageSizeChange(size) {
       //console.log(current, size);
@@ -180,9 +129,8 @@ export default {
         params.category_id = this.category_id;
       }
       getProductList(params).then(({ data }) => {
-
         this.rows = data.rows;
-        this.totle = data.total;
+        this.total = data.total;
       });
     },
     goPay(it) {
@@ -202,10 +150,24 @@ export default {
   padding: 25px;
   padding-left: 230px;
   overflow: hidden;
+  border-bottom: 1px solid #e6e6e6;
+
+  transition: all 0.3s;
+  &:hover {
+    background: #fefefe;
+    .product-media {
+      // transform: scale(1.05);
+      transform: translateX(5px)
+    }
+  }
+
   .product-media {
+    float: left;
     margin-left: -205px;
     width: 180px;
-    height: 110px;
+    height: 120px;
+    overflow: hidden;
+    transition: all 0.3s;
     img {
       display: inline-block;
       line-height: 0px;
@@ -218,10 +180,39 @@ export default {
       vertical-align: middle;
     }
   }
-  .product-body{
-    float:left;
-    width:100%;
+  .product-body {
+    float: left;
+    width: 100%;
+    line-height: 26px;
+  }
 
+  .product-title {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    &:hover {
+      color: #f80;
+    }
+  }
+
+  .product-subtitle {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .product-price {
+    padding: 5px 0;
+  }
+
+  .product-tags {
+    .product-tag {
+      display: inline-block;
+      line-height: 24px;
+      height: 24px;
+      padding: 0 20px;
+      background: #f2f2f2;
+    }
   }
 }
 </style>
