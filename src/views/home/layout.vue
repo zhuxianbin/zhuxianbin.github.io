@@ -23,10 +23,10 @@
 						<el-col :span="16">
 							<div class="search">
 								<div class="search-input">
-									<input type="text" placeholder="请输入您要搜索的课程">
+									<input type="text" @keyup.enter='doSearch' v-model='keyword' placeholder="请输入您要搜索的课程">
 								</div>
 								<div class="search-submit">
-									<button>搜索</button>
+									<button @click='doSearch'>搜索</button>
 								</div>
 							</div>
 						</el-col>
@@ -44,22 +44,13 @@
 								<div class="menu-target">全部课程</div>
 								<div class="menu-body">
 									<div class="menu-body-padd">
-										<div class="menu-title">职业教育</div>
-										<div class="menu-sub">
-											<a>心理咨询师</a>
-											<a>消防工程师</a>
-										</div>
-
-										<div class="menu-title">学历教育</div>
-										<div class="menu-sub">
-											<a>自考本科</a>
-											<a>自考专升本</a>
-										</div>
-
-										<div class="menu-title">职业教育</div>
-										<div class="menu-sub">
-											<a>心理咨询师</a>
-											<a>营养师</a>
+										<div v-for='item in cateList' :key="item.id">
+											<div class="menu-title">{{item.name}}</div>
+											<div class="menu-sub">
+												<template v-for='child in item.children'>
+													<a :key='child.id'>{{child.name}}</a>
+												</template>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -117,11 +108,23 @@
 <script>
 import "swiper/dist/css/swiper.min.css";
 import "@/assets/less/home.less";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      userinfo: null
+      userinfo: null,
+      keyword: ""
     };
+  },
+  computed: {
+    ...mapState({
+      cateList: state => state.cateList
+    })
+  },
+  methods: {
+    doSearch() {
+      window.location.href = `/#/male?keyword=${this.keyword}`;
+    }
   }
 };
 </script>

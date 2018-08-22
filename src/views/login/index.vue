@@ -2,10 +2,10 @@
     <div class="login">
         <div class="container">
             <div class="login-container" style="margin-top: 40px;">
-                <div class="text-center">
-                    <img src="static/images/logo-3.png" alt="" style="width: 300px;">
+                <div class="t-center">
+                  <img @click="doDev" src="static/images/logo-3.png" alt="" style="width: 300px;">
                 </div>
-                <div class="text-center" style="margin: 20px 0;font-size: 26px;">
+                <div class="t-center" style="margin: 20px 0;font-size: 26px;">
                     登录您的账号
                 </div>
 
@@ -41,21 +41,26 @@
                           </div>
                         </el-form-item> -->
                     </el-form>
-                    <div class="text-center">
+                    <div class="t-center">
                       <el-button @click="$router.push('./forget')" type="text">如果您没有设置过密码，请点击这里设置&gt;&gt;</el-button>
                     </div>
-                    <div class="text-center mb-20">
+                    <div class="t-center mb-20">
                       <el-button @click="$router.push('./forget')" type="text">忘记密码，怎么办？&gt;&gt;</el-button>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center">
+            <div class="t-center">
                 <!-- 超职时代（北京）教育科技有限公司  -->
                 超职时代（北京）教育科技有限公司 版权所有 
                 <!-- 京ICP备17033346号 -->
             </div>
         </div>
+        <el-dialog title="爸爸的大肚子" :visible.sync="devtool.show">
+          <el-select @change="doChangeServer">
+            <el-option v-for="item in devtool.servers" :key="item.label" :value="item.value" :label="item.label"></el-option>
+          </el-select>
+        </el-dialog>
     </div>
 </template>
 
@@ -74,6 +79,7 @@ var validatePhoneNumber = function(rule, value, callback) {
 
 import { mapActions } from "vuex";
 import { setToken } from "@/utils/auth";
+import { servers, setServer } from "@/utils/config";
 
 export default {
   name: "Login",
@@ -102,11 +108,14 @@ export default {
           }
         ]
       },
-      visible: false
+      devtool: {
+        show: false,
+        click: 0,
+        servers: servers
+      }
     };
   },
   methods: {
-    
     ...mapActions("user", {
       login: "login"
     }),
@@ -172,7 +181,6 @@ export default {
 
               setToken(data.token);
 
-              
               //登录成功跳转页面（三种用法）
               //this.$router.push({ name: "Index" });
               this.$router.push("/index");
@@ -196,6 +204,16 @@ export default {
           return false;
         }
       });
+    },
+    doDev() {
+      this.devtool.click++;
+      if (this.devtool.click > 5) {
+        this.devtool.show = true;
+      }
+    },
+    doChangeServer(val) {
+      setServer(val);
+      window.location.reload();
     }
   }
 };

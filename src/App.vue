@@ -7,14 +7,15 @@ import { mapActions } from "vuex";
 export default {
   name: "App",
   methods: {
-    // ...mapActions({
-    //   getUserInfo: "USER_INFO",
-    //   getCateList: "CATE_LIST"
-    // })
+    ...mapActions({
+      // getUserInfo: "USER_INFO",
+      getCateList: "CATE_LIST"
+    })
   },
+  
   mounted() {
     // this.getUserInfo();
-    // this.getCateList();
+    this.getCateList();
   }
 };
 </script>

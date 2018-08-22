@@ -18,3 +18,16 @@ export function getCategory(param) {
 export function getProductList(param) {
     return request.post("/api/product/list", param);
 }
+
+export function getTeacherList(params) {
+    return request.post("/api/teacher/list", params);
+}
+
+/**
+ * 用户基本信息
+ * URL (/api/user) METHOD get
+ * 无需参数，直接获取 ，注意要带上token
+ * */
+export function getUserInfo(params){
+    return request.get('"/api/user"',params);
+}

@@ -1,10 +1,9 @@
 <template>
   <div class="container">
-        <category class="mt-20" />
-
+        <category class="mt-20 mb-20" :category.sync='query.category_id' @change='getProductList(1)'></category>
         <div class="bin-panel mt-20">
           <div class='bin-panel-title'>
-            <el-tabs v-model="orderby" @tab-click="changeOrderBy">
+            <el-tabs v-model="query.sort" @tab-click="getProductList(1)">
               <el-tab-pane label="最新" name="new"></el-tab-pane>
               <el-tab-pane label="最热" name="hot"></el-tab-pane>
               <el-tab-pane label="免费" name="free"></el-tab-pane>
@@ -91,43 +90,40 @@ export default {
       rows: [],
       query: {
         p: 1,
-        offset: 10
+        offset: 10,
+        sort: "new",
+        category_id: "",
+        keyword: ""
       },
-      total: 0,
-      category_id: 0,
-      orderby: "new"
+      total: 0
     };
   },
-  // watch: {
-  //   category_id(val) {
-  //     this.loadData();
-  //   }
-  // },
+  watch: {
+    $route: {
+      handler(val) {
+        const { keyword } = val;
+        this.query.keyword = keyword;
+        this.getProductList(1);
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   computed: {
     totalPage() {
       return Math.ceil(this.total / this.query.offset);
     }
   },
   created() {
-    let { cate } = this.$route.query;
-    this.category_id = cate || 0;
+    let { cate, keyword } = this.$route.query;
+    this.query.category_id = cate || "";
+    this.query.keyword = keyword || "";
     this.getProductList(1);
   },
   methods: {
-    changeOrderBy(orderby) {
-      console.log(orderby);
-    },
-    pageSizeChange(size) {
-      //console.log(current, size);
-      this.query.offset = size;
-      this.getProductList(1);
-    },
     getProductList(page) {
       this.query.p = page || this.query.p;
       let params = { ...this.query };
-      if (this.category_id) {
-        params.category_id = this.category_id;
-      }
       getProductList(params).then(({ data }) => {
         this.rows = data.rows;
         this.total = data.total;
@@ -157,7 +153,7 @@ export default {
     background: #fefefe;
     .product-media {
       // transform: scale(1.05);
-      transform: translateX(5px)
+      transform: translateX(5px);
     }
   }
 
@@ -216,3 +212,16 @@ export default {
   }
 }
 </style>
+
+<style lang="less">
+.el-tabs__active-bar {
+  background-color: #f80;
+}
+.el-tabs__item {
+  &:hover,
+  &.is-active {
+    color: #f80;
+  }
+}
+</style>
+

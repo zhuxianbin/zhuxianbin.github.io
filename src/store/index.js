@@ -2,10 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
 
-import api from "@/utils/api";
-import {
-    getToken
-} from "@/utils/auth";
+import { getCategory,getUserInfo } from "@/api";
+import { getToken } from "@/utils/auth";
 
 const USER_INFO = "USER_INFO";
 const CATE_LIST = "CATE_LIST";
@@ -30,24 +28,25 @@ export default new Vuex.Store({
         [USER_INFO](context, data) {
             getToken() &&
                 api
-                .getUserInfo()
-                .then(res => {
-                    context.commit(USER_INFO, res);
-                })
-                .fail(res => {
-                    context.commit(USER_INFO, res);
-                });
+                    .getUserInfo()
+                    .then(res => {
+                        context.commit(USER_INFO, res);
+                    })
+                    .fail(res => {
+                        context.commit(USER_INFO, res);
+                    });
         },
-        [CATE_LIST](context, data) {
-            getToken() &&
-                api.getCategory().then(function (data) {
-                    context.commit(CATE_LIST, data);
-                });
+        [CATE_LIST]({commit}) {
+            getCategory().then(({ data }) => {
+                // this.rows.items = data;
+                commit(CATE_LIST,data)
+            });
         }
     },
     mutations: {
         [USER_INFO](state, data) {
-            state.userInfo = { ...data,
+            state.userInfo = {
+                ...data,
                 ext_info: {
                     avatar_file: ""
                 }
@@ -59,9 +58,7 @@ export default new Vuex.Store({
             //     });
             // }
         },
-        [CATE_LIST](state, {
-            data
-        }) {
+        [CATE_LIST](state, data) {
             state.cateList = data;
         }
     }
