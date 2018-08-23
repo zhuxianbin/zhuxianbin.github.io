@@ -29,6 +29,11 @@ const router = new Router({
                     component: () => import("@/views/home/male")
                 },
                 {
+                    path: "/product/:id?",
+                    name: "product",
+                    component: () => import("@/views/home/product")
+                },
+                {
                     path: "/teacher",
                     name: "teacher",
                     component: () => import("@/views/home/teacher")
@@ -127,7 +132,7 @@ const router = new Router({
         },
         {
             path: "/pay/:id?",
-            name: "Pay",
+            name: "pay",
             // component: Pay
             component: () => import("@/views/Pay")
         }

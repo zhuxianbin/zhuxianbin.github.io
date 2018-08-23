@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     doSearch() {
-      window.location.href = `/#/male?keyword=${this.keyword}`;
+      window.location.hash = `/male?keyword=${this.keyword}`;
     }
   }
 };

@@ -28,24 +28,24 @@
                 <div class='product-body'>
                     <div class='clearfix'>
                       <div class='pull-left'>
-                          <a class='product-title'>{{item.name}}</a>
+                          <router-link :to='{name:"product",params:{id:item.id}}' class='product-title'>{{item.name}}</router-link>
                           <div class='product-subtitle'>
-                              副标题
+                              {{item.sub_name}}
                           </div>
                           <div class='product-price'>
                             <span class='t-18 t-orange'>￥ {{item.price}}</span>
                             <s class='t-gray inline-block ml-10'>￥ {{item.original_price}}</s>
                           </div>
                           <div class='product-tags'>
-
+                            <el-tag v-for='tag in item.tags' :type='setTagStyle()' size="small" :key='tag'>{{tag}}</el-tag>
                           </div>
                       </div>
                       <div class='pull-right'>
                         <div class="mt-30">
-                          <el-button plain type='warning' size="small">查看详情</el-button>
+                          <el-button plain type='warning' @click='$router.push({name:"product",params:{id:item.id}})' size="small">查看详情</el-button>
                         </div>
                         <div class='mt-10'>
-                          <el-button type='success' size="small">立即购买</el-button>
+                          <el-button type='success' size="small" @click='goPay(item)'>立即购买</el-button>
                         </div>
                       </div>
                     </div>
@@ -102,7 +102,7 @@ export default {
     $route: {
       handler(val) {
         const { keyword } = val;
-        this.query.keyword = keyword;
+        this.query.keyword = decodeURIComponent(keyword);
         this.getProductList(1);
       },
       immediate: true,
@@ -117,7 +117,7 @@ export default {
   created() {
     let { cate, keyword } = this.$route.query;
     this.query.category_id = cate || "";
-    this.query.keyword = keyword || "";
+    this.query.keyword = decodeURIComponent(keyword) || "";
     this.getProductList(1);
   },
   methods: {
@@ -125,17 +125,25 @@ export default {
       this.query.p = page || this.query.p;
       let params = { ...this.query };
       getProductList(params).then(({ data }) => {
-        this.rows = data.rows;
+        this.rows = data.rows.map(item => {
+          item.tags = item.tags ? item.tags.split(",") : [];
+          return item;
+        });
         this.total = data.total;
       });
     },
-    goPay(it) {
+    goPay({ id }) {
       this.$router.push({
         path: "./Pay",
         query: {
-          id: it.id
+          id
         }
       });
+    },
+    setTagStyle() {
+      const tagStyles = ["success", "success", "info", "warning", "danger"];
+      var num = Math.floor(Math.random() * tagStyles.length + 1);
+      return tagStyles[num];
     }
   }
 };
@@ -202,26 +210,9 @@ export default {
   }
 
   .product-tags {
-    .product-tag {
-      display: inline-block;
-      line-height: 24px;
-      height: 24px;
-      padding: 0 20px;
-      background: #f2f2f2;
+    .el-tag {
+      margin-right: 5px;
     }
   }
 }
 </style>
-
-<style lang="less">
-.el-tabs__active-bar {
-  background-color: #f80;
-}
-.el-tabs__item {
-  &:hover,
-  &.is-active {
-    color: #f80;
-  }
-}
-</style>
-

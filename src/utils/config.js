@@ -11,7 +11,7 @@ export const servers = [{
   },
   {
     label: "测试环境",
-    value: "http://101.201.222.8:8081"
+    value: "http://test-aci-api.chaozhiedu.com"
   }
 ]
 

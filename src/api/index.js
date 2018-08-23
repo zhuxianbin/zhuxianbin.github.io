@@ -6,7 +6,7 @@ import request from "@/utils/request";
  * 接收参数 无
  * */
 export function getCategory(param) {
-    return request.get("/api/course/category", param);
+    return request.get("/api/category/list", param);
 }
 
 /**
@@ -19,6 +19,16 @@ export function getProductList(param) {
     return request.post("/api/product/list", param);
 }
 
+/**
+ * 产品列表
+ * URL (/api/product/info) METHOD POST
+ * 接收参数
+ * p 分页 必传 offset 每页显示的数量 默认为10
+ * */
+export function getProductInfo(param) {
+    return request.post("api/product/info", param);
+}
+
 export function getTeacherList(params) {
     return request.post("/api/teacher/list", params);
 }
@@ -28,6 +38,6 @@ export function getTeacherList(params) {
  * URL (/api/user) METHOD get
  * 无需参数，直接获取 ，注意要带上token
  * */
-export function getUserInfo(params){
-    return request.get('"/api/user"',params);
+export function getUserInfo(params) {
+    return request.get("/api/user", params);
 }
