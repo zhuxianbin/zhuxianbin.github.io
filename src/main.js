@@ -14,7 +14,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import i18n from './lang'
+// import i18n from './lang'
 
 import * as filters from './filters'
 
@@ -30,7 +30,7 @@ Vue.use(BaiduMap, {
 
 Vue.use(ElementUI, {
   size: 'small',
-  i18n: (key, value) => i18n.t(key, value)
+  // i18n: (key, value) => i18n.t(key, value)
 })
 
 Vue.use(mixins)
@@ -43,7 +43,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  i18n,
+  // i18n,
   store,
   render: h => h(App)
 })

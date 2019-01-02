@@ -1,4 +1,4 @@
-import jQuery from 'jquery'
+import $ from 'jquery'
 (function ($) {
     $.fn.extend({
         capsLockTip: function (divTipID) {
@@ -68,4 +68,4 @@ import jQuery from 'jquery'
         // 大写锁定键状态
         $.fn.capsLockTip.capsLockActived = null;
     };
-})(jQuery);
+})($);

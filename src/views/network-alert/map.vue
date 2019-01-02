@@ -11,16 +11,9 @@
       :zoom="zoom"
       @ready="initMap"
     >
-      <el-form
-        :model="form"
-        :inline="true"
-      >
+      <el-form class="filter-container" :model="form" :inline="true">
         <el-form-item label="网点名称">
-          <el-input
-            v-model="form.name"
-            placeholder="网点名称"
-            clearable
-          ></el-input>
+          <el-input v-model="form.name" placeholder="网点名称" clearable></el-input>
         </el-form-item>
         <el-form-item label="选择公司">
           <el-cascader
@@ -32,95 +25,38 @@
             clearable
             change-on-select
             @change="changeCompany"
-          >
-          </el-cascader>
+          ></el-cascader>
         </el-form-item>
         <el-form-item label="是否启用">
-          <el-select
-            v-model="form.isActive"
-            placeholder="是否启用"
-            clearable
-          >
-            <el-option
-              label="是"
-              value="1"
-            ></el-option>
-            <el-option
-              label="否"
-              value="0"
-            ></el-option>
+          <el-select v-model="form.isActive" placeholder="是否启用" clearable>
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网点值守状态">
-          <el-select
-            v-model="form.unattended"
-            placeholder="网点值守状态"
-            clearable
-          >
-            <el-option
-              label="无人"
-              value="1"
-            ></el-option>
-            <el-option
-              label="有人"
-              value="0"
-            ></el-option>
+          <el-select v-model="form.unattended" placeholder="网点值守状态" clearable>
+            <el-option label="无人" value="1"></el-option>
+            <el-option label="有人" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网点车位状态">
-          <el-select
-            v-model="form.parkingState"
-            placeholder="网点车位状态"
-            clearable
-          >
-            <el-option
-              label="全部"
-              value=""
-            ></el-option>
-            <el-option
-              label="满"
-              value="1"
-            ></el-option>
-            <el-option
-              label="空"
-              value="2"
-            ></el-option>
-            <el-option
-              label="正常"
-              value="3"
-            ></el-option>
-            <el-option
-              label="车辆警报"
-              value="4"
-            ></el-option>
+          <el-select v-model="form.parkingState" placeholder="网点车位状态" clearable>
+            <el-option label="全部" value></el-option>
+            <el-option label="满" value="1"></el-option>
+            <el-option label="空" value="2"></el-option>
+            <el-option label="正常" value="3"></el-option>
+            <el-option label="车辆警报" value="4"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网点车机状态">
-          <el-select
-            v-model="form.dotDeviceState"
-            placeholder="网点车机状态"
-            clearable
-          >
-            <el-option
-              label="全部"
-              value="0"
-            ></el-option>
-            <el-option
-              label="在线"
-              value="1"
-            ></el-option>
-            <el-option
-              label="离线"
-              value="2"
-            ></el-option>
+          <el-select v-model="form.dotDeviceState" placeholder="网点车机状态" clearable>
+            <el-option label="全部" value="0"></el-option>
+            <el-option label="在线" value="1"></el-option>
+            <el-option label="离线" value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网点车辆状态">
-          <el-select
-            v-model="form.dotCarState"
-            placeholder="网点车辆状态"
-            clearable
-          >
+          <el-select v-model="form.dotCarState" placeholder="网点车辆状态" clearable>
             <el-option
               v-for="item in options1"
               :key="item.id"
@@ -140,54 +76,24 @@
             style="width: 200px"
             change-on-select
             @change="changeCity"
-          >
-          </el-cascader>
+          ></el-cascader>
         </el-form-item>
         <el-form-item label="网点类型">
-          <el-select
-            v-model="form.dotType"
-            placeholder="网点类型"
-            clearable
-          >
-            <el-option
-              label="体验店"
-              value="0"
-            ></el-option>
-            <el-option
-              label="直营店"
-              value="1"
-            ></el-option>
-            <el-option
-              label="自助网点"
-              value="2"
-            ></el-option>
+          <el-select v-model="form.dotType" placeholder="网点类型" clearable>
+            <el-option label="体验店" value="0"></el-option>
+            <el-option label="直营店" value="1"></el-option>
+            <el-option label="自助网点" value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="网点租赁状态">
-          <el-select
-            v-model="form.dotRentState"
-            placeholder="网点租赁状态"
-            clearable
-          >
-            <el-option
-              label="全部"
-              value="0"
-            ></el-option>
-            <el-option
-              label="有在租车辆"
-              value="1"
-            ></el-option>
-            <el-option
-              label="无在租车辆"
-              value="2"
-            ></el-option>
+          <el-select v-model="form.dotRentState" placeholder="网点租赁状态" clearable>
+            <el-option label="全部" value="0"></el-option>
+            <el-option label="有在租车辆" value="1"></el-option>
+            <el-option label="无在租车辆" value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="submityMap"
-          >查询</el-button>
+          <el-button type="primary" @click="submityMap">查询</el-button>
         </el-form-item>
       </el-form>
       <!--地图显示组件-->
@@ -195,10 +101,7 @@
       <!--地图的缩放组件-->
       <bm-navigation anchor="BMAP_ANCHOR_TOP_LEFT"></bm-navigation>
       <!--地图坐标-->
-      <bml-marker-clusterer
-        :averageCenter="true"
-        :styles="gyStyles"
-      >
+      <bml-marker-clusterer :averageCenter="true" :styles="gyStyles">
         <bm-marker
           v-for="item in points"
           :key="item.id"
@@ -218,87 +121,51 @@
         </bm-marker>
       </bml-marker-clusterer>
       <!--右边的显示-->
-      <bm-control
-        :offset="offset4"
-        anchor="BMAP_ANCHOR_TOP_RIGHT"
-      >
+      <bm-control :offset="offset4" anchor="BMAP_ANCHOR_TOP_RIGHT">
         <el-row>
-          <el-tag
-            type="info"
-            style="color: #393B3E"
-          >最近一次刷新时间：{{rightObj.updateTime}}</el-tag>
+          <el-tag type="info" style="color: #393B3E">最近一次刷新时间：{{rightObj.updateTime}}</el-tag>
         </el-row>
         <div class="right-div-cont">
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span class="s1"></span><span class="s2">无车网点：{{rightObj.noCarDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1"></span>
+            <span class="s2">无车网点：{{rightObj.noCarDot}}个</span>
             <div style="clear: both"></div>
           </div>
 
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span
-              class="s1"
-              style="background: #A6D39C"
-            ></span><span class="s2">正常网点：{{rightObj.normalDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1" style="background: #A6D39C"></span>
+            <span class="s2">正常网点：{{rightObj.normalDot}}个</span>
             <div style="clear: both"></div>
           </div>
 
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span
-              class="s1"
-              style="background: #CF5862"
-            ></span><span class="s2">车辆爆满网点：{{rightObj.fullCarDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1" style="background: #CF5862"></span>
+            <span class="s2">车辆爆满网点：{{rightObj.fullCarDot}}个</span>
             <div style="clear: both"></div>
           </div>
 
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span
-              class="s1"
-              style="background: #F8D697"
-            ></span><span class="s2">预警网点：{{rightObj.warningDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1" style="background: #F8D697"></span>
+            <span class="s2">预警网点：{{rightObj.warningDot}}个</span>
             <div style="clear: both"></div>
           </div>
 
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span
-              class="s1"
-              style="background: #B2D3EF"
-            ></span><span class="s2">亏电网点：{{rightObj.lossElectricDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1" style="background: #B2D3EF"></span>
+            <span class="s2">亏电网点：{{rightObj.lossElectricDot}}个</span>
             <div style="clear: both"></div>
           </div>
 
-          <div
-            class="right-div"
-            style="margin-top: 15px"
-          >
-            <span
-              class="s1"
-              style="background: #000000"
-            ></span><span class="s2">离线网点：{{rightObj.offlineDot}}个</span>
+          <div class="right-div" style="margin-top: 15px">
+            <span class="s1" style="background: #000000"></span>
+            <span class="s2">离线网点：{{rightObj.offlineDot}}个</span>
             <div style="clear: both"></div>
           </div>
         </div>
       </bm-control>
       <!--地图自定义控件-->
       <transition name="el-zoom-in-center">
-        <bm-control
-          v-show="showDetails"
-          :offset="offset1"
-        >
+        <bm-control v-show="showDetails" :offset="offset1">
           <div class="map-cell">
             <el-row>
               <el-tooltip effect="dark" :content="dotName" placement="top-start">
@@ -330,67 +197,27 @@
             </el-row>
 
             <el-row style="margin-top: 10px;">
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >离线：{{details.offlineCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >空闲：{{details.freeCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >停用：{{details.unUseCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >亏电：{{details.lossElectricCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">离线：{{details.offlineCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">空闲：{{details.freeCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">停用：{{details.unUseCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">亏电：{{details.lossElectricCarCount}}</el-col>
             </el-row>
 
             <el-row style="margin-top: 10px">
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >在租：{{details.orderCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >故障：{{details.faultCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >运维：{{details.operationCarCount}}</el-col>
-              <el-col
-                :span="6"
-                class="map-span-4"
-              >事故：{{details.troubleCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">在租：{{details.orderCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">故障：{{details.faultCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">运维：{{details.operationCarCount}}</el-col>
+              <el-col :span="6" class="map-span-4">事故：{{details.troubleCarCount}}</el-col>
             </el-row>
-            <img
-              class="map-close"
-              src="../../assets/images/guanbi.png"
-              @click="closeMap"
-            />
+            <img class="map-close" src="../../assets/images/guanbi.png" @click="closeMap">
           </div>
 
-          <el-form
-            :model="formTs"
-            :inline="true"
-            style="margin-top: 10px"
-          >
+          <el-form :model="formTs" :inline="true" style="margin-top: 10px">
             <el-form-item style="width: 100px">
-              <el-input
-                v-model="formTs.vehiclePlateId"
-                placeholder="车牌号"
-                clearable
-              ></el-input>
+              <el-input v-model="formTs.vehiclePlateId" placeholder="车牌号" clearable></el-input>
             </el-form-item>
             <el-form-item style="width: 100px">
-              <el-select
-                v-model="formTs.brand"
-                placeholder="品牌"
-                clearable
-              >
+              <el-select v-model="formTs.brand" placeholder="品牌" clearable>
                 <el-option
                   v-for="item in options2"
                   :key="item.id"
@@ -400,31 +227,14 @@
               </el-select>
             </el-form-item>
             <el-form-item style="width: 100px">
-              <el-select
-                v-model="formTs.deviceState"
-                placeholder="车机状态"
-                clearable
-              >
-                <el-option
-                  label="全部"
-                  value="0"
-                ></el-option>
-                <el-option
-                  label="在线"
-                  value="1"
-                ></el-option>
-                <el-option
-                  label="离线"
-                  value="2"
-                ></el-option>
+              <el-select v-model="formTs.deviceState" placeholder="车机状态" clearable>
+                <el-option label="全部" value="0"></el-option>
+                <el-option label="在线" value="1"></el-option>
+                <el-option label="离线" value="2"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item style="width: 100px">
-              <el-select
-                v-model="formTs.carState"
-                placeholder="车辆状态"
-                clearable
-              >
+              <el-select v-model="formTs.carState" placeholder="车辆状态" clearable>
                 <el-option
                   v-for="item in options1"
                   :key="item.id"
@@ -434,10 +244,7 @@
               </el-select>
             </el-form-item>
             <el-form-item style="width: 100px">
-              <el-button
-                type="primary"
-                @click="searchCar"
-              >查询</el-button>
+              <el-button type="primary" @click="searchCar">查询</el-button>
             </el-form-item>
           </el-form>
           <!--需要遍历的效果-->
@@ -449,10 +256,7 @@
           >
             <el-row>
               <span class="map-span-1"></span>
-              <span
-                class="map-span-2"
-                style="color: black"
-              >{{item.vehiclePlateId}}</span>
+              <span class="map-span-2" style="color: black">{{item.vehiclePlateId}}</span>
               <span
                 v-if="item.bizStateShow == '空闲'"
                 class="map-span-3"
@@ -468,21 +272,13 @@
                 class="map-span-3"
                 style="color: #ecab4a"
               >{{item.bizStateShow}}</span>
-              <span
-                v-else
-                class="map-span-3"
-                style="color: #878788"
-              >{{item.bizStateShow}}</span>
+              <span v-else class="map-span-3" style="color: #878788">{{item.bizStateShow}}</span>
               <span
                 v-if="item.offlineState == '在线'"
                 class="map-span-3"
                 style="color: #367D21"
               >{{item.offlineState}}</span>
-              <span
-                v-else
-                class="map-span-3"
-                style="color: #878788"
-              >{{item.offlineState}}</span>
+              <span v-else class="map-span-3" style="color: #878788">{{item.offlineState}}</span>
               <span
                 class="map-span-3"
                 style="color: #367D21"
@@ -519,23 +315,16 @@
               layout="prev, pager, next"
               jumper
               :total="pagination.total"
-            >
-            </el-pagination>
+            ></el-pagination>
           </div>
         </bm-control>
       </transition>
 
       <!--生成订单组件-->
       <transition name="el-zoom-in-center">
-        <bm-control
-          v-show="showDetails1"
-          :offset="offset2"
-        >
+        <bm-control v-show="showDetails1" :offset="offset2">
           <div class="map-dialog">
-            <span
-              class="map-span-1"
-              style="display: block"
-            >{{carName}}</span>
+            <span class="map-span-1" style="display: block">{{carName}}</span>
             <el-form
               :model="formTn"
               ref="ruleFormTn"
@@ -543,14 +332,8 @@
               label-width="110px"
               style="margin-top: 15px"
             >
-              <el-form-item
-                label="选择工单类型"
-                prop="workType"
-              >
-                <el-select
-                  v-model="formTn.workType"
-                  placeholder="请选择工单类型"
-                >
+              <el-form-item label="选择工单类型" prop="workType">
+                <el-select v-model="formTn.workType" placeholder="请选择工单类型">
                   <el-option
                     v-for="item in options3"
                     :key="item.id"
@@ -560,42 +343,20 @@
                 </el-select>
               </el-form-item>
 
-              <el-form-item
-                label="选择目标网点"
-                prop="replaceDotName"
-              >
+              <el-form-item label="选择目标网点" prop="replaceDotName">
                 <el-col :span="12">
-                  <el-input
-                    v-model="formTn.replaceDotName"
-                    disabled
-                  ></el-input>
+                  <el-input v-model="formTn.replaceDotName" disabled></el-input>
                 </el-col>
-                <el-col
-                  :span="4"
-                  :offset="1"
-                >
-                  <el-button
-                    type="primary"
-                    @click="chooseNet"
-                  >选择网点</el-button>
+                <el-col :span="4" :offset="1">
+                  <el-button type="primary" @click="chooseNet">选择网点</el-button>
                 </el-col>
               </el-form-item>
 
-              <el-form-item
-                label="备注"
-                prop="remark"
-              >
-                <el-input
-                  v-model="formTn.remark"
-                  type="textarea"
-                  maxlength="30"
-                ></el-input>
+              <el-form-item label="备注" prop="remark">
+                <el-input v-model="formTn.remark" type="textarea" maxlength="30"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button
-                  type="primary"
-                  @click="createOrder('ruleFormTn')"
-                >提交</el-button>
+                <el-button type="primary" @click="createOrder('ruleFormTn')">提交</el-button>
                 <el-button @click="hideFun1">取消</el-button>
               </el-form-item>
             </el-form>
@@ -604,34 +365,15 @@
       </transition>
     </baidu-map>
     <!--查询网点-->
-    <el-dialog
-      title="查询网点"
-      :visible.sync="dialogVisible"
-      width="900px"
-    >
-      <el-form
-        :model="formXn"
-        :inline="true"
-      >
+    <el-dialog title="查询网点" :visible.sync="dialogVisible" width="900px">
+      <el-form :model="formXn" :inline="true">
         <el-form-item label="网点名称">
-          <el-input
-            v-model="formXn.name"
-            clearable
-          ></el-input>
+          <el-input v-model="formXn.name" clearable></el-input>
         </el-form-item>
         <el-form-item label="是否启用">
-          <el-select
-            v-model="formXn.isActive"
-            clearable
-          >
-            <el-option
-              label="启用"
-              value="1"
-            ></el-option>
-            <el-option
-              label="未启用"
-              value="0"
-            ></el-option>
+          <el-select v-model="formXn.isActive" clearable>
+            <el-option label="启用" value="1"></el-option>
+            <el-option label="未启用" value="0"></el-option>
           </el-select>
         </el-form-item>
         <!-- <el-form-item label="选择公司">
@@ -645,83 +387,42 @@
             @change="changeCompanyX"
           >
           </el-cascader>
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="searchNet"
-          >查询</el-button>
+          <el-button type="primary" @click="searchNet">查询</el-button>
         </el-form-item>
       </el-form>
 
-      <el-table
-        :data="netList"
-        border
-        ref="multipleTableX"
-        tooltip-effect="dark"
-      >
-        <el-table-column
-          label="选择"
-          width="55"
-        >
+      <el-table :data="netList" border ref="multipleTableX" tooltip-effect="dark">
+        <el-table-column label="选择" width="55">
           <template slot-scope="scope">
-            <el-radio
-              v-model="chooseName"
-              :label="scope.row.name"
-              @change="selectDot(scope.row)"
-            ></el-radio>
+            <el-radio v-model="chooseName" :label="scope.row.name" @change="selectDot(scope.row)"></el-radio>
           </template>
         </el-table-column>
-        <el-table-column
-          label="编码"
-          prop="code"
-        >
-        </el-table-column>
-        <el-table-column
-          label="名称"
-          prop="name"
-        >
-        </el-table-column>
-        <el-table-column
-          label="地址"
-          prop="address"
-        >
-        </el-table-column>
-        <el-table-column
-          label="是否启用"
-          prop="isActive"
-        >
+        <el-table-column label="编码" prop="code"></el-table-column>
+        <el-table-column label="名称" prop="name"></el-table-column>
+        <el-table-column label="地址" prop="address"></el-table-column>
+        <el-table-column label="是否启用" prop="isActive">
           <template slot-scope="scope">
             <span v-if="scope.row.isActive == 1">是</span>
             <span v-else>否</span>
           </template>
         </el-table-column>
-        <el-table-column
-          label="行政区域"
-          prop="sAddress"
-        >
-        </el-table-column>
+        <el-table-column label="行政区域" prop="sAddress"></el-table-column>
         <el-table-column label="还车网点">
           <template slot-scope="scope">
             <span>本地</span>
           </template>
         </el-table-column>
-        <el-table-column
-          label="车位数量"
-          prop="totalParkingPlace"
-        >
-        </el-table-column>
-         <el-table-column label="空闲车位" prop="totalUse">
-           <template slot-scope="scope">
-             <span>{{(scope.row.totalParkingPlace - scope.row.totalUse) >= 0 ? (scope.row.totalParkingPlace - scope.row.totalUse) : 0}}</span>
-           </template>
+        <el-table-column label="车位数量" prop="totalParkingPlace"></el-table-column>
+        <el-table-column label="空闲车位" prop="totalUse">
+          <template slot-scope="scope">
+            <span>{{(scope.row.totalParkingPlace - scope.row.totalUse) >= 0 ? (scope.row.totalParkingPlace - scope.row.totalUse) : 0}}</span>
+          </template>
         </el-table-column>
       </el-table>
 
-      <div
-        class="block"
-        align="center"
-      >
+      <div class="block" align="center">
         <el-pagination
           @size-change="handleSizeChangeX"
           @current-change="handleCurrentChangeX"
@@ -730,19 +431,12 @@
           :page-size="formXn.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="paginationX.total"
-        >
-        </el-pagination>
+        ></el-pagination>
       </div>
 
-      <div
-        class="block"
-        align="center"
-      >
+      <div class="block" align="center">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button
-          type="primary"
-          @click="confirmFun"
-        >确定</el-button>
+        <el-button type="primary" @click="confirmFun">确定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -764,7 +458,7 @@ export default {
   data() {
     return {
       aresArr: [],
-      propsObj: {value: 'companySn', label: 'companyName'},
+      propsObj: { value: "companySn", label: "companyName" },
       form: {
         name: "",
         companySn: "",
@@ -871,14 +565,16 @@ export default {
   },
   mounted() {
     this.loadingInstance = true;
-    Promise.all([this.getDicts(), this.selectWorkOrderTypeDicts(), this.getAreaList()]).then(
-      result => {
-        this.getWarningList().then(() => {
-          this.getAllAreasInfo();
-          this.timerFun();
-        });
-      }
-    );
+    Promise.all([
+      this.getDicts(),
+      this.selectWorkOrderTypeDicts(),
+      this.getAreaList()
+    ]).then(result => {
+      this.getWarningList().then(() => {
+        this.getAllAreasInfo();
+        this.timerFun();
+      });
+    });
   },
   beforeDestroy() {
     window.clearInterval(this.timeid);
@@ -887,12 +583,14 @@ export default {
     // 获取所属区域的接口
     getAreaList() {
       return new Promise((resolve, reject) => {
-        getAreaList().then(res => {
-          this.aresArr = res;
-          resolve();
-        }).catch(err => {
-          console.log(err);
-        });
+        getAreaList()
+          .then(res => {
+            this.aresArr = res;
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+          });
       });
     },
     // 定时器每3秒刷新一次
@@ -916,101 +614,105 @@ export default {
             this.loadingInstance = false;
             resolve(arrays);
           } else {
-          arr.forEach(ele => {
-            /**
-             * carParkingState 判断网点状态 1满 2空 3正 4预警
-             * lossElectricCarCount 是否亏电
-             * offlineCarCount 是否离线
-             */
-            const ico = {
-              url: "",
-              size: { width: 50, height: 74 }
-            };
-            const labelStyle = {
-              background: "",
-              color: "#fff",
-              fontSize: "17px",
-              width: "35px",
-              height: "36px",
-              textAlign: "center",
-              lineHeight: "36px",
-              borderStyle: "none"
-            };
-            if (ele.carParkingState === "1") {
-              ele.showLabel = false;
-              ele.parkingStateName = "满车位";
-              if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_manAll.png");
-              } else if (ele.lossElectricCarCount > 0) {
-                ico.url = require("../../assets/images/icon_manK.png");
-              } else if (ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_manL.png");
-              } else {
-                ico.url = require("../../assets/images/icon_man.png");
+            arr.forEach(ele => {
+              /**
+               * carParkingState 判断网点状态 1满 2空 3正 4预警
+               * lossElectricCarCount 是否亏电
+               * offlineCarCount 是否离线
+               */
+              const ico = {
+                url: "",
+                size: { width: 50, height: 74 }
+              };
+              const labelStyle = {
+                background: "",
+                color: "#fff",
+                fontSize: "17px",
+                width: "35px",
+                height: "36px",
+                textAlign: "center",
+                lineHeight: "36px",
+                borderStyle: "none"
+              };
+              if (ele.carParkingState === "1") {
+                ele.showLabel = false;
+                ele.parkingStateName = "满车位";
+                if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_manAll.png");
+                } else if (ele.lossElectricCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_manK.png");
+                } else if (ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_manL.png");
+                } else {
+                  ico.url = require("../../assets/images/icon_man.png");
+                }
+              } else if (ele.carParkingState === "2") {
+                ele.showLabel = false;
+                ele.parkingStateName = "无车";
+                ico.url = require("../../assets/images/icon_not.png");
+              } else if (ele.carParkingState === "3") {
+                ele.showLabel = true;
+                ele.parkingStateName =
+                  "空闲车位(" +
+                  (ele.totalParkingPlace - ele.noOrderCarNum) +
+                  ")";
+                labelStyle.background = "#5EC74F";
+                if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_sucAll.png");
+                } else if (ele.lossElectricCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_sucK.png");
+                } else if (ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_sucL.png");
+                } else {
+                  ico.url = require("../../assets/images/icon_suc.png");
+                }
+              } else if (ele.carParkingState === "4") {
+                ele.showLabel = true;
+                ele.parkingStateName =
+                  "空闲车位(" +
+                  (ele.totalParkingPlace - ele.noOrderCarNum) +
+                  ")";
+                labelStyle.background = "#EA9F4F";
+                if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_waringAll.png");
+                } else if (ele.lossElectricCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_waringK.png");
+                } else if (ele.offlineCarCount > 0) {
+                  ico.url = require("../../assets/images/icon_waringL.png");
+                } else {
+                  ico.url = require("../../assets/images/icon_waring.png");
+                }
               }
-            } else if (ele.carParkingState === "2") {
-              ele.showLabel = false;
-              ele.parkingStateName = "无车";
-              ico.url = require("../../assets/images/icon_not.png");
-            } else if (ele.carParkingState === "3") {
-              ele.showLabel = true;
-              ele.parkingStateName =
-                "空闲车位(" + (ele.totalParkingPlace - ele.noOrderCarNum) + ")";
-              labelStyle.background = "#5EC74F";
-              if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_sucAll.png");
-              } else if (ele.lossElectricCarCount > 0) {
-                ico.url = require("../../assets/images/icon_sucK.png");
-              } else if (ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_sucL.png");
-              } else {
-                ico.url = require("../../assets/images/icon_suc.png");
-              }
-            } else if (ele.carParkingState === "4") {
-              ele.showLabel = true;
-              ele.parkingStateName =
-                "空闲车位(" + (ele.totalParkingPlace - ele.noOrderCarNum) + ")";
-              labelStyle.background = "#EA9F4F";
-              if (ele.lossElectricCarCount > 0 && ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_waringAll.png");
-              } else if (ele.lossElectricCarCount > 0) {
-                ico.url = require("../../assets/images/icon_waringK.png");
-              } else if (ele.offlineCarCount > 0) {
-                ico.url = require("../../assets/images/icon_waringL.png");
-              } else {
-                ico.url = require("../../assets/images/icon_waring.png");
-              }
-            }
-            const obj = {
-              id: ele.id,
-              position: { lng: ele.lng, lat: ele.lat },
-              icon: ico,
-              title: ele.name,
-              noOrderCarNum: ele.noOrderCarNum + "",
-              showLabel: ele.showLabel,
-              labelStyle: labelStyle,
-              offset: { width: 7, height: 17 },
-              name: ele.name,
-              companySn: ele.companySn,
-              cTypeShow: ele.cTypeShow,
-              carParkingState: ele.carParkingState,
-              parkingStateName: ele.parkingStateName,
-              totalParkingPlace: ele.totalParkingPlace,
-              offlineCarCount: ele.offlineCarCount,
-              freeCarCount: ele.freeCarCount,
-              unUseCarCount: ele.unUseCarCount,
-              lossElectricCarCount: ele.lossElectricCarCount,
-              orderCarCount: ele.orderCarCount,
-              faultCarCount: ele.faultCarCount,
-              operationCarCount: ele.operationCarCount,
-              troubleCarCount: ele.troubleCarCount
-            };
-            arrays.push(obj);
-          });
-          this.points = arrays;
-          this.center = this.points[0].position;
-          this.loadingInstance = false;
-          resolve(arrays);
+              const obj = {
+                id: ele.id,
+                position: { lng: ele.lng, lat: ele.lat },
+                icon: ico,
+                title: ele.name,
+                noOrderCarNum: ele.noOrderCarNum + "",
+                showLabel: ele.showLabel,
+                labelStyle: labelStyle,
+                offset: { width: 7, height: 17 },
+                name: ele.name,
+                companySn: ele.companySn,
+                cTypeShow: ele.cTypeShow,
+                carParkingState: ele.carParkingState,
+                parkingStateName: ele.parkingStateName,
+                totalParkingPlace: ele.totalParkingPlace,
+                offlineCarCount: ele.offlineCarCount,
+                freeCarCount: ele.freeCarCount,
+                unUseCarCount: ele.unUseCarCount,
+                lossElectricCarCount: ele.lossElectricCarCount,
+                orderCarCount: ele.orderCarCount,
+                faultCarCount: ele.faultCarCount,
+                operationCarCount: ele.operationCarCount,
+                troubleCarCount: ele.troubleCarCount
+              };
+              arrays.push(obj);
+            });
+            this.points = arrays;
+            this.center = this.points[0].position;
+            this.loadingInstance = false;
+            resolve(arrays);
           }
         });
       });

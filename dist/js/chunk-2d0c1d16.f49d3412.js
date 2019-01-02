@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c1d16"],{4851:function(e,n,t){"use strict";t.r(n);var i=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("router-view")],1)},u=[],c={name:"financeGM"},l=c,o=t("2877"),r=Object(o["a"])(l,i,u,!1,null,null,null);r.options.__file="index.vue";n["default"]=r.exports}}]);
+//# sourceMappingURL=chunk-2d0c1d16.f49d3412.js.map

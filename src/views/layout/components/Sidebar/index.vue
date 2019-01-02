@@ -5,7 +5,7 @@
       :show-timeout="200"
       :default-active="$route.path"
       :collapse="isCollapse"
-      background-color="#304156"
+      background-color="rgba(0,0,0,0)"
       text-color="#bfcbd9"
       active-text-color="#409EFF"
     >
@@ -15,21 +15,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SidebarItem from './SidebarItem'
+import { mapGetters } from "vuex";
+import SidebarItem from "./SidebarItem";
 
 export default {
   components: { SidebarItem },
   computed: {
-    ...mapGetters([
-      'sidebar'
-    ]),
+    ...mapGetters(["sidebar"]),
     routes() {
-      return this.$router.options.routes
+      console.log(this.$router.options);
+      return this.$router.options.routes;
     },
     isCollapse() {
-      return !this.sidebar.opened
+      return !this.sidebar.opened;
     }
   }
-}
+};
 </script>

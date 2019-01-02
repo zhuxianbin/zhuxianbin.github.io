@@ -1,394 +1,261 @@
 <template>
   <div class="app-container">
-    <el-tag type="success">编辑优惠券</el-tag>
-    <el-form
-      :model="formTest"
-      ref="ruleTest"
-      :rules="ruleTest"
-      style="width: 1100px;margin-top: 20px;"
-      label-width="140px"
-    >
-      <div class="bt">
-        <span
-          class="s1"
-          style="margin-left: 0px"
-        ></span>
-        <span class="s2">基本信息</span>
-        <div style="clear:both"></div>
-      </div>
-      <el-form-item
-        prop="type"
-        label="优惠券类型："
-        style="margin-top: 20px;"
+    <div class="panel-container">
+      <el-tag type="success">编辑优惠券</el-tag>
+      <el-form
+        :model="formTest"
+        ref="ruleTest"
+        :rules="ruleTest"
+        style="width: 1100px;margin-top: 20px;"
+        label-width="140px"
       >
-        <el-radio
-          v-model="formTest.type"
-          label="mj"
-          @change="changeType"
-        >代金券</el-radio>
-        <el-radio
-          v-model="formTest.type"
-          label="zk"
-          @change="changeType"
-        >折扣券</el-radio>
-      </el-form-item>
+        <div class="bt">
+          <span class="s1" style="margin-left: 0px"></span>
+          <span class="s2">基本信息</span>
+          <div style="clear:both"></div>
+        </div>
+        <el-form-item prop="type" label="优惠券类型：" style="margin-top: 20px;">
+          <el-radio v-model="formTest.type" label="mj" @change="changeType">代金券</el-radio>
+          <el-radio v-model="formTest.type" label="zk" @change="changeType">折扣券</el-radio>
+        </el-form-item>
 
-      <el-form-item
-        label="优惠券名称："
-        prop="name"
-      >
-        <el-input
-          v-model="formTest.name"
-          placeholder="优惠券名称"
-          clearable
-        ></el-input>
-      </el-form-item>
+        <el-form-item label="优惠券名称：" prop="name">
+          <el-input v-model="formTest.name" placeholder="优惠券名称" clearable></el-input>
+        </el-form-item>
 
-      <el-form-item
-        label="减免金额："
-        v-if="formTest.type == 'mj'"
-        prop="minusAmount"
-      >
-        <el-col :span="12">
-          <el-input
-            v-model.number="formTest.minusAmount"
-            placeholder="减免金额"
-            @keyup.enter.native="limitNum($event)"
-            clearable
-          ></el-input>
-        </el-col>
-        <el-col :span="1">&nbsp;元</el-col>
-      </el-form-item>
-
-      <el-form-item
-        label="打折力度："
-        v-if="formTest.type == 'zk'"
-        prop="discount"
-      >
-        <el-col :span="12">
-          <el-input
-            v-model.number="formTest.discount"
-            placeholder="例：9折为0.9"
-            @keyup.enter.native="limitNum($event)"
-            clearable
-          ></el-input>
-        </el-col>
-      </el-form-item>
-
-      <el-row>
-        <el-col :span="formTest.validDateType ? 3 : 12">
-          <el-form-item
-            label="有效日期："
-            prop="validDateType"
-          >
-            <el-radio-group v-model="formTest.validDateType">
-              <el-col
-                :span="24"
-                style="margin-top: 10px;"
-              >
-                <el-radio :label="1">固定日期</el-radio>
-              </el-col>
-              <el-col
-                :span="24"
-                style="margin-top: 30px;"
-              >
-                <el-radio :label="2">领券后</el-radio>
-              </el-col>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-
-        <el-col :span="21">
-          <el-col
-            :span="24"
-            style="height: 46px;"
-          >
-            <el-form-item
-              v-if="formTest.validDateType == 1"
-              prop="validStartTime"
-            >
-              <el-date-picker
-                v-model="validTime"
-                v-show="formTest.validDateType == 1"
-                type="daterange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                value-format="yyyy-MM-dd"
-                clearable
-                @change="chooseTime"
-              >
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="24">
-            <el-col
-              :span="6"
-              v-show="formTest.validDateType == 2"
-            >
-              <el-form-item
-                v-if="formTest.validDateType == 2"
-                prop="validDate1"
-              >
-                <el-input
-                  v-model.number="formTest.validDate1"
-                  @keyup.enter.native="limitN($event)"
-                  clearable
-                ></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col
-              :span="4"
-              v-show="formTest.validDateType == 2"
-              style="color: #606166;font-size: 14px; line-height: 2.6"
-            >&nbsp;天生效，有效天数&nbsp;
-            </el-col>
-            <el-col
-              :span="6"
-              :pull="4"
-              v-show="formTest.validDateType == 2"
-            >
-              <el-form-item
-                v-if="formTest.validDateType == 2"
-                prop="validDate2"
-              >
-                <el-input
-                  v-model.number="formTest.validDate2"
-                  @keyup.enter.native="limitN($event)"
-                  clearable
-                ></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col
-              :span="7"
-              :pull="4"
-              v-show="formTest.validDateType == 2"
-              style="color: #606166;font-size: 14px; line-height: 2.6"
-            >&nbsp;天
-            <span style="color: #999999">（领取后0天生效，表示当天生效。）</span>
-            </el-col>
-          </el-col>
-        </el-col>
-      </el-row>
-
-      <div class="bt">
-        <span
-          class="s1"
-          style="margin-left: 0px"
-        ></span>
-        <span class="s2">优惠信息</span>
-        <div style="clear:both"></div>
-      </div>
-
-      <el-form-item
-        label="领券限制："
-        style="margin-top: 20px;"
-      >
-        <el-col :span="10">
-          <el-input
-            v-model.number="formTest.maxStockPerSub"
-            @keyup.enter.native="limitN($event)"
-            placeholder="每个客户领券上限"
-            clearable
-          ></el-input>
-        </el-col>
-        <el-col
-          :span="1"
-          style="color: #606166"
-        >&nbsp;张</el-col>
-      </el-form-item>
-
-      <el-form-item
-        label="使用条件："
-        v-if="formTest.type == 'mj'"
-        prop="fullAmount"
-      >
-        <el-col
-          :span="2.6"
-          style="color: #606166"
-        >
-          消费满&nbsp;
-        </el-col>
-        <el-col :span="8">
-          <el-input
-            v-model.number="formTest.fullAmount"
-            @keyup.enter.native="limitNum($event)"
-            placeholder="几"
-            clearable
-          ></el-input>
-        </el-col>
-        <el-col
-          :span="3"
-          style="color: #606166"
-        >&nbsp;元可用</el-col>
-      </el-form-item>
-
-      <el-form-item
-        label="使用条件："
-        v-if="formTest.type == 'zk'"
-        prop="discountLimit"
-      >
-        <el-col
-          :span="2.6"
-          style="color: #606166"
-        >
-          折扣上限&nbsp;
-        </el-col>
-        <el-col :span="8">
-          <el-input
-            v-model.number="formTest.discountLimit"
-            placeholder="几"
-            @keyup.enter.native="limitNum($event)"
-            clearable
-          ></el-input>
-        </el-col>
-        <el-col
-          :span="3"
-          style="color: #606166"
-        >&nbsp;元</el-col>
-      </el-form-item>
-
-      <div class="bt">
-        <span
-          class="s1"
-          style="margin-left: 0px"
-        ></span>
-        <span class="s2">使用设置</span>
-        <div style="clear:both"></div>
-      </div>
-
-      <el-form-item
-        label="优惠券库存："
-        style="margin-top: 20px;"
-      >
-        <el-col :span="5.5">
-          <el-radio-group
-            v-model="radio1"
-            @change="changeStock"
-          >
-            <el-radio :label="-1" v-if="radio1 === -1">不限数量</el-radio>
-            <el-radio :label="0" v-else>限制数量&nbsp;&nbsp;</el-radio>
-          </el-radio-group>
-        </el-col>
-        <el-col :span="4.5" v-if="radio1 === 0">
-          <el-col :span="24">
+        <el-form-item label="减免金额：" v-if="formTest.type == 'mj'" prop="minusAmount">
+          <el-col :span="12">
             <el-input
-              v-show="formTest.stock != -1"
-              v-model.number="formTest.stock"
-              :disabled="$route.query.couponId.length > 0 ? true : false"
-              placeholder="几"
-              @keyup.enter.native="limitN($event)"
+              v-model.number="formTest.minusAmount"
+              placeholder="减免金额"
+              @keyup.enter.native="limitNum($event)"
               clearable
             ></el-input>
           </el-col>
-        </el-col>
-        <el-col :span="1" v-if="radio1 === 0">
-          <span v-show="formTest.stock != -1">&nbsp;&nbsp;张</span>
-        </el-col>
-         <el-col :span="24" style="margin-top: 10px;" v-if="radio1 === 0">
+          <el-col :span="1">&nbsp;元</el-col>
+        </el-form-item>
+
+        <el-form-item label="打折力度：" v-if="formTest.type == 'zk'" prop="discount">
+          <el-col :span="12">
+            <el-input
+              v-model.number="formTest.discount"
+              placeholder="例：9折为0.9"
+              @keyup.enter.native="limitNum($event)"
+              clearable
+            ></el-input>
+          </el-col>
+        </el-form-item>
+
+        <el-row>
+          <el-col :span="formTest.validDateType ? 3 : 12">
+            <el-form-item label="有效日期：" prop="validDateType">
+              <el-radio-group v-model="formTest.validDateType">
+                <el-col :span="24" style="margin-top: 10px;">
+                  <el-radio :label="1">固定日期</el-radio>
+                </el-col>
+                <el-col :span="24" style="margin-top: 30px;">
+                  <el-radio :label="2">领券后</el-radio>
+                </el-col>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="21">
+            <el-col :span="24" style="height: 46px;">
+              <el-form-item v-if="formTest.validDateType == 1" prop="validStartTime">
+                <el-date-picker
+                  v-model="validTime"
+                  v-show="formTest.validDateType == 1"
+                  type="daterange"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  value-format="yyyy-MM-dd"
+                  clearable
+                  @change="chooseTime"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="24">
+              <el-col :span="6" v-show="formTest.validDateType == 2">
+                <el-form-item v-if="formTest.validDateType == 2" prop="validDate1">
+                  <el-input
+                    v-model.number="formTest.validDate1"
+                    @keyup.enter.native="limitN($event)"
+                    clearable
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col
+                :span="4"
+                v-show="formTest.validDateType == 2"
+                style="color: #606166;font-size: 14px; line-height: 2.6"
+              >&nbsp;天生效，有效天数&nbsp;</el-col>
+              <el-col :span="6" :pull="4" v-show="formTest.validDateType == 2">
+                <el-form-item v-if="formTest.validDateType == 2" prop="validDate2">
+                  <el-input
+                    v-model.number="formTest.validDate2"
+                    @keyup.enter.native="limitN($event)"
+                    clearable
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col
+                :span="7"
+                :pull="4"
+                v-show="formTest.validDateType == 2"
+                style="color: #606166;font-size: 14px; line-height: 2.6"
+              >
+                &nbsp;天
+                <span style="color: #999999">（领取后0天生效，表示当天生效。）</span>
+              </el-col>
+            </el-col>
+          </el-col>
+        </el-row>
+
+        <div class="bt">
+          <span class="s1" style="margin-left: 0px"></span>
+          <span class="s2">优惠信息</span>
+          <div style="clear:both"></div>
+        </div>
+
+        <el-form-item label="领券限制：" style="margin-top: 20px;">
+          <el-col :span="10">
+            <el-input
+              v-model.number="formTest.maxStockPerSub"
+              @keyup.enter.native="limitN($event)"
+              placeholder="每个客户领券上限"
+              clearable
+            ></el-input>
+          </el-col>
+          <el-col :span="1" style="color: #606166">&nbsp;张</el-col>
+        </el-form-item>
+
+        <el-form-item label="使用条件：" v-if="formTest.type == 'mj'" prop="fullAmount">
+          <el-col :span="2.6" style="color: #606166">消费满&nbsp;</el-col>
+          <el-col :span="8">
+            <el-input
+              v-model.number="formTest.fullAmount"
+              @keyup.enter.native="limitNum($event)"
+              placeholder="几"
+              clearable
+            ></el-input>
+          </el-col>
+          <el-col :span="3" style="color: #606166">&nbsp;元可用</el-col>
+        </el-form-item>
+
+        <el-form-item label="使用条件：" v-if="formTest.type == 'zk'" prop="discountLimit">
+          <el-col :span="2.6" style="color: #606166">折扣上限&nbsp;</el-col>
+          <el-col :span="8">
+            <el-input
+              v-model.number="formTest.discountLimit"
+              placeholder="几"
+              @keyup.enter.native="limitNum($event)"
+              clearable
+            ></el-input>
+          </el-col>
+          <el-col :span="3" style="color: #606166">&nbsp;元</el-col>
+        </el-form-item>
+
+        <div class="bt">
+          <span class="s1" style="margin-left: 0px"></span>
+          <span class="s2">使用设置</span>
+          <div style="clear:both"></div>
+        </div>
+
+        <el-form-item label="优惠券库存：" style="margin-top: 20px;">
+          <el-col :span="5.5">
+            <el-radio-group v-model="radio1" @change="changeStock">
+              <el-radio :label="-1" v-if="radio1 === -1">不限数量</el-radio>
+              <el-radio :label="0" v-else>限制数量&nbsp;&nbsp;</el-radio>
+            </el-radio-group>
+          </el-col>
+          <el-col :span="4.5" v-if="radio1 === 0">
+            <el-col :span="24">
+              <el-input
+                v-show="formTest.stock != -1"
+                v-model.number="formTest.stock"
+                :disabled="$route.query.couponId.length > 0 ? true : false"
+                placeholder="几"
+                @keyup.enter.native="limitN($event)"
+                clearable
+              ></el-input>
+            </el-col>
+          </el-col>
+          <el-col :span="1" v-if="radio1 === 0">
+            <span v-show="formTest.stock != -1">&nbsp;&nbsp;张</span>
+          </el-col>
+          <el-col :span="24" style="margin-top: 10px;" v-if="radio1 === 0">
             <span>剩余库存数：</span>
             <el-input-number v-model="formTest.availableStock" :step="1" :min="0"></el-input-number>
-          </el-col> 
-      </el-form-item>
-
-      <el-form-item
-        label="适用地区说明："
-        prop="validCompanyDesc"
-      >
-        <el-input
-          v-model="formTest.validCompanyDesc"
-          placeholder="填写后显示于优惠券页面，请认真填写。例：全国适用（海南地区除外）"
-          clearable
-        ></el-input>
-      </el-form-item>
-
-      <el-form-item
-        label="适用地区："
-        prop="companies"
-      >
-        <el-radio-group
-          v-model="formTest.companyType"
-          @change="changeCompanyType"
-        >
-          <el-col :span="24">
-            <el-radio
-              :label="-1"
-              :disabled="nationalDis"
-            >全国适用</el-radio>
           </el-col>
-          <el-col
-            :span="24"
-            style="margin-top: 15px;"
+        </el-form-item>
+
+        <el-form-item label="适用地区说明：" prop="validCompanyDesc">
+          <el-input
+            v-model="formTest.validCompanyDesc"
+            placeholder="填写后显示于优惠券页面，请认真填写。例：全国适用（海南地区除外）"
+            clearable
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="适用地区：" prop="companies">
+          <el-radio-group v-model="formTest.companyType" @change="changeCompanyType">
+            <el-col :span="24">
+              <el-radio :label="-1" :disabled="nationalDis">全国适用</el-radio>
+            </el-col>
+            <el-col :span="24" style="margin-top: 15px;">
+              <el-radio :label="1" @click.native="openDialog1">指定区域适用</el-radio>
+            </el-col>
+          </el-radio-group>
+          <el-col :span="24">{{companiesName ? "（" + cutString(companiesName, 100) + " ）" : ""}}</el-col>
+        </el-form-item>
+
+        <el-form-item label="适用业务：" prop="businessType">
+          <el-checkbox-group
+            v-model="businessType"
+            @change="getCarModels"
+            v-loading="checkboxLoading"
+            :disabled="!formTest.companies"
           >
-            <el-radio
-              :label="1"
-              @click.native="openDialog1"
-            >指定区域适用</el-radio>
-          </el-col>
-        </el-radio-group>
-        <el-col :span="24">{{companiesName ? "（" + cutString(companiesName, 100) + " ）" : ""}}</el-col>
-      </el-form-item>
+            <el-checkbox label="整租"></el-checkbox>
+            <el-checkbox label="长短租"></el-checkbox>
+            <el-checkbox label="日租"></el-checkbox>
+            <el-checkbox label="分时"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
 
-      <el-form-item
-        label="适用业务："
-        prop="businessType"
-      >
-        <el-checkbox-group
-          v-model="businessType"
-          @change="getCarModels"
-          v-loading="checkboxLoading"
-          :disabled="!formTest.companies"
-        >
-          <el-checkbox label="整租"></el-checkbox>
-          <el-checkbox label="长短租"></el-checkbox>
-          <el-checkbox label="日租"></el-checkbox>
-          <el-checkbox label="分时"></el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
-
-      <el-form-item
-        label="适用策略："
-        prop="strategies"
-      >
-        <el-radio-group
-          v-model="formTest.strategyType"
-          :disabled="!formTest.companies || businessType.length === 0"
-          @change="changeStrategyType"
-        >
-          <el-col :span="24">
-            <el-radio :label="-1">全策略</el-radio>
-          </el-col>
-          <el-col
-            :span="24"
-            style="margin-top: 15px;"
+        <el-form-item label="适用策略：" prop="strategies">
+          <el-radio-group
+            v-model="formTest.strategyType"
+            :disabled="!formTest.companies || businessType.length === 0"
+            @change="changeStrategyType"
           >
-            <el-radio
-              :label="1"
-              @click.native="openDialog2"
-            >指定策略可用</el-radio>
+            <el-col :span="24">
+              <el-radio :label="-1">全策略</el-radio>
+            </el-col>
+            <el-col :span="24" style="margin-top: 15px;">
+              <el-radio :label="1" @click.native="openDialog2">指定策略可用</el-radio>
+            </el-col>
+          </el-radio-group>
+          <el-col :span="24">
+            <span>{{strategiesName ? "（" + cutString(strategiesName, 100) + "）" : ""}}</span>
           </el-col>
-        </el-radio-group>
-        <el-col :span="24">
-          <span>{{strategiesName ? "（" + cutString(strategiesName, 100) + "）" : ""}}</span>
-        </el-col>
-      </el-form-item>
+        </el-form-item>
 
-      <el-form-item
-        label="适用车型："
-        prop="carModels"
-      >
-        <span>{{cutString(modelName, 100)}}&emsp;</span>
-        <el-button
-          v-loading="checkboxLoading"
-          v-show="modelName"
-          type="text"
-          style="color: #DBA54F"
-          @click="openDialog3"
-        >修改</el-button>
-      </el-form-item>
+        <el-form-item label="适用车型：" prop="carModels">
+          <span>{{cutString(modelName, 100)}}&emsp;</span>
+          <el-button
+            v-loading="checkboxLoading"
+            v-show="modelName"
+            type="text"
+            style="color: #DBA54F"
+            @click="openDialog3"
+          >修改</el-button>
+        </el-form-item>
 
-      <!-- <el-form-item label="是否启用：">
+        <!-- <el-form-item label="是否启用：">
         <el-radio
           v-model="formTest.isEnable"
           :label="1"
@@ -397,29 +264,23 @@
           v-model="formTest.isEnable"
           :label="0"
         >禁用</el-radio>
-      </el-form-item> -->
+        </el-form-item>-->
+        <el-form-item label="使用须知：" prop="intro">
+          <el-input
+            type="textarea"
+            v-model="formTest.intro"
+            placeholder="填写后显示于优惠券详情页面，请认真填写。最好写明适用地区、适用业务、适用车型。 例：EC180车型不适用"
+            :rows="4"
+            clearable
+          ></el-input>
+        </el-form-item>
 
-      <el-form-item
-        label="使用须知："
-        prop="intro"
-      >
-        <el-input
-          type="textarea"
-          v-model="formTest.intro"
-          placeholder="填写后显示于优惠券详情页面，请认真填写。最好写明适用地区、适用业务、适用车型。 例：EC180车型不适用"
-          :rows="4"
-          clearable
-        ></el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button
-          type="primary"
-          @click="submitUp(1, 'ruleTest')"
-        >确认提交</el-button>
-        <el-button @click="submitUp(0, 'ruleTest')">暂存</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button type="primary" @click="submitUp(1, 'ruleTest')">确认提交</el-button>
+          <el-button @click="submitUp(0, 'ruleTest')">暂存</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
 
     <el-dialog
       :title="dialogObj.title"
@@ -451,7 +312,7 @@
       <!-- <div align="center" style="margin-top: 26px;">
         <el-button @click="cancelFun">取 消</el-button>
         <el-button type="primary" @click="determineFun">确 定</el-button>
-      </div> -->
+      </div>-->
     </el-dialog>
   </div>
 </template>
@@ -478,7 +339,7 @@ export default {
       } else {
         callback();
       }
-    }
+    };
     const validateCompanyDesc = (rule, value, callback) => {
       if (value !== "") {
         if (!this.WidthCheck(value, 30)) {
@@ -489,7 +350,7 @@ export default {
       } else {
         callback();
       }
-    }
+    };
     const validateIntro = (rule, value, callback) => {
       if (value !== "") {
         if (!this.WidthCheck(value, 400)) {
@@ -500,7 +361,7 @@ export default {
       } else {
         callback();
       }
-    }
+    };
     const validateMinusAmount = (rule, value, callback) => {
       if (value !== "") {
         if (
@@ -531,9 +392,7 @@ export default {
     };
     const validateValidDate1 = (rule, value, callback) => {
       if (value !== "") {
-        if (
-          /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(value) === false
-        ) {
+        if (/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(value) === false) {
           callback(new Error("请填写大于等于0的数字"));
         } else {
           callback();
@@ -710,14 +569,16 @@ export default {
         ],
         validCompanyDesc: [
           { required: true, message: "请输入适用地区说明", trigger: "blur" },
-          {validator: validateCompanyDesc}
+          { validator: validateCompanyDesc }
         ],
         companies: [{ required: true, message: "请选择使用地区" }],
         businessType: [{ required: true, message: "请选择适用业务" }],
         strategies: [{ required: true, message: "请选择策略" }],
         carModels: [{ required: true, message: "没有指定车型" }],
-        intro: [{ required: true, message: "请输入使用须知", trigger: "blur" },
-                {validator: validateIntro}]
+        intro: [
+          { required: true, message: "请输入使用须知", trigger: "blur" },
+          { validator: validateIntro }
+        ]
       },
       formModel: {
         businessConfig: "",
@@ -781,7 +642,10 @@ export default {
         } else {
           this.radio1 = -1;
         }
-        const start = this.time(res.coupons.validStartTime, "YYYY-MM-DD HH:mm:ss");
+        const start = this.time(
+          res.coupons.validStartTime,
+          "YYYY-MM-DD HH:mm:ss"
+        );
         const end = this.time(res.coupons.validEndTime, "YYYY-MM-DD HH:mm:ss");
         this.validTime = [start, end];
         this.formTest.validStartTime = start;
@@ -940,7 +804,10 @@ export default {
           }
           if (this.formTest.id) {
             if (this.formTest.stock > 0) {
-              this.formTest.stock = this.formTest.stock - this.availableStock + this.formTest.availableStock;
+              this.formTest.stock =
+                this.formTest.stock -
+                this.availableStock +
+                this.formTest.availableStock;
             }
             couponsUpdate(this.formDataFun(this.formTest)).then(res => {
               this.$message({

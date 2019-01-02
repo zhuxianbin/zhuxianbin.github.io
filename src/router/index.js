@@ -11,6 +11,7 @@ import vehicleRouter from './r-vehicle'
 import commission from './r-commission'
 import finance from './r-finance'
 import marketing from './r-marketing'
+import oamm from "./r-oamm"
 /**
 * hidden: true                   如果“隐藏：true”将不会显示在侧栏中（默认为false）
 * alwaysShow: true               如果设置为true，则总是显示根菜单，不管它的子路线长度是多少
@@ -23,9 +24,16 @@ import marketing from './r-marketing'
     icon: "svg-name"             侧边栏的图标显示,
   }
 **/
-export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+export const constantRouterMap = [{
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
 
   // {
   //   path: '/',
@@ -46,21 +54,31 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/partnerGM',
     name: 'Company',
-    meta: { title: '运营管理', icon: 'home', authority: 'HHR_OPERATION_MANAGEMENT' },
+    meta: {
+      title: '运营管理',
+      icon: 'home',
+      authority: 'HHR_OPERATION_MANAGEMENT'
+    },
     children: [
-      {...partnerRouter},
-      {...marketing},
-      {...vehicleRouter},
-      {...commission},
-      {...finance}
-
+      partnerRouter,
+      marketing,
+      vehicleRouter,
+      commission,
+      finance,
+      oamm
     ]
   },
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 export default new Router({
   // mode: "history", //后端支持可开
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes: constantRouterMap
 })

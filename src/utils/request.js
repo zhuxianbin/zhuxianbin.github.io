@@ -86,7 +86,7 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-    } else if (error.message === 'timeout of 50000ms exceeded') {
+    } else if (error.message.indexOf('timeout') >= 0) {
       Message({
         message: '连接超时，请重试',
         type: 'error',

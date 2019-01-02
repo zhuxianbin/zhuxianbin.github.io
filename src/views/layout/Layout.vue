@@ -5,13 +5,16 @@
     <div class="main-container" :style="$route.query.hiddenLeft ? 'margin-left: 0px' : ''">
       <div class="header-container">
         <navbar v-if="$route.query.hiddenLeft ? false : true"></navbar>
-        <tags-view></tags-view>
+        <!-- <tags-view></tags-view> -->
       </div>
-      <div class="body-container" :style="$route.query.hiddenLeft ? 'padding-top: 30px' : 'padding-top: 84px'">
+      <div
+        class="body-container"
+        :style="$route.query.hiddenLeft ? 'padding-top: 30px' : 'padding-top: 40px'"
+      >
         <app-main></app-main>
       </div>
     </div>
-    <changeServer />
+    <changeServer/>
   </div>
 </template>
 
@@ -77,8 +80,13 @@ export default {
 .app-wrapper {
   .clearfix();
   position: relative;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+  background-image: url("/static/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: #2e323f;
+  background-attachment: fixed;
 }
 .drawer-bg {
   background: #000;

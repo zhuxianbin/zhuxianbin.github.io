@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e9b07"],{"8f36":function(e,n,i){"use strict";i.r(n);var t=function(){var e=this,n=e.$createElement,i=e._self._c||n;return i("div",[i("router-view")],1)},o=[],u={name:"commissionGM"},s=u,c=i("2877"),l=Object(c["a"])(s,t,o,!1,null,null,null);l.options.__file="index.vue";n["default"]=l.exports}}]);
+//# sourceMappingURL=chunk-2d0e9b07.11085fa5.js.map

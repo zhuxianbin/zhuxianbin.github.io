@@ -1,87 +1,100 @@
 <template>
   <div class="app-container">
-    <el-form v-model="coupon" :inline="true">
-      <el-form-item label="名称">
-        <el-input v-model="coupon.name" placeholder="卡券名称"></el-input>
-      </el-form-item>
-      <el-form-item label="类型">
-        <el-select v-model="coupon.type" placeholder="请选择类型">
-          <el-option label="全部" value></el-option>
-          <el-option label="折扣券" value="zk"></el-option>
-          <el-option label="代金券" value="mj"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="微信卡券" style="display:none">
-        <el-select v-model="coupon.weixin" placeholder="请选择类型">
-        </el-select>
-      </el-form-item>
-      <el-form-item label="门店">
-        <el-cascader
-          :options="company.arr"
-          :props="{value: 'companyId', label: 'label'}"
-          v-model="selectedOptionYs"
-          filterable
-          :show-all-levels="false"
-          clearable
-          change-on-select
-          @change="changeCompany"
-        ></el-cascader>
-      </el-form-item>
-      <el-form-item label="状态">
-        <el-select v-model="coupon.state" placeholder="请选择状态">
-          <el-option label="草稿" value="0"></el-option>
-          <el-option label="审核通过" value="1"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="searchCoupon(coupon)">查询</el-button>
-      </el-form-item>
-    </el-form>
-    <div sytle="display:block">
-      <el-button type="primary" v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_ADD_COUPONS')" icon="el-icon-plus" @click="addShow=true">添加</el-button>
-      <el-button
-        type="primary"
-        v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_AUTO_COUPONS')" 
-        @click="ruleShow=true,ruleFirst=true,getCouponsRule(ruleSearch)"
-      >自动发券</el-button>
-      <el-button type="primary" @click="modalShow=true" v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_MANUAL_COUPONS')" >人工发券</el-button>
-      <el-button type="primary">发放记录</el-button>
-    </div>
-    <el-table :data="couponList" borderstyle="width: 100%" border style="margin: 20px 0">
-      <el-table-column prop="type" label="卡券类型" width="100"></el-table-column>
-      <el-table-column prop="id" label="卡券ID" width></el-table-column>
-      <el-table-column prop="name" label="卡券名称" width></el-table-column>
-      <el-table-column prop="validDate" label="有效期" width></el-table-column>
-      <el-table-column prop="stock" label="库存" width="100">
-        
-      </el-table-column>
-      <el-table-column prop="companies" label="适用区域" width></el-table-column>
-      <el-table-column prop="state" label="状态" width="100"></el-table-column>
-      <!-- <el-table-column fixed prop="weixin" label="微信卡券" width="100"></el-table-column> -->
-      <el-table-column fixed="right" label="操作" width="180">
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="editCoupon(scope.row)" v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_EDIT_COUPONS')">编辑</el-button>
-           <!-- <el-button type="text" size="small" @click="copyCoupon(scope.row)">复制</el-button>  -->
-          <el-button
-            @click.native.prevent="deleteCoupon(scope.$index,scope.row,couponList)"
-            v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_DELETE_COUPONS')"
-            type="text"
-            size="small"
-          >删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!--分页-->
-    <div class="block" align="center">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="couponList.pageCurrent"
-        :page-sizes="couponPagination.sizes"
-        :page-size="couponList.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="couponPagination.total"
-      ></el-pagination>
+    <div class="panel-container">
+      <el-form v-model="coupon" class="filter-container" :inline="true">
+        <el-form-item label="名称">
+          <el-input v-model="coupon.name" placeholder="卡券名称"></el-input>
+        </el-form-item>
+        <el-form-item label="类型">
+          <el-select v-model="coupon.type" placeholder="请选择类型">
+            <el-option label="全部" value></el-option>
+            <el-option label="折扣券" value="zk"></el-option>
+            <el-option label="代金券" value="mj"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="微信卡券" style="display:none">
+          <el-select v-model="coupon.weixin" placeholder="请选择类型"></el-select>
+        </el-form-item>
+        <el-form-item label="门店">
+          <el-cascader
+            :options="company.arr"
+            :props="{value: 'companyId', label: 'label'}"
+            v-model="selectedOptionYs"
+            filterable
+            :show-all-levels="false"
+            clearable
+            change-on-select
+            @change="changeCompany"
+          ></el-cascader>
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-select v-model="coupon.state" placeholder="请选择状态">
+            <el-option label="草稿" value="0"></el-option>
+            <el-option label="审核通过" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="searchCoupon(coupon)">查询</el-button>
+        </el-form-item>
+      </el-form>
+      <div class="option-container">
+        <el-button
+          type="primary"
+          v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_ADD_COUPONS')"
+          icon="el-icon-plus"
+          @click="addShow=true"
+        >添加</el-button>
+        <el-button
+          type="primary"
+          v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_AUTO_COUPONS')"
+          @click="ruleShow=true,ruleFirst=true,getCouponsRule(ruleSearch)"
+        >自动发券</el-button>
+        <el-button
+          type="primary"
+          @click="modalShow=true"
+          v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_MANUAL_COUPONS')"
+        >人工发券</el-button>
+        <el-button type="primary">发放记录</el-button>
+      </div>
+      <el-table :data="couponList" borderstyle="width: 100%" style="margin: 20px 0">
+        <el-table-column prop="type" label="卡券类型" width="100"></el-table-column>
+        <el-table-column prop="id" label="卡券ID" width></el-table-column>
+        <el-table-column prop="name" label="卡券名称" width></el-table-column>
+        <el-table-column prop="validDate" label="有效期" width></el-table-column>
+        <el-table-column prop="stock" label="库存" width="100"></el-table-column>
+        <el-table-column prop="companies" label="适用区域" width></el-table-column>
+        <el-table-column prop="state" label="状态" width="100"></el-table-column>
+        <!-- <el-table-column fixed prop="weixin" label="微信卡券" width="100"></el-table-column> -->
+        <el-table-column fixed="right" label="操作" width="180">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              size="small"
+              @click="editCoupon(scope.row)"
+              v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_EDIT_COUPONS')"
+            >编辑</el-button>
+            <!-- <el-button type="text" size="small" @click="copyCoupon(scope.row)">复制</el-button>  -->
+            <el-button
+              @click.native.prevent="deleteCoupon(scope.$index,scope.row,couponList)"
+              v-if="partner.permission.authority['HHR_COUPONS_MANAGEMENT'].includes('HHR_DELETE_COUPONS')"
+              type="text"
+              size="small"
+            >删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--分页-->
+      <div class="block" align="center">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="couponList.pageCurrent"
+          :page-sizes="couponPagination.sizes"
+          :page-size="couponList.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="couponPagination.total"
+        ></el-pagination>
+      </div>
     </div>
     <!--新增添加-->
     <el-dialog title="选择优惠券发行平台" :visible.sync="addShow">
@@ -153,7 +166,6 @@
           v-on:deleteRule="deleteRule"
           v-on:addRule="addRule"
           v-on:editRule="editRule"
-          
         ></rule>
       </div>
       <div v-if="ruleSecond">
@@ -186,8 +198,8 @@
           :multipleSelect="sendCoupon.selected"
           :auto="modalShow"
           v-on:search="searchsendCoupon"
-           v-on:couponSelect="couponSelect"
-            v-on:selectAll="couponSelectAll"
+          v-on:couponSelect="couponSelect"
+          v-on:selectAll="couponSelectAll"
         ></coupon>
         <div style="margin:20px 0 10px;text-align:center">
           <el-button @click="autoSubmit(rule)" type="primary">提交</el-button>
@@ -374,10 +386,10 @@ export default {
     },
     // 复制优惠券
     copyCoupon(row) {
-        this.$router.push({
-          path: '/marketingGM/copy-coupon',
-          query: { couponId: row.id }
-        })
+      this.$router.push({
+        path: "/marketingGM/copy-coupon",
+        query: { couponId: row.id }
+      });
     },
     // 获取优惠券列表页面
     // 每页条数
@@ -391,7 +403,7 @@ export default {
     // 主页面-门店列表
     changeCompany(val) {
       this.coupon.company_id = val[val.length - 1];
-      console.log(this.coupon.company_id)
+      console.log(this.coupon.company_id);
     },
     // 搜索优惠券
     searchCoupon(data) {
@@ -437,20 +449,20 @@ export default {
     searchMember(data) {
       data.startTime = this.time(data.startTime, "YYYY-MM-DD");
       data.endTime = this.time(data.endTime, "YYYY-MM-DD");
-      this.member.selected = []
+      this.member.selected = [];
       this.getMember(data);
     },
     selectAll(data) {
       this.member.selected = data;
     },
     memberSelect(data) {
-     this.member.selected = data;
+      this.member.selected = data;
     },
     couponSelect(data) {
-    this.sendCoupon.selected = data;
+      this.sendCoupon.selected = data;
     },
     couponSelectAll(data) {
-     this.sendCoupon.selected = data;
+      this.sendCoupon.selected = data;
     },
     // 获取会员列表
     getMember(data) {
@@ -512,34 +524,34 @@ export default {
               selected: 1
             });
           });
-          
+
           const data = {};
           this.sendCoupon.selected.forEach(item => {
             data[item.id] = item;
           });
-         
+
           this.sendCoupon.list.forEach(item => {
-            console.log('hebing')
+            console.log("hebing");
             Object.assign(item, data[item.id]);
           });
-          console.log(this.sendCoupon.list)
+          console.log(this.sendCoupon.list);
         }
       });
     },
     // 人工发券关闭后数据清空
     memberReset() {
       if (this.modalShow == false) {
-        this.memberSearch = {
-        start: 1,
-        pageSize: 20,
-        phoneNo: "",
-        name: "",
-        startTime: "",
-        endTime: "",
-        status: "",
-        hasOrder: ""
-      },
-        this.member.list = [];
+        (this.memberSearch = {
+          start: 1,
+          pageSize: 20,
+          phoneNo: "",
+          name: "",
+          startTime: "",
+          endTime: "",
+          status: "",
+          hasOrder: ""
+        }),
+          (this.member.list = []);
         this.member.selected = [];
         this.coupon.list = [];
         this.coupon.selected = [];
@@ -554,10 +566,10 @@ export default {
     // 自动发券清空
     couponReset() {
       if (this.ruleShow == false) {
-         this.couponRule.list = [],
-        this.couponRule.selected = [],
-        this.ruleFirst = false,
-        (this.sendCoupon.list = []),
+        (this.couponRule.list = []),
+          (this.couponRule.selected = []),
+          (this.ruleFirst = false),
+          (this.sendCoupon.list = []),
           (this.sendCoupon.selected = []),
           (this.rule = {
             name: "",
@@ -595,14 +607,14 @@ export default {
         if (valid) {
           api.couponHandleGrant(data).then(res => {
             if (res.length) {
-              this.$alert(res.toString().replace(/,/, "<br>"), '提示', {
-              dangerouslyUseHTMLString: true
+              this.$alert(res.toString().replace(/,/, "<br>"), "提示", {
+                dangerouslyUseHTMLString: true
               });
             } else {
-             this.$message({
-              message: "添加成功",
-              type: "success"
-            });
+              this.$message({
+                message: "添加成功",
+                type: "success"
+              });
             }
             this.modalShow = false;
           });
@@ -631,7 +643,7 @@ export default {
         id: data.id,
         isEnable: data.isEnable == 0 ? 1 : 0
       };
-      const text = data.isEnable == 0 ? "启用" : "禁用"
+      const text = data.isEnable == 0 ? "启用" : "禁用";
       this.$confirm(`是否确认${text}该规则`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -692,8 +704,10 @@ export default {
               name: this.rule.name,
               type: this.rule.type,
               amount: this.rule.amount,
-              validStartDate: this.time(this.rule.date[0], "YYYY-MM-DD") + " 00:00:00",
-              validEndDate: this.time(this.rule.date[1], "YYYY-MM-DD") + " 23:59:59",
+              validStartDate:
+                this.time(this.rule.date[0], "YYYY-MM-DD") + " 00:00:00",
+              validEndDate:
+                this.time(this.rule.date[1], "YYYY-MM-DD") + " 23:59:59",
               isEnable: this.rule.isEnable
             };
             const couponsRule = {

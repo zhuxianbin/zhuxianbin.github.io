@@ -1,6 +1,6 @@
 import Cookie from "js-cookie";
 export const serverKey = "group-server";
-export const BASE_API = Cookie.get(serverKey) || process.env.BASE_API;
+export const BASE_API = Cookie.get(serverKey) || process.env.VUE_APP_BASE_API;
 export function setServer(value) {
   return Cookie.set(serverKey, value);
 }
