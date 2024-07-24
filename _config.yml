@@ -103,5 +103,5 @@ theme: landscape
 deploy:
   type: git
   repo: https://zhuxianbin:zhuxian124@github.com/zhuxianbin/zhuxianbin.github.io.git
-  branch: [gh-pages]
+  branch: master
   # message: [Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}]
